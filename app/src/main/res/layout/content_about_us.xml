@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".AboutUS"
+    tools:showIn="@layout/app_bar_about_us">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <LinearLayout
+        android:paddingBottom="60dp"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:paddingTop="20dp"
+            android:paddingRight="20dp"
+            android:paddingBottom="20dp"
+            android:text="we love our Students"
+            android:textAllCaps="true"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:textAlignment="center"
+            />
+        <ImageView
+
+            android:layout_width="match_parent"
+            android:layout_height="59dp"
+            android:src="@drawable/heart" />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:paddingTop="20dp"
+            android:paddingRight="20dp"
+            android:paddingBottom="20dp"
+            android:text="We always encourage our students to give us feed back for every possible improvement to make this platform better for them. "
+            android:textSize="20dp"
+            android:textAlignment="center"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:paddingTop="20dp"
+            android:paddingRight="20dp"
+            android:paddingBottom="20dp"
+            android:text="what we do"
+            android:textAllCaps="true"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:textAlignment="center"
+            />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="59dp"
+
+            android:src="@drawable/whatwedo" />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:paddingTop="20dp"
+            android:paddingRight="20dp"
+            android:paddingBottom="20dp"
+            android:text="Celpipstore.com is a leading Online platform with large collection of Celpip Practice Tests.  "
+            android:textSize="20dp"
+            android:textAlignment="center"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:paddingTop="20dp"
+            android:paddingRight="20dp"
+            android:paddingBottom="20dp"
+            android:text="our mission"
+            android:textAllCaps="true"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:textAlignment="center"
+            />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="59dp"
+            android:src="@drawable/ourmission" />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:paddingTop="20dp"
+            android:paddingRight="20dp"
+            android:paddingBottom="20dp"
+            android:text="Our mission is to offer cost-effective solutions, available 24x7, for all students planning to appear in CELPIP Exams."
+            android:textSize="20dp"
+            android:textAlignment="center"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:paddingTop="20dp"
+            android:paddingRight="20dp"
+            android:paddingBottom="20dp"
+            android:text="who we are"
+            android:textAllCaps="true"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:textAlignment="center"
+            />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="59dp"
+            android:src="@drawable/whoarewe" />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:paddingTop="20dp"
+            android:paddingRight="20dp"
+            android:paddingBottom="20dp"
+            android:text="CelpipStore.com is a product developed and hosted by California based software development company Nettycoons LLC. "
+            android:textSize="20dp"
+            android:textAlignment="center"
+            />
+
+
+
+
+    </LinearLayout>
+
+    </ScrollView>
+
+
+
+
+</RelativeLayout>

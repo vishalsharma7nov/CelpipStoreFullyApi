@@ -1,0 +1,154 @@
+<?xml version="1.0" encoding="utf-8"?>
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    package="com.celpipstore">
+
+    <uses-permission android:name="android.permission.INTERNET" />
+
+    <supports-screens
+        android:anyDensity="true"
+        android:largeScreens="true"
+        android:normalScreens="true"
+        android:resizeable="true"
+        android:smallScreens="true"
+        android:xlargeScreens="true" />
+
+    <application
+        android:allowBackup="true"
+        android:hardwareAccelerated="true"
+        android:icon="@mipmap/ic_launcher"
+        android:label="@string/app_name"
+        android:largeHeap="true"
+        android:roundIcon="@mipmap/ic_launcher_round"
+        android:supportsRtl="true"
+        android:theme="@style/AppTheme"
+        android:usesCleartextTraffic="true">
+        <activity android:name=".VocabularyTestQuestionsActivity"></activity>
+        <activity
+            android:name=".SpeakingTestListActivity"
+            android:label="Speaking Tests" />
+        <activity
+            android:name=".WritingTestListActivity"
+            android:label="Writing Tests" />
+        <activity
+            android:name=".ReadingTestListActivity"
+            android:label="Reading Tests" />
+        <activity
+            android:name=".ListeningTestListActivity"
+            android:label="Listening Test" />
+        <activity
+            android:name=".RegistrationActivity"
+            android:label="Registration" />
+        <activity
+            android:name=".WRITING"
+            android:label="@string/title_activity_writing"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".READING"
+            android:label="@string/title_activity_reading"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".SPEAKING"
+            android:label="@string/title_activity_speaking"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".COIN_MANAGEMENT"
+            android:label="@string/title_activity_coin__management"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".SETTING"
+            android:label="@string/title_activity_setting"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".SUPPORT"
+            android:label="@string/title_activity_support"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".LISTENING_part2"
+            android:label="@string/title_activity_listening_part2"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".CELPIP_PARTS_TESTS"
+            android:label="@string/title_activity_celpip__parts__tests"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".LISTENING_part1"
+            android:label="@string/title_activity_listening_part1"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".CELPIP_SECTIONS_TESTS"
+            android:label="@string/title_activity_celpip__sections__tests"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".FILL_IN_THE_BLANKS"
+            android:label="@string/title_activity_fill__in__the__blanks"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".RE_ARRANGE"
+            android:label="@string/title_activity_re__arrange"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".DICTATION_TESTS"
+            android:label="@string/title_activity_dictation__tests"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".SPOTTING_THE_ERRORS"
+            android:label="@string/title_activity_spotting__the__errors"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".VOCABULARY_TESTS"
+            android:label="@string/title_activity_vocabulary__tests"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".COMPETITIVE_ENGLISH"
+            android:label="@string/title_activity_competitive__english"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".EARN_FEE_COINS"
+            android:label="@string/title_activity_earn__fee__coins"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".Dashboard"
+            android:label="@string/title_activity_dashboard"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".HOME"
+            android:label="Celpip Store"
+            android:theme="@style/AppTheme.NoActionBar">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+        </activity>
+        <activity
+            android:name=".CONTACTUS"
+            android:label="@string/title_activity_contactus"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".FAQ"
+            android:label="FAQ"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".WHYUS"
+            android:label="@string/title_activity_whyus"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".OurFeature"
+            android:label="@string/title_activity_our_feature"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".AboutUS"
+            android:label="@string/title_activity_about_us"
+            android:theme="@style/AppTheme.NoActionBar" />
+        <activity
+            android:name=".MainActivity"
+            android:label="@string/app_name"
+            android:theme="@style/AppTheme.NoActionBar" />
+
+        <meta-data
+            android:name="preloaded_fonts"
+            android:resource="@array/preloaded_fonts" />
+    </application>
+
+</manifest>

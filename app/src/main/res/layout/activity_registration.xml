@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#F2F1F1"
+    tools:context=".RegistrationActivity">
+
+    <ImageView
+        android:layout_marginTop="30dp"
+        android:layout_width="201dp"
+        android:layout_height="70dp"
+        android:layout_gravity="left"
+        android:layout_marginLeft="20dp"
+        android:src="@drawable/loginpage" />
+
+    <LinearLayout
+        android:orientation="vertical"
+        android:layout_marginTop="100dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <EditText
+            android:id="@+id/editTextEmialId"
+            android:inputType="textEmailAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="50dp"
+            android:layout_marginEnd="40dp"
+            android:drawableLeft="@drawable/ic_mail_outline_black_24dp"
+            android:hint="Email Id" />
+        <EditText
+            android:id="@+id/editTextUsername"
+            android:inputType="textEmailAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="40dp"
+            android:drawableLeft="@drawable/ic_person_outline_black_24dp"
+            android:hint="Username" />
+        <EditText
+            android:id="@+id/editTextRefer"
+            android:inputType="textEmailAddress"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="40dp"
+            android:layout_marginTop="10dp"
+            android:layout_marginEnd="40dp"
+            android:drawableLeft="@drawable/coupon"
+            android:hint="Coupon Code(Optional)" />
+
+        <Button
+            android:id="@+id/register"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="150dp"
+            android:layout_marginTop="40dp"
+            android:background="@color/colorPrimary"
+            android:gravity="center"
+            android:text="Register"
+            android:textColor="#FCFCFC" />
+
+    </LinearLayout>
+
+</RelativeLayout>

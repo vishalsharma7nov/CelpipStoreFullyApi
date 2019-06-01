@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    android:orientation="vertical"
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".FAQ"
+    tools:showIn="@layout/app_bar_faq">
+
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="vertical">
+
+            <TextView
+                android:textColor="@color/colorAccent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="20dp"
+                android:paddingTop="20dp"
+                android:paddingRight="20dp"
+                android:text="CELPIP FAQ"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:textSize="18sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="20dp"
+                android:paddingTop="20dp"
+                android:paddingRight="20dp"
+                android:text="The CELPIP FAQ section tries to answer all the questions that candidates might be wondering about. We really appreciate your visit to the CELPIP FAQ section.If you cannot find your question from the below-listed FAQs, you may email us. We will add your question with an answer in this section, that would be beneficial for others as it would save them for further search. "/>
+
+
+            <TextView
+                android:textStyle="bold"
+                android:textColor="@color/colorAccent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="20dp"
+                android:paddingTop="20dp"
+                android:paddingRight="20dp"
+                android:text="What Is CELPIP?"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textSize="20dp"/>
+
+            <TextView
+                android:textSize="18sp"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="20dp"
+                android:paddingTop="20dp"
+                android:paddingRight="20dp"
+                android:text="The CELPIP i.e Canadian English Language Proficiency IndexProgram is a general English language proficiency test.This test allows the candidate to prove his proficiency in the English language. This test assesses the candidate precisely in different situations, like, communicating with friends and co-workers, responding to difficult situations, understanding and interpreting newscasts, and even responding to emails an other written materials."/>
+
+
+            <TextView
+                android:textColor="@color/colorAccent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="20dp"
+                android:paddingTop="20dp"
+                android:paddingRight="20dp"
+                android:text="who accept the celpip test?"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textSize="20dp"
+                android:textStyle="bold">
+
+            </TextView>
+
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:paddingLeft="20dp"
+                android:paddingTop="20dp"
+                android:paddingRight="20dp"
+                android:text="CELPIP Test is approved and accepted by Immigration, Refugees and Citizenship Canada (IRCC). Other organizations that accept the CELPIP-General Test include Immigration Consultants of Canada Regulatory Council (ICCRC) and the Real Estate Council of British Columbia (RECBC)."/>
+
+
+            <TextView
+                android:textColor="@color/colorAccent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="20dp"
+                android:paddingTop="20dp"
+                android:paddingRight="20dp"
+                android:text="which country accept celpip test?"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textSize="20dp"
+                android:textStyle="bold" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:paddingLeft="20dp"
+                android:paddingTop="20dp"
+                android:paddingRight="20dp"
+                android:text="The CELPIP Test is exclusively available for Canada. CELPIP contains 33 areas throughout Canada, in every state except Prince Edward Island (the evaluation destinations are unavailable at the 3 Canadian territories Youkon Territory, Nunavut, Northwest Territory). They’ve recently opened  new center in Dubai."/>
+
+            <TextView
+                android:textStyle="bold"
+                android:textColor="@color/colorAccent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="20dp"
+                android:paddingTop="20dp"
+                android:paddingRight="20dp"
+                android:text="is celpip a computer based test?"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textSize="20dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:paddingLeft="20dp"
+                android:paddingTop="20dp"
+                android:paddingRight="20dp"
+                android:text="The CELPIP examination is totally Computer-based test. It provides test takers opportunity to finish all the test components in just one sitting, with no other extra interviews and appointments. CELPIP test-takers make use of computer keyboard and mouse to complete the Reading and Writing sections of the test."/>
+
+
+            <TextView
+                android:textStyle="bold"
+                android:textColor="@color/colorAccent"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:paddingLeft="20dp"
+                android:paddingTop="20dp"
+                android:paddingRight="20dp"
+                android:text="is celpip an alternative to ielts?"
+                android:textAlignment="center"
+                android:textAllCaps="true"
+                android:textSize="20dp"/>
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:textSize="18sp"
+                android:paddingLeft="20dp"
+                android:paddingTop="20dp"
+                android:paddingRight="20dp"
+                android:paddingBottom="50dp"
+                android:text="The Reply is YES. There are two options to meet English language skills: taking the International English Language Testing System (IELTS) or the Canadian English Language Proficiency Index Program (CELPIP), both tests are accepted by The Citizenship and Immigration Canada."/>
+
+
+        </LinearLayout>
+    </ScrollView>
+
+
+</LinearLayout>

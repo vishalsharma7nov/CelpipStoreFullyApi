@@ -1,0 +1,32 @@
+<resources>
+    <string name="app_name">Celpip Store</string>
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+    <string name="nav_header_title">CELPIP STORE</string>
+    <string name="nav_header_subtitle">contact@celpipstore.com </string>
+    <string name="nav_header_desc">Navigation header</string>
+    <string name="action_settings">Log Out</string>
+    <string name="title_activity_about_us">About US</string>
+    <string name="title_activity_our_feature">Our Feature</string>
+    <string name="title_activity_whyus">WHY US</string>
+    <string name="title_activity_contactus">CONTACT US</string>
+    <string name="title_activity_home">Celpip Store</string>
+    <string name="title_activity_dashboard">Dashboard</string>
+    <string name="title_activity_earn__fee__coins">EARN FEE COINS</string>
+    <string name="title_activity_competitive__english">COMPETITIVE ENGLISH</string>
+    <string name="title_activity_vocabulary__tests">VOCABULARY TESTS</string>
+    <string name="title_activity_spotting__the__errors">SPOTTING THE ERRORS</string>
+    <string name="title_activity_dictation__tests">DICTATION TESTS</string>
+    <string name="title_activity_re__arrange">RE-ARRANGE</string>
+    <string name="title_activity_fill__in__the__blanks">FILL IN THE BLANKS</string>
+    <string name="title_activity_celpip__sections__tests">CELPIP SECTIONS TESTS</string>
+    <string name="title_activity_listening_part1">LISTENING</string>
+    <string name="title_activity_celpip__parts__tests">CELPIP PARTS TESTS</string>
+    <string name="title_activity_listening_part2">LISTENING</string>
+    <string name="title_activity_support">SUPPORT</string>
+    <string name="title_activity_setting">SETTING</string>
+    <string name="title_activity_coin__management">COIN MANAGEMENT</string>
+    <string name="title_activity_reading">READING</string>
+    <string name="title_activity_speaking">SPEAKING</string>
+    <string name="title_activity_writing">WRITING</string>
+</resources>

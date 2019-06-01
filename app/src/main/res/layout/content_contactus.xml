@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context=".CONTACTUS"
+    tools:showIn="@layout/app_bar_contactus">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+    <LinearLayout
+        android:paddingBottom="60dp"
+        android:layout_width="match_parent"
+        android:orientation="vertical"
+        android:layout_height="match_parent">
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:paddingTop="20dp"
+            android:paddingRight="20dp"
+            android:paddingBottom="20dp"
+            android:text="address"
+            android:textAllCaps="true"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:textAlignment="center"
+            />
+    <ImageView
+        android:layout_width="match_parent"
+        android:layout_height="59dp"
+        android:background="#FF5505"
+        android:src="@drawable/address" />
+
+
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:paddingLeft="20dp"
+        android:paddingTop="20dp"
+        android:paddingRight="20dp"
+        android:paddingBottom="20dp"
+        android:text="7770 Regents Road #113 -189 San Diego, CA 92122, USA"
+        android:textSize="20dp"
+        android:autoLink="map"
+        android:textColorLink="#000"
+        android:textIsSelectable="true"
+        android:textAlignment="center"
+        />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:paddingTop="20dp"
+            android:paddingRight="20dp"
+            android:paddingBottom="20dp"
+            android:text="mobile"
+            android:textAllCaps="true"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:textAlignment="center"
+            />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="59dp"
+            android:background="#FF5505"
+            android:src="@drawable/mobile" />
+
+
+        <TextView
+            android:layout_width="match_parent"
+            android:textIsSelectable="true"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:paddingTop="20dp"
+            android:paddingRight="20dp"
+            android:paddingBottom="20dp"
+            android:autoLink="phone"
+            android:textColorLink="#000"
+            android:text="+1 858-935-7686"
+            android:textSize="20dp"
+            android:textAlignment="center"
+            />
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:paddingTop="20dp"
+            android:paddingRight="20dp"
+            android:paddingBottom="20dp"
+            android:text="contact us"
+            android:textAllCaps="true"
+            android:textStyle="bold"
+            android:textSize="20dp"
+            android:textAlignment="center"
+            />
+        <ImageView
+            android:layout_width="match_parent"
+            android:layout_height="59dp"
+            android:background="#FF5505"
+            android:src="@drawable/mail" />
+
+
+        <TextView
+            android:id="@+id/email"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:paddingLeft="20dp"
+            android:paddingTop="20dp"
+            android:paddingRight="20dp"
+            android:paddingBottom="20dp"
+            android:textIsSelectable="true"
+            android:text="contact@celpipstore.com"
+            android:textSize="20dp"
+            android:autoLink="email"
+            android:textColorLink="#000"
+            android:textAlignment="center"
+            />
+
+        <TextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="info@celpipstore.com"
+            android:textSize="20dp"
+            android:textIsSelectable="true"
+            android:autoLink="email"
+            android:textColorLink="#000"
+            android:textAlignment="center"
+            />
+
+    </LinearLayout>
+
+    </ScrollView>
+
+</RelativeLayout>
