@@ -71,7 +71,7 @@ public class VocabularyTestQuestionsActivity extends AppCompatActivity {
     private void showJSON(String json) {
         JsonDataHandlerVocabularyTestQuestionList jsonHolderListing = new JsonDataHandlerVocabularyTestQuestionList(json);
         jsonHolderListing.parseJSON();
-        VocabularyTestQuestionAdapter ca = new VocabularyTestQuestionAdapter(this,jsonHolderListing.id,jsonHolderListing.level_id, jsonHolderListing.title,jsonHolderListing.question_image,jsonHolderListing.options);
+        VocabularyTestQuestionAdapter ca = new VocabularyTestQuestionAdapter(this,jsonHolderListing.id,jsonHolderListing.level_id, jsonHolderListing.title,jsonHolderListing.question_image,jsonHolderListing.options1,jsonHolderListing.options2,jsonHolderListing.options3,jsonHolderListing.options4);
         listView.setAdapter(ca);
         ca.notifyDataSetChanged();
     }

@@ -17,17 +17,23 @@ public class VocabularyTestQuestionAdapter extends BaseAdapter{
     public static String[] level_id;
     public static String[] title;
     public static String[] question_image;
-    public static String[] options;
+    public static String[] options1;
+    public static String[] options2;
+    public static String[] options3;
+    public static String[] options4;
 
 
-    public VocabularyTestQuestionAdapter(Context c, String[] id, String[] level_id, String[] title, String[] question_image, String[] options)
+    public VocabularyTestQuestionAdapter(Context c, String[] id, String[] level_id, String[] title, String[] question_image, String[] options1, String[] options2, String[] options3, String[] options4)
     {
         this.c=c;
         this.id             = id;
         this.level_id       = level_id;
         this.title          = title;
         this.question_image = question_image;
-        this.options        = options;
+        this.options1        = options1;
+        this.options2        = options2;
+        this.options3       = options3;
+        this.options4        = options4;
 
     }
 
@@ -76,10 +82,10 @@ public class VocabularyTestQuestionAdapter extends BaseAdapter{
         for (int i = 0;i<id.length;i++)
         {
             t1.setText(title[position]);
-            t2.setText(options[position]);
-            t3.setText(options[position]);
-            t4.setText(options[position]);
-            t5.setText(options[position]);
+            t2.setText(options1[position]);
+            t3.setText(options2[position+1]);
+            t4.setText(options3[position+2]);
+            t5.setText(options4[position+3]);
             t6.setText(id[position]);
 
 
