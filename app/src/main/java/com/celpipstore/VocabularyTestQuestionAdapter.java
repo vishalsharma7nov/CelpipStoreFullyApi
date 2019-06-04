@@ -83,9 +83,9 @@ public class VocabularyTestQuestionAdapter extends BaseAdapter{
         {
             t1.setText(title[position]);
             t2.setText(options1[position]);
-            t3.setText(options2[position+1]);
-            t4.setText(options3[position+2]);
-            t5.setText(options4[position+3]);
+            t3.setText(options2[position]);
+            t4.setText(options3[position]);
+            t5.setText(options4[position]);
             t6.setText(id[position]);
 
 
