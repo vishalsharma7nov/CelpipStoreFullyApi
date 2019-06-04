@@ -168,7 +168,6 @@ public class VocabularyTestQuestionsActivity extends AppCompatActivity {
                     }
                     else
                     {
-                        Toast.makeText(VocabularyTestQuestionsActivity.this, option1, Toast.LENGTH_SHORT).show();
                         textViewGivenAnswer.setText(JsonDataHandlerVocabularyTestQuestionList.options1[position]);
                         if (option1.equals(a))
                         {
