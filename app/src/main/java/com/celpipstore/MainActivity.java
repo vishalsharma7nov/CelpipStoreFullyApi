@@ -11,6 +11,7 @@ import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
 import android.text.Editable;
+import android.util.Log;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -63,11 +64,11 @@ public class MainActivity extends AppCompatActivity
         setContentView(R.layout.activity_main);
 
 
-        prefManager = new PrefManager(this);
-        if (!prefManager.isFirstTimeLaunch()) {
-            launchHomeScreen();
-            finish();
-        }
+//        prefManager = new PrefManager(this);
+//        if (!prefManager.isFirstTimeLaunch()) {
+//            launchHomeScreen();
+//            finish();
+//        }
 
         //---------------------------------------------------------------------------------//
 
@@ -217,18 +218,18 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
-    private void launchHomeScreen() {
-        prefManager.setFirstTimeLaunch(true);
-        startActivity(new Intent(MainActivity.this, Dashboard.class));
-        finish();
-    }
+//    private void launchHomeScreen() {
+//        prefManager.setFirstTimeLaunch(true);
+//        startActivity(new Intent(MainActivity.this, Dashboard.class));
+//        finish();
+//    }
 
     public void login() {
         final ProgressDialog loading = ProgressDialog.show(this,"Loading","Please wait...",false,false);
         final String Username = username.getText().toString();
         final String Password = password.getText().toString();
 
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://online.celpip.biz/api/login",
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://online.celpip.biz/api/login?password="+password+"&username="+username,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -240,14 +241,22 @@ public class MainActivity extends AppCompatActivity
 
                             if (abc == 1)
                             {
+                                String id          = obj.getJSONObject("").getString("id");
+                                String total_coins = obj.getJSONObject("").getString("coins");
+                                Toast.makeText(MainActivity.this, id, Toast.LENGTH_SHORT).show();
                                 loading.dismiss();
-                                prefManager.setFirstTimeLaunch(false);
+//                                prefManager.setFirstTimeLaunch(false);
+
                                 Intent intent = new Intent(MainActivity.this,Dashboard.class);
+                                intent.putExtra("username",Username);
+                                intent.putExtra("password",Password);
                                 startActivity(intent);
+
                                 Toast.makeText(MainActivity.this, "Login Successful!!!", Toast.LENGTH_SHORT).show();
                             }
                             else
                             {
+                                loading.dismiss();
                                 Toast.makeText(MainActivity.this, response, Toast.LENGTH_SHORT).show();
                             }
 

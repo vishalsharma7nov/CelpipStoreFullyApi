@@ -28,9 +28,9 @@ public class LISTENING_part2 extends AppCompatActivity{
         setContentView(R.layout.activity_listening_part2);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-//        Intent intent = getIntent();
-//        String a = intent.getStringExtra("t1");
-//        Toast.makeText(this, a, Toast.LENGTH_SHORT).show();
+        Intent intent = getIntent();
+        String member_id = intent.getStringExtra("member_id");
+        Toast.makeText(this, member_id, Toast.LENGTH_SHORT).show();
 
         listView = (ListView)findViewById(R.id.listViewListeningTestPart2);
         sendRequest();

@@ -65,7 +65,7 @@ public class ListeningTestAdapter extends BaseAdapter{
                             Intent intent = new Intent(c,ListeningTestListActivity.class);
                             intent.putExtra("t1", id[position]);
                             c.startActivity(intent);
-
+//                Toast.makeText(c, id[position], Toast.LENGTH_SHORT).show();
             }
         });
         for (int i = 0;i<coin_cost.length;i++)

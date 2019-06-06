@@ -53,16 +53,16 @@ public class ListeningTestListAdapter extends BaseAdapter{
         TextView t2=(TextView)convertView.findViewById(R.id.listeningTestListTestNumber);
 
 
-        final Button b1 = (Button)convertView.findViewById(R.id.listeningTestListStartTest);
+        Button b1 = (Button)convertView.findViewById(R.id.listeningTestListStartTest);
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
 
                             Intent intent = new Intent(c,ListeningTestQuestionActivity.class);
-                            intent.putExtra("t1", id[position]);
+                            intent.putExtra("t2",test_code[position]);
                             c.startActivity(intent);
-                        Toast.makeText(c, id[position], Toast.LENGTH_SHORT).show();
+                            Toast.makeText(c, test_code[position], Toast.LENGTH_SHORT).show();
 
             }
         });

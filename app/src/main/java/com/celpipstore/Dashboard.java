@@ -1,12 +1,15 @@
 package com.celpipstore;
 
+import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -23,10 +26,22 @@ import android.webkit.WebViewClient;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 
 public class Dashboard extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
@@ -35,7 +50,10 @@ public class Dashboard extends AppCompatActivity
     ExpandableListView expListView;
     List<String> listDataHeader;
     HashMap<String, List<String>> listDataChild;
-
+    TextView textViewTotalCoins;
+    String username;
+    String password;
+    String id,total_coins;
     ImageView vocabularyimage,spottingerrorimage,dictationimage,comprehensionimage,rearrangeimage,fillintheblanksimage,listeningimage,readingimage,writingimage,speakingimage;
 
 
@@ -45,6 +63,20 @@ public class Dashboard extends AppCompatActivity
         setContentView(R.layout.activity_dashboard);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        Intent intent = getIntent();
+        username = intent.getStringExtra("username");
+        password = intent.getStringExtra("password");
+        textViewTotalCoins = (TextView)findViewById(R.id.textViewTotalCoins);
+
+        final Handler handler = new Handler();
+        final Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                login();
+                handler.postDelayed(this,1000);//10 second delay
+            }
+        };handler.postDelayed(runnable,1000);
 
 //-----------------------------------------------------------------------------------------//
 
@@ -101,6 +133,7 @@ public class Dashboard extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Dashboard.this,LISTENING_part2.class);
+                intent.putExtra("member_id",id);
                 startActivity(intent);
             }
         });
@@ -362,6 +395,50 @@ public class Dashboard extends AppCompatActivity
         }
         return super.onKeyDown(keyCode, event);
     }
+    public void login() {
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://online.celpip.biz/api/login?password="+password+"&username="+username,
+                new Response.Listener<String>() {
+                    @Override
+                    public void onResponse(String response) {
+
+                        try
+                        {
+                            JSONObject obj = new JSONObject(response);
+                            int abc = Integer.parseInt(obj.getString("response"));
+
+                            if (abc == 1)
+                            {
+                                id          = obj.getJSONObject("").getString("id");
+                                total_coins = obj.getJSONObject("").getString("coins");
+                                textViewTotalCoins.setText("Total Coins = "+total_coins);
+                            }
+
+                        } catch (JSONException e) {
+                            e.printStackTrace();
+                        }
+
+
+                    }
+                },
+
+                new Response.ErrorListener() {
+
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
+                    }
+                })
+        {
+            @Override
+            protected Map<String, String> getParams() {
+                Map<String, String> params = new HashMap<>();
+                return params;
+            }
+        };
+
+        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+        requestQueue.add(stringRequest);
+    }
 
     protected void exitByBackKey() {
 
@@ -371,7 +448,7 @@ public class Dashboard extends AppCompatActivity
 
                     // do something when the button is clicked
                     public void onClick(DialogInterface arg0, int arg1) {
-
+                        recreate();
                         Intent intent= new Intent(Dashboard.this,MainActivity.class);
                         startActivity(intent);
                         finish();

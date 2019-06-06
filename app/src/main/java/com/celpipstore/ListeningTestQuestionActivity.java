@@ -1,6 +1,7 @@
 package com.celpipstore;
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.net.Uri;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -14,6 +15,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -25,7 +27,6 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
 
     ImageView imageViewQuestion;
 
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -33,11 +34,17 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
         listView = (ListView)findViewById(R.id.listView);
         imageViewQuestion = (ImageView)findViewById(R.id.imageView);
 
+        Intent intent = getIntent();
+        String test_id = intent.getStringExtra("t1");
+        String test_code = intent.getStringExtra("t2");
+        Log.e("==code",test_code);
+        url = "http://online.celpip.biz/api/accessnewtest?memberid=41&testid=19&testcode="+test_code;
+
         sendRequest();
     }
     private void sendRequest() {
         final ProgressDialog loading = ProgressDialog.show(this,"Loading","Please wait...",false,false);
-        StringRequest stringRequest = new StringRequest("http://online.celpip.biz/api/accessnewtest?memberid=41&testid=20&testcode=L1T1",
+        StringRequest stringRequest = new StringRequest(url,
                 new com.android.volley.Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -46,6 +53,8 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
                             JSONObject obj = new JSONObject(response);
                             int abc = Integer.parseInt(obj.getString("response"));
                             String tokenCode = obj.getString("tdcode");
+                            String a = "http://online.celpip.biz/api/testnewprogress?token="+tokenCode;
+                            Log.e("===a",a);
                             if (abc !=1 )
                             {
                                 loading.dismiss();
@@ -54,11 +63,9 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
                             else if (abc == 1)
                             {
                                 loading.dismiss();
-                                url ="http://online.celpip.biz/api/testnewprogress?token="+tokenCode;
-
                                 Toast.makeText(ListeningTestQuestionActivity.this, url, Toast.LENGTH_SHORT).show();
                                 final ProgressDialog loading = ProgressDialog.show(ListeningTestQuestionActivity.this,"Loading","Please wait...",false,false);
-                                StringRequest stringRequest = new StringRequest(url,
+                                StringRequest stringRequest = new StringRequest(a,
                                         new com.android.volley.Response.Listener<String>() {
                                             @Override
                                             public void onResponse(String response) {
@@ -77,6 +84,11 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
                                                         String imageFile = "main_image3.jpg";
                                                         String imageUrl = "https://online.celpip.biz/uploads/part1_listening/"+imageFile;
                                                         Log.e("===image",imageUrl);
+                                                        Glide
+                                                                .with(ListeningTestQuestionActivity.this)
+                                                                .load(imageUrl)
+                                                                .centerCrop()
+                                                                .into(imageViewQuestion);
                                                         loading.dismiss();
                                                         showJSON(response);
                                                     }
