@@ -23,7 +23,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".VocabularyTestQuestionsActivity"></activity>
+        <activity android:name=".ListeningTestQuestionActivity"></activity>
+        <activity android:name=".VocabularyTestQuestionsActivity" />
         <activity
             android:name=".SpeakingTestListActivity"
             android:label="Speaking Tests" />

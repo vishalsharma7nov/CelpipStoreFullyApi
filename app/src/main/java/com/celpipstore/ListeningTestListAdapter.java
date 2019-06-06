@@ -1,6 +1,7 @@
 package com.celpipstore;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -57,17 +58,11 @@ public class ListeningTestListAdapter extends BaseAdapter{
             @Override
             public void onClick(View v) {
 
-                b1.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
-//                            Intent intent = new Intent(c,LISTENING_part2.class);
-//                            intent.putExtra("t1", id[position]);
-//                            c.startActivity(intent);
+
+                            Intent intent = new Intent(c,ListeningTestQuestionActivity.class);
+                            intent.putExtra("t1", id[position]);
+                            c.startActivity(intent);
                         Toast.makeText(c, id[position], Toast.LENGTH_SHORT).show();
-
-                    }
-                });
-
 
             }
         });

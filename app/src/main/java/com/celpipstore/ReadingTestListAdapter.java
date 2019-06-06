@@ -57,16 +57,12 @@ public class ReadingTestListAdapter extends BaseAdapter{
             @Override
             public void onClick(View v) {
 
-                b1.setOnClickListener(new View.OnClickListener() {
-                    @Override
-                    public void onClick(View v) {
+
 //                            Intent intent = new Intent(c,LISTENING_part2.class);
 //                            intent.putExtra("t1", id[position]);
 //                            c.startActivity(intent);
                         Toast.makeText(c, id[position], Toast.LENGTH_SHORT).show();
 
-                    }
-                });
 
 
             }

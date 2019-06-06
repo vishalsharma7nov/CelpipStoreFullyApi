@@ -372,6 +372,8 @@ public class Dashboard extends AppCompatActivity
                     // do something when the button is clicked
                     public void onClick(DialogInterface arg0, int arg1) {
 
+                        Intent intent= new Intent(Dashboard.this,MainActivity.class);
+                        startActivity(intent);
                         finish();
                         //close();
 

@@ -55,12 +55,19 @@ public class MainActivity extends AppCompatActivity
     ExpandableListView expListView;
     List<String> listDataHeader;
     HashMap<String, List<String>> listDataChild;
+    PrefManager prefManager;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+
+        prefManager = new PrefManager(this);
+        if (!prefManager.isFirstTimeLaunch()) {
+            launchHomeScreen();
+            finish();
+        }
 
         //---------------------------------------------------------------------------------//
 
@@ -210,6 +217,11 @@ public class MainActivity extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
     }
+    private void launchHomeScreen() {
+        prefManager.setFirstTimeLaunch(true);
+        startActivity(new Intent(MainActivity.this, Dashboard.class));
+        finish();
+    }
 
     public void login() {
         final ProgressDialog loading = ProgressDialog.show(this,"Loading","Please wait...",false,false);
@@ -229,6 +241,7 @@ public class MainActivity extends AppCompatActivity
                             if (abc == 1)
                             {
                                 loading.dismiss();
+                                prefManager.setFirstTimeLaunch(false);
                                 Intent intent = new Intent(MainActivity.this,Dashboard.class);
                                 startActivity(intent);
                                 Toast.makeText(MainActivity.this, "Login Successful!!!", Toast.LENGTH_SHORT).show();
