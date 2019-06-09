@@ -5,6 +5,7 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
@@ -21,16 +22,20 @@ import org.json.JSONException;
 import org.json.JSONObject;
 
 public class LISTENING_part2 extends AppCompatActivity{
+
     ListView listView;
+    String member_id;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listening_part2);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
         Intent intent = getIntent();
-        String member_id = intent.getStringExtra("member_id");
-        Toast.makeText(this, member_id, Toast.LENGTH_SHORT).show();
+        member_id = intent.getStringExtra("member_id");
+//        Log.e("==member_id",member_id);
 
         listView = (ListView)findViewById(R.id.listViewListeningTestPart2);
         sendRequest();
@@ -80,6 +85,7 @@ public class LISTENING_part2 extends AppCompatActivity{
 
                             if (abc !=1 )
                             {
+                                loading.dismiss();
                                 Toast.makeText(LISTENING_part2.this, "Work in Progress....", Toast.LENGTH_SHORT).show();
                             }
                             else if (abc == 1)
@@ -108,6 +114,7 @@ public class LISTENING_part2 extends AppCompatActivity{
         ListeningTestAdapter ca = new ListeningTestAdapter(this,jsonHolderListing.id,jsonHolderListing.PTEsubtype, jsonHolderListing.coin_cost,jsonHolderListing.total_test);
         listView.setAdapter(ca);
         ca.notifyDataSetChanged();
+
     }
 
 }

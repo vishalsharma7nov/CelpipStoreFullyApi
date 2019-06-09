@@ -3,6 +3,7 @@ package com.celpipstore;
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -53,6 +54,7 @@ public class Dashboard extends AppCompatActivity
     TextView textViewTotalCoins;
     String username;
     String password;
+    String member_id;
     String id,total_coins;
     ImageView vocabularyimage,spottingerrorimage,dictationimage,comprehensionimage,rearrangeimage,fillintheblanksimage,listeningimage,readingimage,writingimage,speakingimage;
 
@@ -67,8 +69,12 @@ public class Dashboard extends AppCompatActivity
         Intent intent = getIntent();
         username = intent.getStringExtra("username");
         password = intent.getStringExtra("password");
+        member_id = intent.getStringExtra("member_id");
         textViewTotalCoins = (TextView)findViewById(R.id.textViewTotalCoins);
-
+        SharedPreferences prefs = getSharedPreferences("my_prefs", MODE_PRIVATE);
+        SharedPreferences.Editor edit = prefs.edit();
+        edit.putString("member_id", member_id);
+        edit.commit();
         final Handler handler = new Handler();
         final Runnable runnable = new Runnable() {
             @Override
@@ -133,7 +139,7 @@ public class Dashboard extends AppCompatActivity
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(Dashboard.this,LISTENING_part2.class);
-                intent.putExtra("member_id",id);
+                intent.putExtra("member_id",member_id);
                 startActivity(intent);
             }
         });
@@ -425,7 +431,6 @@ public class Dashboard extends AppCompatActivity
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 })
         {

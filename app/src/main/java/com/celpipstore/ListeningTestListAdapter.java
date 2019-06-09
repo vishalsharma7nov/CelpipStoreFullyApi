@@ -2,6 +2,7 @@ package com.celpipstore;
 
 import android.content.Context;
 import android.content.Intent;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -58,16 +59,15 @@ public class ListeningTestListAdapter extends BaseAdapter{
             @Override
             public void onClick(View v) {
 
-
+                            String test_id[] = JsonDataHandler.id;
                             Intent intent = new Intent(c,ListeningTestQuestionActivity.class);
                             intent.putExtra("t2",test_code[position]);
                             c.startActivity(intent);
-                            Toast.makeText(c, test_code[position], Toast.LENGTH_SHORT).show();
-
             }
         });
         for (int i = 0;i<id.length;i++)
         {
+
             t1.setText(id[position]);
             t2.setText("Test"+" "+id[position]);
 

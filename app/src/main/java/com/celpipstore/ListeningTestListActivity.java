@@ -19,6 +19,7 @@ import org.json.JSONObject;
 public class ListeningTestListActivity extends AppCompatActivity {
     String url;
     ListView listView;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +30,7 @@ public class ListeningTestListActivity extends AppCompatActivity {
         listView = (ListView)findViewById(R.id.listViewListeningTestListPart2);
         sendRequest();
     }
+
 
     private void sendRequest() {
         final ProgressDialog loading = ProgressDialog.show(this,"Loading","Please wait...",false,false);

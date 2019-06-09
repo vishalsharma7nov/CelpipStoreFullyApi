@@ -242,7 +242,6 @@ public class MainActivity extends AppCompatActivity
                             if (abc == 1)
                             {
                                 String id          = obj.getJSONObject("").getString("id");
-                                String total_coins = obj.getJSONObject("").getString("coins");
                                 Toast.makeText(MainActivity.this, id, Toast.LENGTH_SHORT).show();
                                 loading.dismiss();
 //                                prefManager.setFirstTimeLaunch(false);
@@ -250,6 +249,7 @@ public class MainActivity extends AppCompatActivity
                                 Intent intent = new Intent(MainActivity.this,Dashboard.class);
                                 intent.putExtra("username",Username);
                                 intent.putExtra("password",Password);
+                                intent.putExtra("member_id",id);
                                 startActivity(intent);
 
                                 Toast.makeText(MainActivity.this, "Login Successful!!!", Toast.LENGTH_SHORT).show();

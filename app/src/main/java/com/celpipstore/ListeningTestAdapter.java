@@ -2,6 +2,7 @@ package com.celpipstore;
 
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -9,6 +10,8 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import static android.content.Context.MODE_PRIVATE;
 
 
 public class ListeningTestAdapter extends BaseAdapter{
@@ -61,10 +64,15 @@ public class ListeningTestAdapter extends BaseAdapter{
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+//
                             Intent intent = new Intent(c,ListeningTestListActivity.class);
                             intent.putExtra("t1", id[position]);
                             c.startActivity(intent);
+                            SharedPreferences prefs = c.getSharedPreferences("my_prefs", MODE_PRIVATE);
+                            SharedPreferences.Editor edit = prefs.edit();
+                            edit.putString("test_id", id[position]);
+                            edit.commit();
+
 //                Toast.makeText(c, id[position], Toast.LENGTH_SHORT).show();
             }
         });
