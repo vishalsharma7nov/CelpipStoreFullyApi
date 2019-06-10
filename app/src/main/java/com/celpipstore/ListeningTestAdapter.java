@@ -61,6 +61,7 @@ public class ListeningTestAdapter extends BaseAdapter{
         TextView t3=(TextView)convertView.findViewById(R.id.listeningtestpart2totaltest);
 
         Button b1 = (Button)convertView.findViewById(R.id.buttonSelectedTest);
+
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -76,6 +77,7 @@ public class ListeningTestAdapter extends BaseAdapter{
 //                Toast.makeText(c, id[position], Toast.LENGTH_SHORT).show();
             }
         });
+
         for (int i = 0;i<coin_cost.length;i++)
         {
             t1.setText(PTEsubtype[position]);

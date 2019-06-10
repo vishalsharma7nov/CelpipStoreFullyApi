@@ -1,45 +1,184 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout
+<RelativeLayout
     android:orientation="vertical"
-    android:background="#FFF3F3"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/t1"
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginStart="0dp"
+        android:layout_marginTop="53dp"
+        android:orientation="horizontal">
 
-    <TextView
-        android:id="@+id/t2"
+        <TextView
+            android:id="@+id/textViewStartTime"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:text="Start Time" />
+
+        <SeekBar
+            android:id="@+id/seekbar"
+            android:layout_width="200dp"
+            android:layout_height="30dp"
+            android:layout_marginStart="20dp"
+            android:layout_marginEnd="10dp"
+            android:background="@color/colorWhite" />
+
+        <TextView
+            android:id="@+id/textViewStopTime"
+            android:layout_width="50dp"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="10dp"
+            android:layout_marginEnd="10dp"
+            android:text="End Time" />
+    </LinearLayout>
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="wrap_content"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:layout_marginTop="140dp"
+        android:orientation="vertical">
 
-    <TextView
-        android:id="@+id/t3"
+        <ImageButton
+            android:id="@+id/buttonPlay"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_alignParentTop="true"
+            android:layout_centerHorizontal="true"
+            android:layout_gravity="center"
+            android:layout_marginTop="50dp"
+            android:background="@color/colorPrimary"
+            android:src="@drawable/ic_play_arrow_black_24dp" />
+
+        <RadioGroup
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="20dp">
+
+            <RadioButton
+                android:id="@+id/radioButtonOption1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="50dp" />
+
+            <RadioButton
+                android:id="@+id/radioButtonOption2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="50dp" />
+
+            <RadioButton
+                android:id="@+id/radioButtonOption3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="50dp" />
+
+            <RadioButton
+                android:id="@+id/radioButtonOption4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentStart="true"
+                android:layout_alignParentTop="true"
+                android:layout_marginStart="50dp"
+                android:layout_marginEnd="50dp" />
+        </RadioGroup>
+    </LinearLayout>
+
+
+    <Button
+        android:id="@+id/buttonNextQuestion2"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/buttonFinish"
+        android:layout_marginStart="140dp"
+        android:layout_marginTop="450dp"
+        android:layout_marginBottom="80dp"
+        android:background="@color/colorPrimary"
+        android:text="Next Question"
+        android:textColor="@color/colorWhite" />
+
+    <Button
+        android:visibility="gone"
+        android:id="@+id/buttonNextQuestion3"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginStart="140dp"
+        android:layout_marginTop="450dp"
+        android:layout_marginBottom="80dp"
+        android:background="@color/colorPrimary"
+        android:text="Next Question"
+        android:textColor="@color/colorWhite" />
+
+    <Button
+        android:visibility="gone"
+        android:id="@+id/buttonNextQuestion4"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="140dp"
+        android:layout_marginTop="450dp"
+        android:layout_marginBottom="80dp"
+        android:background="@color/colorPrimary"
+        android:text="Next Question"
+        android:textColor="@color/colorWhite" />
+    <Button
+        android:visibility="gone"
+        android:id="@+id/buttonNextQuestion5"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="140dp"
+        android:layout_marginTop="450dp"
+        android:layout_marginBottom="80dp"
+        android:background="@color/colorPrimary"
+        android:text="Next Question"
+        android:textColor="@color/colorWhite" />
+
+    <Button
+        android:visibility="gone"
+        android:id="@+id/buttonFinish"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginStart="140dp"
+        android:layout_marginTop="450dp"
+        android:layout_marginBottom="80dp"
+        android:background="@color/colorPrimary"
+        android:text="Test Finish"
+        android:textColor="@color/colorWhite" />
+
+
+    <ListView
+        android:visibility="gone"
+        android:id="@+id/correctanswer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="254dp">
+    </ListView>
 
-    <TextView
-        android:id="@+id/t4"
+    <ListView
+        android:id="@+id/userAnswer"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:id="@+id/t5"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"/>
-
-    <TextView
-        android:id="@+id/t6"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
-
-    <TextView
-        android:id="@+id/t7"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+        android:layout_height="200dp"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="13dp"
+        android:layout_marginBottom="398dp"></ListView>
 
 
-</LinearLayout>
+
+</RelativeLayout>

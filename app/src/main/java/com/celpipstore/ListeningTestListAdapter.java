@@ -50,11 +50,12 @@ public class ListeningTestListAdapter extends BaseAdapter{
         convertView=in.inflate(R.layout.test_list_adapter,null);
 
 
-        TextView t1=(TextView)convertView.findViewById(R.id.listeningTestListId);
+//        TextView t1=(TextView)convertView.findViewById(R.id.listeningTestListId);
         TextView t2=(TextView)convertView.findViewById(R.id.listeningTestListTestNumber);
 
 
         Button b1 = (Button)convertView.findViewById(R.id.listeningTestListStartTest);
+        Button b2 = (Button)convertView.findViewById(R.id.reviewTest);
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -65,10 +66,16 @@ public class ListeningTestListAdapter extends BaseAdapter{
                             c.startActivity(intent);
             }
         });
+        b2.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Toast.makeText(c, "Review", Toast.LENGTH_SHORT).show();
+            }
+        });
         for (int i = 0;i<id.length;i++)
         {
 
-            t1.setText(id[position]);
+//            t1.setText(id[position]);
             t2.setText("Test"+" "+id[position]);
 
         }

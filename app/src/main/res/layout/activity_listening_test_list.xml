@@ -7,18 +7,12 @@
         android:orientation="horizontal"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
+
         <TextView
-            android:text="Id"
+            android:text="Test"
             android:textStyle="bold"
             android:layout_marginTop="10dp"
-            android:layout_marginStart="10dp"
-            android:layout_width="50dp"
-            android:layout_height="wrap_content" />
-        <TextView
-            android:text="Test Number"
-            android:textStyle="bold"
-            android:layout_marginTop="10dp"
-            android:layout_marginStart="50dp"
+            android:layout_marginStart="20dp"
             android:layout_width="100dp"
             android:layout_height="wrap_content" />
 
@@ -27,7 +21,15 @@
             android:textStyle="bold"
             android:textAlignment="center"
             android:layout_marginTop="10dp"
-            android:layout_marginStart="50dp"
+            android:layout_marginStart="20dp"
+            android:layout_width="80dp"
+            android:layout_height="wrap_content" />
+        <TextView
+            android:text="Review"
+            android:textStyle="bold"
+            android:textAlignment="center"
+            android:layout_marginTop="10dp"
+            android:layout_marginStart="30dp"
             android:layout_width="80dp"
             android:layout_height="wrap_content" />
 

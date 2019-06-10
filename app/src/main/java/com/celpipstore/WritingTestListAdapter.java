@@ -48,7 +48,7 @@ public class WritingTestListAdapter extends BaseAdapter{
         convertView=in.inflate(R.layout.test_list_adapter,null);
 
 
-        TextView t1=(TextView)convertView.findViewById(R.id.listeningTestListId);
+//        TextView t1=(TextView)convertView.findViewById(R.id.listeningTestListId);
         TextView t2=(TextView)convertView.findViewById(R.id.listeningTestListTestNumber);
 
 
@@ -69,7 +69,7 @@ public class WritingTestListAdapter extends BaseAdapter{
         });
         for (int i = 0;i<id.length;i++)
         {
-            t1.setText(id[position]);
+//            t1.setText(id[position]);
             t2.setText("Test"+" "+id[position]);
 
         }
