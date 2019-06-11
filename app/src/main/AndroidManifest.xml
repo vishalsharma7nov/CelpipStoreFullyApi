@@ -4,7 +4,8 @@
     package="com.celpipstore">
 
     <uses-permission android:name="android.permission.INTERNET" />
-
+    <uses-permission android:name="android.permission.MEDIA_CONTENT_CONTROL"
+        tools:ignore="ProtectedPermissions" />
     <supports-screens
         android:anyDensity="true"
         android:largeScreens="true"
@@ -150,6 +151,7 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
+
     </application>
 
 </manifest>

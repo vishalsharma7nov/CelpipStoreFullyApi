@@ -7,6 +7,7 @@ import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.media.AudioManager;
+import android.media.Image;
 import android.media.MediaPlayer;
 import android.net.Uri;
 import android.os.Build;
@@ -15,7 +16,7 @@ import android.os.Handler;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.view.Display;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -32,6 +33,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.bumptech.glide.Glide;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -42,9 +44,12 @@ import java.util.concurrent.TimeUnit;
 public class ListeningTestQuestionActivity extends AppCompatActivity {
 
     ListView listView;
-    String url;
+    String url,part1,part2;
+    String image;
+    ImageView imageView;
 
-    JsonDataHandlerListeningPart2 jsonHolderListing;
+    JsonDataHandlerListeningPart1 jsonHolderListingpart1;
+    JsonDataHandlerListeningPart2 jsonHolderListingpart2;
     MediaPlayer mediaPlayer;
     double startTime = 0;
     double finalTime = 0;
@@ -54,12 +59,10 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
     int backwardTime = 5000;
     SeekBar seekbar;
     ImageButton imageButtonPlay,imageButtonPause;
-    Button buttonNext;
-    LinearLayout linearLayoutFrame1;
-    TextView textViewStart,textViewStop,textViewPercent;
+    Button buttonNext,button;
+    LinearLayout linearLayoutFrame1,linearLayoutFrame2;
+    TextView textViewStart,textViewStop,textViewPercent,textViewInstruction;
     public static int oneTimeOnly = 0;
-    Uri myUri;
-    ProgressDialog buffer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -69,14 +72,20 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
         listView = (ListView)findViewById(R.id.listView);
         imageButtonPlay = (ImageButton)findViewById(R.id.buttonPlay);
         buttonNext = (Button)findViewById(R.id.buttonNext);
+        button     = (Button)findViewById(R.id.button);
         imageButtonPause = (ImageButton)findViewById(R.id.buttonPause);
+
         linearLayoutFrame1 = (LinearLayout)findViewById(R.id.frame1);
+        linearLayoutFrame2 = (LinearLayout)findViewById(R.id.frame2);
+
         seekbar = (SeekBar)findViewById(R.id.seekbar);
         seekbar.setClickable(false);
         textViewStart = (TextView)findViewById(R.id.textViewStartTime);
         textViewStop = (TextView)findViewById(R.id.textViewStopTime);
-        textViewPercent = (TextView)findViewById(R.id.percent);
+        textViewInstruction = (TextView)findViewById(R.id.textViewInstruction);
+        imageButtonPause.setVisibility(View.GONE);
 
+        imageView = (ImageView)findViewById(R.id.imageView);
 
         SharedPreferences bb = getSharedPreferences("my_prefs", 0);
         String member_id = bb.getString("member_id", "member_id");
@@ -85,75 +94,21 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
         String test_id = bb.getString("test_id","test_id");
         String test_code = intent.getStringExtra("t2");
         url = "http://online.celpip.biz/api/accessnewtest?memberid="+member_id+"&testid="+test_id+"&testcode="+test_code;
+        part1 = "http://online.celpip.biz/api/accessnewtest?memberid="+member_id+"&testid=20&testcode="+test_code;
+        part2 = "http://online.celpip.biz/api/accessnewtest?memberid="+member_id+"&testid=19&testcode="+test_code;
         sendRequest();
-
-        imageButtonPlay.setOnClickListener(new View.OnClickListener() {
+        button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                String audio_player = "https://online.celpip.biz/uploads/part2_listening/"+jsonHolderListing.converstaion_1_audio;
-                Uri myUri = Uri.parse(audio_player);
-                try
-                {
-                    mediaPlayer = new MediaPlayer();
-                    mediaPlayer.setDataSource(ListeningTestQuestionActivity.this, myUri);
-                    mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-                    mediaPlayer.prepare();
-                    mediaPlayer.seekTo((int) startTime);
-
-                    mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                        @Override
-                        public void onPrepared(MediaPlayer player) {
-
-                            mediaPlayer.setOnBufferingUpdateListener(new MediaPlayer.OnBufferingUpdateListener() {
-                                @RequiresApi(api = Build.VERSION_CODES.O)
-                                @Override
-                                public void onBufferingUpdate(MediaPlayer mp, int percent) {
-                                    seekbar.setSecondaryProgress(percent * mediaPlayer.getDuration() /100 );
-                                    seekbar.setSecondaryProgressTintList(ColorStateList.valueOf(Color.RED));
-                                    mediaPlayer.start();
-                                }
-                            });
-                        }
-                    });
-
-                    finalTime = mediaPlayer.getDuration();
-                    startTime = mediaPlayer.getCurrentPosition();
-                    if (oneTimeOnly == 0) {
-                        seekbar.setMax((int) finalTime);
-                        oneTimeOnly = 0;
-                    }
-
-                    seekbar.setProgress((int)startTime);
-                    myHandler.postDelayed(UpdateSongTime,100);
-                    textViewStop.setText(String.format("%d min, %d sec",
-                            TimeUnit.MILLISECONDS.toMinutes((long) finalTime),
-                            TimeUnit.MILLISECONDS.toSeconds((long) finalTime) -
-                                    TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes((long)
-                                            finalTime)))
-                    );
-
-                    textViewStart.setText(String.format("%d min, %d sec",
-                            TimeUnit.MILLISECONDS.toMinutes((long) startTime),
-                            TimeUnit.MILLISECONDS.toSeconds((long) startTime) -
-                                    TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes((long)
-                                            startTime)))
-                    );
-
-
-                }
-                catch (IOException e)
-                {
-                    e.printStackTrace();
-                }
-
-
+                linearLayoutFrame2.setVisibility(View.GONE);
+                linearLayoutFrame1.setVisibility(View.VISIBLE);
+                button.setVisibility(View.GONE);
             }
         });
+
         buttonNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-//                mediaPlayer.pause();
                 linearLayoutFrame1.setVisibility(View.GONE);
                 listView.setVisibility(View.VISIBLE);
             }
@@ -161,13 +116,23 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
         imageButtonPause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                mediaPlayer.pause();
+                if (mediaPlayer.isPlaying()) {
+                    mediaPlayer.stop();
+                }
+                else
+                {
+                    mediaPlayer.start();
+                }
+                Toast.makeText(ListeningTestQuestionActivity.this, "Pause", Toast.LENGTH_SHORT).show();
             }
         });
 
+
     }
-    private Runnable UpdateSongTime = new Runnable() {
+
+    private Runnable UpdateAudioTime = new Runnable() {
         public void run() {
+
             startTime = mediaPlayer.getCurrentPosition();
             textViewStart.setText(String.format("%d min, %d sec",
                     TimeUnit.MILLISECONDS.toMinutes((long) startTime),
@@ -227,45 +192,187 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
                             else if (abc == 1)
                             {
                                 loading.dismiss();
-                                final ProgressDialog loading = ProgressDialog.show(ListeningTestQuestionActivity.this,"Loading","Please wait...",false,false);
-                                StringRequest stringRequest = new StringRequest(a,
-                                        new com.android.volley.Response.Listener<String>() {
-                                            @Override
-                                            public void onResponse(String response) {
+                                    final ProgressDialog loading = ProgressDialog.show(ListeningTestQuestionActivity.this,"Loading","Please wait...",false,false);
+                                    StringRequest stringRequest = new StringRequest(a,
+                                            new com.android.volley.Response.Listener<String>() {
+                                                @Override
+                                                public void onResponse(String response) {
 
-                                                try {
-                                                    JSONObject obj = new JSONObject(response);
-                                                    int abc = Integer.parseInt(obj.getString("response"));
-                                                    String url_data = "https://online.celpip.biz/uploads/part2_listening/";
-                                                    String audio_file = obj.getJSONObject("data").getString("q1_audio");
-                                                    String audio = url_data+audio_file;
-                                                    if (abc !=1 )
-                                                    {
-                                                        loading.dismiss();
-                                                        Toast.makeText(ListeningTestQuestionActivity.this, "Work in Progress....", Toast.LENGTH_SHORT).show();
-                                                    }
-                                                    else if (abc == 1)
-                                                    {
+                                                    try {
+                                                        JSONObject obj = new JSONObject(response);
+                                                        int abc = Integer.parseInt(obj.getString("response"));
+                                                        if (abc !=1 )
+                                                        {
+                                                            loading.dismiss();
+                                                            Toast.makeText(ListeningTestQuestionActivity.this, "Work in Progress....", Toast.LENGTH_SHORT).show();
+                                                        }
+                                                        else if (abc == 1)
+                                                        {
+                                                            if (url.equals(part1))
+                                                            {
+                                                                showJSONPart1(response);
+                                                                image = "https://online.celpip.biz/uploads/part1_listening/"+jsonHolderListingpart1.l1_practice_01_img;
+                                                                Log.e("===imageURL",image);
+                                                                Glide
+                                                                        .with(ListeningTestQuestionActivity.this)
+                                                                        .load(image)
+                                                                        .into(imageView);
+                                                                textViewInstruction.setText("Instruction :\n"+jsonHolderListingpart1.l1_practice_01_text);
+                                                                loading.dismiss();
+                                                                imageButtonPlay.setOnClickListener(new View.OnClickListener() {
+                                                                    @Override
+                                                                    public void onClick(View v) {
+                                                                        final ProgressDialog loading = ProgressDialog.show(ListeningTestQuestionActivity.this,"Loading Audio","Please wait...",false,false);
+                                                                        String audio_player = "https://online.celpip.biz/uploads/part1_listening/"+jsonHolderListingpart1.l1_converstaion_1_audio;
+                                                                        Uri myUri = Uri.parse(audio_player);
+                                                                        try
+                                                                        {
+                                                                            mediaPlayer = new MediaPlayer();
+                                                                            mediaPlayer.setDataSource(ListeningTestQuestionActivity.this, myUri);
+                                                                            mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+                                                                            mediaPlayer.prepare();
+                                                                            mediaPlayer.setLooping(false);
+                                                                            mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                                                                                @Override
+                                                                                public void onPrepared(MediaPlayer player) {
 
-                                                        loading.dismiss();
-                                                        showJSON(response);
+                                                                                    mediaPlayer.setOnBufferingUpdateListener(new MediaPlayer.OnBufferingUpdateListener() {
+                                                                                        @RequiresApi(api = Build.VERSION_CODES.O)
+                                                                                        @Override
+                                                                                        public void onBufferingUpdate(MediaPlayer mp, int percent) {
+                                                                                            seekbar.setSecondaryProgress(percent * mediaPlayer.getDuration() /100 );
+                                                                                            seekbar.setSecondaryProgressTintList(ColorStateList.valueOf(Color.RED));
+                                                                                            loading.dismiss();
+                                                                                            imageButtonPause.setVisibility(View.VISIBLE);
+                                                                                            mediaPlayer.start();
+                                                                                        }
+                                                                                    });
+                                                                                }
+                                                                            });
+
+
+                                                                            finalTime = mediaPlayer.getDuration();
+                                                                            startTime = mediaPlayer.getCurrentPosition();
+                                                                            if (oneTimeOnly == 0) {
+                                                                                seekbar.setMax((int) finalTime);
+                                                                                oneTimeOnly = 0;
+                                                                            }
+
+                                                                            seekbar.setProgress((int)startTime);
+                                                                            myHandler.postDelayed(UpdateAudioTime,100);
+                                                                            textViewStop.setText(String.format("%d min, %d sec",
+                                                                                    TimeUnit.MILLISECONDS.toMinutes((long) finalTime),
+                                                                                    TimeUnit.MILLISECONDS.toSeconds((long) finalTime) -
+                                                                                            TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes((long)
+                                                                                                    finalTime)))
+                                                                            );
+
+                                                                            textViewStart.setText(String.format("%d min, %d sec",
+                                                                                    TimeUnit.MILLISECONDS.toMinutes((long) startTime),
+                                                                                    TimeUnit.MILLISECONDS.toSeconds((long) startTime) -
+                                                                                            TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes((long)
+                                                                                                    startTime)))
+                                                                            );
+
+                                                                        }
+                                                                        catch (IOException e)
+                                                                        {
+                                                                            e.printStackTrace();
+                                                                        }
+
+
+                                                                    }
+                                                                });
+                                                            }
+                                                            else if(url.equals(part2))
+                                                            {
+                                                                loading.dismiss();
+                                                                linearLayoutFrame2.setVisibility(View.GONE);
+                                                                linearLayoutFrame1.setVisibility(View.VISIBLE);
+                                                                showJSONPart2(response);
+                                                                imageButtonPlay.setOnClickListener(new View.OnClickListener() {
+                                                                    @Override
+                                                                    public void onClick(View v) {
+                                                                        final ProgressDialog loading = ProgressDialog.show(ListeningTestQuestionActivity.this,"Loading Audio","Please wait...",false,false);
+                                                                        String audio_player = "https://online.celpip.biz/uploads/part2_listening/"+jsonHolderListingpart2.converstaion_1_audio;
+                                                                        Uri myUri = Uri.parse(audio_player);
+                                                                        try
+                                                                        {
+                                                                            mediaPlayer = new MediaPlayer();
+                                                                            mediaPlayer.setDataSource(ListeningTestQuestionActivity.this, myUri);
+                                                                            mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+                                                                            mediaPlayer.prepare();
+                                                                            mediaPlayer.setLooping(false);
+                                                                            mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                                                                                @Override
+                                                                                public void onPrepared(MediaPlayer player) {
+
+                                                                                    mediaPlayer.setOnBufferingUpdateListener(new MediaPlayer.OnBufferingUpdateListener() {
+                                                                                        @RequiresApi(api = Build.VERSION_CODES.O)
+                                                                                        @Override
+                                                                                        public void onBufferingUpdate(MediaPlayer mp, int percent) {
+                                                                                            seekbar.setSecondaryProgress(percent * mediaPlayer.getDuration() /100 );
+                                                                                            seekbar.setSecondaryProgressTintList(ColorStateList.valueOf(Color.RED));
+                                                                                            loading.dismiss();
+                                                                                            imageButtonPause.setVisibility(View.VISIBLE);
+                                                                                            mediaPlayer.start();
+                                                                                        }
+                                                                                    });
+                                                                                }
+                                                                            });
+
+
+                                                                            finalTime = mediaPlayer.getDuration();
+                                                                            startTime = mediaPlayer.getCurrentPosition();
+                                                                            if (oneTimeOnly == 0) {
+                                                                                seekbar.setMax((int) finalTime);
+                                                                                oneTimeOnly = 0;
+                                                                            }
+
+                                                                            seekbar.setProgress((int)startTime);
+                                                                            myHandler.postDelayed(UpdateAudioTime,100);
+                                                                            textViewStop.setText(String.format("%d min, %d sec",
+                                                                                    TimeUnit.MILLISECONDS.toMinutes((long) finalTime),
+                                                                                    TimeUnit.MILLISECONDS.toSeconds((long) finalTime) -
+                                                                                            TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes((long)
+                                                                                                    finalTime)))
+                                                                            );
+
+                                                                            textViewStart.setText(String.format("%d min, %d sec",
+                                                                                    TimeUnit.MILLISECONDS.toMinutes((long) startTime),
+                                                                                    TimeUnit.MILLISECONDS.toSeconds((long) startTime) -
+                                                                                            TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes((long)
+                                                                                                    startTime)))
+                                                                            );
+
+                                                                        }
+                                                                        catch (IOException e)
+                                                                        {
+                                                                            e.printStackTrace();
+                                                                        }
+
+
+                                                                    }
+                                                                });
+                                                            }
+                                                        }
+                                                    } catch (JSONException e) {
+                                                        e.printStackTrace();
                                                     }
-                                                } catch (JSONException e) {
-                                                    e.printStackTrace();
                                                 }
-                                            }
-                                        },
-                                        new Response.ErrorListener() {
-                                            @Override
-                                            public void onErrorResponse(VolleyError error) {
-                                                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
-                                                loading.dismiss();
-                                            }
-                                        });
+                                            },
+                                            new Response.ErrorListener() {
+                                                @Override
+                                                public void onErrorResponse(VolleyError error) {
+                                                    Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
+                                                    loading.dismiss();
+                                                }
+                                            });
 
-                                RequestQueue requestQueue = Volley.newRequestQueue(ListeningTestQuestionActivity.this);
-                                requestQueue.add(stringRequest);
-                            }
+                                    RequestQueue requestQueue = Volley.newRequestQueue(ListeningTestQuestionActivity.this);
+                                    requestQueue.add(stringRequest);
+                                }
+
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
@@ -283,11 +390,20 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
         requestQueue.add(stringRequest);
     }
 
-    private void showJSON(String json) {
-        JsonDataHandlerListeningPart2 jsonHolderListing = new JsonDataHandlerListeningPart2(json);
-        jsonHolderListing.parseJSON();
+    private void showJSONPart1(String json) {
+        JsonDataHandlerListeningPart1 jsonHolderListingpart1 = new JsonDataHandlerListeningPart1(json);
+        jsonHolderListingpart1.parseJSON();
 
-        ListeningTestQuesionAdapter ca = new ListeningTestQuesionAdapter(this,jsonHolderListing.id,jsonHolderListing.test_code,jsonHolderListing.converstaion_1_audio,jsonHolderListing.q1_audio,jsonHolderListing.q1_option1,jsonHolderListing.q1_option2,jsonHolderListing.q1_option3,jsonHolderListing.q1_option4,jsonHolderListing.q2_audio,jsonHolderListing.q2_option1,jsonHolderListing.q2_option2,jsonHolderListing.q2_option3,jsonHolderListing.q2_option4,jsonHolderListing.q3_audio,jsonHolderListing.q3_option1,jsonHolderListing.q3_option2,jsonHolderListing.q3_option3,jsonHolderListing.q3_option4,jsonHolderListing.q4_audio,jsonHolderListing.q4_option1,jsonHolderListing.q4_option2,jsonHolderListing.q4_option3,jsonHolderListing.q4_option4,jsonHolderListing.q5_audio,jsonHolderListing.q5_option1,jsonHolderListing.q5_option2,jsonHolderListing.q5_option3,jsonHolderListing.q5_option4);
+        ListeningTestPart1QuesionAdapter ca = new ListeningTestPart1QuesionAdapter(this,jsonHolderListingpart1.id,jsonHolderListingpart1.test_code,jsonHolderListingpart1.l1_q1_audio,jsonHolderListingpart1.l1_q1_option1,jsonHolderListingpart1.l1_q1_option2,jsonHolderListingpart1.l1_q1_option3,jsonHolderListingpart1.l1_q1_option4,jsonHolderListingpart1.l1_q2_audio,jsonHolderListingpart1.l1_q2_option1,jsonHolderListingpart1.l1_q2_option2,jsonHolderListingpart1.l1_q2_option3,jsonHolderListingpart1.l1_q2_option4,jsonHolderListingpart1.l1_q3_audio,jsonHolderListingpart1.l1_q3_option1,jsonHolderListingpart1.l1_q3_option2,jsonHolderListingpart1.l1_q3_option3,jsonHolderListingpart1.l1_q3_option4,jsonHolderListingpart1.l1_q4_audio,jsonHolderListingpart1.l1_q4_option1,jsonHolderListingpart1.l1_q4_option2,jsonHolderListingpart1.l1_q4_option3,jsonHolderListingpart1.l1_q4_option4,jsonHolderListingpart1.l1_q5_audio,jsonHolderListingpart1.l1_q5_option1,jsonHolderListingpart1.l1_q5_option2,jsonHolderListingpart1.l1_q5_option3,jsonHolderListingpart1.l1_q5_option4,jsonHolderListingpart1.l1_q6_audio,jsonHolderListingpart1.l1_q6_option1,jsonHolderListingpart1.l1_q6_option2,jsonHolderListingpart1.l1_q6_option3,jsonHolderListingpart1.l1_q6_option4,jsonHolderListingpart1.l1_q7_audio,jsonHolderListingpart1.l1_q7_option1,jsonHolderListingpart1.l1_q7_option2,jsonHolderListingpart1.l1_q7_option3,jsonHolderListingpart1.l1_q7_option4,jsonHolderListingpart1.l1_q8_audio,jsonHolderListingpart1.l1_q8_option1,jsonHolderListingpart1.l1_q8_option2,jsonHolderListingpart1.l1_q8_option3,jsonHolderListingpart1.l1_q8_option4);
+        listView.setAdapter(ca);
+        ca.notifyDataSetChanged();
+
+    }
+    private void showJSONPart2(String json) {
+        JsonDataHandlerListeningPart2 jsonHolderListingpart2 = new JsonDataHandlerListeningPart2(json);
+        jsonHolderListingpart2.parseJSON();
+
+        ListeningTestPart2QuesionAdapter ca = new ListeningTestPart2QuesionAdapter(this,jsonHolderListingpart2.id,jsonHolderListingpart2.test_code,jsonHolderListingpart2.converstaion_1_audio,jsonHolderListingpart2.q1_audio,jsonHolderListingpart2.q1_option1,jsonHolderListingpart2.q1_option2,jsonHolderListingpart2.q1_option3,jsonHolderListingpart2.q1_option4,jsonHolderListingpart2.q2_audio,jsonHolderListingpart2.q2_option1,jsonHolderListingpart2.q2_option2,jsonHolderListingpart2.q2_option3,jsonHolderListingpart2.q2_option4,jsonHolderListingpart2.q3_audio,jsonHolderListingpart2.q3_option1,jsonHolderListingpart2.q3_option2,jsonHolderListingpart2.q3_option3,jsonHolderListingpart2.q3_option4,jsonHolderListingpart2.q4_audio,jsonHolderListingpart2.q4_option1,jsonHolderListingpart2.q4_option2,jsonHolderListingpart2.q4_option3,jsonHolderListingpart2.q4_option4,jsonHolderListingpart2.q5_audio,jsonHolderListingpart2.q5_option1,jsonHolderListingpart2.q5_option2,jsonHolderListingpart2.q5_option3,jsonHolderListingpart2.q5_option4);
         listView.setAdapter(ca);
         ca.notifyDataSetChanged();
 

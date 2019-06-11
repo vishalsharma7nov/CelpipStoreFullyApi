@@ -10,7 +10,6 @@ import android.net.Uri;
 import android.os.Build;
 import android.os.Handler;
 import android.support.annotation.RequiresApi;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -23,11 +22,10 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import java.io.IOException;
-import java.util.List;
 import java.util.concurrent.TimeUnit;
 
 
-public class ListeningTestQuesionAdapter extends BaseAdapter{
+public class ListeningTestPart2QuesionAdapter extends BaseAdapter{
 
     Context c;
     String url = "https://online.celpip.biz/uploads/part2_listening/";
@@ -78,7 +76,7 @@ public class ListeningTestQuesionAdapter extends BaseAdapter{
     public static String q5_option4;
     public static String q5_answer;
 
-    public ListeningTestQuesionAdapter(Context c, String id, String test_code,String converstaion_1_audio,String q1_audio,String q1_option1,String q1_option2,String q1_option3,String q1_option4,String q2_audio,String q2_option1,String q2_option2,String q2_option3,String q2_option4,String q3_audio,String q3_option1,String q3_option2,String q3_option3,String q3_option4,String q4_audio,String q4_option1,String q4_option2,String q4_option3,String q4_option4,String q5_audio,String q5_option1,String q5_option2,String q5_option3,String q5_option4)
+    public ListeningTestPart2QuesionAdapter(Context c, String id, String test_code, String converstaion_1_audio, String q1_audio, String q1_option1, String q1_option2, String q1_option3, String q1_option4, String q2_audio, String q2_option1, String q2_option2, String q2_option3, String q2_option4, String q3_audio, String q3_option1, String q3_option2, String q3_option3, String q3_option4, String q4_audio, String q4_option1, String q4_option2, String q4_option3, String q4_option4, String q5_audio, String q5_option1, String q5_option2, String q5_option3, String q5_option4)
     {
         this.c=c;
         this.id         = id;
@@ -132,7 +130,7 @@ public class ListeningTestQuesionAdapter extends BaseAdapter{
     public View getView(final int position, View convertView, ViewGroup parent) {
         LayoutInflater in=(LayoutInflater)c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        convertView=in.inflate(R.layout.test_adapter_listeningtest,null);
+        convertView=in.inflate(R.layout.test_adapter_listeningtestpart2,null);
 
 
         final RadioButton t1=(RadioButton) convertView.findViewById(R.id.radioButtonOption1);

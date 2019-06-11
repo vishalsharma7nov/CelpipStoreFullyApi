@@ -9,6 +9,7 @@
 
 
     <LinearLayout
+        android:visibility="gone"
         android:id="@+id/frame1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
@@ -52,32 +53,35 @@
                 android:layout_height="wrap_content" />
         </LinearLayout>
         <TextView
-            android:id="@+id/percent"
-            android:gravity="center"
-            android:layout_width="wrap_content"
+            android:layout_marginTop="20dp"
+            android:textSize="16sp"
+            android:textAlignment="center"
+            android:textAllCaps="true"
+            android:textStyle="bold"
+            android:text="This playbar will not appear in the official test."
+            android:layout_width="match_parent"
             android:layout_height="wrap_content" />
-
         <ImageButton
             android:id="@+id/buttonPlay"
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="20dp"
             android:background="@color/colorPrimary"
-            android:drawablePadding="10dp"
             android:src="@drawable/ic_play_arrow_black_24dp" />
         <ImageButton
             android:id="@+id/buttonPause"
+            android:clickable="true"
             android:layout_width="100dp"
             android:layout_height="50dp"
             android:layout_gravity="center"
-            android:layout_marginTop="50dp"
+            android:layout_marginTop="20dp"
             android:background="@color/colorPrimary"
-            android:drawablePadding="10dp"
             android:src="@drawable/ic_pause_black_24dp" />
 
         <Button
             android:id="@+id/buttonNext"
+            android:clickable="true"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="50dp"
@@ -86,11 +90,7 @@
             android:textColor="@color/colorWhite"
             android:textStyle="bold" />
     </LinearLayout>
-    <TextView
-        android:visibility="gone"
-        android:id="@+id/t1"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content" />
+
     <ListView
         android:visibility="gone"
         android:id="@+id/listView"
@@ -99,5 +99,33 @@
         android:layout_width="match_parent"
         android:layout_height="match_parent">
     </ListView>
+    <LinearLayout
+        android:id="@+id/frame2"
+        android:orientation="vertical"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <TextView
+            android:id="@+id/textViewInstruction"
+            android:textStyle="bold"
+            android:textAllCaps="true"
+            android:layout_margin="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_margin="30dp"
+            android:layout_width="match_parent"
+            android:layout_height="300dp" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignBottom="@+id/frame2"
+            android:background="@color/colorPrimary"
+            android:text="Next"
+            android:textColor="@color/colorWhite" />
+    </LinearLayout>
 
 </RelativeLayout>
