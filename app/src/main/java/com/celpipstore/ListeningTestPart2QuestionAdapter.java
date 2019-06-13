@@ -25,7 +25,7 @@ import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 
-public class ListeningTestPart2QuesionAdapter extends BaseAdapter{
+public class ListeningTestPart2QuestionAdapter extends BaseAdapter{
 
     Context c;
     String url = "https://online.celpip.biz/uploads/part2_listening/";
@@ -76,7 +76,7 @@ public class ListeningTestPart2QuesionAdapter extends BaseAdapter{
     public static String q5_option4;
     public static String q5_answer;
 
-    public ListeningTestPart2QuesionAdapter(Context c, String id, String test_code, String converstaion_1_audio, String q1_audio, String q1_option1, String q1_option2, String q1_option3, String q1_option4, String q2_audio, String q2_option1, String q2_option2, String q2_option3, String q2_option4, String q3_audio, String q3_option1, String q3_option2, String q3_option3, String q3_option4, String q4_audio, String q4_option1, String q4_option2, String q4_option3, String q4_option4, String q5_audio, String q5_option1, String q5_option2, String q5_option3, String q5_option4)
+    public ListeningTestPart2QuestionAdapter(Context c, String id, String test_code, String converstaion_1_audio, String q1_audio, String q1_option1, String q1_option2, String q1_option3, String q1_option4, String q2_audio, String q2_option1, String q2_option2, String q2_option3, String q2_option4, String q3_audio, String q3_option1, String q3_option2, String q3_option3, String q3_option4, String q4_audio, String q4_option1, String q4_option2, String q4_option3, String q4_option4, String q5_audio, String q5_option1, String q5_option2, String q5_option3, String q5_option4)
     {
         this.c=c;
         this.id         = id;

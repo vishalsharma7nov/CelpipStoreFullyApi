@@ -6,13 +6,15 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
+import android.graphics.drawable.Drawable;
 import android.media.AudioManager;
-import android.media.Image;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -34,11 +36,14 @@ import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.load.DataSource;
+import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.request.RequestListener;
+import com.bumptech.glide.request.target.Target;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-import java.io.IOException;
 import java.util.concurrent.TimeUnit;
 
 public class ListeningTestQuestionActivity extends AppCompatActivity {
@@ -63,12 +68,13 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
     LinearLayout linearLayoutFrame1,linearLayoutFrame2;
     TextView textViewStart,textViewStop,textViewPercent,textViewInstruction;
     public static int oneTimeOnly = 0;
+    ProgressDialog loadingAudio;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listening_test_question);
-
+          loadingAudio = new ProgressDialog(ListeningTestQuestionActivity.this);
         listView = (ListView)findViewById(R.id.listView);
         imageButtonPlay = (ImageButton)findViewById(R.id.buttonPlay);
         buttonNext = (Button)findViewById(R.id.buttonNext);
@@ -126,13 +132,27 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
                 Toast.makeText(ListeningTestQuestionActivity.this, "Pause", Toast.LENGTH_SHORT).show();
             }
         });
+        imageButtonPlay.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
+                if (url.equals(part1))
+                {
+                    new PalyMusic().execute();
+
+                }
+                if (url.equals(part2))
+                {
+                    new PalyMusic().execute();
+                }
+
+            }
+        });
 
     }
 
     private Runnable UpdateAudioTime = new Runnable() {
         public void run() {
-
             startTime = mediaPlayer.getCurrentPosition();
             textViewStart.setText(String.format("%d min, %d sec",
                     TimeUnit.MILLISECONDS.toMinutes((long) startTime),
@@ -144,6 +164,7 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
             myHandler.postDelayed(this, 100);
         }
     };
+
 
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
@@ -184,6 +205,10 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
                             int abc = Integer.parseInt(obj.getString("response"));
                             String tokenCode = obj.getString("tdcode");
                             String a = "http://online.celpip.biz/api/testnewprogress?token="+tokenCode;
+                            SharedPreferences prefs = getSharedPreferences("my_prefs", MODE_PRIVATE);
+                            SharedPreferences.Editor edit = prefs.edit();
+                            edit.putString("tokenCode", tokenCode);
+                            edit.commit();
                             if (abc !=1 )
                             {
                                 loading.dismiss();
@@ -216,144 +241,30 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
                                                                 Glide
                                                                         .with(ListeningTestQuestionActivity.this)
                                                                         .load(image)
-                                                                        .into(imageView);
-                                                                textViewInstruction.setText("Instruction :\n"+jsonHolderListingpart1.l1_practice_01_text);
-                                                                loading.dismiss();
-                                                                imageButtonPlay.setOnClickListener(new View.OnClickListener() {
-                                                                    @Override
-                                                                    public void onClick(View v) {
-                                                                        final ProgressDialog loading = ProgressDialog.show(ListeningTestQuestionActivity.this,"Loading Audio","Please wait...",false,false);
-                                                                        String audio_player = "https://online.celpip.biz/uploads/part1_listening/"+jsonHolderListingpart1.l1_converstaion_1_audio;
-                                                                        Uri myUri = Uri.parse(audio_player);
-                                                                        try
-                                                                        {
-                                                                            mediaPlayer = new MediaPlayer();
-                                                                            mediaPlayer.setDataSource(ListeningTestQuestionActivity.this, myUri);
-                                                                            mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-                                                                            mediaPlayer.prepare();
-                                                                            mediaPlayer.setLooping(false);
-                                                                            mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                                                                                @Override
-                                                                                public void onPrepared(MediaPlayer player) {
-
-                                                                                    mediaPlayer.setOnBufferingUpdateListener(new MediaPlayer.OnBufferingUpdateListener() {
-                                                                                        @RequiresApi(api = Build.VERSION_CODES.O)
-                                                                                        @Override
-                                                                                        public void onBufferingUpdate(MediaPlayer mp, int percent) {
-                                                                                            seekbar.setSecondaryProgress(percent * mediaPlayer.getDuration() /100 );
-                                                                                            seekbar.setSecondaryProgressTintList(ColorStateList.valueOf(Color.RED));
-                                                                                            loading.dismiss();
-                                                                                            imageButtonPause.setVisibility(View.VISIBLE);
-                                                                                            mediaPlayer.start();
-                                                                                        }
-                                                                                    });
-                                                                                }
-                                                                            });
-
-
-                                                                            finalTime = mediaPlayer.getDuration();
-                                                                            startTime = mediaPlayer.getCurrentPosition();
-                                                                            if (oneTimeOnly == 0) {
-                                                                                seekbar.setMax((int) finalTime);
-                                                                                oneTimeOnly = 0;
+                                                                        .listener(new RequestListener<Drawable>() {
+                                                                            @Override
+                                                                            public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Drawable> target, boolean isFirstResource) {
+                                                                                Toast.makeText(ListeningTestQuestionActivity.this, "Problem Loading the Image!!!!", Toast.LENGTH_SHORT).show();
+                                                                                loading.dismiss();
+                                                                                return false;
                                                                             }
 
-                                                                            seekbar.setProgress((int)startTime);
-                                                                            myHandler.postDelayed(UpdateAudioTime,100);
-                                                                            textViewStop.setText(String.format("%d min, %d sec",
-                                                                                    TimeUnit.MILLISECONDS.toMinutes((long) finalTime),
-                                                                                    TimeUnit.MILLISECONDS.toSeconds((long) finalTime) -
-                                                                                            TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes((long)
-                                                                                                    finalTime)))
-                                                                            );
+                                                                            @Override
+                                                                            public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
+                                                                                loading.dismiss();
+                                                                                return false;
+                                                                            }
+                                                                        })
+                                                                        .into(imageView);
+                                                                textViewInstruction.setText("Instruction :\n"+jsonHolderListingpart1.l1_practice_01_text);
 
-                                                                            textViewStart.setText(String.format("%d min, %d sec",
-                                                                                    TimeUnit.MILLISECONDS.toMinutes((long) startTime),
-                                                                                    TimeUnit.MILLISECONDS.toSeconds((long) startTime) -
-                                                                                            TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes((long)
-                                                                                                    startTime)))
-                                                                            );
-
-                                                                        }
-                                                                        catch (IOException e)
-                                                                        {
-                                                                            e.printStackTrace();
-                                                                        }
-
-
-                                                                    }
-                                                                });
                                                             }
                                                             else if(url.equals(part2))
                                                             {
-                                                                loading.dismiss();
                                                                 linearLayoutFrame2.setVisibility(View.GONE);
                                                                 linearLayoutFrame1.setVisibility(View.VISIBLE);
                                                                 showJSONPart2(response);
-                                                                imageButtonPlay.setOnClickListener(new View.OnClickListener() {
-                                                                    @Override
-                                                                    public void onClick(View v) {
-                                                                        final ProgressDialog loading = ProgressDialog.show(ListeningTestQuestionActivity.this,"Loading Audio","Please wait...",false,false);
-                                                                        String audio_player = "https://online.celpip.biz/uploads/part2_listening/"+jsonHolderListingpart2.converstaion_1_audio;
-                                                                        Uri myUri = Uri.parse(audio_player);
-                                                                        try
-                                                                        {
-                                                                            mediaPlayer = new MediaPlayer();
-                                                                            mediaPlayer.setDataSource(ListeningTestQuestionActivity.this, myUri);
-                                                                            mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-                                                                            mediaPlayer.prepare();
-                                                                            mediaPlayer.setLooping(false);
-                                                                            mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                                                                                @Override
-                                                                                public void onPrepared(MediaPlayer player) {
-
-                                                                                    mediaPlayer.setOnBufferingUpdateListener(new MediaPlayer.OnBufferingUpdateListener() {
-                                                                                        @RequiresApi(api = Build.VERSION_CODES.O)
-                                                                                        @Override
-                                                                                        public void onBufferingUpdate(MediaPlayer mp, int percent) {
-                                                                                            seekbar.setSecondaryProgress(percent * mediaPlayer.getDuration() /100 );
-                                                                                            seekbar.setSecondaryProgressTintList(ColorStateList.valueOf(Color.RED));
-                                                                                            loading.dismiss();
-                                                                                            imageButtonPause.setVisibility(View.VISIBLE);
-                                                                                            mediaPlayer.start();
-                                                                                        }
-                                                                                    });
-                                                                                }
-                                                                            });
-
-
-                                                                            finalTime = mediaPlayer.getDuration();
-                                                                            startTime = mediaPlayer.getCurrentPosition();
-                                                                            if (oneTimeOnly == 0) {
-                                                                                seekbar.setMax((int) finalTime);
-                                                                                oneTimeOnly = 0;
-                                                                            }
-
-                                                                            seekbar.setProgress((int)startTime);
-                                                                            myHandler.postDelayed(UpdateAudioTime,100);
-                                                                            textViewStop.setText(String.format("%d min, %d sec",
-                                                                                    TimeUnit.MILLISECONDS.toMinutes((long) finalTime),
-                                                                                    TimeUnit.MILLISECONDS.toSeconds((long) finalTime) -
-                                                                                            TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes((long)
-                                                                                                    finalTime)))
-                                                                            );
-
-                                                                            textViewStart.setText(String.format("%d min, %d sec",
-                                                                                    TimeUnit.MILLISECONDS.toMinutes((long) startTime),
-                                                                                    TimeUnit.MILLISECONDS.toSeconds((long) startTime) -
-                                                                                            TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes((long)
-                                                                                                    startTime)))
-                                                                            );
-
-                                                                        }
-                                                                        catch (IOException e)
-                                                                        {
-                                                                            e.printStackTrace();
-                                                                        }
-
-
-                                                                    }
-                                                                });
+                                                                loading.dismiss();
                                                             }
                                                         }
                                                     } catch (JSONException e) {
@@ -394,7 +305,7 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
         JsonDataHandlerListeningPart1 jsonHolderListingpart1 = new JsonDataHandlerListeningPart1(json);
         jsonHolderListingpart1.parseJSON();
 
-        ListeningTestPart1QuesionAdapter ca = new ListeningTestPart1QuesionAdapter(this,jsonHolderListingpart1.id,jsonHolderListingpart1.test_code,jsonHolderListingpart1.l1_q1_audio,jsonHolderListingpart1.l1_q1_option1,jsonHolderListingpart1.l1_q1_option2,jsonHolderListingpart1.l1_q1_option3,jsonHolderListingpart1.l1_q1_option4,jsonHolderListingpart1.l1_q2_audio,jsonHolderListingpart1.l1_q2_option1,jsonHolderListingpart1.l1_q2_option2,jsonHolderListingpart1.l1_q2_option3,jsonHolderListingpart1.l1_q2_option4,jsonHolderListingpart1.l1_q3_audio,jsonHolderListingpart1.l1_q3_option1,jsonHolderListingpart1.l1_q3_option2,jsonHolderListingpart1.l1_q3_option3,jsonHolderListingpart1.l1_q3_option4,jsonHolderListingpart1.l1_q4_audio,jsonHolderListingpart1.l1_q4_option1,jsonHolderListingpart1.l1_q4_option2,jsonHolderListingpart1.l1_q4_option3,jsonHolderListingpart1.l1_q4_option4,jsonHolderListingpart1.l1_q5_audio,jsonHolderListingpart1.l1_q5_option1,jsonHolderListingpart1.l1_q5_option2,jsonHolderListingpart1.l1_q5_option3,jsonHolderListingpart1.l1_q5_option4,jsonHolderListingpart1.l1_q6_audio,jsonHolderListingpart1.l1_q6_option1,jsonHolderListingpart1.l1_q6_option2,jsonHolderListingpart1.l1_q6_option3,jsonHolderListingpart1.l1_q6_option4,jsonHolderListingpart1.l1_q7_audio,jsonHolderListingpart1.l1_q7_option1,jsonHolderListingpart1.l1_q7_option2,jsonHolderListingpart1.l1_q7_option3,jsonHolderListingpart1.l1_q7_option4,jsonHolderListingpart1.l1_q8_audio,jsonHolderListingpart1.l1_q8_option1,jsonHolderListingpart1.l1_q8_option2,jsonHolderListingpart1.l1_q8_option3,jsonHolderListingpart1.l1_q8_option4);
+        ListeningTestPart1QuestionAdapter ca = new ListeningTestPart1QuestionAdapter(this,jsonHolderListingpart1.id,jsonHolderListingpart1.test_code,jsonHolderListingpart1.l1_q1_audio,jsonHolderListingpart1.l1_q1_option1,jsonHolderListingpart1.l1_q1_option2,jsonHolderListingpart1.l1_q1_option3,jsonHolderListingpart1.l1_q1_option4,jsonHolderListingpart1.l1_q2_audio,jsonHolderListingpart1.l1_q2_option1,jsonHolderListingpart1.l1_q2_option2,jsonHolderListingpart1.l1_q2_option3,jsonHolderListingpart1.l1_q2_option4,jsonHolderListingpart1.l1_q3_audio,jsonHolderListingpart1.l1_q3_option1,jsonHolderListingpart1.l1_q3_option2,jsonHolderListingpart1.l1_q3_option3,jsonHolderListingpart1.l1_q3_option4,jsonHolderListingpart1.l1_q4_audio,jsonHolderListingpart1.l1_q4_option1,jsonHolderListingpart1.l1_q4_option2,jsonHolderListingpart1.l1_q4_option3,jsonHolderListingpart1.l1_q4_option4,jsonHolderListingpart1.l1_q5_audio,jsonHolderListingpart1.l1_q5_option1,jsonHolderListingpart1.l1_q5_option2,jsonHolderListingpart1.l1_q5_option3,jsonHolderListingpart1.l1_q5_option4,jsonHolderListingpart1.l1_q6_audio,jsonHolderListingpart1.l1_q6_option1,jsonHolderListingpart1.l1_q6_option2,jsonHolderListingpart1.l1_q6_option3,jsonHolderListingpart1.l1_q6_option4,jsonHolderListingpart1.l1_q7_audio,jsonHolderListingpart1.l1_q7_option1,jsonHolderListingpart1.l1_q7_option2,jsonHolderListingpart1.l1_q7_option3,jsonHolderListingpart1.l1_q7_option4,jsonHolderListingpart1.l1_q8_audio,jsonHolderListingpart1.l1_q8_option1,jsonHolderListingpart1.l1_q8_option2,jsonHolderListingpart1.l1_q8_option3,jsonHolderListingpart1.l1_q8_option4);
         listView.setAdapter(ca);
         ca.notifyDataSetChanged();
 
@@ -403,9 +314,142 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
         JsonDataHandlerListeningPart2 jsonHolderListingpart2 = new JsonDataHandlerListeningPart2(json);
         jsonHolderListingpart2.parseJSON();
 
-        ListeningTestPart2QuesionAdapter ca = new ListeningTestPart2QuesionAdapter(this,jsonHolderListingpart2.id,jsonHolderListingpart2.test_code,jsonHolderListingpart2.converstaion_1_audio,jsonHolderListingpart2.q1_audio,jsonHolderListingpart2.q1_option1,jsonHolderListingpart2.q1_option2,jsonHolderListingpart2.q1_option3,jsonHolderListingpart2.q1_option4,jsonHolderListingpart2.q2_audio,jsonHolderListingpart2.q2_option1,jsonHolderListingpart2.q2_option2,jsonHolderListingpart2.q2_option3,jsonHolderListingpart2.q2_option4,jsonHolderListingpart2.q3_audio,jsonHolderListingpart2.q3_option1,jsonHolderListingpart2.q3_option2,jsonHolderListingpart2.q3_option3,jsonHolderListingpart2.q3_option4,jsonHolderListingpart2.q4_audio,jsonHolderListingpart2.q4_option1,jsonHolderListingpart2.q4_option2,jsonHolderListingpart2.q4_option3,jsonHolderListingpart2.q4_option4,jsonHolderListingpart2.q5_audio,jsonHolderListingpart2.q5_option1,jsonHolderListingpart2.q5_option2,jsonHolderListingpart2.q5_option3,jsonHolderListingpart2.q5_option4);
+        ListeningTestPart2QuestionAdapter ca = new ListeningTestPart2QuestionAdapter(this,jsonHolderListingpart2.id,jsonHolderListingpart2.test_code,jsonHolderListingpart2.converstaion_1_audio,jsonHolderListingpart2.q1_audio,jsonHolderListingpart2.q1_option1,jsonHolderListingpart2.q1_option2,jsonHolderListingpart2.q1_option3,jsonHolderListingpart2.q1_option4,jsonHolderListingpart2.q2_audio,jsonHolderListingpart2.q2_option1,jsonHolderListingpart2.q2_option2,jsonHolderListingpart2.q2_option3,jsonHolderListingpart2.q2_option4,jsonHolderListingpart2.q3_audio,jsonHolderListingpart2.q3_option1,jsonHolderListingpart2.q3_option2,jsonHolderListingpart2.q3_option3,jsonHolderListingpart2.q3_option4,jsonHolderListingpart2.q4_audio,jsonHolderListingpart2.q4_option1,jsonHolderListingpart2.q4_option2,jsonHolderListingpart2.q4_option3,jsonHolderListingpart2.q4_option4,jsonHolderListingpart2.q5_audio,jsonHolderListingpart2.q5_option1,jsonHolderListingpart2.q5_option2,jsonHolderListingpart2.q5_option3,jsonHolderListingpart2.q5_option4);
         listView.setAdapter(ca);
         ca.notifyDataSetChanged();
+
+    }
+    public void audiopart1()
+    {
+        String audio_player = "https://online.celpip.biz/uploads/part1_listening/"+jsonHolderListingpart1.l1_converstaion_1_audio;
+        mediaPlayer = MediaPlayer.create(ListeningTestQuestionActivity.this,Uri.parse(audio_player));
+        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+        mediaPlayer.setLooping(false);
+        mediaPlayer.setOnBufferingUpdateListener(new MediaPlayer.OnBufferingUpdateListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void onBufferingUpdate(MediaPlayer mp, int percent) {
+                seekbar.setSecondaryProgress(percent * mediaPlayer.getDuration() /100 );
+                seekbar.setSecondaryProgressTintList(ColorStateList.valueOf(Color.RED));
+                mp.setLooping(false);
+                mp.start();
+                imageButtonPause.setVisibility(View.VISIBLE);
+                loadingAudio.dismiss();
+            }
+        });
+        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                mp.setLooping(false);
+                mp.stop();
+            }
+        });
+        finalTime = mediaPlayer.getDuration();
+        startTime = mediaPlayer.getCurrentPosition();
+        if (oneTimeOnly == 0) {
+            seekbar.setMax((int) finalTime);
+            oneTimeOnly = 0;
+        }
+
+        seekbar.setProgress((int)startTime);
+        myHandler.postDelayed(UpdateAudioTime,100);
+        textViewStop.setText(String.format("%d min, %d sec",
+                TimeUnit.MILLISECONDS.toMinutes((long) finalTime),
+                TimeUnit.MILLISECONDS.toSeconds((long) finalTime) -
+                        TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes((long)
+                                finalTime)))
+        );
+
+        textViewStart.setText(String.format("%d min, %d sec",
+                TimeUnit.MILLISECONDS.toMinutes((long) startTime),
+                TimeUnit.MILLISECONDS.toSeconds((long) startTime) -
+                        TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes((long)
+                                startTime)))
+        );
+    }
+    public void audiopart2()
+    {
+        String audio_player = "https://online.celpip.biz/uploads/part2_listening/"+jsonHolderListingpart2.converstaion_1_audio;
+        mediaPlayer = MediaPlayer.create(ListeningTestQuestionActivity.this,Uri.parse(audio_player));
+        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+        mediaPlayer.setLooping(false);
+        mediaPlayer.setOnBufferingUpdateListener(new MediaPlayer.OnBufferingUpdateListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void onBufferingUpdate(MediaPlayer mp, int percent) {
+                seekbar.setSecondaryProgress(percent * mediaPlayer.getDuration() /100 );
+                seekbar.setSecondaryProgressTintList(ColorStateList.valueOf(Color.RED));
+                mp.setLooping(false);
+                mp.start();
+                imageButtonPause.setVisibility(View.VISIBLE);
+                loadingAudio.dismiss();
+            }
+        });
+        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                mp.setLooping(false);
+                mp.stop();
+            }
+        });
+        finalTime = mediaPlayer.getDuration();
+        startTime = mediaPlayer.getCurrentPosition();
+        if (oneTimeOnly == 0) {
+            seekbar.setMax((int) finalTime);
+            oneTimeOnly = 0;
+        }
+
+        seekbar.setProgress((int)startTime);
+        myHandler.postDelayed(UpdateAudioTime,100);
+        textViewStop.setText(String.format("%d min, %d sec",
+                TimeUnit.MILLISECONDS.toMinutes((long) finalTime),
+                TimeUnit.MILLISECONDS.toSeconds((long) finalTime) -
+                        TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes((long)
+                                finalTime)))
+        );
+
+        textViewStart.setText(String.format("%d min, %d sec",
+                TimeUnit.MILLISECONDS.toMinutes((long) startTime),
+                TimeUnit.MILLISECONDS.toSeconds((long) startTime) -
+                        TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes((long)
+                                startTime)))
+        );
+    }
+    class  PalyMusic extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected void onPreExecute() {
+            // TODO Auto-generated method stub
+            loadingAudio.setMessage("Loading Audio");
+            loadingAudio.show();
+            loadingAudio.setCancelable(false);
+            loadingAudio.setIndeterminate(false);
+            super.onPreExecute();
+
+        }
+
+        @Override
+        protected Void doInBackground(Void... unused) {
+
+
+            //your background process
+            if (url.equals(part1))
+            {
+                audiopart1();
+            }
+            if (url.equals(part2))
+            {
+                audiopart2();
+            }
+
+            return (null);
+        }
+
+        protected void onPostExecute(Void unused) {
+
+            //here you can call your mp.prepare();
+            loadingAudio.dismiss();
+        }
 
     }
 
