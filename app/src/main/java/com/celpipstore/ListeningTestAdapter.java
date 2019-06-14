@@ -1,8 +1,13 @@
 package com.celpipstore;
 
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.support.v7.app.AlertDialog;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -54,6 +59,36 @@ public class ListeningTestAdapter extends BaseAdapter{
         LayoutInflater in=(LayoutInflater)c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
         convertView=in.inflate(R.layout.test_adapter,null);
+
+
+        ConnectivityManager ConnectionManager=(ConnectivityManager)c.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo=ConnectionManager.getActiveNetworkInfo();
+        if(networkInfo != null && networkInfo.isConnected()==true )
+        {
+//            Toast.makeText(DASHBOARD.this, "Network Available", Toast.LENGTH_LONG).show();
+        }
+        else
+        {
+            AlertDialog alertbox = new AlertDialog.Builder(c)
+                    .setMessage("Check Your Internet Connention?")
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+                        // do something when the button is clicked
+                        public void onClick(DialogInterface arg0, int arg1) {
+
+                            Intent intent = new Intent();
+                            intent.setComponent(new ComponentName("com.android.settings", "com.android.settings.Settings$DataUsageSummaryActivity"));
+                            c.startActivity(intent);
+
+//                        //close();
+
+
+                        }
+                    })
+                    .show();
+            Toast.makeText(c, "Network Not Available", Toast.LENGTH_LONG).show();
+
+        }
 
 
         TextView t1=(TextView)convertView.findViewById(R.id.listeningtestpart2ptesubtype);

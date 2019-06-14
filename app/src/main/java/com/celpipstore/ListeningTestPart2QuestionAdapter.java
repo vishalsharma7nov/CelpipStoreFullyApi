@@ -1,5 +1,6 @@
 package com.celpipstore;
 
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.res.ColorStateList;
@@ -7,6 +8,7 @@ import android.graphics.Color;
 import android.media.AudioManager;
 import android.media.MediaPlayer;
 import android.net.Uri;
+import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Handler;
 import android.support.annotation.RequiresApi;
@@ -39,7 +41,7 @@ public class ListeningTestPart2QuestionAdapter extends BaseAdapter{
     Handler myHandler = new Handler();
     public static int oneTimeOnly = 0;
     String audio_player;
-
+    ProgressDialog loadingAudio;
 
     //json data
     public static String id;
@@ -150,8 +152,9 @@ public class ListeningTestPart2QuestionAdapter extends BaseAdapter{
         final String question_option3[] = {q1_option3,q2_option3,q3_option3,q4_option3,q5_option3,null};
         final String question_option4[] = {q1_option4,q2_option4,q3_option4,q4_option4,q5_option4,null};
 
-        final ListView lv = convertView.findViewById(R.id.correctanswer);
-        final ListView lv1 = convertView.findViewById(R.id.userAnswer);
+        seekbar = (SeekBar)  convertView.findViewById(R.id.seekbar);
+        textViewStart = (TextView) convertView.findViewById(R.id.textViewStartTime);
+        textViewStop  = (TextView) convertView.findViewById(R.id.textViewStopTime);
 
         ImageButton imageButtonPlay = (ImageButton)convertView.findViewById(R.id.buttonPlay);
         final View finalConvertView = convertView;
@@ -159,66 +162,7 @@ public class ListeningTestPart2QuestionAdapter extends BaseAdapter{
         imageButtonPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Uri myUri = Uri.parse(audio_player);
-                try
-                {
-
-                    textViewStart = (TextView) finalConvertView1.findViewById(R.id.textViewStartTime);
-                    textViewStop  = (TextView) finalConvertView1.findViewById(R.id.textViewStopTime);
-                    int forwardTime = 5000;
-                    int backwardTime = 5000;
-                    seekbar = (SeekBar)  finalConvertView.findViewById(R.id.seekbar);
-                    seekbar.setClickable(false);
-                    mediaPlayer = new MediaPlayer();
-                    mediaPlayer.setDataSource(c, myUri);
-                    mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-                    mediaPlayer.prepare();
-                    mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                        @Override
-                        public void onPrepared(MediaPlayer player) {
-
-                            mediaPlayer.setOnBufferingUpdateListener(new MediaPlayer.OnBufferingUpdateListener() {
-                                @RequiresApi(api = Build.VERSION_CODES.O)
-                                @Override
-                                public void onBufferingUpdate(MediaPlayer mp, int percent) {
-                                    seekbar.setSecondaryProgress(percent * mediaPlayer.getDuration() /100 );
-                                    seekbar.setSecondaryProgressTintList(ColorStateList.valueOf(Color.RED));
-                                    mediaPlayer.start();
-                                }
-                            });
-                        }
-                    });
-                    finalTime = mediaPlayer.getDuration();
-                    startTime = mediaPlayer.getCurrentPosition();
-                    if (oneTimeOnly == 0) {
-                        seekbar.setMax((int) finalTime);
-                        oneTimeOnly = 0;
-                    }
-
-                    seekbar.setProgress((int)startTime);
-                    myHandler.postDelayed(UpdateSongTime,100);
-                    textViewStop.setText(String.format("%d min, %d sec",
-                            TimeUnit.MILLISECONDS.toMinutes((long) finalTime),
-                            TimeUnit.MILLISECONDS.toSeconds((long) finalTime) -
-                                    TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes((long)
-                                            finalTime)))
-                    );
-
-                    textViewStart.setText(String.format("%d min, %d sec",
-                            TimeUnit.MILLISECONDS.toMinutes((long) startTime),
-                            TimeUnit.MILLISECONDS.toSeconds((long) startTime) -
-                                    TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes((long)
-                                            startTime)))
-                    );
-
-
-                }
-                catch (IOException e)
-                {
-                    e.printStackTrace();
-                }
-
+                new PlayMusic().execute();
             }
         });
 
@@ -316,5 +260,91 @@ public class ListeningTestPart2QuestionAdapter extends BaseAdapter{
             myHandler.postDelayed(this, 100);
         }
     };
+
+    class  PlayMusic extends AsyncTask<Void, Void, Void> {
+
+        @Override
+        protected void onPreExecute() {
+            // TODO Auto-generated method stub
+            loadingAudio = new ProgressDialog(c);
+            loadingAudio.setMessage("Loading Audio");
+            loadingAudio.show();
+            loadingAudio.setCancelable(false);
+            loadingAudio.setIndeterminate(false);
+            super.onPreExecute();
+
+        }
+
+        @Override
+        protected Void doInBackground(Void... unused) {
+
+
+            audioFile();
+            return (null);
+        }
+
+        protected void onPostExecute(Void unused) {
+
+            //here you can call your mp.prepare();
+            loadingAudio.dismiss();
+        }
+
+    }
+
+    public void audioFile()
+    {
+        Uri myUri = Uri.parse(audio_player);
+        try
+        {
+            seekbar.setClickable(false);
+            mediaPlayer = new MediaPlayer();
+            mediaPlayer.setDataSource(c, myUri);
+            mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+            mediaPlayer.prepare();
+            mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+                @Override
+                public void onPrepared(MediaPlayer player) {
+
+                    mediaPlayer.setOnBufferingUpdateListener(new MediaPlayer.OnBufferingUpdateListener() {
+                        @RequiresApi(api = Build.VERSION_CODES.O)
+                        @Override
+                        public void onBufferingUpdate(MediaPlayer mp, int percent) {
+                            seekbar.setSecondaryProgress(percent * mediaPlayer.getDuration() /100 );
+                            seekbar.setSecondaryProgressTintList(ColorStateList.valueOf(Color.RED));
+                            mediaPlayer.start();
+                        }
+                    });
+                }
+            });
+            finalTime = mediaPlayer.getDuration();
+            startTime = mediaPlayer.getCurrentPosition();
+            if (oneTimeOnly == 0) {
+                seekbar.setMax((int) finalTime);
+                oneTimeOnly = 0;
+            }
+
+            seekbar.setProgress((int)startTime);
+            myHandler.postDelayed(UpdateSongTime,100);
+            textViewStop.setText(String.format("%d min, %d sec",
+                    TimeUnit.MILLISECONDS.toMinutes((long) finalTime),
+                    TimeUnit.MILLISECONDS.toSeconds((long) finalTime) -
+                            TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes((long)
+                                    finalTime)))
+            );
+
+            textViewStart.setText(String.format("%d min, %d sec",
+                    TimeUnit.MILLISECONDS.toMinutes((long) startTime),
+                    TimeUnit.MILLISECONDS.toSeconds((long) startTime) -
+                            TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes((long)
+                                    startTime)))
+            );
+
+
+        }
+        catch (IOException e)
+        {
+            e.printStackTrace();
+        }
+    }
 
 }

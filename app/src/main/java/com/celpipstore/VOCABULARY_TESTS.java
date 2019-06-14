@@ -1,7 +1,12 @@
 package com.celpipstore;
 
 import android.app.ProgressDialog;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -38,6 +43,35 @@ public class VOCABULARY_TESTS extends AppCompatActivity {
         setContentView(R.layout.activity_vocabulary__tests);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+
+        ConnectivityManager ConnectionManager=(ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo=ConnectionManager.getActiveNetworkInfo();
+        if(networkInfo != null && networkInfo.isConnected()==true )
+        {
+//            Toast.makeText(DASHBOARD.this, "Network Available", Toast.LENGTH_LONG).show();
+        }
+        else
+        {
+            AlertDialog alertbox = new AlertDialog.Builder(this)
+                    .setMessage("Check Your Internet Connention?")
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+                        // do something when the button is clicked
+                        public void onClick(DialogInterface arg0, int arg1) {
+
+                            Intent intent = new Intent();
+                            intent.setComponent(new ComponentName("com.android.settings", "com.android.settings.Settings$DataUsageSummaryActivity"));
+                            startActivity(intent);
+                            recreate();
+//                        //close();
+
+
+                        }
+                    })
+                    .show();
+            Toast.makeText(VOCABULARY_TESTS.this, "Network Not Available", Toast.LENGTH_LONG).show();
+
+        }
 
         listView =(ListView)findViewById(R.id.listViewWritingTest);
         sendRequest();

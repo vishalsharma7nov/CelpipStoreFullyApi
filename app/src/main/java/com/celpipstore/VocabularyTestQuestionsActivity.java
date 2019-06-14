@@ -2,8 +2,12 @@ package com.celpipstore;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
@@ -45,6 +49,32 @@ public class VocabularyTestQuestionsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vocabulary_test_questions);
+
+        ConnectivityManager ConnectionManager=(ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo=ConnectionManager.getActiveNetworkInfo();
+        if(networkInfo != null && networkInfo.isConnected()==true )
+        {
+//            Toast.makeText(DASHBOARD.this, "Network Available", Toast.LENGTH_LONG).show();
+        }
+        else
+        {
+            AlertDialog alertbox = new AlertDialog.Builder(this)
+                    .setMessage("Check Your Internet Connention?")
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+                        // do something when the button is clicked
+                        public void onClick(DialogInterface arg0, int arg1) {
+
+                            Intent intent = new Intent();
+                            intent.setComponent(new ComponentName("com.android.settings", "com.android.settings.Settings$DataUsageSummaryActivity"));
+                            startActivity(intent);
+                            recreate();
+                        }
+                    })
+                    .show();
+            Toast.makeText(VocabularyTestQuestionsActivity.this, "Network Not Available", Toast.LENGTH_LONG).show();
+
+        }
 
         radioGroupOptions = findViewById(R.id.radiogroupOptions);
 

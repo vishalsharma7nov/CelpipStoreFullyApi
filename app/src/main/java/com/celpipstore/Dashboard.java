@@ -1,9 +1,13 @@
 package com.celpipstore;
 
 import android.app.ProgressDialog;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.content.SharedPreferences;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.net.Uri;
 import android.os.Bundle;
 import android.os.Handler;
@@ -66,6 +70,33 @@ public class Dashboard extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        ConnectivityManager ConnectionManager=(ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo=ConnectionManager.getActiveNetworkInfo();
+        if(networkInfo != null && networkInfo.isConnected()==true )
+        {
+//            Toast.makeText(DASHBOARD.this, "Network Available", Toast.LENGTH_LONG).show();
+        }
+        else
+        {
+            AlertDialog alertbox = new AlertDialog.Builder(this)
+                    .setMessage("Check Your Internet Connention?")
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+                        // do something when the button is clicked
+                        public void onClick(DialogInterface arg0, int arg1) {
+
+                            Intent intent = new Intent();
+                            intent.setComponent(new ComponentName("com.android.settings", "com.android.settings.Settings$DataUsageSummaryActivity"));
+                            startActivity(intent);
+                            recreate();
+
+                        }
+                    })
+                    .show();
+            Toast.makeText(Dashboard.this, "Network Not Available", Toast.LENGTH_LONG).show();
+
+        }
+
         Intent intent = getIntent();
         username = intent.getStringExtra("username");
         password = intent.getStringExtra("password");
@@ -91,24 +122,102 @@ public class Dashboard extends AppCompatActivity
         vocabularyimage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Dashboard.this,VOCABULARY_TESTS.class);
-                startActivity(intent);
+                ConnectivityManager ConnectionManager=(ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+                NetworkInfo networkInfo=ConnectionManager.getActiveNetworkInfo();
+                if(networkInfo != null && networkInfo.isConnected()==true )
+                {
+                    Intent intent = new Intent(Dashboard.this,VOCABULARY_TESTS.class);
+                    intent.putExtra("member_id",member_id);
+                    startActivity(intent);
+
+                }
+                else
+                {
+                    AlertDialog alertbox = new AlertDialog.Builder(Dashboard.this)
+                            .setMessage("Check Your Internet Connention?")
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+                                // do something when the button is clicked
+                                public void onClick(DialogInterface arg0, int arg1) {
+
+                                    Intent intent = new Intent();
+                                    intent.setComponent(new ComponentName("com.android.settings", "com.android.settings.Settings$DataUsageSummaryActivity"));
+                                    startActivity(intent);
+                                    recreate();
+                                }
+                            })
+                            .show();
+                    Toast.makeText(Dashboard.this, "Network Not Available", Toast.LENGTH_LONG).show();
+
+                }
             }
         });
         spottingerrorimage   = (ImageView)findViewById(R.id.spottingerrorimage);
         spottingerrorimage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Dashboard.this,SPOTTING_THE_ERRORS.class);
-                startActivity(intent);
+
+                ConnectivityManager ConnectionManager=(ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+                NetworkInfo networkInfo=ConnectionManager.getActiveNetworkInfo();
+                if(networkInfo != null && networkInfo.isConnected()==true )
+                {
+                    Intent intent = new Intent(Dashboard.this,SPOTTING_THE_ERRORS.class);
+                    intent.putExtra("member_id",member_id);
+                    startActivity(intent);
+
+                }
+                else
+                {
+                    AlertDialog alertbox = new AlertDialog.Builder(Dashboard.this)
+                            .setMessage("Check Your Internet Connention?")
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+                                // do something when the button is clicked
+                                public void onClick(DialogInterface arg0, int arg1) {
+
+                                    Intent intent = new Intent();
+                                    intent.setComponent(new ComponentName("com.android.settings", "com.android.settings.Settings$DataUsageSummaryActivity"));
+                                    startActivity(intent);
+                                    recreate();
+                                }
+                            })
+                            .show();
+                    Toast.makeText(Dashboard.this, "Network Not Available", Toast.LENGTH_LONG).show();
+
+                }
             }
         });
         dictationimage       = (ImageView)findViewById(R.id.dictationimage);
         dictationimage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Dashboard.this,DICTATION_TESTS.class);
-                startActivity(intent);
+                ConnectivityManager ConnectionManager=(ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+                NetworkInfo networkInfo=ConnectionManager.getActiveNetworkInfo();
+                if(networkInfo != null && networkInfo.isConnected()==true )
+                {
+                    Intent intent = new Intent(Dashboard.this,DICTATION_TESTS.class);
+                    intent.putExtra("member_id",member_id);
+                    startActivity(intent);
+                }
+                else
+                {
+                    AlertDialog alertbox = new AlertDialog.Builder(Dashboard.this)
+                            .setMessage("Check Your Internet Connention?")
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+                                // do something when the button is clicked
+                                public void onClick(DialogInterface arg0, int arg1) {
+
+                                    Intent intent = new Intent();
+                                    intent.setComponent(new ComponentName("com.android.settings", "com.android.settings.Settings$DataUsageSummaryActivity"));
+                                    startActivity(intent);
+                                    recreate();
+                                }
+                            })
+                            .show();
+                    Toast.makeText(Dashboard.this, "Network Not Available", Toast.LENGTH_LONG).show();
+
+                }
             }
         });
         comprehensionimage   = (ImageView)findViewById(R.id.comprehensionimage);
@@ -122,49 +231,212 @@ public class Dashboard extends AppCompatActivity
         rearrangeimage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Dashboard.this,RE_ARRANGE.class);
-                startActivity(intent);
+                ConnectivityManager ConnectionManager=(ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+                NetworkInfo networkInfo=ConnectionManager.getActiveNetworkInfo();
+                if(networkInfo != null && networkInfo.isConnected()==true )
+                {
+                    Intent intent = new Intent(Dashboard.this,RE_ARRANGE.class);
+                    intent.putExtra("member_id",member_id);
+                    startActivity(intent);
+                }
+                else
+                {
+                    AlertDialog alertbox = new AlertDialog.Builder(Dashboard.this)
+                            .setMessage("Check Your Internet Connention?")
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+                                // do something when the button is clicked
+                                public void onClick(DialogInterface arg0, int arg1) {
+
+                                    Intent intent = new Intent();
+                                    intent.setComponent(new ComponentName("com.android.settings", "com.android.settings.Settings$DataUsageSummaryActivity"));
+                                    startActivity(intent);
+                                    recreate();
+                                }
+                            })
+                            .show();
+                    Toast.makeText(Dashboard.this, "Network Not Available", Toast.LENGTH_LONG).show();
+
+                }
+
             }
         });
         fillintheblanksimage = (ImageView)findViewById(R.id.fillintheblanksimage);
         fillintheblanksimage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Dashboard.this,FILL_IN_THE_BLANKS.class);
-                startActivity(intent);
+
+                ConnectivityManager ConnectionManager=(ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+                NetworkInfo networkInfo=ConnectionManager.getActiveNetworkInfo();
+                if(networkInfo != null && networkInfo.isConnected()==true )
+                {
+                    Intent intent = new Intent(Dashboard.this,FILL_IN_THE_BLANKS.class);
+                    intent.putExtra("member_id",member_id);
+                    startActivity(intent);
+                }
+                else
+                {
+                    AlertDialog alertbox = new AlertDialog.Builder(Dashboard.this)
+                            .setMessage("Check Your Internet Connention?")
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+                                // do something when the button is clicked
+                                public void onClick(DialogInterface arg0, int arg1) {
+
+                                    Intent intent = new Intent();
+                                    intent.setComponent(new ComponentName("com.android.settings", "com.android.settings.Settings$DataUsageSummaryActivity"));
+                                    startActivity(intent);
+                                    recreate();
+//                        //close();
+
+
+                                }
+                            })
+                            .show();
+                    Toast.makeText(Dashboard.this, "Network Not Available", Toast.LENGTH_LONG).show();
+
+                }
             }
         });
         listeningimage       = (ImageView)findViewById(R.id.listeningimage);
         listeningimage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Dashboard.this,LISTENING_part2.class);
-                intent.putExtra("member_id",member_id);
-                startActivity(intent);
+                ConnectivityManager ConnectionManager=(ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+                NetworkInfo networkInfo=ConnectionManager.getActiveNetworkInfo();
+                if(networkInfo != null && networkInfo.isConnected()==true )
+                {
+                    Intent intent = new Intent(Dashboard.this,LISTENING_part2.class);
+                    intent.putExtra("member_id",member_id);
+                    startActivity(intent);
+                }
+                else
+                {
+                    AlertDialog alertbox = new AlertDialog.Builder(Dashboard.this)
+                            .setMessage("Check Your Internet Connention?")
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+                                // do something when the button is clicked
+                                public void onClick(DialogInterface arg0, int arg1) {
+
+                                    Intent intent = new Intent();
+                                    intent.setComponent(new ComponentName("com.android.settings", "com.android.settings.Settings$DataUsageSummaryActivity"));
+                                    startActivity(intent);
+                                    recreate();
+                                }
+                            })
+                            .show();
+                    Toast.makeText(Dashboard.this, "Network Not Available", Toast.LENGTH_LONG).show();
+
+                }
+
             }
         });
         readingimage         = (ImageView)findViewById(R.id.readingimage);
         readingimage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Dashboard.this,READING.class);
-                startActivity(intent);
+
+                ConnectivityManager ConnectionManager=(ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+                NetworkInfo networkInfo=ConnectionManager.getActiveNetworkInfo();
+                if(networkInfo != null && networkInfo.isConnected()==true )
+                {
+                    Intent intent = new Intent(Dashboard.this,READING.class);
+                    intent.putExtra("member_id",member_id);
+                    startActivity(intent);
+                }
+                else
+                {
+                    AlertDialog alertbox = new AlertDialog.Builder(Dashboard.this)
+                            .setMessage("Check Your Internet Connention?")
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+                                // do something when the button is clicked
+                                public void onClick(DialogInterface arg0, int arg1) {
+
+                                    Intent intent = new Intent();
+                                    intent.setComponent(new ComponentName("com.android.settings", "com.android.settings.Settings$DataUsageSummaryActivity"));
+                                    startActivity(intent);
+                                    recreate();
+//                        //close();
+                                }
+                            })
+                            .show();
+                    Toast.makeText(Dashboard.this, "Network Not Available", Toast.LENGTH_LONG).show();
+
+                }
+
             }
         });
         speakingimage        = (ImageView)findViewById(R.id.speakingimage);
         speakingimage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Dashboard.this,SPEAKING.class);
-                startActivity(intent);
+
+                ConnectivityManager ConnectionManager=(ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+                NetworkInfo networkInfo=ConnectionManager.getActiveNetworkInfo();
+                if(networkInfo != null && networkInfo.isConnected()==true )
+                {
+                    Intent intent = new Intent(Dashboard.this,SPEAKING.class);
+                    intent.putExtra("member_id",member_id);
+                    startActivity(intent);
+                }
+                else
+                {
+                    AlertDialog alertbox = new AlertDialog.Builder(Dashboard.this)
+                            .setMessage("Check Your Internet Connention?")
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+                                // do something when the button is clicked
+                                public void onClick(DialogInterface arg0, int arg1) {
+
+                                    Intent intent = new Intent();
+                                    intent.setComponent(new ComponentName("com.android.settings", "com.android.settings.Settings$DataUsageSummaryActivity"));
+                                    startActivity(intent);
+                                    recreate();
+//                        //close();
+                                }
+                            })
+                            .show();
+                    Toast.makeText(Dashboard.this, "Network Not Available", Toast.LENGTH_LONG).show();
+
+                }
+
             }
         });
         writingimage         = (ImageView)findViewById(R.id.writingimage);
         writingimage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(Dashboard.this,WRITING.class);
-                startActivity(intent);
+
+                ConnectivityManager ConnectionManager=(ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+                NetworkInfo networkInfo=ConnectionManager.getActiveNetworkInfo();
+                if(networkInfo != null && networkInfo.isConnected()==true )
+                {
+                    Intent intent = new Intent(Dashboard.this,WRITING.class);
+                    intent.putExtra("member_id",member_id);
+                    startActivity(intent);
+                }
+                else
+                {
+                    AlertDialog alertbox = new AlertDialog.Builder(Dashboard.this)
+                            .setMessage("Check Your Internet Connention?")
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+                                // do something when the button is clicked
+                                public void onClick(DialogInterface arg0, int arg1) {
+
+                                    Intent intent = new Intent();
+                                    intent.setComponent(new ComponentName("com.android.settings", "com.android.settings.Settings$DataUsageSummaryActivity"));
+                                    startActivity(intent);
+                                    recreate();
+//                        //close();
+                                }
+                            })
+                            .show();
+                    Toast.makeText(Dashboard.this, "Network Not Available", Toast.LENGTH_LONG).show();
+
+                }
             }
         });
 
