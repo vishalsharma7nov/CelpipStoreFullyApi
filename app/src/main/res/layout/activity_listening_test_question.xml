@@ -45,6 +45,7 @@
             <SeekBar
                 android:id="@+id/seekbar"
                 android:layout_width="200dp"
+                android:clickable="false"
                 android:gravity="center"
                 android:layout_height="30dp"
                 android:layout_marginLeft="40dp"
@@ -108,6 +109,7 @@
         android:layout_height="match_parent">
     </ListView>
     <LinearLayout
+        android:visibility="gone"
         android:id="@+id/frame2"
         android:orientation="vertical"
         android:layout_width="match_parent"
@@ -135,5 +137,58 @@
             android:text="Next"
             android:textColor="@color/colorWhite" />
     </LinearLayout>
+    
+    <LinearLayout
+        android:visibility="gone"
+        android:id="@+id/framePracttcieTest"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <TextView
+            android:textSize="20sp"
+            android:textStyle="bold"
+            android:textColor="@color/colorPrimary"
+            android:layout_margin="20dp"
+            android:text="Choose the sentence that is closest in meaning to the statement."
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <RadioGroup
+            android:layout_margin="20dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+            <RadioButton
+                android:id="@+id/practiceTestRadio1"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <RadioButton
+                android:id="@+id/practiceTestRadio2"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <RadioButton
+                android:id="@+id/practiceTestRadio3"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+            <RadioButton
+                android:id="@+id/practiceTestRadio4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content" />
+
+        </RadioGroup>
+
+        <Button
+            android:id="@+id/buttonPracticeTestSubmit"
+            android:layout_margin="20dp"
+            android:text="submit"
+            android:textColor="@color/colorWhite"
+            android:background="@color/colorPrimary"
+            android:layout_gravity="center"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+    </LinearLayout>
+
+
 
 </RelativeLayout>

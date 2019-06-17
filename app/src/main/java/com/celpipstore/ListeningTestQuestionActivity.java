@@ -24,12 +24,14 @@ import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.KeyEvent;
+import android.view.MotionEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ImageView;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.RadioButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -53,10 +55,13 @@ import java.util.concurrent.TimeUnit;
 public class ListeningTestQuestionActivity extends AppCompatActivity {
 
     ListView listView;
-    String url,part1,part2,part3,part4,part5,part6;
+    String url,practicetest,part1,part2,part3,part4,part5,part6;
     String image;
     ImageView imageView;
 
+    RadioButton radioButton1,radioButton2,radioButton3,radioButton4;
+
+    JsonDataHandlerPracticeTestListening jsonHolderListingPracticeTest;
     JsonDataHandlerListeningPart1 jsonHolderListingpart1;
     JsonDataHandlerListeningPart2 jsonHolderListingpart2;
     MediaPlayer mediaPlayer;
@@ -68,9 +73,9 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
     int backwardTime = 5000;
     SeekBar seekbar;
     ImageButton imageButtonPlay,imageButtonPause;
-    Button buttonNext,button;
-    LinearLayout linearLayoutFrame1,linearLayoutFrame2;
-    TextView textViewStart,textViewStop,textViewPercent,textViewInstruction;
+    Button buttonNext,button,buttonPracticeTestSubmit;
+    LinearLayout linearLayoutFrame1,linearLayoutFrame2,linearLayoutFrame3;
+    TextView textViewStart,textViewStop,textViewInstruction;
     public static int oneTimeOnly = 0;
     ProgressDialog loadingAudio;
 
@@ -111,17 +116,31 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
         imageButtonPlay = (ImageButton)findViewById(R.id.buttonPlay);
         buttonNext = (Button)findViewById(R.id.buttonNext);
         button     = (Button)findViewById(R.id.button);
+        buttonPracticeTestSubmit  = (Button)findViewById(R.id.buttonPracticeTestSubmit);
         imageButtonPause = (ImageButton)findViewById(R.id.buttonPause);
 
         linearLayoutFrame1 = (LinearLayout)findViewById(R.id.frame1);
         linearLayoutFrame2 = (LinearLayout)findViewById(R.id.frame2);
+        linearLayoutFrame3 = (LinearLayout)findViewById(R.id.framePracttcieTest);
 
         seekbar = (SeekBar)findViewById(R.id.seekbar);
         seekbar.setClickable(false);
+        seekbar.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                return true;
+            }
+        });
         textViewStart = (TextView)findViewById(R.id.textViewStartTime);
         textViewStop = (TextView)findViewById(R.id.textViewStopTime);
         textViewInstruction = (TextView)findViewById(R.id.textViewInstruction);
         imageButtonPause.setVisibility(View.GONE);
+
+        radioButton1 = (RadioButton)findViewById(R.id.practiceTestRadio1);
+        radioButton2 = (RadioButton)findViewById(R.id.practiceTestRadio2);
+        radioButton3 = (RadioButton)findViewById(R.id.practiceTestRadio3);
+        radioButton4 = (RadioButton)findViewById(R.id.practiceTestRadio4);
+
 
         imageView = (ImageView)findViewById(R.id.imageView);
 
@@ -133,6 +152,7 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
         String test_code = intent.getStringExtra("t2");
 
         url = "http://online.celpip.biz/api/accessnewtest?memberid="+member_id+"&testid="+test_id+"&testcode="+test_code;
+        practicetest = "http://online.celpip.biz/api/accessnewtest?memberid="+member_id+"&testid=29&testcode="+test_code;
         part1 = "http://online.celpip.biz/api/accessnewtest?memberid="+member_id+"&testid=20&testcode="+test_code;
         part2 = "http://online.celpip.biz/api/accessnewtest?memberid="+member_id+"&testid=19&testcode="+test_code;
         part3 = "http://online.celpip.biz/api/accessnewtest?memberid="+member_id+"&testid=18&testcode="+test_code;
@@ -144,39 +164,75 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
         button.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
                 linearLayoutFrame2.setVisibility(View.GONE);
                 linearLayoutFrame1.setVisibility(View.VISIBLE);
                 button.setVisibility(View.GONE);
+
             }
         });
-
+        buttonPracticeTestSubmit.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent1 = new Intent(ListeningTestQuestionActivity.this,LISTENING_part2.class);
+                startActivity(intent1);
+            }
+        });
         buttonNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                linearLayoutFrame1.setVisibility(View.GONE);
-                listView.setVisibility(View.VISIBLE);
+
+                if (url.equals(practicetest))
+                {
+                    linearLayoutFrame3.setVisibility(View.VISIBLE);
+                    linearLayoutFrame1.setVisibility(View.GONE);
+                    if (mediaPlayer.isPlaying()) {
+                        mediaPlayer.pause();
+                        Toast.makeText(ListeningTestQuestionActivity.this, "Stopped", Toast.LENGTH_SHORT).show();
+                    }
+                }
+                else
+                {
+                    linearLayoutFrame1.setVisibility(View.GONE);
+                    listView.setVisibility(View.VISIBLE);
+                    if (mediaPlayer.isPlaying()) {
+                        mediaPlayer.stop();
+                        Toast.makeText(ListeningTestQuestionActivity.this, "Stopped", Toast.LENGTH_SHORT).show();
+                    }
+
+                }
+
             }
         });
         imageButtonPause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+               imageButtonPause.setImageResource(R.drawable.ic_play_arrow_black_24dp);
                 if (mediaPlayer.isPlaying()) {
                     mediaPlayer.pause();
-
+                    imageButtonPause.setImageResource(R.drawable.ic_play_arrow_black_24dp);
+                    Toast.makeText(ListeningTestQuestionActivity.this, "Pause", Toast.LENGTH_SHORT).show();
                 }
                 else
                 {
-                    imageButtonPause.setEnabled(true);
                     mediaPlayer.start();
+                    imageButtonPause.setImageResource(R.drawable.ic_pause_black_24dp);
+                    Toast.makeText(ListeningTestQuestionActivity.this, "Play", Toast.LENGTH_SHORT).show();
                 }
 
-                Toast.makeText(ListeningTestQuestionActivity.this, "Pause", Toast.LENGTH_SHORT).show();
+
             }
         });
         imageButtonPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
+                imageButtonPlay.setVisibility(View.GONE);
+                imageButtonPause.setVisibility(View.VISIBLE);
+                if (url.equals(practicetest))
+                {
+                    new PlayMusic().execute();
+                    imageButtonPlay.setEnabled(false);
+                }
                 if (url.equals(part1))
                 {
                     new PlayMusic().execute();
@@ -318,7 +374,8 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
                                                                             }
                                                                         })
                                                                         .into(imageView);
-
+                                                                linearLayoutFrame2.setVisibility(View.VISIBLE);
+                                                                linearLayoutFrame1.setVisibility(View.GONE);
                                                                 textViewInstruction.setText("Instruction :\n"+jsonHolderListingpart1.l1_practice_01_text);
 
                                                             }
@@ -357,9 +414,22 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
                                                                 showJSONPart2(response);
                                                                 loading.dismiss();
                                                             }
+                                                            else
+                                                            {
+                                                                linearLayoutFrame2.setVisibility(View.GONE);
+                                                                linearLayoutFrame1.setVisibility(View.VISIBLE);
+                                                                showJSONPracticeTest(response);
+                                                                radioButton1.setText(jsonHolderListingPracticeTest.option1);
+                                                                radioButton2.setText(jsonHolderListingPracticeTest.option2);
+                                                                radioButton3.setText(jsonHolderListingPracticeTest.option3);
+                                                                radioButton4.setText(jsonHolderListingPracticeTest.option4);
+                                                                seekbar.setClickable(false);
+                                                                loading.dismiss();
+                                                            }
                                                         }
                                                     } catch (JSONException e) {
                                                         e.printStackTrace();
+                                                        loading.dismiss();
                                                     }
                                                 }
                                             },
@@ -410,6 +480,17 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
         ca.notifyDataSetChanged();
 
     }
+
+    private void showJSONPracticeTest(String json) {
+        JsonDataHandlerPracticeTestListening jsonHolderListingPracticeTest = new JsonDataHandlerPracticeTestListening(json);
+        jsonHolderListingPracticeTest.parseJSON();
+
+        ListeningTestPart2QuestionAdapter ca = new ListeningTestPart2QuestionAdapter(this,jsonHolderListingpart2.id,jsonHolderListingpart2.test_code,jsonHolderListingpart2.converstaion_1_audio,jsonHolderListingpart2.q1_audio,jsonHolderListingpart2.q1_option1,jsonHolderListingpart2.q1_option2,jsonHolderListingpart2.q1_option3,jsonHolderListingpart2.q1_option4,jsonHolderListingpart2.q2_audio,jsonHolderListingpart2.q2_option1,jsonHolderListingpart2.q2_option2,jsonHolderListingpart2.q2_option3,jsonHolderListingpart2.q2_option4,jsonHolderListingpart2.q3_audio,jsonHolderListingpart2.q3_option1,jsonHolderListingpart2.q3_option2,jsonHolderListingpart2.q3_option3,jsonHolderListingpart2.q3_option4,jsonHolderListingpart2.q4_audio,jsonHolderListingpart2.q4_option1,jsonHolderListingpart2.q4_option2,jsonHolderListingpart2.q4_option3,jsonHolderListingpart2.q4_option4,jsonHolderListingpart2.q5_audio,jsonHolderListingpart2.q5_option1,jsonHolderListingpart2.q5_option2,jsonHolderListingpart2.q5_option3,jsonHolderListingpart2.q5_option4);
+        listView.setAdapter(ca);
+        ca.notifyDataSetChanged();
+
+    }
+
     public void audiopart1()
     {
         String audio_player = "https://online.celpip.biz/uploads/part1_listening/"+jsonHolderListingpart1.l1_converstaion_1_audio;
@@ -423,7 +504,6 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
                 seekbar.setSecondaryProgress(percent * mediaPlayer.getDuration() /100 );
                 seekbar.setSecondaryProgressTintList(ColorStateList.valueOf(Color.RED));
                 mp.setLooping(false);
-                imageButtonPause.setVisibility(View.VISIBLE);
                 loadingAudio.dismiss();
             }
         });
@@ -434,6 +514,7 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
             public void onCompletion(MediaPlayer mp) {
                 mp.setLooping(false);
                 mp.stop();
+                imageButtonPlay.setVisibility(View.VISIBLE);
             }
         });
         finalTime = mediaPlayer.getDuration();
@@ -472,7 +553,6 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
                 seekbar.setSecondaryProgress(percent * mediaPlayer.getDuration() /100 );
                 seekbar.setSecondaryProgressTintList(ColorStateList.valueOf(Color.RED));
                 mp.setLooping(false);
-                imageButtonPause.setVisibility(View.VISIBLE);
                 loadingAudio.dismiss();
             }
         });
@@ -521,7 +601,6 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
                 seekbar.setSecondaryProgress(percent * mediaPlayer.getDuration() /100 );
                 seekbar.setSecondaryProgressTintList(ColorStateList.valueOf(Color.RED));
                 mp.setLooping(false);
-                imageButtonPause.setVisibility(View.VISIBLE);
                 loadingAudio.dismiss();
             }
         });
@@ -570,7 +649,6 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
                 seekbar.setSecondaryProgress(percent * mediaPlayer.getDuration() /100 );
                 seekbar.setSecondaryProgressTintList(ColorStateList.valueOf(Color.RED));
                 mp.setLooping(false);
-                imageButtonPause.setVisibility(View.VISIBLE);
                 loadingAudio.dismiss();
             }
         });
@@ -619,7 +697,6 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
                 seekbar.setSecondaryProgress(percent * mediaPlayer.getDuration() /100 );
                 seekbar.setSecondaryProgressTintList(ColorStateList.valueOf(Color.RED));
                 mp.setLooping(false);
-                imageButtonPause.setVisibility(View.VISIBLE);
                 loadingAudio.dismiss();
             }
         });
@@ -668,7 +745,6 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
                 seekbar.setSecondaryProgress(percent * mediaPlayer.getDuration() /100 );
                 seekbar.setSecondaryProgressTintList(ColorStateList.valueOf(Color.RED));
                 mp.setLooping(false);
-                imageButtonPause.setVisibility(View.VISIBLE);
                 loadingAudio.dismiss();
             }
         });
@@ -705,7 +781,7 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
     }
     public void audiopractice()
     {
-        String audio_player = "https://online.celpip.biz/uploads/listening_practiceTask/"+jsonHolderListingpart2.converstaion_1_audio;
+        String audio_player = "https://online.celpip.biz/uploads/listening_practiceTask/"+jsonHolderListingPracticeTest.mp3URL;
         mediaPlayer = MediaPlayer.create(ListeningTestQuestionActivity.this,Uri.parse(audio_player));
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         mediaPlayer.setLooping(false);
@@ -716,7 +792,6 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
                 seekbar.setSecondaryProgress(percent * mediaPlayer.getDuration() /100 );
                 seekbar.setSecondaryProgressTintList(ColorStateList.valueOf(Color.RED));
                 mp.setLooping(false);
-                imageButtonPause.setVisibility(View.VISIBLE);
                 loadingAudio.dismiss();
             }
         });
@@ -785,12 +860,18 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
             if (url.equals(part4))
             {
                 audiopart4();
-            }if (url.equals(part5))
+            }
+            if (url.equals(part5))
             {
                 audiopart5();
-            }if (url.equals(part6))
+            }
+            if (url.equals(part6))
             {
                 audiopart6();
+            }
+            if (url.equals(practicetest))
+            {
+                audiopractice();
             }
 
             return (null);
