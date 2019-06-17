@@ -282,6 +282,7 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             exitByBackKey();
+            moveTaskToBack(false);
             return true;
         }
         return super.onKeyDown(keyCode, event);
@@ -294,8 +295,10 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
 
                     // do something when the button is clicked
+                    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
                     public void onClick(DialogInterface arg0, int arg1) {
                         finish();
+                        finishAndRemoveTask();
                         //close();
                     }
                 })

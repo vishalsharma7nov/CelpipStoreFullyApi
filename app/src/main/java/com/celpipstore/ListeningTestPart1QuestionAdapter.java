@@ -679,6 +679,7 @@ public class ListeningTestPart1QuestionAdapter extends BaseAdapter{
                radioGroup1.setVisibility(View.GONE);
                 Intent intent = new Intent(c , LISTENING_part2.class);
                 c.startActivity(intent);
+
             }
         });
 

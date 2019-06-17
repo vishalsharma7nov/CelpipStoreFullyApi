@@ -7,7 +7,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -78,7 +80,7 @@ public class LISTENING_part2 extends AppCompatActivity{
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             exitByBackKey();
-           //moveTaskToBack(false);
+           moveTaskToBack(false);
             return true;
         }
         return super.onKeyDown(keyCode, event);
@@ -91,7 +93,10 @@ public class LISTENING_part2 extends AppCompatActivity{
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
 
                     // do something when the button is clicked
+                    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
                     public void onClick(DialogInterface arg0, int arg1) {
+                        Intent intent = new Intent(LISTENING_part2.this,Dashboard.class);
+                        startActivity(intent);
                         finish();
                         //close();
 

@@ -9,8 +9,10 @@ import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.annotation.RequiresApi;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AlertDialog;
@@ -667,7 +669,7 @@ public class Dashboard extends AppCompatActivity
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             exitByBackKey();
 
-            //moveTaskToBack(false);
+            moveTaskToBack(false);
 
             return true;
         }
@@ -724,9 +726,11 @@ public class Dashboard extends AppCompatActivity
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
 
                     // do something when the button is clicked
+                    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
                     public void onClick(DialogInterface arg0, int arg1) {
-                        recreate();
+
                         Intent intent= new Intent(Dashboard.this,MainActivity.class);
+                        intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
                         finish();
                         //close();
@@ -750,8 +754,10 @@ public class Dashboard extends AppCompatActivity
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
+            moveTaskToBack(true);
         } else {
             super.onBackPressed();
+            moveTaskToBack(true);
         }
     }
 
