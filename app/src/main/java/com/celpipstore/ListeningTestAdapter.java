@@ -61,34 +61,7 @@ public class ListeningTestAdapter extends BaseAdapter{
         convertView=in.inflate(R.layout.test_adapter,null);
 
 
-        ConnectivityManager ConnectionManager=(ConnectivityManager)c.getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo=ConnectionManager.getActiveNetworkInfo();
-        if(networkInfo != null && networkInfo.isConnected()==true )
-        {
-//            Toast.makeText(DASHBOARD.this, "Network Available", Toast.LENGTH_LONG).show();
-        }
-        else
-        {
-            AlertDialog alertbox = new AlertDialog.Builder(c)
-                    .setMessage("Check Your Internet Connention?")
-                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
 
-                        // do something when the button is clicked
-                        public void onClick(DialogInterface arg0, int arg1) {
-
-                            Intent intent = new Intent();
-                            intent.setComponent(new ComponentName("com.android.settings", "com.android.settings.Settings$DataUsageSummaryActivity"));
-                            c.startActivity(intent);
-
-//                        //close();
-
-
-                        }
-                    })
-                    .show();
-            Toast.makeText(c, "Network Not Available", Toast.LENGTH_LONG).show();
-
-        }
 
 
         TextView t1=(TextView)convertView.findViewById(R.id.listeningtestpart2ptesubtype);
@@ -101,13 +74,41 @@ public class ListeningTestAdapter extends BaseAdapter{
             @Override
             public void onClick(View v) {
 //
-                            Intent intent = new Intent(c,ListeningTestListActivity.class);
-                            intent.putExtra("t1", id[position]);
-                            c.startActivity(intent);
-                            SharedPreferences prefs = c.getSharedPreferences("my_prefs", MODE_PRIVATE);
-                            SharedPreferences.Editor edit = prefs.edit();
-                            edit.putString("test_id", id[position]);
-                            edit.commit();
+
+                ConnectivityManager ConnectionManager=(ConnectivityManager)c.getSystemService(Context.CONNECTIVITY_SERVICE);
+                NetworkInfo networkInfo=ConnectionManager.getActiveNetworkInfo();
+                if(networkInfo != null && networkInfo.isConnected()==true )
+                {
+                    Intent intent = new Intent(c,ListeningTestListActivity.class);
+                    intent.putExtra("t1", id[position]);
+                    c.startActivity(intent);
+                    SharedPreferences prefs = c.getSharedPreferences("my_prefs", MODE_PRIVATE);
+                    SharedPreferences.Editor edit = prefs.edit();
+                    edit.putString("test_id", id[position]);
+                    edit.commit();
+                }
+                else
+                {
+                    AlertDialog alertbox = new AlertDialog.Builder(c)
+                            .setMessage("Check Your Internet Connention?")
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+                                // do something when the button is clicked
+                                public void onClick(DialogInterface arg0, int arg1) {
+
+                                    Intent intent = new Intent();
+                                    intent.setComponent(new ComponentName("com.android.settings", "com.android.settings.Settings$DataUsageSummaryActivity"));
+                                    c.startActivity(intent);
+
+//                        //close();
+
+
+                                }
+                            })
+                            .show();
+                    Toast.makeText(c, "Network Not Available", Toast.LENGTH_LONG).show();
+
+                }
 
 //                Toast.makeText(c, id[position], Toast.LENGTH_SHORT).show();
             }

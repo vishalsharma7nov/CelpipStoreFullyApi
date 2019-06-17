@@ -1,7 +1,12 @@
 package com.celpipstore;
 
+import android.content.ComponentName;
 import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.support.v7.app.AlertDialog;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -60,10 +65,35 @@ public class ListeningTestListAdapter extends BaseAdapter{
             @Override
             public void onClick(View v) {
 
-                            String test_id[] = JsonDataHandler.id;
-                            Intent intent = new Intent(c,ListeningTestQuestionActivity.class);
-                            intent.putExtra("t2",test_code[position]);
-                            c.startActivity(intent);
+
+                ConnectivityManager ConnectionManager=(ConnectivityManager)c.getSystemService(Context.CONNECTIVITY_SERVICE);
+                NetworkInfo networkInfo=ConnectionManager.getActiveNetworkInfo();
+                if(networkInfo != null && networkInfo.isConnected()==true )
+                {
+                    String test_id[] = JsonDataHandler.id;
+                    Intent intent = new Intent(c,ListeningTestQuestionActivity.class);
+                    intent.putExtra("t2",test_code[position]);
+                    c.startActivity(intent);
+                }
+                else
+                {
+                    AlertDialog alertbox = new AlertDialog.Builder(c)
+                            .setMessage("Check Your Internet Connention?")
+                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+                                // do something when the button is clicked
+                                public void onClick(DialogInterface arg0, int arg1) {
+
+                                    Intent intent = new Intent();
+                                    intent.setComponent(new ComponentName("com.android.settings", "com.android.settings.Settings$DataUsageSummaryActivity"));
+                                    c.startActivity(intent);
+
+                                }
+                            })
+                            .show();
+                    Toast.makeText(c, "Network Not Available", Toast.LENGTH_LONG).show();
+
+                }
             }
         });
         b2.setOnClickListener(new View.OnClickListener() {

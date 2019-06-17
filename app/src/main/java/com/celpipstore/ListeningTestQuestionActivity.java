@@ -53,7 +53,7 @@ import java.util.concurrent.TimeUnit;
 public class ListeningTestQuestionActivity extends AppCompatActivity {
 
     ListView listView;
-    String url,part1,part2;
+    String url,part1,part2,part3,part4,part5,part6;
     String image;
     ImageView imageView;
 
@@ -106,8 +106,6 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
 
         }
 
-
-
         loadingAudio = new ProgressDialog(ListeningTestQuestionActivity.this);
         listView = (ListView)findViewById(R.id.listView);
         imageButtonPlay = (ImageButton)findViewById(R.id.buttonPlay);
@@ -133,9 +131,15 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String test_id = bb.getString("test_id","test_id");
         String test_code = intent.getStringExtra("t2");
+
         url = "http://online.celpip.biz/api/accessnewtest?memberid="+member_id+"&testid="+test_id+"&testcode="+test_code;
         part1 = "http://online.celpip.biz/api/accessnewtest?memberid="+member_id+"&testid=20&testcode="+test_code;
         part2 = "http://online.celpip.biz/api/accessnewtest?memberid="+member_id+"&testid=19&testcode="+test_code;
+        part3 = "http://online.celpip.biz/api/accessnewtest?memberid="+member_id+"&testid=18&testcode="+test_code;
+        part4 = "http://online.celpip.biz/api/accessnewtest?memberid="+member_id+"&testid=17&testcode="+test_code;
+        part5 = "http://online.celpip.biz/api/accessnewtest?memberid="+member_id+"&testid=16&testcode="+test_code;
+        part6 = "http://online.celpip.biz/api/accessnewtest?memberid="+member_id+"&testid=15&testcode="+test_code;
+
         sendRequest();
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -157,12 +161,15 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 if (mediaPlayer.isPlaying()) {
-                    mediaPlayer.stop();
+                    mediaPlayer.pause();
+
                 }
                 else
                 {
+                    imageButtonPause.setEnabled(true);
                     mediaPlayer.start();
                 }
+
                 Toast.makeText(ListeningTestQuestionActivity.this, "Pause", Toast.LENGTH_SHORT).show();
             }
         });
@@ -172,12 +179,33 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
 
                 if (url.equals(part1))
                 {
-                    new PalyMusic().execute();
-
+                    new PlayMusic().execute();
+                    imageButtonPlay.setEnabled(false);
                 }
                 if (url.equals(part2))
                 {
-                    new PalyMusic().execute();
+                    new PlayMusic().execute();
+                    imageButtonPlay.setEnabled(false);
+                }
+                if (url.equals(part3))
+                {
+                    new PlayMusic().execute();
+                    imageButtonPlay.setEnabled(false);
+                }
+                if (url.equals(part4))
+                {
+                    new PlayMusic().execute();
+                    imageButtonPlay.setEnabled(false);
+                }
+                if (url.equals(part5))
+                {
+                    new PlayMusic().execute();
+                    imageButtonPlay.setEnabled(false);
+                }
+                if (url.equals(part6))
+                {
+                    new PlayMusic().execute();
+                    imageButtonPlay.setEnabled(false);
                 }
 
             }
@@ -290,10 +318,39 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
                                                                             }
                                                                         })
                                                                         .into(imageView);
+
                                                                 textViewInstruction.setText("Instruction :\n"+jsonHolderListingpart1.l1_practice_01_text);
 
                                                             }
                                                             else if(url.equals(part2))
+                                                            {
+                                                                linearLayoutFrame2.setVisibility(View.GONE);
+                                                                linearLayoutFrame1.setVisibility(View.VISIBLE);
+                                                                showJSONPart2(response);
+                                                                loading.dismiss();
+                                                            }
+                                                            else if (url.equals(part3))
+                                                            {
+                                                                linearLayoutFrame2.setVisibility(View.GONE);
+                                                                linearLayoutFrame1.setVisibility(View.VISIBLE);
+                                                                showJSONPart2(response);
+                                                                loading.dismiss();
+                                                            }
+                                                            else if (url.equals(part4))
+                                                            {
+                                                                linearLayoutFrame2.setVisibility(View.GONE);
+                                                                linearLayoutFrame1.setVisibility(View.VISIBLE);
+                                                                showJSONPart2(response);
+                                                                loading.dismiss();
+                                                            }
+                                                            else if (url.equals(part5))
+                                                            {
+                                                                linearLayoutFrame2.setVisibility(View.GONE);
+                                                                linearLayoutFrame1.setVisibility(View.VISIBLE);
+                                                                showJSONPart2(response);
+                                                                loading.dismiss();
+                                                            }
+                                                            else if (url.equals(part6))
                                                             {
                                                                 linearLayoutFrame2.setVisibility(View.GONE);
                                                                 linearLayoutFrame1.setVisibility(View.VISIBLE);
@@ -366,11 +423,12 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
                 seekbar.setSecondaryProgress(percent * mediaPlayer.getDuration() /100 );
                 seekbar.setSecondaryProgressTintList(ColorStateList.valueOf(Color.RED));
                 mp.setLooping(false);
-                mp.start();
                 imageButtonPause.setVisibility(View.VISIBLE);
                 loadingAudio.dismiss();
             }
         });
+        mediaPlayer.start();
+
         mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mp) {
@@ -382,7 +440,7 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
         startTime = mediaPlayer.getCurrentPosition();
         if (oneTimeOnly == 0) {
             seekbar.setMax((int) finalTime);
-            oneTimeOnly = 0;
+            oneTimeOnly = 1;
         }
 
         seekbar.setProgress((int)startTime);
@@ -414,11 +472,11 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
                 seekbar.setSecondaryProgress(percent * mediaPlayer.getDuration() /100 );
                 seekbar.setSecondaryProgressTintList(ColorStateList.valueOf(Color.RED));
                 mp.setLooping(false);
-                mp.start();
                 imageButtonPause.setVisibility(View.VISIBLE);
                 loadingAudio.dismiss();
             }
         });
+        mediaPlayer.start();
         mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
             @Override
             public void onCompletion(MediaPlayer mp) {
@@ -430,7 +488,7 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
         startTime = mediaPlayer.getCurrentPosition();
         if (oneTimeOnly == 0) {
             seekbar.setMax((int) finalTime);
-            oneTimeOnly = 0;
+            oneTimeOnly = 1;
         }
 
         seekbar.setProgress((int)startTime);
@@ -449,7 +507,252 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
                                 startTime)))
         );
     }
-    class  PalyMusic extends AsyncTask<Void, Void, Void> {
+
+    public void audiopart3()
+    {
+        String audio_player = "https://online.celpip.biz/uploads/part3_listening/"+jsonHolderListingpart2.converstaion_1_audio;
+        mediaPlayer = MediaPlayer.create(ListeningTestQuestionActivity.this,Uri.parse(audio_player));
+        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+        mediaPlayer.setLooping(false);
+        mediaPlayer.setOnBufferingUpdateListener(new MediaPlayer.OnBufferingUpdateListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void onBufferingUpdate(MediaPlayer mp, int percent) {
+                seekbar.setSecondaryProgress(percent * mediaPlayer.getDuration() /100 );
+                seekbar.setSecondaryProgressTintList(ColorStateList.valueOf(Color.RED));
+                mp.setLooping(false);
+                imageButtonPause.setVisibility(View.VISIBLE);
+                loadingAudio.dismiss();
+            }
+        });
+        mediaPlayer.start();
+        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                mp.setLooping(false);
+                mp.stop();
+            }
+        });
+        finalTime = mediaPlayer.getDuration();
+        startTime = mediaPlayer.getCurrentPosition();
+        if (oneTimeOnly == 0) {
+            seekbar.setMax((int) finalTime);
+            oneTimeOnly = 1;
+        }
+
+        seekbar.setProgress((int)startTime);
+        myHandler.postDelayed(UpdateAudioTime,100);
+        textViewStop.setText(String.format("%d min, %d sec",
+                TimeUnit.MILLISECONDS.toMinutes((long) finalTime),
+                TimeUnit.MILLISECONDS.toSeconds((long) finalTime) -
+                        TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes((long)
+                                finalTime)))
+        );
+
+        textViewStart.setText(String.format("%d min, %d sec",
+                TimeUnit.MILLISECONDS.toMinutes((long) startTime),
+                TimeUnit.MILLISECONDS.toSeconds((long) startTime) -
+                        TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes((long)
+                                startTime)))
+        );
+    }
+
+    public void audiopart4()
+    {
+        String audio_player = "https://online.celpip.biz/uploads/part4_listening/"+jsonHolderListingpart2.converstaion_1_audio;
+        mediaPlayer = MediaPlayer.create(ListeningTestQuestionActivity.this,Uri.parse(audio_player));
+        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+        mediaPlayer.setLooping(false);
+        mediaPlayer.setOnBufferingUpdateListener(new MediaPlayer.OnBufferingUpdateListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void onBufferingUpdate(MediaPlayer mp, int percent) {
+                seekbar.setSecondaryProgress(percent * mediaPlayer.getDuration() /100 );
+                seekbar.setSecondaryProgressTintList(ColorStateList.valueOf(Color.RED));
+                mp.setLooping(false);
+                imageButtonPause.setVisibility(View.VISIBLE);
+                loadingAudio.dismiss();
+            }
+        });
+        mediaPlayer.start();
+        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                mp.setLooping(false);
+                mp.stop();
+            }
+        });
+        finalTime = mediaPlayer.getDuration();
+        startTime = mediaPlayer.getCurrentPosition();
+        if (oneTimeOnly == 0) {
+            seekbar.setMax((int) finalTime);
+            oneTimeOnly = 1;
+        }
+
+        seekbar.setProgress((int)startTime);
+        myHandler.postDelayed(UpdateAudioTime,100);
+        textViewStop.setText(String.format("%d min, %d sec",
+                TimeUnit.MILLISECONDS.toMinutes((long) finalTime),
+                TimeUnit.MILLISECONDS.toSeconds((long) finalTime) -
+                        TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes((long)
+                                finalTime)))
+        );
+
+        textViewStart.setText(String.format("%d min, %d sec",
+                TimeUnit.MILLISECONDS.toMinutes((long) startTime),
+                TimeUnit.MILLISECONDS.toSeconds((long) startTime) -
+                        TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes((long)
+                                startTime)))
+        );
+    }
+
+    public void audiopart5()
+    {
+        String audio_player = "https://online.celpip.biz/uploads/part5_listening/"+jsonHolderListingpart2.converstaion_1_audio;
+        mediaPlayer = MediaPlayer.create(ListeningTestQuestionActivity.this,Uri.parse(audio_player));
+        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+        mediaPlayer.setLooping(false);
+        mediaPlayer.setOnBufferingUpdateListener(new MediaPlayer.OnBufferingUpdateListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void onBufferingUpdate(MediaPlayer mp, int percent) {
+                seekbar.setSecondaryProgress(percent * mediaPlayer.getDuration() /100 );
+                seekbar.setSecondaryProgressTintList(ColorStateList.valueOf(Color.RED));
+                mp.setLooping(false);
+                imageButtonPause.setVisibility(View.VISIBLE);
+                loadingAudio.dismiss();
+            }
+        });
+        mediaPlayer.start();
+        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                mp.setLooping(false);
+                mp.stop();
+            }
+        });
+        finalTime = mediaPlayer.getDuration();
+        startTime = mediaPlayer.getCurrentPosition();
+        if (oneTimeOnly == 0) {
+            seekbar.setMax((int) finalTime);
+            oneTimeOnly = 1;
+        }
+
+        seekbar.setProgress((int)startTime);
+        myHandler.postDelayed(UpdateAudioTime,100);
+        textViewStop.setText(String.format("%d min, %d sec",
+                TimeUnit.MILLISECONDS.toMinutes((long) finalTime),
+                TimeUnit.MILLISECONDS.toSeconds((long) finalTime) -
+                        TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes((long)
+                                finalTime)))
+        );
+
+        textViewStart.setText(String.format("%d min, %d sec",
+                TimeUnit.MILLISECONDS.toMinutes((long) startTime),
+                TimeUnit.MILLISECONDS.toSeconds((long) startTime) -
+                        TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes((long)
+                                startTime)))
+        );
+    }
+
+    public void audiopart6()
+    {
+        String audio_player = "https://online.celpip.biz/uploads/part6_listening/"+jsonHolderListingpart2.converstaion_1_audio;
+        mediaPlayer = MediaPlayer.create(ListeningTestQuestionActivity.this,Uri.parse(audio_player));
+        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+        mediaPlayer.setLooping(false);
+        mediaPlayer.setOnBufferingUpdateListener(new MediaPlayer.OnBufferingUpdateListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void onBufferingUpdate(MediaPlayer mp, int percent) {
+                seekbar.setSecondaryProgress(percent * mediaPlayer.getDuration() /100 );
+                seekbar.setSecondaryProgressTintList(ColorStateList.valueOf(Color.RED));
+                mp.setLooping(false);
+                imageButtonPause.setVisibility(View.VISIBLE);
+                loadingAudio.dismiss();
+            }
+        });
+        mediaPlayer.start();
+        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                mp.setLooping(false);
+                mp.stop();
+            }
+        });
+        finalTime = mediaPlayer.getDuration();
+        startTime = mediaPlayer.getCurrentPosition();
+        if (oneTimeOnly == 0) {
+            seekbar.setMax((int) finalTime);
+            oneTimeOnly = 1;
+        }
+
+        seekbar.setProgress((int)startTime);
+        myHandler.postDelayed(UpdateAudioTime,100);
+        textViewStop.setText(String.format("%d min, %d sec",
+                TimeUnit.MILLISECONDS.toMinutes((long) finalTime),
+                TimeUnit.MILLISECONDS.toSeconds((long) finalTime) -
+                        TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes((long)
+                                finalTime)))
+        );
+
+        textViewStart.setText(String.format("%d min, %d sec",
+                TimeUnit.MILLISECONDS.toMinutes((long) startTime),
+                TimeUnit.MILLISECONDS.toSeconds((long) startTime) -
+                        TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes((long)
+                                startTime)))
+        );
+    }
+    public void audiopractice()
+    {
+        String audio_player = "https://online.celpip.biz/uploads/listening_practiceTask/"+jsonHolderListingpart2.converstaion_1_audio;
+        mediaPlayer = MediaPlayer.create(ListeningTestQuestionActivity.this,Uri.parse(audio_player));
+        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+        mediaPlayer.setLooping(false);
+        mediaPlayer.setOnBufferingUpdateListener(new MediaPlayer.OnBufferingUpdateListener() {
+            @RequiresApi(api = Build.VERSION_CODES.O)
+            @Override
+            public void onBufferingUpdate(MediaPlayer mp, int percent) {
+                seekbar.setSecondaryProgress(percent * mediaPlayer.getDuration() /100 );
+                seekbar.setSecondaryProgressTintList(ColorStateList.valueOf(Color.RED));
+                mp.setLooping(false);
+                imageButtonPause.setVisibility(View.VISIBLE);
+                loadingAudio.dismiss();
+            }
+        });
+        mediaPlayer.start();
+        mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+            @Override
+            public void onCompletion(MediaPlayer mp) {
+                mp.setLooping(false);
+                mp.stop();
+            }
+        });
+        finalTime = mediaPlayer.getDuration();
+        startTime = mediaPlayer.getCurrentPosition();
+        if (oneTimeOnly == 0) {
+            seekbar.setMax((int) finalTime);
+            oneTimeOnly = 1;
+        }
+
+        seekbar.setProgress((int)startTime);
+        myHandler.postDelayed(UpdateAudioTime,100);
+        textViewStop.setText(String.format("%d min, %d sec",
+                TimeUnit.MILLISECONDS.toMinutes((long) finalTime),
+                TimeUnit.MILLISECONDS.toSeconds((long) finalTime) -
+                        TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes((long)
+                                finalTime)))
+        );
+
+        textViewStart.setText(String.format("%d min, %d sec",
+                TimeUnit.MILLISECONDS.toMinutes((long) startTime),
+                TimeUnit.MILLISECONDS.toSeconds((long) startTime) -
+                        TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes((long)
+                                startTime)))
+        );
+    }
+
+    class  PlayMusic extends AsyncTask<Void, Void, Void> {
 
         @Override
         protected void onPreExecute() {
@@ -474,6 +777,20 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
             if (url.equals(part2))
             {
                 audiopart2();
+            }
+            if (url.equals(part3))
+            {
+                audiopart3();
+            }
+            if (url.equals(part4))
+            {
+                audiopart4();
+            }if (url.equals(part5))
+            {
+                audiopart5();
+            }if (url.equals(part6))
+            {
+                audiopart6();
             }
 
             return (null);

@@ -272,7 +272,7 @@ public class MainActivity extends AppCompatActivity
                             if (abc == 1)
                             {
                                 String id          = obj.getJSONObject("").getString("id");
-                                Toast.makeText(MainActivity.this, id, Toast.LENGTH_SHORT).show();
+//                                Toast.makeText(MainActivity.this, id, Toast.LENGTH_SHORT).show();
                                 loading.dismiss();
 //                                prefManager.setFirstTimeLaunch(false);
 
@@ -302,6 +302,7 @@ public class MainActivity extends AppCompatActivity
 
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        loading.dismiss();
                         Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 })

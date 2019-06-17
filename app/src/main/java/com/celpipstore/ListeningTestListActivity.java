@@ -50,10 +50,7 @@ public class ListeningTestListActivity extends AppCompatActivity {
                             intent.setComponent(new ComponentName("com.android.settings", "com.android.settings.Settings$DataUsageSummaryActivity"));
                             startActivity(intent);
                             recreate();
-
 //                        //close();
-
-
                         }
                     })
                     .show();
@@ -82,6 +79,7 @@ public class ListeningTestListActivity extends AppCompatActivity {
 
                             if (abc !=1 )
                             {
+                                loading.dismiss();
                                 Toast.makeText(ListeningTestListActivity.this, "Work in Progress....", Toast.LENGTH_SHORT).show();
                             }
                             else if (abc == 1)
@@ -97,6 +95,7 @@ public class ListeningTestListActivity extends AppCompatActivity {
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
+                        loading.dismiss();
                         Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 });

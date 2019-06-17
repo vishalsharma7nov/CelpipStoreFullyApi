@@ -280,9 +280,6 @@ public class ListeningTestPart1QuestionAdapter extends BaseAdapter{
         final String question_option3[] = {l1_q1_option3,l1_q2_option3,l1_q3_option3,l1_q4_option3,l1_q5_option3,l1_q6_option3,l1_q7_option3,l1_q8_option3,null};
         final String question_option4[] = {l1_q1_option4,l1_q2_option4,l1_q3_option4,l1_q4_option4,l1_q5_option4,l1_q6_option4,l1_q7_option4,l1_q8_option4,null};
 
-        final ListView lv = convertView.findViewById(R.id.correctanswer);
-        final ListView lv1 = convertView.findViewById(R.id.userAnswer);
-
         ImageButton imageButtonPlay = (ImageButton)convertView.findViewById(R.id.buttonPlay);
         final View finalConvertView = convertView;
         final View finalConvertView1 = convertView;
