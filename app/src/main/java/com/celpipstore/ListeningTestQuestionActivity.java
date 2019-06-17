@@ -178,6 +178,7 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
                 startActivity(intent1);
             }
         });
+        buttonNext.setVisibility(View.GONE);
         buttonNext.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -228,40 +229,34 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
             public void onClick(View v) {
                 imageButtonPlay.setVisibility(View.GONE);
                 imageButtonPause.setVisibility(View.VISIBLE);
+                buttonNext.setVisibility(View.VISIBLE);
                 if (url.equals(practicetest))
                 {
                     new PlayMusic().execute();
-                    imageButtonPlay.setEnabled(false);
                 }
                 if (url.equals(part1))
                 {
                     new PlayMusic().execute();
-                    imageButtonPlay.setEnabled(false);
                 }
                 if (url.equals(part2))
                 {
                     new PlayMusic().execute();
-                    imageButtonPlay.setEnabled(false);
                 }
                 if (url.equals(part3))
                 {
                     new PlayMusic().execute();
-                    imageButtonPlay.setEnabled(false);
                 }
                 if (url.equals(part4))
                 {
                     new PlayMusic().execute();
-                    imageButtonPlay.setEnabled(false);
                 }
                 if (url.equals(part5))
                 {
                     new PlayMusic().execute();
-                    imageButtonPlay.setEnabled(false);
                 }
                 if (url.equals(part6))
                 {
                     new PlayMusic().execute();
-                    imageButtonPlay.setEnabled(false);
                 }
 
             }
@@ -514,14 +509,15 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
             public void onCompletion(MediaPlayer mp) {
                 mp.setLooping(false);
                 mp.stop();
-                imageButtonPlay.setVisibility(View.VISIBLE);
+                imageButtonPlay.setVisibility(View.GONE);
+                imageButtonPause.setVisibility(View.GONE);
             }
         });
         finalTime = mediaPlayer.getDuration();
         startTime = mediaPlayer.getCurrentPosition();
         if (oneTimeOnly == 0) {
             seekbar.setMax((int) finalTime);
-            oneTimeOnly = 1;
+            oneTimeOnly = 0;
         }
 
         seekbar.setProgress((int)startTime);
@@ -562,13 +558,15 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
             public void onCompletion(MediaPlayer mp) {
                 mp.setLooping(false);
                 mp.stop();
+                imageButtonPlay.setVisibility(View.VISIBLE);
+                imageButtonPause.setVisibility(View.GONE);
             }
         });
         finalTime = mediaPlayer.getDuration();
         startTime = mediaPlayer.getCurrentPosition();
         if (oneTimeOnly == 0) {
             seekbar.setMax((int) finalTime);
-            oneTimeOnly = 1;
+            oneTimeOnly = 0;
         }
 
         seekbar.setProgress((int)startTime);
@@ -610,13 +608,15 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
             public void onCompletion(MediaPlayer mp) {
                 mp.setLooping(false);
                 mp.stop();
+                imageButtonPlay.setVisibility(View.VISIBLE);
+                imageButtonPause.setVisibility(View.GONE);
             }
         });
         finalTime = mediaPlayer.getDuration();
         startTime = mediaPlayer.getCurrentPosition();
         if (oneTimeOnly == 0) {
             seekbar.setMax((int) finalTime);
-            oneTimeOnly = 1;
+            oneTimeOnly = 0;
         }
 
         seekbar.setProgress((int)startTime);
@@ -658,13 +658,15 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
             public void onCompletion(MediaPlayer mp) {
                 mp.setLooping(false);
                 mp.stop();
+                imageButtonPlay.setVisibility(View.VISIBLE);
+                imageButtonPause.setVisibility(View.GONE);
             }
         });
         finalTime = mediaPlayer.getDuration();
         startTime = mediaPlayer.getCurrentPosition();
         if (oneTimeOnly == 0) {
             seekbar.setMax((int) finalTime);
-            oneTimeOnly = 1;
+            oneTimeOnly = 0;
         }
 
         seekbar.setProgress((int)startTime);
@@ -706,13 +708,15 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
             public void onCompletion(MediaPlayer mp) {
                 mp.setLooping(false);
                 mp.stop();
+                imageButtonPlay.setVisibility(View.VISIBLE);
+                imageButtonPause.setVisibility(View.GONE);
             }
         });
         finalTime = mediaPlayer.getDuration();
         startTime = mediaPlayer.getCurrentPosition();
         if (oneTimeOnly == 0) {
             seekbar.setMax((int) finalTime);
-            oneTimeOnly = 1;
+            oneTimeOnly = 0;
         }
 
         seekbar.setProgress((int)startTime);
@@ -754,13 +758,15 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
             public void onCompletion(MediaPlayer mp) {
                 mp.setLooping(false);
                 mp.stop();
+                imageButtonPlay.setVisibility(View.VISIBLE);
+                imageButtonPause.setVisibility(View.GONE);
             }
         });
         finalTime = mediaPlayer.getDuration();
         startTime = mediaPlayer.getCurrentPosition();
         if (oneTimeOnly == 0) {
             seekbar.setMax((int) finalTime);
-            oneTimeOnly = 1;
+            oneTimeOnly = 0;
         }
 
         seekbar.setProgress((int)startTime);
@@ -785,6 +791,7 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
         mediaPlayer = MediaPlayer.create(ListeningTestQuestionActivity.this,Uri.parse(audio_player));
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         mediaPlayer.setLooping(false);
+
         mediaPlayer.setOnBufferingUpdateListener(new MediaPlayer.OnBufferingUpdateListener() {
             @RequiresApi(api = Build.VERSION_CODES.O)
             @Override
@@ -801,13 +808,16 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
             public void onCompletion(MediaPlayer mp) {
                 mp.setLooping(false);
                 mp.stop();
+                imageButtonPlay.setVisibility(View.VISIBLE);
+                imageButtonPause.setVisibility(View.GONE);
+
             }
         });
         finalTime = mediaPlayer.getDuration();
         startTime = mediaPlayer.getCurrentPosition();
         if (oneTimeOnly == 0) {
             seekbar.setMax((int) finalTime);
-            oneTimeOnly = 1;
+            oneTimeOnly = 0;
         }
 
         seekbar.setProgress((int)startTime);

@@ -231,17 +231,10 @@ public class ListeningTestPart2QuestionAdapter extends BaseAdapter{
         b6NextQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                audio_player = url + questions_audio[5];
-                t1.setText(question_option1[5]);
-                t2.setText(question_option2[5]);
-                t3.setText(question_option3[5]);
-                t4.setText(question_option4[5]);
+
                 b5NextQuestion.setVisibility(View.GONE);
-
-
                 Intent intent = new Intent(c , LISTENING_part2.class);
                 c.startActivity(intent);
-
             }
         });
 
