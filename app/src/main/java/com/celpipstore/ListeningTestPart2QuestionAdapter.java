@@ -3,6 +3,7 @@ package com.celpipstore;
 import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.res.ColorStateList;
 import android.graphics.Color;
 import android.media.AudioManager;
@@ -12,6 +13,7 @@ import android.os.AsyncTask;
 import android.os.Build;
 import android.os.Handler;
 import android.support.annotation.RequiresApi;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -22,8 +24,19 @@ import android.widget.ListView;
 import android.widget.RadioButton;
 import android.widget.SeekBar;
 import android.widget.TextView;
+import android.widget.Toast;
+
+import com.android.volley.AuthFailureError;
+import com.android.volley.Request;
+import com.android.volley.RequestQueue;
+import com.android.volley.Response;
+import com.android.volley.VolleyError;
+import com.android.volley.toolbox.StringRequest;
+import com.android.volley.toolbox.Volley;
 
 import java.io.IOException;
+import java.util.HashMap;
+import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 
@@ -42,6 +55,12 @@ public class ListeningTestPart2QuestionAdapter extends BaseAdapter{
     public static int oneTimeOnly = 0;
     String audio_player;
     ProgressDialog loadingAudio;
+
+    String userAnswerQuestion1;
+    String userAnswerQuestion2;
+    String userAnswerQuestion3;
+    String userAnswerQuestion4;
+    String userAnswerQuestion5;
 
     //json data
     public static String id;
@@ -152,21 +171,21 @@ public class ListeningTestPart2QuestionAdapter extends BaseAdapter{
         final String question_option3[] = {q1_option3,q2_option3,q3_option3,q4_option3,q5_option3,null};
         final String question_option4[] = {q1_option4,q2_option4,q3_option4,q4_option4,q5_option4,null};
 
+        SharedPreferences bb = c.getSharedPreferences("my_prefs", 0);
+        final String tokenCode = bb.getString("tokenCode", "tokenCode");
+        final String member_id = bb.getString("member_id", "member_id");
+
         seekbar = (SeekBar)  convertView.findViewById(R.id.seekbar);
         textViewStart = (TextView) convertView.findViewById(R.id.textViewStartTime);
         textViewStop  = (TextView) convertView.findViewById(R.id.textViewStopTime);
 
         ImageButton imageButtonPlay = (ImageButton)convertView.findViewById(R.id.buttonPlay);
-        final View finalConvertView = convertView;
-        final View finalConvertView1 = convertView;
         imageButtonPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 new PlayMusic().execute();
             }
         });
-
-            String correct_answer[] = {q1_answer,q2_answer,q3_answer,q4_answer,q5_answer};
 
 
             audio_player = url+questions_audio[0];
@@ -175,56 +194,135 @@ public class ListeningTestPart2QuestionAdapter extends BaseAdapter{
             t3.setText(question_option3[0]);
             t4.setText(question_option4[0]);
 
+                t1.setChecked(false);
+                t2.setChecked(false);
+                t3.setChecked(false);
+                t4.setChecked(false);
 
         b2NextQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                b2NextQuestion.setVisibility(View.GONE);
+                b3NextQuestion.setVisibility(View.VISIBLE);
+                audio_player = url+questions_audio[0];
+                t1.setText(question_option1[0]);
+                t2.setText(question_option2[0]);
+                t3.setText(question_option3[0]);
+                t4.setText(question_option4[0]);
+                if (t1.isChecked())
+                {
+                    userAnswerQuestion1 = t1.getText().toString();
+                }
+                if (t2.isChecked())
+                {
+                    userAnswerQuestion1 = t2.getText().toString();
+                }
+                if (t3.isChecked())
+                {
+                    userAnswerQuestion1 = t3.getText().toString();
+                }
+                if (t4.isChecked())
+                {
+                    userAnswerQuestion1 = t4.getText().toString();
+                }
                 audio_player = url + questions_audio[1];
                 t1.setText(question_option1[1]);
                 t2.setText(question_option2[1]);
                 t3.setText(question_option3[1]);
                 t4.setText(question_option4[1]);
-                b2NextQuestion.setVisibility(View.GONE);
-                b3NextQuestion.setVisibility(View.VISIBLE);
 
             }
         });
         b3NextQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                b3NextQuestion.setVisibility(View.GONE);
+                b4NextQuestion.setVisibility(View.VISIBLE);
+                if (t1.isChecked())
+                {
+                    userAnswerQuestion2 = t1.getText().toString();
+                }
+                if (t2.isChecked())
+                {
+                    userAnswerQuestion2 = t2.getText().toString();
+                }
+                if (t3.isChecked())
+                {
+                    userAnswerQuestion2 = t3.getText().toString();
+                }
+                if (t4.isChecked())
+                {
+                    userAnswerQuestion2 = t4.getText().toString();
+                }
                 audio_player = url + questions_audio[2];
                 t1.setText(question_option1[2]);
                 t2.setText(question_option2[2]);
                 t3.setText(question_option3[2]);
                 t4.setText(question_option4[2]);
-                b3NextQuestion.setVisibility(View.GONE);
-                b4NextQuestion.setVisibility(View.VISIBLE);
 
             }
         });
         b4NextQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                b4NextQuestion.setVisibility(View.GONE);
+                b5NextQuestion.setVisibility(View.VISIBLE);
+                if (t1.isChecked())
+                {
+                    userAnswerQuestion3 = t1.getText().toString();
+                }
+                if (t2.isChecked())
+                {
+                    userAnswerQuestion3 = t2.getText().toString();
+                }
+                if (t3.isChecked())
+                {
+                    userAnswerQuestion3 = t3.getText().toString();
+                }
+                if (t4.isChecked())
+                {
+                    userAnswerQuestion3 = t4.getText().toString();
+                }
+
                 audio_player = url + questions_audio[3];
                 t1.setText(question_option1[3]);
                 t2.setText(question_option2[3]);
                 t3.setText(question_option3[3]);
                 t4.setText(question_option4[3]);
-                b4NextQuestion.setVisibility(View.GONE);
-                b5NextQuestion.setVisibility(View.VISIBLE);
 
             }
         });
         b5NextQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+
+                b5NextQuestion.setVisibility(View.GONE);
+                b6NextQuestion.setVisibility(View.VISIBLE);
+                if (t1.isChecked())
+                {
+                    userAnswerQuestion4 = t1.getText().toString();
+                }
+                if (t2.isChecked())
+                {
+                    userAnswerQuestion4 = t2.getText().toString();
+                }
+                if (t3.isChecked())
+                {
+                    userAnswerQuestion4 = t3.getText().toString();
+                }
+                if (t4.isChecked())
+                {
+                    userAnswerQuestion4 = t4.getText().toString();
+                }
+
                 audio_player = url + questions_audio[4];
                 t1.setText(question_option1[4]);
                 t2.setText(question_option2[4]);
                 t3.setText(question_option3[4]);
                 t4.setText(question_option4[4]);
-                b5NextQuestion.setVisibility(View.GONE);
-                b6NextQuestion.setVisibility(View.VISIBLE);
 
             }
         });
@@ -233,6 +331,57 @@ public class ListeningTestPart2QuestionAdapter extends BaseAdapter{
             public void onClick(View v) {
 
                 b5NextQuestion.setVisibility(View.GONE);
+
+                if (t1.isChecked())
+                {
+                    userAnswerQuestion5 = t1.getText().toString();
+                }
+                if (t2.isChecked())
+                {
+                    userAnswerQuestion5 = t2.getText().toString();
+                }
+                if (t3.isChecked())
+                {
+                    userAnswerQuestion5 = t3.getText().toString();
+                }
+                if (t4.isChecked())
+                {
+                    userAnswerQuestion5 = t4.getText().toString();
+                }
+                String urlForSubmittingOptions = "http://online.celpip.biz/api/lsPart2Submit?token="+tokenCode+"&q1_response="+userAnswerQuestion1+"&q2_response="+userAnswerQuestion2+"&q3_response="+userAnswerQuestion3+"&q4_response="+userAnswerQuestion4+"&q5_response="+userAnswerQuestion5+"&memberid="+member_id;
+                StringRequest stringRequest = new StringRequest(Request.Method.POST, urlForSubmittingOptions,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                Toast.makeText(c, response, Toast.LENGTH_SHORT).show();
+                            }
+
+                        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        Toast.makeText(c, error.getMessage(), Toast.LENGTH_SHORT).show();
+                    }
+                }) {
+                    @Override
+                    protected Map<String, String> getParams() throws AuthFailureError {
+                        Map<String, String> params = new HashMap<>();
+                        params.put("q1_response", userAnswerQuestion1);
+                        params.put("q2_response", userAnswerQuestion2);
+                        params.put("q3_response", userAnswerQuestion3);
+                        params.put("q4_response", userAnswerQuestion4);
+                        params.put("q5_response", userAnswerQuestion5);
+                        Log.e("===answer1",userAnswerQuestion1);
+                        Log.e("===answer2",userAnswerQuestion2);
+                        Log.e("===answer3",userAnswerQuestion3);
+                        Log.e("===answer4",userAnswerQuestion4);
+                        Log.e("===answer5",userAnswerQuestion5);
+
+                        return params;
+                    }
+                };
+                RequestQueue requestQueue = Volley.newRequestQueue(c.getApplicationContext());
+                requestQueue.add(stringRequest);
+
                 Intent intent = new Intent(c , LISTENING_part2.class);
                 c.startActivity(intent);
             }

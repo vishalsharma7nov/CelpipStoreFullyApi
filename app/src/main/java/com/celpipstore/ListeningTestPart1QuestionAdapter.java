@@ -382,6 +382,13 @@ public class ListeningTestPart1QuestionAdapter extends BaseAdapter{
                     }
                 })
                 .into(imageView4);
+
+
+        t1.setChecked(false);
+        t2.setChecked(false);
+        t3.setChecked(false);
+        t4.setChecked(false);
+
         b1NextQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -492,6 +499,10 @@ public class ListeningTestPart1QuestionAdapter extends BaseAdapter{
                 t2.setText(question_option2[4]);
                 t3.setText(question_option3[4]);
                 t4.setText(question_option4[4]);
+                t1.setChecked(false);
+                t2.setChecked(false);
+                t3.setChecked(false);
+                t4.setChecked(false);
                 if (t1.isChecked())
                 {
                     userAnswerQuestion4 = t1.getText().toString();
@@ -557,7 +568,6 @@ public class ListeningTestPart1QuestionAdapter extends BaseAdapter{
                 t2.setText(question_option2[6]);
                 t3.setText(question_option3[6]);
                 t4.setText(question_option4[6]);
-
                 if (t1.isChecked())
                 {
                     userAnswerQuestion6 = t1.getText().toString();
@@ -617,6 +627,10 @@ public class ListeningTestPart1QuestionAdapter extends BaseAdapter{
                 radioGroup1.setVisibility(View.GONE);
                 b8NextQuestion.setVisibility(View.GONE);
                 b9NextQuestion.setVisibility(View.VISIBLE);
+                t1.setChecked(false);
+                t2.setChecked(false);
+                t3.setChecked(false);
+                t4.setChecked(false);
                 if (t1.isChecked())
                 {
                     userAnswerQuestion8 = t1.getText().toString();
