@@ -10,6 +10,8 @@ public class JsonDataHandlerListeningPart1 {
     public static String l1_practice_01_img;
     public static String l1_practice_01_text;
     public static String l1_converstaion_1_audio;
+    public static String l1_converstaion_2_audio;
+    public static String l1_converstaion_3_audio;
     public static String l1_q1_audio;
     public static String l1_q1_option1;
     public static String l1_q1_option2;
@@ -78,6 +80,8 @@ public class JsonDataHandlerListeningPart1 {
                 l1_practice_01_img      = jsonObject.getJSONObject("data").getString("l1_practice_01_img");
                 l1_practice_01_text     = jsonObject.getJSONObject("data").getString("l1_practice_01_text");
                 l1_converstaion_1_audio = jsonObject.getJSONObject("data").getString("l1_conversation_1_audio");
+                l1_converstaion_2_audio = jsonObject.getJSONObject("data").getString("l1_conversation_2_audio");
+                l1_converstaion_3_audio = jsonObject.getJSONObject("data").getString("l1_conversation_3_audio");
                 l1_q1_audio             = jsonObject.getJSONObject("data").getString("l1_q1_audio");
                 l1_q1_option1           = jsonObject.getJSONObject("data").getString("l1_q1_option1");
                 l1_q1_option2           = jsonObject.getJSONObject("data").getString("l1_q1_option2");

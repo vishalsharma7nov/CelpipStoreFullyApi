@@ -260,8 +260,8 @@ public class MainActivity extends AppCompatActivity
         final ProgressDialog loading = ProgressDialog.show(this,"Loading","Please wait...",false,false);
         final String Username = username.getText().toString();
         final String Password = password.getText().toString();
-
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://online.celpip.biz/api/login?password="+password+"&username="+username,
+        final String url = "http://online.celpip.biz/api/login?password="+Password+"&username="+Username;
+        StringRequest stringRequest = new StringRequest(Request.Method.POST,url ,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -275,7 +275,7 @@ public class MainActivity extends AppCompatActivity
                             {
                                 String id          = obj.getJSONObject("").getString("id");
 //                                Toast.makeText(MainActivity.this, id, Toast.LENGTH_SHORT).show();
-                                loading.dismiss();
+
 //                                prefManager.setFirstTimeLaunch(false);
 
                                 Intent intent = new Intent(MainActivity.this,Dashboard.class);
@@ -283,17 +283,19 @@ public class MainActivity extends AppCompatActivity
                                 intent.putExtra("password",Password);
                                 intent.putExtra("member_id",id);
                                 startActivity(intent);
-
+                                Log.e("===exceptions",response);
+                                loading.dismiss();
                                 Toast.makeText(MainActivity.this, "Login Successful!!!", Toast.LENGTH_SHORT).show();
                             }
                             else
                             {
                                 loading.dismiss();
-                                Toast.makeText(MainActivity.this, response, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(MainActivity.this, "hello"+response, Toast.LENGTH_SHORT).show();
                             }
 
                         } catch (JSONException e) {
                             e.printStackTrace();
+                            Log.e("===exceptions",e.getMessage());
                         }
 
 
@@ -305,7 +307,8 @@ public class MainActivity extends AppCompatActivity
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         loading.dismiss();
-                        Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), "Error"+error.getMessage(), Toast.LENGTH_LONG).show();
+                        Log.e("===exceptions",url);
                     }
                 })
         {

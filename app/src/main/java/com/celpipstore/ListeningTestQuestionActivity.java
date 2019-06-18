@@ -272,8 +272,20 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
                     TimeUnit.MILLISECONDS.toSeconds((long) startTime) -
                             TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.
                                     toMinutes((long) startTime)))
+
             );
+            finalTime = mediaPlayer.getDuration();
+            textViewStop.setText(String.format("%d min, %d sec",
+                    TimeUnit.MILLISECONDS.toMinutes((long) finalTime),
+                    TimeUnit.MILLISECONDS.toSeconds((long) finalTime) -
+                            TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes((long)
+                                    finalTime)))
+            );
+
             seekbar.setProgress((int)startTime);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                seekbar.setSecondaryProgressTintList(ColorStateList.valueOf(Color.RED));
+            }
             myHandler.postDelayed(this, 100);
         }
     };
@@ -298,7 +310,6 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
                     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
                     public void onClick(DialogInterface arg0, int arg1) {
                         finish();
-                        finishAndRemoveTask();
                         //close();
                     }
                 })
@@ -525,19 +536,6 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
 
         seekbar.setProgress((int)startTime);
         myHandler.postDelayed(UpdateAudioTime,100);
-        textViewStop.setText(String.format("%d min, %d sec",
-                TimeUnit.MILLISECONDS.toMinutes((long) finalTime),
-                TimeUnit.MILLISECONDS.toSeconds((long) finalTime) -
-                        TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes((long)
-                                finalTime)))
-        );
-
-        textViewStart.setText(String.format("%d min, %d sec",
-                TimeUnit.MILLISECONDS.toMinutes((long) startTime),
-                TimeUnit.MILLISECONDS.toSeconds((long) startTime) -
-                        TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes((long)
-                                startTime)))
-        );
     }
     public void audiopart2()
     {
@@ -574,19 +572,7 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
 
         seekbar.setProgress((int)startTime);
         myHandler.postDelayed(UpdateAudioTime,100);
-        textViewStop.setText(String.format("%d min, %d sec",
-                TimeUnit.MILLISECONDS.toMinutes((long) finalTime),
-                TimeUnit.MILLISECONDS.toSeconds((long) finalTime) -
-                        TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes((long)
-                                finalTime)))
-        );
 
-        textViewStart.setText(String.format("%d min, %d sec",
-                TimeUnit.MILLISECONDS.toMinutes((long) startTime),
-                TimeUnit.MILLISECONDS.toSeconds((long) startTime) -
-                        TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes((long)
-                                startTime)))
-        );
     }
 
     public void audiopart3()
@@ -600,7 +586,7 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
             @Override
             public void onBufferingUpdate(MediaPlayer mp, int percent) {
                 seekbar.setSecondaryProgress(percent * mediaPlayer.getDuration() /100 );
-                seekbar.setSecondaryProgressTintList(ColorStateList.valueOf(Color.RED));
+//                seekbar.setSecondaryProgressTintList(ColorStateList.valueOf(Color.RED));
                 mp.setLooping(false);
                 loadingAudio.dismiss();
             }
@@ -624,19 +610,7 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
 
         seekbar.setProgress((int)startTime);
         myHandler.postDelayed(UpdateAudioTime,100);
-        textViewStop.setText(String.format("%d min, %d sec",
-                TimeUnit.MILLISECONDS.toMinutes((long) finalTime),
-                TimeUnit.MILLISECONDS.toSeconds((long) finalTime) -
-                        TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes((long)
-                                finalTime)))
-        );
 
-        textViewStart.setText(String.format("%d min, %d sec",
-                TimeUnit.MILLISECONDS.toMinutes((long) startTime),
-                TimeUnit.MILLISECONDS.toSeconds((long) startTime) -
-                        TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes((long)
-                                startTime)))
-        );
     }
 
     public void audiopart4()
@@ -650,7 +624,7 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
             @Override
             public void onBufferingUpdate(MediaPlayer mp, int percent) {
                 seekbar.setSecondaryProgress(percent * mediaPlayer.getDuration() /100 );
-                seekbar.setSecondaryProgressTintList(ColorStateList.valueOf(Color.RED));
+//                seekbar.setSecondaryProgressTintList(ColorStateList.valueOf(Color.RED));
                 mp.setLooping(false);
                 loadingAudio.dismiss();
             }
@@ -674,19 +648,7 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
 
         seekbar.setProgress((int)startTime);
         myHandler.postDelayed(UpdateAudioTime,100);
-        textViewStop.setText(String.format("%d min, %d sec",
-                TimeUnit.MILLISECONDS.toMinutes((long) finalTime),
-                TimeUnit.MILLISECONDS.toSeconds((long) finalTime) -
-                        TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes((long)
-                                finalTime)))
-        );
 
-        textViewStart.setText(String.format("%d min, %d sec",
-                TimeUnit.MILLISECONDS.toMinutes((long) startTime),
-                TimeUnit.MILLISECONDS.toSeconds((long) startTime) -
-                        TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes((long)
-                                startTime)))
-        );
     }
 
     public void audiopart5()
@@ -700,7 +662,7 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
             @Override
             public void onBufferingUpdate(MediaPlayer mp, int percent) {
                 seekbar.setSecondaryProgress(percent * mediaPlayer.getDuration() /100 );
-                seekbar.setSecondaryProgressTintList(ColorStateList.valueOf(Color.RED));
+//                seekbar.setSecondaryProgressTintList(ColorStateList.valueOf(Color.RED));
                 mp.setLooping(false);
                 loadingAudio.dismiss();
             }
@@ -724,19 +686,7 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
 
         seekbar.setProgress((int)startTime);
         myHandler.postDelayed(UpdateAudioTime,100);
-        textViewStop.setText(String.format("%d min, %d sec",
-                TimeUnit.MILLISECONDS.toMinutes((long) finalTime),
-                TimeUnit.MILLISECONDS.toSeconds((long) finalTime) -
-                        TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes((long)
-                                finalTime)))
-        );
 
-        textViewStart.setText(String.format("%d min, %d sec",
-                TimeUnit.MILLISECONDS.toMinutes((long) startTime),
-                TimeUnit.MILLISECONDS.toSeconds((long) startTime) -
-                        TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes((long)
-                                startTime)))
-        );
     }
 
     public void audiopart6()
@@ -750,7 +700,7 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
             @Override
             public void onBufferingUpdate(MediaPlayer mp, int percent) {
                 seekbar.setSecondaryProgress(percent * mediaPlayer.getDuration() /100 );
-                seekbar.setSecondaryProgressTintList(ColorStateList.valueOf(Color.RED));
+//                seekbar.setSecondaryProgressTintList(ColorStateList.valueOf(Color.RED));
                 mp.setLooping(false);
                 loadingAudio.dismiss();
             }
@@ -774,19 +724,7 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
 
         seekbar.setProgress((int)startTime);
         myHandler.postDelayed(UpdateAudioTime,100);
-        textViewStop.setText(String.format("%d min, %d sec",
-                TimeUnit.MILLISECONDS.toMinutes((long) finalTime),
-                TimeUnit.MILLISECONDS.toSeconds((long) finalTime) -
-                        TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes((long)
-                                finalTime)))
-        );
 
-        textViewStart.setText(String.format("%d min, %d sec",
-                TimeUnit.MILLISECONDS.toMinutes((long) startTime),
-                TimeUnit.MILLISECONDS.toSeconds((long) startTime) -
-                        TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes((long)
-                                startTime)))
-        );
     }
     public void audiopractice()
     {
@@ -800,7 +738,7 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
             @Override
             public void onBufferingUpdate(MediaPlayer mp, int percent) {
                 seekbar.setSecondaryProgress(percent * mediaPlayer.getDuration() /100 );
-                seekbar.setSecondaryProgressTintList(ColorStateList.valueOf(Color.RED));
+//                seekbar.setSecondaryProgressTintList(ColorStateList.valueOf(Color.RED));
                 mp.setLooping(false);
                 loadingAudio.dismiss();
             }
@@ -825,19 +763,7 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
 
         seekbar.setProgress((int)startTime);
         myHandler.postDelayed(UpdateAudioTime,100);
-        textViewStop.setText(String.format("%d min, %d sec",
-                TimeUnit.MILLISECONDS.toMinutes((long) finalTime),
-                TimeUnit.MILLISECONDS.toSeconds((long) finalTime) -
-                        TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes((long)
-                                finalTime)))
-        );
 
-        textViewStart.setText(String.format("%d min, %d sec",
-                TimeUnit.MILLISECONDS.toMinutes((long) startTime),
-                TimeUnit.MILLISECONDS.toSeconds((long) startTime) -
-                        TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes((long)
-                                startTime)))
-        );
     }
 
     class  PlayMusic extends AsyncTask<Void, Void, Void> {

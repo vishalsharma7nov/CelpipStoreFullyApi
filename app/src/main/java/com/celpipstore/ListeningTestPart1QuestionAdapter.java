@@ -85,6 +85,8 @@ public class ListeningTestPart1QuestionAdapter extends BaseAdapter{
     public static String id;
     public static String test_code;
     public static String l1_converstaion_1_audio;
+    public static String l1_converstaion_2_audio;
+    public static String l1_converstaion_3_audio;
     public static String l1_q1_audio;
     public static String l1_q1_option1;
     public static String l1_q1_option2;
@@ -182,6 +184,8 @@ public class ListeningTestPart1QuestionAdapter extends BaseAdapter{
         this.id         = ListeningTestPart1QuestionAdapter.id;
         this.test_code  = ListeningTestPart1QuestionAdapter.test_code;
         this.l1_converstaion_1_audio = l1_converstaion_1_audio;
+        this.l1_converstaion_2_audio = l1_converstaion_2_audio;
+        this.l1_converstaion_3_audio = l1_converstaion_3_audio;
         this.l1_q1_audio   = l1_q1_audio;
         this.l1_q1_option1 = l1_q1_option1;
         this.l1_q1_option2 = l1_q1_option2;
