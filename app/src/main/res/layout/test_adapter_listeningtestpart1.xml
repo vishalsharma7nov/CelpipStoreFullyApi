@@ -60,6 +60,18 @@
             android:background="@color/colorPrimary"
             android:layout_gravity="center"
             android:src="@drawable/ic_play_arrow_black_24dp" />
+        <ImageButton
+            android:visibility="gone"
+            android:id="@+id/buttonPause"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_alignStart="@+id/buttonNextQuestion1"
+            android:layout_alignParentTop="true"
+            android:layout_marginStart="0dp"
+            android:layout_marginTop="5dp"
+            android:background="@color/colorPrimary"
+            android:layout_gravity="center"
+            android:src="@drawable/ic_pause_black_24dp" />
 
         <RadioGroup
             android:id="@+id/frame1"
@@ -296,8 +308,9 @@
         android:layout_marginTop="450dp"
         android:layout_marginBottom="80dp"
         android:background="@color/colorPrimary"
-        android:text="Next Question"
+        android:text="Next Conversation"
         android:textColor="@color/colorWhite" />
+
     <Button
         android:visibility="gone"
         android:id="@+id/buttonAudio3"
@@ -307,8 +320,9 @@
         android:layout_marginTop="450dp"
         android:layout_marginBottom="80dp"
         android:background="@color/colorPrimary"
-        android:text="Next Question"
+        android:text="Next Conversation"
         android:textColor="@color/colorWhite" />
+
 
 
 

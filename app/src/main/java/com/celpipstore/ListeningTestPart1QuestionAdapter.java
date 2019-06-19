@@ -17,6 +17,7 @@ import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
@@ -59,6 +60,8 @@ public class ListeningTestPart1QuestionAdapter extends BaseAdapter{
 
     Context c;
     String url = "https://online.celpip.biz/uploads/part1_listening/";
+    JsonDataHandlerListeningPart1 jsonHolderListingpart1;
+
     //media player
     double startTime = 0;
     double finalTime = 0;
@@ -272,6 +275,8 @@ public class ListeningTestPart1QuestionAdapter extends BaseAdapter{
         final Button b7NextQuestion = convertView.findViewById(R.id.buttonNextQuestion7);
         final Button b8NextQuestion = convertView.findViewById(R.id.buttonNextQuestion8);
         final Button b9NextQuestion = convertView.findViewById(R.id.buttonFinish);
+        final Button b10NextQuestion = convertView.findViewById(R.id.buttonAudio2);
+        final Button b11NextQuestion = convertView.findViewById(R.id.buttonAudio3);
 
         final ImageView imageView1  = convertView.findViewById(R.id.imageViewRadio1);
         final ImageView imageView2  = convertView.findViewById(R.id.imageViewRadio2);
@@ -285,6 +290,8 @@ public class ListeningTestPart1QuestionAdapter extends BaseAdapter{
         final String question_option4[] = {l1_q1_option4,l1_q2_option4,l1_q3_option4,l1_q4_option4,l1_q5_option4,l1_q6_option4,l1_q7_option4,l1_q8_option4,null};
 
         ImageButton imageButtonPlay = (ImageButton)convertView.findViewById(R.id.buttonPlay);
+        final ImageButton imageButtonPause = (ImageButton)convertView.findViewById(R.id.buttonPause);
+
         final View finalConvertView = convertView;
         final View finalConvertView1 = convertView;
         textViewStart = (TextView) finalConvertView1.findViewById(R.id.textViewStartTime);
@@ -311,7 +318,12 @@ public class ListeningTestPart1QuestionAdapter extends BaseAdapter{
             final String image4 = "https://online.celpip.biz/uploads/part1_listening/"+question_option4[0];
             final ProgressDialog loading = ProgressDialog.show(c,"Loading","Please wait...",false,false);
 
-
+        seekbar.setOnTouchListener(new View.OnTouchListener() {
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                return true;
+            }
+        });
 
         audio_player = url+questions_audio[0];
         Glide
@@ -389,6 +401,17 @@ public class ListeningTestPart1QuestionAdapter extends BaseAdapter{
         t3.setChecked(false);
         t4.setChecked(false);
 
+        imageButtonPause.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+
+                if (mediaPlayer.isPlaying()) {
+                    mediaPlayer.stop();
+                    Toast.makeText(c, "Pause", Toast.LENGTH_SHORT).show();
+                }
+            }
+        });
+
         b1NextQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -429,7 +452,7 @@ public class ListeningTestPart1QuestionAdapter extends BaseAdapter{
             @Override
             public void onClick(View v) {
                 b2NextQuestion.setVisibility(View.GONE);
-                b3NextQuestion.setVisibility(View.VISIBLE);
+                b10NextQuestion.setVisibility(View.VISIBLE);
                 radioGroup2.setVisibility(View.GONE);
                 radioGroup1.setVisibility(View.VISIBLE);
                 audio_player = url + questions_audio[2];
@@ -456,12 +479,23 @@ public class ListeningTestPart1QuestionAdapter extends BaseAdapter{
 
             }
         });
+        b10NextQuestion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                b10NextQuestion.setVisibility(View.GONE);
+                imageButtonPause.setVisibility(View.VISIBLE);
+                b3NextQuestion.setVisibility(View.VISIBLE);
+                radioGroup1.setVisibility(View.GONE);
+                audio_player = "https://online.celpip.biz/uploads/part1_listening/"+jsonHolderListingpart1.l1_converstaion_2_audio;
+            }
+        });
         b3NextQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 b3NextQuestion.setVisibility(View.GONE);
                 b4NextQuestion.setVisibility(View.VISIBLE);
+                imageButtonPause.setVisibility(View.GONE);
                 radioGroup1.setVisibility(View.VISIBLE);
                 audio_player = url + questions_audio[3];
                 t1.setText(question_option1[3]);
@@ -527,7 +561,7 @@ public class ListeningTestPart1QuestionAdapter extends BaseAdapter{
             public void onClick(View v) {
 
                 b5NextQuestion.setVisibility(View.GONE);
-                b6NextQuestion.setVisibility(View.VISIBLE);
+                b11NextQuestion.setVisibility(View.VISIBLE);
                 radioGroup1.setVisibility(View.VISIBLE);
                 audio_player = url + questions_audio[5];
                 t1.setText(question_option1[5]);
@@ -556,12 +590,25 @@ public class ListeningTestPart1QuestionAdapter extends BaseAdapter{
 
             }
         });
+
+        b11NextQuestion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                b11NextQuestion.setVisibility(View.GONE);
+                imageButtonPause.setVisibility(View.VISIBLE);
+                b6NextQuestion.setVisibility(View.VISIBLE);
+                radioGroup1.setVisibility(View.GONE);
+                audio_player = "https://online.celpip.biz/uploads/part1_listening/"+jsonHolderListingpart1.l1_converstaion_3_audio;
+            }
+        });
+
         b6NextQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
 
                 b6NextQuestion.setVisibility(View.GONE);
                 b7NextQuestion.setVisibility(View.VISIBLE);
+                imageButtonPause.setVisibility(View.GONE);
                 radioGroup1.setVisibility(View.VISIBLE);
                 audio_player = url + questions_audio[6];
                 t1.setText(question_option1[6]);
@@ -695,8 +742,8 @@ public class ListeningTestPart1QuestionAdapter extends BaseAdapter{
             public void onClick(View v) {
                radioGroup2.setVisibility(View.GONE);
                radioGroup1.setVisibility(View.GONE);
-                Intent intent = new Intent(c , LISTENING_part2.class);
-                c.startActivity(intent);
+               Intent intent = new Intent(c , LISTENING_part2.class);
+               c.startActivity(intent);
 
             }
         });
@@ -706,11 +753,18 @@ public class ListeningTestPart1QuestionAdapter extends BaseAdapter{
     private Runnable UpdateSongTime = new Runnable() {
         public void run() {
             startTime = mediaPlayer.getCurrentPosition();
+            textViewStop.setText(String.format("%d min, %d sec",
+                    TimeUnit.MILLISECONDS.toMinutes((long) finalTime),
+                    TimeUnit.MILLISECONDS.toSeconds((long) finalTime) -
+                            TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes((long)
+                                    finalTime)))
+            );
+
             textViewStart.setText(String.format("%d min, %d sec",
                     TimeUnit.MILLISECONDS.toMinutes((long) startTime),
                     TimeUnit.MILLISECONDS.toSeconds((long) startTime) -
-                            TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.
-                                    toMinutes((long) startTime)))
+                            TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes((long)
+                                    startTime)))
             );
             seekbar.setProgress((int)startTime);
             myHandler.postDelayed(this, 100);
@@ -755,21 +809,24 @@ public class ListeningTestPart1QuestionAdapter extends BaseAdapter{
             mediaPlayer.setDataSource(c, myUri);
             mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
             mediaPlayer.prepare();
-            mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
+            mediaPlayer.setOnBufferingUpdateListener(new MediaPlayer.OnBufferingUpdateListener() {
                 @Override
-                public void onPrepared(MediaPlayer player) {
+                public void onBufferingUpdate(MediaPlayer mp, int percent) {
+                seekbar.setSecondaryProgress(percent * mediaPlayer.getDuration() /100 );
+                            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                                seekbar.setSecondaryProgressTintList(ColorStateList.valueOf(Color.RED));
+                            }
 
-                    mediaPlayer.setOnBufferingUpdateListener(new MediaPlayer.OnBufferingUpdateListener() {
-                        @RequiresApi(api = Build.VERSION_CODES.O)
-                        @Override
-                        public void onBufferingUpdate(MediaPlayer mp, int percent) {
-                            seekbar.setSecondaryProgress(percent * mediaPlayer.getDuration() /100 );
-                            seekbar.setSecondaryProgressTintList(ColorStateList.valueOf(Color.RED));
-                            mediaPlayer.start();
-                        }
-                    });
+            }
+            });
+            mediaPlayer.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
+                @Override
+                public void onCompletion(MediaPlayer mp) {
+                    seekbar.setProgress(0);
                 }
             });
+            mediaPlayer.start();
+            mediaPlayer.setLooping(false);
             finalTime = mediaPlayer.getDuration();
             startTime = mediaPlayer.getCurrentPosition();
             if (oneTimeOnly == 0) {
@@ -779,19 +836,7 @@ public class ListeningTestPart1QuestionAdapter extends BaseAdapter{
 
             seekbar.setProgress((int)startTime);
             myHandler.postDelayed(UpdateSongTime,100);
-            textViewStop.setText(String.format("%d min, %d sec",
-                    TimeUnit.MILLISECONDS.toMinutes((long) finalTime),
-                    TimeUnit.MILLISECONDS.toSeconds((long) finalTime) -
-                            TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes((long)
-                                    finalTime)))
-            );
 
-            textViewStart.setText(String.format("%d min, %d sec",
-                    TimeUnit.MILLISECONDS.toMinutes((long) startTime),
-                    TimeUnit.MILLISECONDS.toSeconds((long) startTime) -
-                            TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes((long)
-                                    startTime)))
-            );
 
 
         }

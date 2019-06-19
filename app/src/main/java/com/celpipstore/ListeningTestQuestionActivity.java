@@ -188,7 +188,7 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
                     linearLayoutFrame3.setVisibility(View.VISIBLE);
                     linearLayoutFrame1.setVisibility(View.GONE);
                     if (mediaPlayer.isPlaying()) {
-                        mediaPlayer.pause();
+                        mediaPlayer.stop();
                         Toast.makeText(ListeningTestQuestionActivity.this, "Stopped", Toast.LENGTH_SHORT).show();
                     }
                 }
@@ -399,7 +399,7 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
                                                             {
                                                                 linearLayoutFrame2.setVisibility(View.GONE);
                                                                 linearLayoutFrame1.setVisibility(View.VISIBLE);
-                                                                showJSONPart2(response);
+                                                                showJSONPart3(response);
                                                                 loading.dismiss();
                                                             }
                                                             else if (url.equals(part4))
@@ -485,6 +485,16 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
         jsonHolderListingpart2.parseJSON();
 
         ListeningTestPart2QuestionAdapter ca = new ListeningTestPart2QuestionAdapter(this,jsonHolderListingpart2.id,jsonHolderListingpart2.test_code,jsonHolderListingpart2.converstaion_1_audio,jsonHolderListingpart2.q1_audio,jsonHolderListingpart2.q1_option1,jsonHolderListingpart2.q1_option2,jsonHolderListingpart2.q1_option3,jsonHolderListingpart2.q1_option4,jsonHolderListingpart2.q2_audio,jsonHolderListingpart2.q2_option1,jsonHolderListingpart2.q2_option2,jsonHolderListingpart2.q2_option3,jsonHolderListingpart2.q2_option4,jsonHolderListingpart2.q3_audio,jsonHolderListingpart2.q3_option1,jsonHolderListingpart2.q3_option2,jsonHolderListingpart2.q3_option3,jsonHolderListingpart2.q3_option4,jsonHolderListingpart2.q4_audio,jsonHolderListingpart2.q4_option1,jsonHolderListingpart2.q4_option2,jsonHolderListingpart2.q4_option3,jsonHolderListingpart2.q4_option4,jsonHolderListingpart2.q5_audio,jsonHolderListingpart2.q5_option1,jsonHolderListingpart2.q5_option2,jsonHolderListingpart2.q5_option3,jsonHolderListingpart2.q5_option4);
+        listView.setAdapter(ca);
+        ca.notifyDataSetChanged();
+
+    }
+
+    private void showJSONPart3(String json) {
+        JsonDataHandlerListeningPart2 jsonHolderListingpart2 = new JsonDataHandlerListeningPart2(json);
+        jsonHolderListingpart2.parseJSON();
+
+        ListeningTestPart3QuestionAdapter ca = new ListeningTestPart3QuestionAdapter(this,jsonHolderListingpart2.id,jsonHolderListingpart2.test_code,jsonHolderListingpart2.converstaion_1_audio,jsonHolderListingpart2.q1_audio,jsonHolderListingpart2.q1_option1,jsonHolderListingpart2.q1_option2,jsonHolderListingpart2.q1_option3,jsonHolderListingpart2.q1_option4,jsonHolderListingpart2.q2_audio,jsonHolderListingpart2.q2_option1,jsonHolderListingpart2.q2_option2,jsonHolderListingpart2.q2_option3,jsonHolderListingpart2.q2_option4,jsonHolderListingpart2.q3_audio,jsonHolderListingpart2.q3_option1,jsonHolderListingpart2.q3_option2,jsonHolderListingpart2.q3_option3,jsonHolderListingpart2.q3_option4,jsonHolderListingpart2.q4_audio,jsonHolderListingpart2.q4_option1,jsonHolderListingpart2.q4_option2,jsonHolderListingpart2.q4_option3,jsonHolderListingpart2.q4_option4,jsonHolderListingpart2.q5_audio,jsonHolderListingpart2.q5_option1,jsonHolderListingpart2.q5_option2,jsonHolderListingpart2.q5_option3,jsonHolderListingpart2.q5_option4);
         listView.setAdapter(ca);
         ca.notifyDataSetChanged();
 
