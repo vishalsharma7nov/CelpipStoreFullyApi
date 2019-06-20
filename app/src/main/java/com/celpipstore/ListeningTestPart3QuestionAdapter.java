@@ -187,6 +187,7 @@ public class ListeningTestPart3QuestionAdapter extends BaseAdapter{
 
 
             audio_player = url+questions_audio[0];
+            new PlayMusic().execute();
             t1.setText(question_option1[0]);
             t2.setText(question_option2[0]);
             t3.setText(question_option3[0]);
@@ -225,6 +226,8 @@ public class ListeningTestPart3QuestionAdapter extends BaseAdapter{
                     userAnswerQuestion1 = t4.getText().toString();
                 }
                 audio_player = url + questions_audio[1];
+                new PlayMusic().execute();
+                mediaPlayer.stop();
                 t1.setText(question_option1[1]);
                 t2.setText(question_option2[1]);
                 t3.setText(question_option3[1]);
@@ -255,6 +258,8 @@ public class ListeningTestPart3QuestionAdapter extends BaseAdapter{
                     userAnswerQuestion2 = t4.getText().toString();
                 }
                 audio_player = url + questions_audio[2];
+                new PlayMusic().execute();
+                mediaPlayer.stop();
                 t1.setText(question_option1[2]);
                 t2.setText(question_option2[2]);
                 t3.setText(question_option3[2]);
@@ -286,6 +291,8 @@ public class ListeningTestPart3QuestionAdapter extends BaseAdapter{
                 }
 
                 audio_player = url + questions_audio[3];
+                new PlayMusic().execute();
+                mediaPlayer.stop();
                 t1.setText(question_option1[3]);
                 t2.setText(question_option2[3]);
                 t3.setText(question_option3[3]);
@@ -317,6 +324,8 @@ public class ListeningTestPart3QuestionAdapter extends BaseAdapter{
                 }
 
                 audio_player = url + questions_audio[4];
+                new PlayMusic().execute();
+                mediaPlayer.stop();
                 t1.setText(question_option1[4]);
                 t2.setText(question_option2[4]);
                 t3.setText(question_option3[4]);
@@ -329,7 +338,7 @@ public class ListeningTestPart3QuestionAdapter extends BaseAdapter{
             public void onClick(View v) {
 
                 b5NextQuestion.setVisibility(View.GONE);
-
+                mediaPlayer.stop();
                 if (t1.isChecked())
                 {
                     userAnswerQuestion5 = t1.getText().toString();
@@ -417,8 +426,6 @@ public class ListeningTestPart3QuestionAdapter extends BaseAdapter{
 
         @Override
         protected Void doInBackground(Void... unused) {
-
-
             audioFile();
             return (null);
         }
@@ -430,61 +437,32 @@ public class ListeningTestPart3QuestionAdapter extends BaseAdapter{
         }
 
     }
-
     public void audioFile()
     {
         Uri myUri = Uri.parse(audio_player);
-        try
-        {
-            seekbar.setClickable(false);
-            mediaPlayer = new MediaPlayer();
-            mediaPlayer.setDataSource(c, myUri);
-            mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
-            mediaPlayer.prepare();
-            mediaPlayer.setOnPreparedListener(new MediaPlayer.OnPreparedListener() {
-                @Override
-                public void onPrepared(MediaPlayer player) {
-
-                    mediaPlayer.setOnBufferingUpdateListener(new MediaPlayer.OnBufferingUpdateListener() {
-                        @RequiresApi(api = Build.VERSION_CODES.O)
-                        @Override
-                        public void onBufferingUpdate(MediaPlayer mp, int percent) {
-                            seekbar.setSecondaryProgress(percent * mediaPlayer.getDuration() /100 );
-                            seekbar.setSecondaryProgressTintList(ColorStateList.valueOf(Color.RED));
-                            mediaPlayer.start();
-                        }
-                    });
+        mediaPlayer = MediaPlayer.create(c,myUri);
+        mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
+        mediaPlayer.setOnBufferingUpdateListener(new MediaPlayer.OnBufferingUpdateListener() {
+            @Override
+            public void onBufferingUpdate(MediaPlayer mp, int percent) {
+                seekbar.setSecondaryProgress(percent * mediaPlayer.getDuration() /100 );
+                if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
+                    seekbar.setSecondaryProgressTintList(ColorStateList.valueOf(Color.RED));
                 }
-            });
-            finalTime = mediaPlayer.getDuration();
-            startTime = mediaPlayer.getCurrentPosition();
-            if (oneTimeOnly == 0) {
-                seekbar.setMax((int) finalTime);
-                oneTimeOnly = 0;
             }
-
-            seekbar.setProgress((int)startTime);
-            myHandler.postDelayed(UpdateSongTime,100);
-            textViewStop.setText(String.format("%d min, %d sec",
-                    TimeUnit.MILLISECONDS.toMinutes((long) finalTime),
-                    TimeUnit.MILLISECONDS.toSeconds((long) finalTime) -
-                            TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes((long)
-                                    finalTime)))
-            );
-
-            textViewStart.setText(String.format("%d min, %d sec",
-                    TimeUnit.MILLISECONDS.toMinutes((long) startTime),
-                    TimeUnit.MILLISECONDS.toSeconds((long) startTime) -
-                            TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes((long)
-                                    startTime)))
-            );
-
-
+        });
+        mediaPlayer.start();
+        mediaPlayer.setLooping(false);
+        finalTime = mediaPlayer.getDuration();
+        startTime = mediaPlayer.getCurrentPosition();
+        if (oneTimeOnly == 0) {
+            seekbar.setMax((int) finalTime);
+            oneTimeOnly = 0;
         }
-        catch (IOException e)
-        {
-            e.printStackTrace();
-        }
+
+        seekbar.setProgress((int)startTime);
+        myHandler.postDelayed(UpdateSongTime,100);
+
     }
 
 }

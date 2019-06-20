@@ -185,7 +185,6 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
 
                 if (url.equals(practicetest))
                 {
-                    linearLayoutFrame3.setVisibility(View.VISIBLE);
                     linearLayoutFrame1.setVisibility(View.GONE);
                     if (mediaPlayer.isPlaying()) {
                         mediaPlayer.stop();
@@ -232,6 +231,7 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
                 buttonNext.setVisibility(View.VISIBLE);
                 if (url.equals(practicetest))
                 {
+                    buttonNext.setVisibility(View.GONE);
                     new PlayMusic().execute();
                 }
                 if (url.equals(part1))
@@ -310,6 +310,7 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
                     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
                     public void onClick(DialogInterface arg0, int arg1) {
                         finish();
+                        mediaPlayer.stop();
                         //close();
                     }
                 })
@@ -748,7 +749,7 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
             @Override
             public void onBufferingUpdate(MediaPlayer mp, int percent) {
                 seekbar.setSecondaryProgress(percent * mediaPlayer.getDuration() /100 );
-//                seekbar.setSecondaryProgressTintList(ColorStateList.valueOf(Color.RED));
+                seekbar.setSecondaryProgressTintList(ColorStateList.valueOf(Color.RED));
                 mp.setLooping(false);
                 loadingAudio.dismiss();
             }
@@ -761,6 +762,8 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
                 mp.stop();
                 imageButtonPlay.setVisibility(View.VISIBLE);
                 imageButtonPause.setVisibility(View.GONE);
+                linearLayoutFrame1.setVisibility(View.GONE);
+                linearLayoutFrame3.setVisibility(View.VISIBLE);
 
             }
         });
