@@ -64,6 +64,8 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
     JsonDataHandlerPracticeTestListening jsonHolderListingPracticeTest;
     JsonDataHandlerListeningPart1 jsonHolderListingpart1;
     JsonDataHandlerListeningPart2 jsonHolderListingpart2;
+    JsonDataHandlerListeningPart4 jsonHolderListingpart4;
+
     MediaPlayer mediaPlayer;
     double startTime = 0;
     double finalTime = 0;
@@ -407,7 +409,7 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
                                                             {
                                                                 linearLayoutFrame2.setVisibility(View.GONE);
                                                                 linearLayoutFrame1.setVisibility(View.VISIBLE);
-                                                                showJSONPart2(response);
+                                                                showJSONPart4(response);
                                                                 loading.dismiss();
                                                             }
                                                             else if (url.equals(part5))
@@ -496,6 +498,15 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
         jsonHolderListingpart2.parseJSON();
 
         ListeningTestPart3QuestionAdapter ca = new ListeningTestPart3QuestionAdapter(this,jsonHolderListingpart2.id,jsonHolderListingpart2.test_code,jsonHolderListingpart2.converstaion_1_audio,jsonHolderListingpart2.q1_audio,jsonHolderListingpart2.q1_option1,jsonHolderListingpart2.q1_option2,jsonHolderListingpart2.q1_option3,jsonHolderListingpart2.q1_option4,jsonHolderListingpart2.q2_audio,jsonHolderListingpart2.q2_option1,jsonHolderListingpart2.q2_option2,jsonHolderListingpart2.q2_option3,jsonHolderListingpart2.q2_option4,jsonHolderListingpart2.q3_audio,jsonHolderListingpart2.q3_option1,jsonHolderListingpart2.q3_option2,jsonHolderListingpart2.q3_option3,jsonHolderListingpart2.q3_option4,jsonHolderListingpart2.q4_audio,jsonHolderListingpart2.q4_option1,jsonHolderListingpart2.q4_option2,jsonHolderListingpart2.q4_option3,jsonHolderListingpart2.q4_option4,jsonHolderListingpart2.q5_audio,jsonHolderListingpart2.q5_option1,jsonHolderListingpart2.q5_option2,jsonHolderListingpart2.q5_option3,jsonHolderListingpart2.q5_option4);
+        listView.setAdapter(ca);
+        ca.notifyDataSetChanged();
+
+    }
+    private void showJSONPart4(String json) {
+        JsonDataHandlerListeningPart4 jsonHolderListingpart4 = new JsonDataHandlerListeningPart4(json);
+        jsonHolderListingpart4.parseJSON();
+
+        ListeningTestPart4QuestionAdapter ca = new ListeningTestPart4QuestionAdapter(this,jsonHolderListingpart4.id,jsonHolderListingpart4.test_code,jsonHolderListingpart4.converstaion_1_audio,jsonHolderListingpart4.q1_question,jsonHolderListingpart4.q2_question,jsonHolderListingpart4.q3_question,jsonHolderListingpart4.q4_question,jsonHolderListingpart4.q5_question,jsonHolderListingpart4.q1_option1,jsonHolderListingpart4.q1_option2,jsonHolderListingpart4.q1_option3,jsonHolderListingpart4.q1_option4,jsonHolderListingpart4.q2_option1,jsonHolderListingpart4.q2_option2,jsonHolderListingpart4.q2_option3,jsonHolderListingpart4.q2_option4,jsonHolderListingpart4.q3_option1,jsonHolderListingpart4.q3_option2,jsonHolderListingpart2.q3_option3,jsonHolderListingpart4.q3_option4,jsonHolderListingpart4.q4_option1,jsonHolderListingpart4.q4_option2,jsonHolderListingpart4.q4_option3,jsonHolderListingpart4.q4_option4,jsonHolderListingpart4.q5_option1,jsonHolderListingpart4.q5_option2,jsonHolderListingpart4.q5_option3,jsonHolderListingpart4.q5_option4);
         listView.setAdapter(ca);
         ca.notifyDataSetChanged();
 
@@ -626,7 +637,7 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
 
     public void audiopart4()
     {
-        String audio_player = "https://online.celpip.biz/uploads/part4_listening/"+jsonHolderListingpart2.converstaion_1_audio;
+        String audio_player = "https://online.celpip.biz/uploads/part4_listening/"+jsonHolderListingpart4.converstaion_1_audio;
         mediaPlayer = MediaPlayer.create(ListeningTestQuestionActivity.this,Uri.parse(audio_player));
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         mediaPlayer.setLooping(false);
