@@ -83,6 +83,19 @@
 
         </Spinner>
 
+        <TextView
+            android:id="@+id/question6"
+            android:layout_margin="10dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+        <Spinner
+            android:id="@+id/optionsquestion6"
+            android:layout_margin="10dp"
+            android:layout_width="250dp"
+            android:layout_height="wrap_content">
+
+        </Spinner>
+
         <Button
             android:id="@+id/buttonSubmitTest"
             android:layout_width="wrap_content"
@@ -92,6 +105,7 @@
             android:background="@color/colorPrimary"
             android:text="Submit"
             android:textColor="@color/colorWhite" />
+
     </LinearLayout>
 
     <TextView

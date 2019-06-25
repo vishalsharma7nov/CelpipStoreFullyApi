@@ -1,48 +1,21 @@
 package com.celpipstore;
 
-import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
-import android.content.res.ColorStateList;
-import android.graphics.Color;
-import android.media.AudioManager;
-import android.media.MediaPlayer;
-import android.net.Uri;
-import android.os.AsyncTask;
-import android.os.Build;
-import android.os.Handler;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.BaseAdapter;
 import android.widget.Button;
-import android.widget.ImageButton;
-import android.widget.QuickContactBadge;
-import android.widget.RadioButton;
-import android.widget.SeekBar;
 import android.widget.Spinner;
 import android.widget.TextView;
-import android.widget.Toast;
-
-import com.android.volley.AuthFailureError;
-import com.android.volley.Request;
-import com.android.volley.RequestQueue;
-import com.android.volley.Response;
-import com.android.volley.VolleyError;
-import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
 
 import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.Map;
-import java.util.concurrent.TimeUnit;
 
 
-public class ListeningTestPart4QuestionAdapter extends BaseAdapter{
+public class ListeningTestPart6QuestionAdapter extends BaseAdapter{
 
     Context c;
 
@@ -55,13 +28,14 @@ public class ListeningTestPart4QuestionAdapter extends BaseAdapter{
     //json data
     public static String id;
     public static String test_code;
-    public static String converstaion_1_audio;
+    public static String conversation_1_audio;
 
     public static String q1_question;
     public static String q2_question;
     public static String q3_question;
     public static String q4_question;
     public static String q5_question;
+    public static String q6_question;
 
     public static String q1_option1;
     public static String q1_option2;
@@ -93,18 +67,29 @@ public class ListeningTestPart4QuestionAdapter extends BaseAdapter{
     public static String q5_option4;
     public static String q5_answer;
 
-    public ListeningTestPart4QuestionAdapter(Context c, String id, String test_code, String converstaion_1_audio,String q1_question,String q2_question,String q3_question,String q4_question,String q5_question, String q1_option1, String q1_option2, String q1_option3, String q1_option4, String q2_option1, String q2_option2, String q2_option3, String q2_option4,  String q3_option1, String q3_option2, String q3_option3, String q3_option4, String q4_option1, String q4_option2, String q4_option3, String q4_option4, String q5_option1, String q5_option2, String q5_option3, String q5_option4)
+    public static String q6_option1;
+    public static String q6_option2;
+    public static String q6_option3;
+    public static String q6_option4;
+    public static String q6_answer;
+
+    public ListeningTestPart6QuestionAdapter(Context c, String id, String test_code, String conversation_1_audio, String q1_question, String q2_question, String q3_question, String q4_question, String q5_question, String q6_question, String q1_option1, String q1_option2, String q1_option3, String q1_option4, String q2_option1, String q2_option2, String q2_option3, String q2_option4, String q3_option1, String q3_option2, String q3_option3, String q3_option4, String q4_option1, String q4_option2, String q4_option3, String q4_option4, String q5_option1, String q5_option2, String q5_option3, String q5_option4
+        , String q6_option1
+        , String q6_option2
+        , String q6_option3
+        , String q6_option4)
     {
         this.c=c;
         this.id         = id;
         this.test_code  = test_code;
-        this.converstaion_1_audio = converstaion_1_audio;
+        this.conversation_1_audio = conversation_1_audio;
 
         this.q1_question = q1_question;
         this.q2_question = q2_question;
         this.q3_question = q3_question;
         this.q4_question = q4_question;
         this.q5_question = q5_question;
+        this.q6_question = q6_question;
 
         this.q1_option1 = q1_option1;
         this.q1_option2 = q1_option2;
@@ -131,6 +116,11 @@ public class ListeningTestPart4QuestionAdapter extends BaseAdapter{
         this.q5_option3 = q5_option3;
         this.q5_option4 = q5_option4;
 
+        this.q6_option1 = q6_option1;
+        this.q6_option2 = q6_option2;
+        this.q6_option3 = q6_option3;
+        this.q6_option4 = q6_option4;
+
     }
 
     @Override
@@ -152,13 +142,15 @@ public class ListeningTestPart4QuestionAdapter extends BaseAdapter{
     public View getView(final int position, View convertView, ViewGroup parent) {
         LayoutInflater in=(LayoutInflater)c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
 
-        convertView=in.inflate(R.layout.test_adapter_listeningtestpart4,null);
+        convertView=in.inflate(R.layout.test_adapter_listeningtestpart6,null);
 
         TextView  question1 = convertView.findViewById(R.id.question1);
         TextView  question2 = convertView.findViewById(R.id.question2);
         TextView  question3 = convertView.findViewById(R.id.question3);
         TextView  question4 = convertView.findViewById(R.id.question4);
         TextView  question5 = convertView.findViewById(R.id.question5);
+        TextView  question6 = convertView.findViewById(R.id.question6);
+
         final TextView  answerquestion1 = convertView.findViewById(R.id.answer1);
         final TextView  answerquestion2 = convertView.findViewById(R.id.answer2);
         final TextView  answerquestion3 = convertView.findViewById(R.id.answer3);
@@ -166,16 +158,18 @@ public class ListeningTestPart4QuestionAdapter extends BaseAdapter{
         final TextView  answerquestion5 = convertView.findViewById(R.id.answer5);
 
         final Spinner   optionsquestion1   = convertView.findViewById(R.id.optionsquestion1);
-        Spinner   optionsquestion2   = convertView.findViewById(R.id.optionsquestion2);
-        Spinner   optionsquestion3   = convertView.findViewById(R.id.optionsquestion3);
-        Spinner   optionsquestion4   = convertView.findViewById(R.id.optionsquestion4);
-        Spinner   optionsquestion5   = convertView.findViewById(R.id.optionsquestion5);
+        final Spinner   optionsquestion2   = convertView.findViewById(R.id.optionsquestion2);
+        final Spinner   optionsquestion3   = convertView.findViewById(R.id.optionsquestion3);
+        final Spinner   optionsquestion4   = convertView.findViewById(R.id.optionsquestion4);
+        final Spinner   optionsquestion5   = convertView.findViewById(R.id.optionsquestion5);
+        final Spinner   optionsquestion6   = convertView.findViewById(R.id.optionsquestion6);
 
         question1.setText("1."+q1_question);
         question2.setText("2."+q2_question);
         question3.setText("3."+q3_question);
         question4.setText("4."+q4_question);
         question5.setText("5."+q5_question);
+        question6.setText("6."+q6_question);
 
         final Button buttonSubmit = convertView.findViewById(R.id.buttonSubmitTest);
 
@@ -218,6 +212,14 @@ public class ListeningTestPart4QuestionAdapter extends BaseAdapter{
         question5_option.add(q5_option3);
         question5_option.add(q5_option4);
 
+        ArrayList<String> question6_option = new ArrayList<>();
+        question6_option.add("Choose The Answer");
+        question6_option.add(q6_option1);
+        question6_option.add(q6_option2);
+        question6_option.add(q6_option3);
+        question6_option.add(q6_option4);
+
+
         ArrayAdapter<String> adapter1 =
                 new ArrayAdapter<String>(c,  android.R.layout.simple_spinner_dropdown_item, question1_option);
         adapter1.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
@@ -243,6 +245,11 @@ public class ListeningTestPart4QuestionAdapter extends BaseAdapter{
         adapter5.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
         optionsquestion5.setAdapter(adapter5);
 
+        ArrayAdapter<String> adapter6 =
+                new ArrayAdapter<String>(c,  android.R.layout.simple_spinner_dropdown_item, question6_option);
+        adapter6.setDropDownViewResource( android.R.layout.simple_spinner_dropdown_item);
+        optionsquestion6.setAdapter(adapter6);
+
 
         buttonSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -251,8 +258,6 @@ public class ListeningTestPart4QuestionAdapter extends BaseAdapter{
                 c.startActivity(intent);
             }
         });
-
-
 
         return convertView;
     }
