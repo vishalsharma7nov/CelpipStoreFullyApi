@@ -1,4 +1,4 @@
-package com.celpipstore;
+package com.celpipstore.Tests.ListeningTest;
 
 import android.app.ProgressDialog;
 import android.content.ComponentName;
@@ -61,7 +61,7 @@ import com.celpipstore.JsonData.JsonDataHandlerListeningPart4;
 import com.celpipstore.JsonData.JsonDataHandlerListeningPart5;
 import com.celpipstore.JsonData.JsonDataHandlerListeningPart6;
 import com.celpipstore.JsonData.JsonDataHandlerPracticeTestListening;
-import com.celpipstore.Tests.LISTENING_part2;
+import com.celpipstore.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -79,7 +79,6 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
     ProgressBar progressBar;
 
     RadioButton radioButton1,radioButton2,radioButton3,radioButton4;
-
     JsonDataHandlerPracticeTestListening jsonHolderListingPracticeTest;
     JsonDataHandlerListeningPart1 jsonHolderListingpart1;
     JsonDataHandlerListeningPart2 jsonHolderListingpart2;
@@ -89,8 +88,7 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
     MediaPlayer mediaPlayer;
     double startTime = 0;
     double finalTime = 0;
-
-    Handler myHandler = new Handler();;
+    Handler myHandler = new Handler();
     int forwardTime = 5000;
     int backwardTime = 5000;
     SeekBar seekbar;
@@ -128,22 +126,22 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
             Toast.makeText(ListeningTestQuestionActivity.this, "Network Not Available", Toast.LENGTH_LONG).show();
         }
         MediaController mediaController = new MediaController(this);
-        videoView = (VideoView)findViewById(R.id.videoView);
+        videoView = findViewById(R.id.videoView);
         videoView.setMediaController(mediaController);
-        progressBar = (ProgressBar)findViewById(R.id.progrss);
+        progressBar = findViewById(R.id.progrss);
         loadingAudio = new ProgressDialog(ListeningTestQuestionActivity.this);
-        listView = (ListView)findViewById(R.id.listView);
-        imageButtonPlay = (ImageButton)findViewById(R.id.buttonPlay);
-        buttonNext = (Button)findViewById(R.id.buttonNext);
-        button     = (Button)findViewById(R.id.button);
-        buttonPracticeTestSubmit  = (Button)findViewById(R.id.buttonPracticeTestSubmit);
-        buttonQuestionsPart5  = (Button)findViewById(R.id.buttonQuestions);
-        imageButtonPause = (ImageButton)findViewById(R.id.buttonPause);
-        linearLayoutFrame1 = (LinearLayout)findViewById(R.id.frame1);
-        linearLayoutFrame2 = (LinearLayout)findViewById(R.id.frame2);
-        linearLayoutFrame3 = (LinearLayout)findViewById(R.id.framePracttcieTest);
-        linearLayoutFrame4 = (LinearLayout)findViewById(R.id.frame3);
-        seekbar = (SeekBar)findViewById(R.id.seekbar);
+        listView = findViewById(R.id.listView);
+        imageButtonPlay = findViewById(R.id.buttonPlay);
+        buttonNext = findViewById(R.id.buttonNext);
+        button     = findViewById(R.id.button);
+        buttonPracticeTestSubmit  = findViewById(R.id.buttonPracticeTestSubmit);
+        buttonQuestionsPart5  = findViewById(R.id.buttonQuestions);
+        imageButtonPause = findViewById(R.id.buttonPause);
+        linearLayoutFrame1 = findViewById(R.id.frame1);
+        linearLayoutFrame2 = findViewById(R.id.frame2);
+        linearLayoutFrame3 = findViewById(R.id.framePracttcieTest);
+        linearLayoutFrame4 = findViewById(R.id.frame3);
+        seekbar = findViewById(R.id.seekbar);
         seekbar.setClickable(false);
         seekbar.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -151,15 +149,15 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
                 return true;
             }
         });
-        textViewStart = (TextView)findViewById(R.id.textViewStartTime);
-        textViewStop = (TextView)findViewById(R.id.textViewStopTime);
-        textViewInstruction = (TextView)findViewById(R.id.textViewInstruction);
+        textViewStart = findViewById(R.id.textViewStartTime);
+        textViewStop = findViewById(R.id.textViewStopTime);
+        textViewInstruction = findViewById(R.id.textViewInstruction);
         imageButtonPause.setVisibility(View.GONE);
-        radioButton1 = (RadioButton)findViewById(R.id.practiceTestRadio1);
-        radioButton2 = (RadioButton)findViewById(R.id.practiceTestRadio2);
-        radioButton3 = (RadioButton)findViewById(R.id.practiceTestRadio3);
-        radioButton4 = (RadioButton)findViewById(R.id.practiceTestRadio4);
-        imageView = (ImageView)findViewById(R.id.imageView);
+        radioButton1 = findViewById(R.id.practiceTestRadio1);
+        radioButton2 = findViewById(R.id.practiceTestRadio2);
+        radioButton3 = findViewById(R.id.practiceTestRadio3);
+        radioButton4 = findViewById(R.id.practiceTestRadio4);
+        imageView = findViewById(R.id.imageView);
         SharedPreferences bb = getSharedPreferences("my_prefs", 0);
         String member_id = bb.getString("member_id", "member_id");
         Intent intent = getIntent();
@@ -378,7 +376,7 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
                                                             if (url.equals(part1))
                                                             {
                                                                 showJSONPart1(response);
-                                                                image = "https://online.celpip.biz/uploads/part1_listening/"+jsonHolderListingpart1.l1_practice_01_img;
+                                                                image = "https://online.celpip.biz/uploads/part1_listening/"+ JsonDataHandlerListeningPart1.l1_practice_01_img;
                                                                 Log.e("===imageURL",image);
                                                                 Glide
                                                                         .with(ListeningTestQuestionActivity.this)
@@ -400,7 +398,7 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
                                                                         .into(imageView);
                                                                 linearLayoutFrame2.setVisibility(View.VISIBLE);
                                                                 linearLayoutFrame1.setVisibility(View.GONE);
-                                                                textViewInstruction.setText("Instruction :\n"+jsonHolderListingpart1.l1_practice_01_text);
+                                                                textViewInstruction.setText("Instruction :\n"+ JsonDataHandlerListeningPart1.l1_practice_01_text);
 
                                                             }
                                                             else if(url.equals(part2))
@@ -443,10 +441,10 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
                                                                 linearLayoutFrame2.setVisibility(View.GONE);
                                                                 linearLayoutFrame1.setVisibility(View.VISIBLE);
                                                                 showJSONPracticeTest(response);
-                                                                radioButton1.setText(jsonHolderListingPracticeTest.option1);
-                                                                radioButton2.setText(jsonHolderListingPracticeTest.option2);
-                                                                radioButton3.setText(jsonHolderListingPracticeTest.option3);
-                                                                radioButton4.setText(jsonHolderListingPracticeTest.option4);
+                                                                radioButton1.setText(JsonDataHandlerPracticeTestListening.option1);
+                                                                radioButton2.setText(JsonDataHandlerPracticeTestListening.option2);
+                                                                radioButton3.setText(JsonDataHandlerPracticeTestListening.option3);
+                                                                radioButton4.setText(JsonDataHandlerPracticeTestListening.option4);
                                                                 seekbar.setClickable(false);
                                                                 loading.dismiss();
                                                             }
@@ -489,14 +487,14 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
     private void showJSONPart1(String json) {
         JsonDataHandlerListeningPart1 jsonHolderListingpart1 = new JsonDataHandlerListeningPart1(json);
         jsonHolderListingpart1.parseJSON();
-        ListeningTestPart1QuestionAdapter ca = new ListeningTestPart1QuestionAdapter(this,jsonHolderListingpart1.id,jsonHolderListingpart1.test_code,jsonHolderListingpart1.l1_q1_audio,jsonHolderListingpart1.l1_q1_option1,jsonHolderListingpart1.l1_q1_option2,jsonHolderListingpart1.l1_q1_option3,jsonHolderListingpart1.l1_q1_option4,jsonHolderListingpart1.l1_q2_audio,jsonHolderListingpart1.l1_q2_option1,jsonHolderListingpart1.l1_q2_option2,jsonHolderListingpart1.l1_q2_option3,jsonHolderListingpart1.l1_q2_option4,jsonHolderListingpart1.l1_q3_audio,jsonHolderListingpart1.l1_q3_option1,jsonHolderListingpart1.l1_q3_option2,jsonHolderListingpart1.l1_q3_option3,jsonHolderListingpart1.l1_q3_option4,jsonHolderListingpart1.l1_q4_audio,jsonHolderListingpart1.l1_q4_option1,jsonHolderListingpart1.l1_q4_option2,jsonHolderListingpart1.l1_q4_option3,jsonHolderListingpart1.l1_q4_option4,jsonHolderListingpart1.l1_q5_audio,jsonHolderListingpart1.l1_q5_option1,jsonHolderListingpart1.l1_q5_option2,jsonHolderListingpart1.l1_q5_option3,jsonHolderListingpart1.l1_q5_option4,jsonHolderListingpart1.l1_q6_audio,jsonHolderListingpart1.l1_q6_option1,jsonHolderListingpart1.l1_q6_option2,jsonHolderListingpart1.l1_q6_option3,jsonHolderListingpart1.l1_q6_option4,jsonHolderListingpart1.l1_q7_audio,jsonHolderListingpart1.l1_q7_option1,jsonHolderListingpart1.l1_q7_option2,jsonHolderListingpart1.l1_q7_option3,jsonHolderListingpart1.l1_q7_option4,jsonHolderListingpart1.l1_q8_audio,jsonHolderListingpart1.l1_q8_option1,jsonHolderListingpart1.l1_q8_option2,jsonHolderListingpart1.l1_q8_option3,jsonHolderListingpart1.l1_q8_option4);
+        ListeningTestPart1QuestionAdapter ca = new ListeningTestPart1QuestionAdapter(this, JsonDataHandlerListeningPart1.id, JsonDataHandlerListeningPart1.test_code, JsonDataHandlerListeningPart1.l1_q1_audio, JsonDataHandlerListeningPart1.l1_q1_option1, JsonDataHandlerListeningPart1.l1_q1_option2, JsonDataHandlerListeningPart1.l1_q1_option3, JsonDataHandlerListeningPart1.l1_q1_option4, JsonDataHandlerListeningPart1.l1_q2_audio, JsonDataHandlerListeningPart1.l1_q2_option1, JsonDataHandlerListeningPart1.l1_q2_option2, JsonDataHandlerListeningPart1.l1_q2_option3, JsonDataHandlerListeningPart1.l1_q2_option4, JsonDataHandlerListeningPart1.l1_q3_audio, JsonDataHandlerListeningPart1.l1_q3_option1, JsonDataHandlerListeningPart1.l1_q3_option2, JsonDataHandlerListeningPart1.l1_q3_option3, JsonDataHandlerListeningPart1.l1_q3_option4, JsonDataHandlerListeningPart1.l1_q4_audio, JsonDataHandlerListeningPart1.l1_q4_option1, JsonDataHandlerListeningPart1.l1_q4_option2, JsonDataHandlerListeningPart1.l1_q4_option3, JsonDataHandlerListeningPart1.l1_q4_option4, JsonDataHandlerListeningPart1.l1_q5_audio, JsonDataHandlerListeningPart1.l1_q5_option1, JsonDataHandlerListeningPart1.l1_q5_option2, JsonDataHandlerListeningPart1.l1_q5_option3, JsonDataHandlerListeningPart1.l1_q5_option4, JsonDataHandlerListeningPart1.l1_q6_audio, JsonDataHandlerListeningPart1.l1_q6_option1, JsonDataHandlerListeningPart1.l1_q6_option2, JsonDataHandlerListeningPart1.l1_q6_option3, JsonDataHandlerListeningPart1.l1_q6_option4, JsonDataHandlerListeningPart1.l1_q7_audio, JsonDataHandlerListeningPart1.l1_q7_option1, JsonDataHandlerListeningPart1.l1_q7_option2, JsonDataHandlerListeningPart1.l1_q7_option3, JsonDataHandlerListeningPart1.l1_q7_option4, JsonDataHandlerListeningPart1.l1_q8_audio, JsonDataHandlerListeningPart1.l1_q8_option1, JsonDataHandlerListeningPart1.l1_q8_option2, JsonDataHandlerListeningPart1.l1_q8_option3, JsonDataHandlerListeningPart1.l1_q8_option4);
         listView.setAdapter(ca);
         ca.notifyDataSetChanged();
     }
     private void showJSONPart2(String json) {
         JsonDataHandlerListeningPart2 jsonHolderListingpart2 = new JsonDataHandlerListeningPart2(json);
         jsonHolderListingpart2.parseJSON();
-        ListeningTestPart2QuestionAdapter ca = new ListeningTestPart2QuestionAdapter(this,jsonHolderListingpart2.id,jsonHolderListingpart2.test_code,jsonHolderListingpart2.converstaion_1_audio,jsonHolderListingpart2.q1_audio,jsonHolderListingpart2.q1_option1,jsonHolderListingpart2.q1_option2,jsonHolderListingpart2.q1_option3,jsonHolderListingpart2.q1_option4,jsonHolderListingpart2.q2_audio,jsonHolderListingpart2.q2_option1,jsonHolderListingpart2.q2_option2,jsonHolderListingpart2.q2_option3,jsonHolderListingpart2.q2_option4,jsonHolderListingpart2.q3_audio,jsonHolderListingpart2.q3_option1,jsonHolderListingpart2.q3_option2,jsonHolderListingpart2.q3_option3,jsonHolderListingpart2.q3_option4,jsonHolderListingpart2.q4_audio,jsonHolderListingpart2.q4_option1,jsonHolderListingpart2.q4_option2,jsonHolderListingpart2.q4_option3,jsonHolderListingpart2.q4_option4,jsonHolderListingpart2.q5_audio,jsonHolderListingpart2.q5_option1,jsonHolderListingpart2.q5_option2,jsonHolderListingpart2.q5_option3,jsonHolderListingpart2.q5_option4);
+        ListeningTestPart2QuestionAdapter ca = new ListeningTestPart2QuestionAdapter(this, JsonDataHandlerListeningPart2.id, JsonDataHandlerListeningPart2.test_code, JsonDataHandlerListeningPart2.converstaion_1_audio, JsonDataHandlerListeningPart2.q1_audio, JsonDataHandlerListeningPart2.q1_option1, JsonDataHandlerListeningPart2.q1_option2, JsonDataHandlerListeningPart2.q1_option3, JsonDataHandlerListeningPart2.q1_option4, JsonDataHandlerListeningPart2.q2_audio, JsonDataHandlerListeningPart2.q2_option1, JsonDataHandlerListeningPart2.q2_option2, JsonDataHandlerListeningPart2.q2_option3, JsonDataHandlerListeningPart2.q2_option4, JsonDataHandlerListeningPart2.q3_audio, JsonDataHandlerListeningPart2.q3_option1, JsonDataHandlerListeningPart2.q3_option2, JsonDataHandlerListeningPart2.q3_option3, JsonDataHandlerListeningPart2.q3_option4, JsonDataHandlerListeningPart2.q4_audio, JsonDataHandlerListeningPart2.q4_option1, JsonDataHandlerListeningPart2.q4_option2, JsonDataHandlerListeningPart2.q4_option3, JsonDataHandlerListeningPart2.q4_option4, JsonDataHandlerListeningPart2.q5_audio, JsonDataHandlerListeningPart2.q5_option1, JsonDataHandlerListeningPart2.q5_option2, JsonDataHandlerListeningPart2.q5_option3, JsonDataHandlerListeningPart2.q5_option4);
         listView.setAdapter(ca);
         ca.notifyDataSetChanged();
     }
@@ -504,14 +502,14 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
     private void showJSONPart3(String json) {
         JsonDataHandlerListeningPart2 jsonHolderListingpart2 = new JsonDataHandlerListeningPart2(json);
         jsonHolderListingpart2.parseJSON();
-        ListeningTestPart3QuestionAdapter ca = new ListeningTestPart3QuestionAdapter(this,jsonHolderListingpart2.id,jsonHolderListingpart2.test_code,jsonHolderListingpart2.converstaion_1_audio,jsonHolderListingpart2.q1_audio,jsonHolderListingpart2.q1_option1,jsonHolderListingpart2.q1_option2,jsonHolderListingpart2.q1_option3,jsonHolderListingpart2.q1_option4,jsonHolderListingpart2.q2_audio,jsonHolderListingpart2.q2_option1,jsonHolderListingpart2.q2_option2,jsonHolderListingpart2.q2_option3,jsonHolderListingpart2.q2_option4,jsonHolderListingpart2.q3_audio,jsonHolderListingpart2.q3_option1,jsonHolderListingpart2.q3_option2,jsonHolderListingpart2.q3_option3,jsonHolderListingpart2.q3_option4,jsonHolderListingpart2.q4_audio,jsonHolderListingpart2.q4_option1,jsonHolderListingpart2.q4_option2,jsonHolderListingpart2.q4_option3,jsonHolderListingpart2.q4_option4,jsonHolderListingpart2.q5_audio,jsonHolderListingpart2.q5_option1,jsonHolderListingpart2.q5_option2,jsonHolderListingpart2.q5_option3,jsonHolderListingpart2.q5_option4);
+        ListeningTestPart3QuestionAdapter ca = new ListeningTestPart3QuestionAdapter(this, JsonDataHandlerListeningPart2.id, JsonDataHandlerListeningPart2.test_code, JsonDataHandlerListeningPart2.converstaion_1_audio, JsonDataHandlerListeningPart2.q1_audio, JsonDataHandlerListeningPart2.q1_option1, JsonDataHandlerListeningPart2.q1_option2, JsonDataHandlerListeningPart2.q1_option3, JsonDataHandlerListeningPart2.q1_option4, JsonDataHandlerListeningPart2.q2_audio, JsonDataHandlerListeningPart2.q2_option1, JsonDataHandlerListeningPart2.q2_option2, JsonDataHandlerListeningPart2.q2_option3, JsonDataHandlerListeningPart2.q2_option4, JsonDataHandlerListeningPart2.q3_audio, JsonDataHandlerListeningPart2.q3_option1, JsonDataHandlerListeningPart2.q3_option2, JsonDataHandlerListeningPart2.q3_option3, JsonDataHandlerListeningPart2.q3_option4, JsonDataHandlerListeningPart2.q4_audio, JsonDataHandlerListeningPart2.q4_option1, JsonDataHandlerListeningPart2.q4_option2, JsonDataHandlerListeningPart2.q4_option3, JsonDataHandlerListeningPart2.q4_option4, JsonDataHandlerListeningPart2.q5_audio, JsonDataHandlerListeningPart2.q5_option1, JsonDataHandlerListeningPart2.q5_option2, JsonDataHandlerListeningPart2.q5_option3, JsonDataHandlerListeningPart2.q5_option4);
         listView.setAdapter(ca);
         ca.notifyDataSetChanged();
     }
     private void showJSONPart4(String json) {
         JsonDataHandlerListeningPart4 jsonHolderListingpart4 = new JsonDataHandlerListeningPart4(json);
         jsonHolderListingpart4.parseJSON();
-        ListeningTestPart4QuestionAdapter ca = new ListeningTestPart4QuestionAdapter(this,jsonHolderListingpart4.id,jsonHolderListingpart4.test_code,jsonHolderListingpart4.converstaion_1_audio,jsonHolderListingpart4.q1_question,jsonHolderListingpart4.q2_question,jsonHolderListingpart4.q3_question,jsonHolderListingpart4.q4_question,jsonHolderListingpart4.q5_question,jsonHolderListingpart4.q1_option1,jsonHolderListingpart4.q1_option2,jsonHolderListingpart4.q1_option3,jsonHolderListingpart4.q1_option4,jsonHolderListingpart4.q2_option1,jsonHolderListingpart4.q2_option2,jsonHolderListingpart4.q2_option3,jsonHolderListingpart4.q2_option4,jsonHolderListingpart4.q3_option1,jsonHolderListingpart4.q3_option2,jsonHolderListingpart4.q3_option3,jsonHolderListingpart4.q3_option4,jsonHolderListingpart4.q4_option1,jsonHolderListingpart4.q4_option2,jsonHolderListingpart4.q4_option3,jsonHolderListingpart4.q4_option4,jsonHolderListingpart4.q5_option1,jsonHolderListingpart4.q5_option2,jsonHolderListingpart4.q5_option3,jsonHolderListingpart4.q5_option4);
+        ListeningTestPart4QuestionAdapter ca = new ListeningTestPart4QuestionAdapter(this, JsonDataHandlerListeningPart4.id, JsonDataHandlerListeningPart4.test_code, JsonDataHandlerListeningPart4.converstaion_1_audio, JsonDataHandlerListeningPart4.q1_question, JsonDataHandlerListeningPart4.q2_question, JsonDataHandlerListeningPart4.q3_question, JsonDataHandlerListeningPart4.q4_question, JsonDataHandlerListeningPart4.q5_question, JsonDataHandlerListeningPart4.q1_option1, JsonDataHandlerListeningPart4.q1_option2, JsonDataHandlerListeningPart4.q1_option3, JsonDataHandlerListeningPart4.q1_option4, JsonDataHandlerListeningPart4.q2_option1, JsonDataHandlerListeningPart4.q2_option2, JsonDataHandlerListeningPart4.q2_option3, JsonDataHandlerListeningPart4.q2_option4, JsonDataHandlerListeningPart4.q3_option1, JsonDataHandlerListeningPart4.q3_option2, JsonDataHandlerListeningPart4.q3_option3, JsonDataHandlerListeningPart4.q3_option4, JsonDataHandlerListeningPart4.q4_option1, JsonDataHandlerListeningPart4.q4_option2, JsonDataHandlerListeningPart4.q4_option3, JsonDataHandlerListeningPart4.q4_option4, JsonDataHandlerListeningPart4.q5_option1, JsonDataHandlerListeningPart4.q5_option2, JsonDataHandlerListeningPart4.q5_option3, JsonDataHandlerListeningPart4.q5_option4);
         listView.setAdapter(ca);
         ca.notifyDataSetChanged();
     }
@@ -519,14 +517,14 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
     private void showJSONPart5(String json) {
         JsonDataHandlerListeningPart5 jsonHolderListingpart5 = new JsonDataHandlerListeningPart5(json);
         jsonHolderListingpart5.parseJSON();
-        ListeningTestPart5QuestionAdapter ca = new ListeningTestPart5QuestionAdapter(this,jsonHolderListingpart5.id,jsonHolderListingpart5.test_code,jsonHolderListingpart5.conversation_1_video,jsonHolderListingpart5.q1_question,jsonHolderListingpart5.q2_question,jsonHolderListingpart5.q3_question,jsonHolderListingpart5.q4_question,jsonHolderListingpart5.q5_question,jsonHolderListingpart5.q6_question,jsonHolderListingpart5.q7_question,jsonHolderListingpart5.q8_question,jsonHolderListingpart5.q1_option1,jsonHolderListingpart5.q1_option2,jsonHolderListingpart5.q1_option3,jsonHolderListingpart5.q1_option4,jsonHolderListingpart5.q2_option1,jsonHolderListingpart5.q2_option2,jsonHolderListingpart5.q2_option3,jsonHolderListingpart5.q2_option4,jsonHolderListingpart5.q3_option1,jsonHolderListingpart5.q3_option2,jsonHolderListingpart5.q3_option3,jsonHolderListingpart5.q3_option4,jsonHolderListingpart5.q4_option1,jsonHolderListingpart5.q4_option2,jsonHolderListingpart5.q4_option3,jsonHolderListingpart5.q4_option4,jsonHolderListingpart5.q5_option1,jsonHolderListingpart5.q5_option2,jsonHolderListingpart5.q5_option3,jsonHolderListingpart5.q5_option4,jsonHolderListingpart5.q6_option1,jsonHolderListingpart5.q6_option2,jsonHolderListingpart5.q6_option3,jsonHolderListingpart5.q6_option4,jsonHolderListingpart5.q7_option1,jsonHolderListingpart5.q7_option2,jsonHolderListingpart5.q7_option3,jsonHolderListingpart5.q7_option4,jsonHolderListingpart5.q8_option1,jsonHolderListingpart5.q8_option2,jsonHolderListingpart5.q8_option3,jsonHolderListingpart5.q8_option4);
+        ListeningTestPart5QuestionAdapter ca = new ListeningTestPart5QuestionAdapter(this, JsonDataHandlerListeningPart5.id, JsonDataHandlerListeningPart5.test_code, JsonDataHandlerListeningPart5.conversation_1_video, JsonDataHandlerListeningPart5.q1_question, JsonDataHandlerListeningPart5.q2_question, JsonDataHandlerListeningPart5.q3_question, JsonDataHandlerListeningPart5.q4_question, JsonDataHandlerListeningPart5.q5_question, JsonDataHandlerListeningPart5.q6_question, JsonDataHandlerListeningPart5.q7_question, JsonDataHandlerListeningPart5.q8_question, JsonDataHandlerListeningPart5.q1_option1, JsonDataHandlerListeningPart5.q1_option2, JsonDataHandlerListeningPart5.q1_option3, JsonDataHandlerListeningPart5.q1_option4, JsonDataHandlerListeningPart5.q2_option1, JsonDataHandlerListeningPart5.q2_option2, JsonDataHandlerListeningPart5.q2_option3, JsonDataHandlerListeningPart5.q2_option4, JsonDataHandlerListeningPart5.q3_option1, JsonDataHandlerListeningPart5.q3_option2, JsonDataHandlerListeningPart5.q3_option3, JsonDataHandlerListeningPart5.q3_option4, JsonDataHandlerListeningPart5.q4_option1, JsonDataHandlerListeningPart5.q4_option2, JsonDataHandlerListeningPart5.q4_option3, JsonDataHandlerListeningPart5.q4_option4, JsonDataHandlerListeningPart5.q5_option1, JsonDataHandlerListeningPart5.q5_option2, JsonDataHandlerListeningPart5.q5_option3, JsonDataHandlerListeningPart5.q5_option4, JsonDataHandlerListeningPart5.q6_option1, JsonDataHandlerListeningPart5.q6_option2, JsonDataHandlerListeningPart5.q6_option3, JsonDataHandlerListeningPart5.q6_option4, JsonDataHandlerListeningPart5.q7_option1, JsonDataHandlerListeningPart5.q7_option2, JsonDataHandlerListeningPart5.q7_option3, JsonDataHandlerListeningPart5.q7_option4, JsonDataHandlerListeningPart5.q8_option1, JsonDataHandlerListeningPart5.q8_option2, JsonDataHandlerListeningPart5.q8_option3, JsonDataHandlerListeningPart5.q8_option4);
         listView.setAdapter(ca);
         ca.notifyDataSetChanged();
     }
     private void showJSONPart6(String json) {
         JsonDataHandlerListeningPart6 jsonHolderListingpart6 = new JsonDataHandlerListeningPart6(json);
         jsonHolderListingpart6.parseJSON();
-        ListeningTestPart6QuestionAdapter ca = new ListeningTestPart6QuestionAdapter(this,jsonHolderListingpart6.id,jsonHolderListingpart6.test_code,jsonHolderListingpart6.conversation_1_audio,jsonHolderListingpart6.q1_question,jsonHolderListingpart6.q2_question,jsonHolderListingpart6.q3_question,jsonHolderListingpart6.q4_question,jsonHolderListingpart6.q5_question,jsonHolderListingpart6.q6_question,jsonHolderListingpart6.q1_option1,jsonHolderListingpart6.q1_option2,jsonHolderListingpart6.q1_option3,jsonHolderListingpart6.q1_option4,jsonHolderListingpart6.q2_option1,jsonHolderListingpart6.q2_option2,jsonHolderListingpart6.q2_option3,jsonHolderListingpart6.q2_option4,jsonHolderListingpart6.q3_option1,jsonHolderListingpart6.q3_option2,jsonHolderListingpart6.q3_option3,jsonHolderListingpart6.q3_option4,jsonHolderListingpart6.q4_option1,jsonHolderListingpart6.q4_option2,jsonHolderListingpart6.q4_option3,jsonHolderListingpart6.q4_option4,jsonHolderListingpart6.q5_option1,jsonHolderListingpart6.q5_option2,jsonHolderListingpart6.q5_option3,jsonHolderListingpart6.q5_option4,jsonHolderListingpart6.q6_option1,jsonHolderListingpart6.q6_option2,jsonHolderListingpart6.q6_option3,jsonHolderListingpart6.q6_option4);
+        ListeningTestPart6QuestionAdapter ca = new ListeningTestPart6QuestionAdapter(this, JsonDataHandlerListeningPart6.id, JsonDataHandlerListeningPart6.test_code, JsonDataHandlerListeningPart6.conversation_1_audio, JsonDataHandlerListeningPart6.q1_question, JsonDataHandlerListeningPart6.q2_question, JsonDataHandlerListeningPart6.q3_question, JsonDataHandlerListeningPart6.q4_question, JsonDataHandlerListeningPart6.q5_question, JsonDataHandlerListeningPart6.q6_question, JsonDataHandlerListeningPart6.q1_option1, JsonDataHandlerListeningPart6.q1_option2, JsonDataHandlerListeningPart6.q1_option3, JsonDataHandlerListeningPart6.q1_option4, JsonDataHandlerListeningPart6.q2_option1, JsonDataHandlerListeningPart6.q2_option2, JsonDataHandlerListeningPart6.q2_option3, JsonDataHandlerListeningPart6.q2_option4, JsonDataHandlerListeningPart6.q3_option1, JsonDataHandlerListeningPart6.q3_option2, JsonDataHandlerListeningPart6.q3_option3, JsonDataHandlerListeningPart6.q3_option4, JsonDataHandlerListeningPart6.q4_option1, JsonDataHandlerListeningPart6.q4_option2, JsonDataHandlerListeningPart6.q4_option3, JsonDataHandlerListeningPart6.q4_option4, JsonDataHandlerListeningPart6.q5_option1, JsonDataHandlerListeningPart6.q5_option2, JsonDataHandlerListeningPart6.q5_option3, JsonDataHandlerListeningPart6.q5_option4, JsonDataHandlerListeningPart6.q6_option1, JsonDataHandlerListeningPart6.q6_option2, JsonDataHandlerListeningPart6.q6_option3, JsonDataHandlerListeningPart6.q6_option4);
         listView.setAdapter(ca);
         ca.notifyDataSetChanged();
     }
@@ -534,14 +532,14 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
     private void showJSONPracticeTest(String json) {
         JsonDataHandlerPracticeTestListening jsonHolderListingPracticeTest = new JsonDataHandlerPracticeTestListening(json);
         jsonHolderListingPracticeTest.parseJSON();
-        ListeningTestPart2QuestionAdapter ca = new ListeningTestPart2QuestionAdapter(this,jsonHolderListingpart2.id,jsonHolderListingpart2.test_code,jsonHolderListingpart2.converstaion_1_audio,jsonHolderListingpart2.q1_audio,jsonHolderListingpart2.q1_option1,jsonHolderListingpart2.q1_option2,jsonHolderListingpart2.q1_option3,jsonHolderListingpart2.q1_option4,jsonHolderListingpart2.q2_audio,jsonHolderListingpart2.q2_option1,jsonHolderListingpart2.q2_option2,jsonHolderListingpart2.q2_option3,jsonHolderListingpart2.q2_option4,jsonHolderListingpart2.q3_audio,jsonHolderListingpart2.q3_option1,jsonHolderListingpart2.q3_option2,jsonHolderListingpart2.q3_option3,jsonHolderListingpart2.q3_option4,jsonHolderListingpart2.q4_audio,jsonHolderListingpart2.q4_option1,jsonHolderListingpart2.q4_option2,jsonHolderListingpart2.q4_option3,jsonHolderListingpart2.q4_option4,jsonHolderListingpart2.q5_audio,jsonHolderListingpart2.q5_option1,jsonHolderListingpart2.q5_option2,jsonHolderListingpart2.q5_option3,jsonHolderListingpart2.q5_option4);
+        ListeningTestPart2QuestionAdapter ca = new ListeningTestPart2QuestionAdapter(this, JsonDataHandlerListeningPart2.id, JsonDataHandlerListeningPart2.test_code, JsonDataHandlerListeningPart2.converstaion_1_audio, JsonDataHandlerListeningPart2.q1_audio, JsonDataHandlerListeningPart2.q1_option1, JsonDataHandlerListeningPart2.q1_option2, JsonDataHandlerListeningPart2.q1_option3, JsonDataHandlerListeningPart2.q1_option4, JsonDataHandlerListeningPart2.q2_audio, JsonDataHandlerListeningPart2.q2_option1, JsonDataHandlerListeningPart2.q2_option2, JsonDataHandlerListeningPart2.q2_option3, JsonDataHandlerListeningPart2.q2_option4, JsonDataHandlerListeningPart2.q3_audio, JsonDataHandlerListeningPart2.q3_option1, JsonDataHandlerListeningPart2.q3_option2, JsonDataHandlerListeningPart2.q3_option3, JsonDataHandlerListeningPart2.q3_option4, JsonDataHandlerListeningPart2.q4_audio, JsonDataHandlerListeningPart2.q4_option1, JsonDataHandlerListeningPart2.q4_option2, JsonDataHandlerListeningPart2.q4_option3, JsonDataHandlerListeningPart2.q4_option4, JsonDataHandlerListeningPart2.q5_audio, JsonDataHandlerListeningPart2.q5_option1, JsonDataHandlerListeningPart2.q5_option2, JsonDataHandlerListeningPart2.q5_option3, JsonDataHandlerListeningPart2.q5_option4);
         listView.setAdapter(ca);
         ca.notifyDataSetChanged();
     }
 
     public void audiopart1()
     {
-        String audio_player = "https://online.celpip.biz/uploads/part1_listening/"+jsonHolderListingpart1.l1_converstaion_1_audio;
+        String audio_player = "https://online.celpip.biz/uploads/part1_listening/"+ JsonDataHandlerListeningPart1.l1_converstaion_1_audio;
         mediaPlayer = MediaPlayer.create(ListeningTestQuestionActivity.this,Uri.parse(audio_player));
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         mediaPlayer.setLooping(false);
@@ -578,7 +576,7 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
     }
     public void audiopart2()
     {
-        String audio_player = "https://online.celpip.biz/uploads/part2_listening/"+jsonHolderListingpart2.converstaion_1_audio;
+        String audio_player = "https://online.celpip.biz/uploads/part2_listening/"+ JsonDataHandlerListeningPart2.converstaion_1_audio;
         mediaPlayer = MediaPlayer.create(ListeningTestQuestionActivity.this,Uri.parse(audio_player));
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         mediaPlayer.setLooping(false);
@@ -616,7 +614,7 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
 
     public void audiopart3()
     {
-        String audio_player = "https://online.celpip.biz/uploads/part3_listening/"+jsonHolderListingpart2.converstaion_1_audio;
+        String audio_player = "https://online.celpip.biz/uploads/part3_listening/"+ JsonDataHandlerListeningPart2.converstaion_1_audio;
         mediaPlayer = MediaPlayer.create(ListeningTestQuestionActivity.this,Uri.parse(audio_player));
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         mediaPlayer.setLooping(false);
@@ -654,7 +652,7 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
 
     public void audiopart4()
     {
-        String audio_player = "https://online.celpip.biz/uploads/part4_listening/"+jsonHolderListingpart4.converstaion_1_audio;
+        String audio_player = "https://online.celpip.biz/uploads/part4_listening/"+ JsonDataHandlerListeningPart4.converstaion_1_audio;
         mediaPlayer = MediaPlayer.create(ListeningTestQuestionActivity.this,Uri.parse(audio_player));
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         mediaPlayer.setLooping(false);
@@ -693,12 +691,12 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
     public void audiopart5()
     {
 
-        String audio_player = "https://online.celpip.biz/uploads/part5_listening/"+jsonHolderListingpart5.conversation_1_video;
+        String audio_player = "https://online.celpip.biz/uploads/part5_listening/"+ JsonDataHandlerListeningPart5.conversation_1_video;
         Log.e("===link",audio_player);
 
         Uri uri=Uri.parse(audio_player);
 //        videoView.setVideoURI(uri);
-        videoView.setVideoPath("https://online.celpip.biz/uploads/part5_listening/"+jsonHolderListingpart5.conversation_1_video);
+        videoView.setVideoPath("https://online.celpip.biz/uploads/part5_listening/"+ JsonDataHandlerListeningPart5.conversation_1_video);
 
 
         videoView.setOnCompletionListener(new MediaPlayer.OnCompletionListener() {
@@ -730,7 +728,7 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
 
     public void audiopart6()
     {
-        String audio_player = "https://online.celpip.biz/uploads/part6_listening/"+jsonHolderListingpart6.conversation_1_audio;
+        String audio_player = "https://online.celpip.biz/uploads/part6_listening/"+ JsonDataHandlerListeningPart6.conversation_1_audio;
         mediaPlayer = MediaPlayer.create(ListeningTestQuestionActivity.this,Uri.parse(audio_player));
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         mediaPlayer.setLooping(false);
@@ -767,7 +765,7 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
     }
     public void audiopractice()
     {
-        String audio_player = "https://online.celpip.biz/uploads/listening_practiceTask/"+jsonHolderListingPracticeTest.mp3URL;
+        String audio_player = "https://online.celpip.biz/uploads/listening_practiceTask/"+ JsonDataHandlerPracticeTestListening.mp3URL;
         mediaPlayer = MediaPlayer.create(ListeningTestQuestionActivity.this,Uri.parse(audio_player));
         mediaPlayer.setAudioStreamType(AudioManager.STREAM_MUSIC);
         mediaPlayer.setLooping(false);

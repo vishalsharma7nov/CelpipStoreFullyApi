@@ -1,4 +1,4 @@
-package com.celpipstore;
+package com.celpipstore.Tests.VocabularyTest;
 
 import android.annotation.SuppressLint;
 import android.app.ProgressDialog;
@@ -8,10 +8,13 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.LinearLayout;
@@ -28,7 +31,7 @@ import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
 import com.celpipstore.Adapter.VocabularyTestQuestionAdapter;
 import com.celpipstore.JsonData.JsonDataHandlerVocabularyTestQuestionList;
-import com.celpipstore.Tests.VOCABULARY_TESTS;
+import com.celpipstore.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -73,32 +76,32 @@ public class VocabularyTestQuestionsActivity extends AppCompatActivity {
             Toast.makeText(VocabularyTestQuestionsActivity.this, "Network Not Available", Toast.LENGTH_LONG).show();
         }
         radioGroupOptions = findViewById(R.id.radiogroupOptions);
-        viewReportLayout = (LinearLayout)findViewById(R.id.viewReportLayout);
-        questionLayout = (LinearLayout)findViewById(R.id.questionLayout);
-        textViewQuestion = (TextView)findViewById(R.id.question);
-        textViewGivenAnswer = (TextView)findViewById(R.id.givenanswer);
-        textViewCorrectAnswer = (TextView)findViewById(R.id.correctanswer);
-        radioButtonOption1 =(RadioButton)findViewById(R.id.radioButtonOption1);
-        radioButtonOption2 =(RadioButton)findViewById(R.id.radioButtonOption2);
-        radioButtonOption3 =(RadioButton)findViewById(R.id.radioButtonOption3);
-        radioButtonOption4 =(RadioButton)findViewById(R.id.radioButtonOption4);
+        viewReportLayout = findViewById(R.id.viewReportLayout);
+        questionLayout = findViewById(R.id.questionLayout);
+        textViewQuestion = findViewById(R.id.question);
+        textViewGivenAnswer = findViewById(R.id.givenanswer);
+        textViewCorrectAnswer = findViewById(R.id.correctanswer);
+        radioButtonOption1 = findViewById(R.id.radioButtonOption1);
+        radioButtonOption2 = findViewById(R.id.radioButtonOption2);
+        radioButtonOption3 = findViewById(R.id.radioButtonOption3);
+        radioButtonOption4 = findViewById(R.id.radioButtonOption4);
         radioButtonOption1.setChecked(true);
         radioButtonOption2.setChecked(false);
         radioButtonOption3.setChecked(false);
         radioButtonOption4.setChecked(false);
-        buttonSubmit = (Button)findViewById(R.id.submit);
-        buttonNext = (Button)findViewById(R.id.next);
-        buttonViewReport = (Button)findViewById(R.id.viewReport);
-        buttonDone = (Button)findViewById(R.id.done);
-        buttonBack = (Button)findViewById(R.id.back);
-        buttonFinish = (Button)findViewById(R.id.finish);
+        buttonSubmit = findViewById(R.id.submit);
+        buttonNext = findViewById(R.id.next);
+        buttonViewReport = findViewById(R.id.viewReport);
+        buttonDone = findViewById(R.id.done);
+        buttonBack = findViewById(R.id.back);
+        buttonFinish = findViewById(R.id.finish);
 
 
         Intent intent = getIntent();
         String id = intent.getStringExtra("t1");
         url = "http://online.celpip.biz/api/vocabularyQuestion?lavelId="+id;
         Log.d("url", url);
-        listView =(ListView)findViewById(R.id.listViewVocabularyTestQuestionsList);
+        listView = findViewById(R.id.listViewVocabularyTestQuestionsList);
 
         buttonViewReport.setVisibility(View.GONE);
         buttonBack.setVisibility(View.GONE);
@@ -117,9 +120,7 @@ public class VocabularyTestQuestionsActivity extends AppCompatActivity {
                     radioButtonOption4.setChecked(false);
                     buttonSubmit.setVisibility(View.VISIBLE);
                     buttonViewReport.setVisibility(View.GONE);
-
-
-                String total_questions[] = jsonHolderListing.id;
+                String[] total_questions = JsonDataHandlerVocabularyTestQuestionList.id;
                 int aa = total_questions.length;
 
                 if (position == aa-1)
@@ -127,8 +128,6 @@ public class VocabularyTestQuestionsActivity extends AppCompatActivity {
                         buttonNext.setVisibility(View.GONE);
                         buttonFinish.setVisibility(View.VISIBLE);
                 }
-
-
             }
         });
         buttonFinish.setOnClickListener(new View.OnClickListener() {
@@ -295,12 +294,36 @@ public class VocabularyTestQuestionsActivity extends AppCompatActivity {
                         }
                     }
                 }
-
-
-
                 buttonSubmit.setVisibility(View.GONE);
             }
         });
+    }
+
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (keyCode == KeyEvent.KEYCODE_BACK) {
+            exitByBackKey();
+            moveTaskToBack(false);
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+    }
+
+    protected void exitByBackKey() {
+        AlertDialog alertbox = new AlertDialog.Builder(this)
+                .setMessage("Do you want to exit?")
+                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                    // do something when the button is clicked
+                    @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
+                    public void onClick(DialogInterface arg0, int arg1) {
+                        finish();
+                    }
+                })
+                .setNegativeButton("No", new DialogInterface.OnClickListener() {
+                    // do something when the button is clicked
+                    public void onClick(DialogInterface arg0, int arg1) {
+                    }
+                })
+                .show();
     }
 
     private void sendRequest() {
@@ -344,7 +367,7 @@ public class VocabularyTestQuestionsActivity extends AppCompatActivity {
         JsonDataHandlerVocabularyTestQuestionList jsonHolderListing = new JsonDataHandlerVocabularyTestQuestionList(json);
         jsonHolderListing.parseJSON();
         setData(position);
-        VocabularyTestQuestionAdapter ca = new VocabularyTestQuestionAdapter(this,jsonHolderListing.id,jsonHolderListing.level_id, jsonHolderListing.title,jsonHolderListing.question_image,jsonHolderListing.options1,jsonHolderListing.options2,jsonHolderListing.options3,jsonHolderListing.options4);
+        VocabularyTestQuestionAdapter ca = new VocabularyTestQuestionAdapter(this, JsonDataHandlerVocabularyTestQuestionList.id, JsonDataHandlerVocabularyTestQuestionList.level_id, JsonDataHandlerVocabularyTestQuestionList.title, JsonDataHandlerVocabularyTestQuestionList.question_image, JsonDataHandlerVocabularyTestQuestionList.options1, JsonDataHandlerVocabularyTestQuestionList.options2, JsonDataHandlerVocabularyTestQuestionList.options3, JsonDataHandlerVocabularyTestQuestionList.options4);
         listView.setAdapter(ca);
         ca.notifyDataSetChanged();
     }

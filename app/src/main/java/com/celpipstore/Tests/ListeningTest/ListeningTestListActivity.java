@@ -1,4 +1,4 @@
-package com.celpipstore.Tests;
+package com.celpipstore.Tests.ListeningTest;
 
 import android.app.ProgressDialog;
 import android.content.ComponentName;
@@ -7,11 +7,9 @@ import android.content.DialogInterface;
 import android.content.Intent;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
-import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
-import android.view.KeyEvent;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
+import android.os.Bundle;
 import android.widget.ListView;
 import android.widget.Toast;
 
@@ -20,9 +18,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.celpipstore.Adapter.VocabularyTestAdapter;
-import com.celpipstore.GetterAndSetterClasses.VocabularyTest;
-import com.celpipstore.JsonData.JsonDataHandlerVocabularyTestList;
+import com.celpipstore.Adapter.TotalTestListAdapter;
+import com.celpipstore.GetterAndSetterClasses.TotalTestList;
+import com.celpipstore.JsonData.JsonDataHandlerTestList;
 import com.celpipstore.R;
 
 import org.json.JSONException;
@@ -30,16 +28,14 @@ import org.json.JSONObject;
 
 import java.util.List;
 
-public class VOCABULARY_TESTS extends AppCompatActivity {
-
+public class ListeningTestListActivity extends AppCompatActivity {
+    protected String url;
     protected ListView listView;
-    protected List<VocabularyTest> vocabularyTests;
+    protected List<TotalTestList> totalTestLists;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_vocabulary__tests);
-        Toolbar toolbar = findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
+        setContentView(R.layout.activity_listening_test_list);
         ConnectivityManager ConnectionManager=(ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo=ConnectionManager.getActiveNetworkInfo();
         if(networkInfo != null && networkInfo.isConnected()==true )
@@ -60,39 +56,18 @@ public class VOCABULARY_TESTS extends AppCompatActivity {
                         }
                     })
                     .show();
-            Toast.makeText(VOCABULARY_TESTS.this, "Network Not Available", Toast.LENGTH_LONG).show();
+            Toast.makeText(ListeningTestListActivity.this, "Network Not Available", Toast.LENGTH_LONG).show();
         }
-        listView = findViewById(R.id.listViewWritingTest);
+        Intent intent = getIntent();
+        String id = intent.getStringExtra("t1");
+        url = "http://online.celpip.biz/api/getTestList?testId="+id;
+        listView = findViewById(R.id.listViewListeningTestListPart2);
         sendRequest();
     }
 
-    public boolean onKeyDown(int keyCode, KeyEvent event) {
-        if (keyCode == KeyEvent.KEYCODE_BACK) {
-            exitByBackKey();
-            return true;
-        }
-        return super.onKeyDown(keyCode, event);
-    }
-
-    protected void exitByBackKey() {
-        AlertDialog alertbox = new AlertDialog.Builder(this)
-                .setMessage("Do you want to exit vocabulary test?")
-                .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                    // do something when the button is clicked
-                    public void onClick(DialogInterface arg0, int arg1) {
-                        finish();
-                    }
-                })
-                .setNegativeButton("No", new DialogInterface.OnClickListener() {
-                    // do something when the button is clicked
-                    public void onClick(DialogInterface arg0, int arg1) {
-                    }
-                })
-                .show();
-    }
     private void sendRequest() {
         final ProgressDialog loading = ProgressDialog.show(this,"Loading","Please wait...",false,false);
-        StringRequest stringRequest = new StringRequest("http://online.celpip.biz/api/vocabularyLevels",
+        StringRequest stringRequest = new StringRequest(url,
                 new com.android.volley.Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -102,16 +77,18 @@ public class VOCABULARY_TESTS extends AppCompatActivity {
                             if (abc !=1 )
                             {
                                 loading.dismiss();
-                                Toast.makeText(VOCABULARY_TESTS.this, "Application Under Maintenance!!", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(ListeningTestListActivity.this, "Work in Progress....", Toast.LENGTH_SHORT).show();
                             }
                             else if (abc == 1)
                             {
                                 loading.dismiss();
                                 showJSON(response);
                             }
-                        } catch (JSONException e) {
+                        }
+                        catch (JSONException e)
+                        {
                             loading.dismiss();
-                            Toast.makeText(getApplicationContext(), "Application Under Maintenance!!"+e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Application Under Maintenance!!", Toast.LENGTH_SHORT).show();
                             e.printStackTrace();
                         }
                     }
@@ -120,18 +97,17 @@ public class VOCABULARY_TESTS extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         loading.dismiss();
-                        Toast.makeText(getApplicationContext(), "Application Under Maintenance!!"+error.getMessage(), Toast.LENGTH_LONG).show();
+                        Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 });
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
     }
     private void showJSON(String json) {
-        JsonDataHandlerVocabularyTestList jsonHolderListing = new JsonDataHandlerVocabularyTestList(json);
-        vocabularyTests=jsonHolderListing.parseJSON();
-        VocabularyTestAdapter ca = new VocabularyTestAdapter(this,vocabularyTests);
+        JsonDataHandlerTestList jsonHolderListing = new JsonDataHandlerTestList(json);
+        totalTestLists=jsonHolderListing.parseJSON();
+        TotalTestListAdapter ca = new TotalTestListAdapter(this,totalTestLists);
         listView.setAdapter(ca);
         ca.notifyDataSetChanged();
     }
-
 }

@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".LISTENING_part1"
+    tools:context=".Tests.ListeningTest.LISTENING_part1"
     tools:showIn="@layout/app_bar_listening_part1">
 
 </android.support.constraint.ConstraintLayout>

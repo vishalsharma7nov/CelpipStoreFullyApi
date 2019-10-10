@@ -1,4 +1,4 @@
-package com.celpipstore.Tests;
+package com.celpipstore.Tests.SpeakingTest;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -32,9 +32,9 @@ public class SPEAKING extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_speaking);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        listView  = (ListView)findViewById(R.id.listViewSpeakingTest);
+        listView  = findViewById(R.id.listViewSpeakingTest);
         sendRequest();
     }
 

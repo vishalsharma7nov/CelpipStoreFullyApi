@@ -1,4 +1,4 @@
-package com.celpipstore;
+package com.celpipstore.Tests.ListeningTest;
 
 import android.content.DialogInterface;
 import android.os.Bundle;
@@ -15,6 +15,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
+
+import com.celpipstore.R;
 
 public class LISTENING_part1 extends AppCompatActivity{
 

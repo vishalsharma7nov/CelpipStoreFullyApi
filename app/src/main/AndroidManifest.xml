@@ -30,8 +30,8 @@
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
 
-        <activity android:name=".ListeningTestQuestionActivity" />
-        <activity android:name=".VocabularyTestQuestionsActivity" />
+        <activity android:name=".Tests.ListeningTest.ListeningTestQuestionActivity" />
+        <activity android:name=".Tests.VocabularyTest.VocabularyTestQuestionsActivity" />
         <activity
             android:name=".SpeakingTestListActivity"
             android:label="Speaking Tests" />
@@ -42,21 +42,21 @@
             android:name=".ReadingTestListActivity"
             android:label="Reading Tests" />
         <activity
-            android:name=".ListeningTestListActivity"
+            android:name=".Tests.ListeningTest.ListeningTestListActivity"
             android:label="Listening Test" />
         <activity
             android:name=".LoginAndRegistration.RegistrationActivity"
             android:label="Registration" />
         <activity
-            android:name=".Tests.WRITING"
+            android:name=".Tests.WritingTest.WRITING"
             android:label="@string/title_activity_writing"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Tests.READING"
+            android:name=".Tests.ReadingTest.READING"
             android:label="@string/title_activity_reading"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Tests.SPEAKING"
+            android:name=".Tests.SpeakingTest.SPEAKING"
             android:label="@string/title_activity_speaking"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -72,7 +72,7 @@
             android:label="@string/title_activity_support"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Tests.LISTENING_part2"
+            android:name=".Tests.ListeningTest.LISTENING_part2"
             android:label="@string/title_activity_listening_part2"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -80,7 +80,7 @@
             android:label="@string/title_activity_celpip__parts__tests"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".LISTENING_part1"
+            android:name=".Tests.ListeningTest.LISTENING_part1"
             android:label="@string/title_activity_listening_part1"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -104,7 +104,7 @@
             android:label="@string/title_activity_spotting__the__errors"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Tests.VOCABULARY_TESTS"
+            android:name=".Tests.VocabularyTest.VOCABULARY_TESTS"
             android:label="@string/title_activity_vocabulary__tests"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity

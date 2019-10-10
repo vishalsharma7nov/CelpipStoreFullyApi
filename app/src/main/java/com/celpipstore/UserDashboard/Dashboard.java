@@ -13,7 +13,6 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AlertDialog;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -38,18 +37,17 @@ import com.android.volley.toolbox.Volley;
 import com.celpipstore.Adapter.ExpandableListAdapter;
 import com.celpipstore.DICTATION_TESTS;
 import com.celpipstore.FILL_IN_THE_BLANKS;
-import com.celpipstore.GetterAndSetterClasses.VocabularyTest;
-import com.celpipstore.LISTENING_part1;
+import com.celpipstore.Tests.ListeningTest.LISTENING_part1;
 import com.celpipstore.LoginAndRegistration.SessionManager;
-import com.celpipstore.Tests.LISTENING_part2;
+import com.celpipstore.Tests.ListeningTest.LISTENING_part2;
 import com.celpipstore.LoginAndRegistration.LoginActivity;
 import com.celpipstore.R;
-import com.celpipstore.Tests.READING;
+import com.celpipstore.Tests.ReadingTest.READING;
 import com.celpipstore.RE_ARRANGE;
-import com.celpipstore.Tests.SPEAKING;
+import com.celpipstore.Tests.SpeakingTest.SPEAKING;
 import com.celpipstore.SPOTTING_THE_ERRORS;
-import com.celpipstore.Tests.VOCABULARY_TESTS;
-import com.celpipstore.Tests.WRITING;
+import com.celpipstore.Tests.VocabularyTest.VOCABULARY_TESTS;
+import com.celpipstore.Tests.WritingTest.WRITING;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -259,7 +257,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
     }
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
             moveTaskToBack(true);
@@ -272,7 +270,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
     }
@@ -326,7 +324,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         //---------------------------------------------------------------------------------//
         //expandable list
         // get the listview
-        expListView = (ExpandableListView) findViewById(R.id.lvExp);
+        expListView = findViewById(R.id.lvExp);
         // preparing list data
         prepareListData();
         listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild);

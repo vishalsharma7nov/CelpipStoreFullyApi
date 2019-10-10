@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".Tests.LISTENING_part2"
+    tools:context=".Tests.ListeningTest.LISTENING_part2"
     tools:showIn="@layout/app_bar_listening_part2">
     <ListView
         android:id="@+id/listViewListeningTestPart2"

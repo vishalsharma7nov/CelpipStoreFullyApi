@@ -17,7 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.celpipstore.GetterAndSetterClasses.TotalTest;
-import com.celpipstore.ListeningTestListActivity;
+import com.celpipstore.Tests.ListeningTest.ListeningTestListActivity;
 import com.celpipstore.R;
 
 import java.util.List;
@@ -55,10 +55,10 @@ public class TotalTestAdapter extends BaseAdapter{
     public View getView(final int position, View convertView, ViewGroup parent) {
         LayoutInflater in=(LayoutInflater)c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         convertView=in.inflate(R.layout.test_adapter,null);
-        TextView t1=(TextView)convertView.findViewById(R.id.listeningtestpart2ptesubtype);
-        TextView t2=(TextView)convertView.findViewById(R.id.listeningtestpart2coincost);
-        TextView t3=(TextView)convertView.findViewById(R.id.listeningtestpart2totaltest);
-        Button b1 = (Button)convertView.findViewById(R.id.buttonSelectedTest);
+        TextView t1= convertView.findViewById(R.id.listeningtestpart2ptesubtype);
+        TextView t2= convertView.findViewById(R.id.listeningtestpart2coincost);
+        TextView t3= convertView.findViewById(R.id.listeningtestpart2totaltest);
+        Button b1 = convertView.findViewById(R.id.buttonSelectedTest);
         b1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {

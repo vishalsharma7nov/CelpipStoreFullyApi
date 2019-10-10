@@ -42,7 +42,7 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.celpipstore.JsonData.JsonDataHandlerListeningPart1;
-import com.celpipstore.Tests.LISTENING_part2;
+import com.celpipstore.Tests.ListeningTest.LISTENING_part2;
 import com.celpipstore.R;
 
 import java.util.HashMap;
@@ -178,51 +178,51 @@ public class ListeningTestPart1QuestionAdapter extends BaseAdapter{
             , String l1_q8_option4)
             {
         this.c=c;
-        this.id         = ListeningTestPart1QuestionAdapter.id;
-        this.test_code  = ListeningTestPart1QuestionAdapter.test_code;
-        this.l1_converstaion_1_audio = l1_converstaion_1_audio;
-        this.l1_converstaion_2_audio = l1_converstaion_2_audio;
-        this.l1_converstaion_3_audio = l1_converstaion_3_audio;
-        this.l1_q1_audio   = l1_q1_audio;
-        this.l1_q1_option1 = l1_q1_option1;
-        this.l1_q1_option2 = l1_q1_option2;
-        this.l1_q1_option3 = l1_q1_option3;
-        this.l1_q1_option4 = l1_q1_option4;
-        this.l1_q2_audio   = l1_q2_audio;
-        this.l1_q2_option1 = l1_q2_option1;
-        this.l1_q2_option2 = l1_q2_option2;
-        this.l1_q2_option3 = l1_q2_option3;
-        this.l1_q2_option4 = l1_q2_option4;
-        this.l1_q3_audio   = l1_q3_audio;
-        this.l1_q3_option1 = l1_q3_option1;
-        this.l1_q3_option2 = l1_q3_option2;
-        this.l1_q3_option3 = l1_q3_option3;
-        this.l1_q3_option4 = l1_q3_option4;
-        this.l1_q4_audio   = l1_q4_audio;
-        this.l1_q4_option1 = l1_q4_option1;
-        this.l1_q4_option2 = l1_q4_option2;
-        this.l1_q4_option3 = l1_q4_option3;
-        this.l1_q4_option4 = l1_q4_option4;
-        this.l1_q5_audio   = l1_q5_audio;
-        this.l1_q5_option1 = l1_q5_option1;
-        this.l1_q5_option2 = l1_q5_option2;
-        this.l1_q5_option3 = l1_q5_option3;
-        this.l1_q5_option4 = l1_q5_option4;
-        this.l1_q6_audio   = l1_q6_audio;
-        this.l1_q6_option1 = l1_q6_option1;
-        this.l1_q6_option2 = l1_q6_option2;
-        this.l1_q6_option3 = l1_q6_option3;
-        this.l1_q6_option4 = l1_q6_option4;
-        this.l1_q7_audio   = l1_q7_audio;
-        this.l1_q7_option1 = l1_q7_option1;
-        this.l1_q7_option2 = l1_q7_option2;
-        this.l1_q7_option3 = l1_q7_option3;
-        this.l1_q7_option4 = l1_q7_option4;
-        this.l1_q8_audio   = l1_q8_audio;
-        this.l1_q8_option1 = l1_q8_option1;
-        this.l1_q8_option2 = l1_q8_option2;
-        this.l1_q8_option3 = l1_q8_option3;
-        this.l1_q8_option4 = l1_q8_option4;
+        ListeningTestPart1QuestionAdapter.id = ListeningTestPart1QuestionAdapter.id;
+        ListeningTestPart1QuestionAdapter.test_code = ListeningTestPart1QuestionAdapter.test_code;
+        l1_converstaion_1_audio = l1_converstaion_1_audio;
+        l1_converstaion_2_audio = l1_converstaion_2_audio;
+        l1_converstaion_3_audio = l1_converstaion_3_audio;
+        ListeningTestPart1QuestionAdapter.l1_q1_audio = l1_q1_audio;
+        ListeningTestPart1QuestionAdapter.l1_q1_option1 = l1_q1_option1;
+        ListeningTestPart1QuestionAdapter.l1_q1_option2 = l1_q1_option2;
+        ListeningTestPart1QuestionAdapter.l1_q1_option3 = l1_q1_option3;
+        ListeningTestPart1QuestionAdapter.l1_q1_option4 = l1_q1_option4;
+        ListeningTestPart1QuestionAdapter.l1_q2_audio = l1_q2_audio;
+        ListeningTestPart1QuestionAdapter.l1_q2_option1 = l1_q2_option1;
+        ListeningTestPart1QuestionAdapter.l1_q2_option2 = l1_q2_option2;
+        ListeningTestPart1QuestionAdapter.l1_q2_option3 = l1_q2_option3;
+        ListeningTestPart1QuestionAdapter.l1_q2_option4 = l1_q2_option4;
+        ListeningTestPart1QuestionAdapter.l1_q3_audio = l1_q3_audio;
+        ListeningTestPart1QuestionAdapter.l1_q3_option1 = l1_q3_option1;
+        ListeningTestPart1QuestionAdapter.l1_q3_option2 = l1_q3_option2;
+        ListeningTestPart1QuestionAdapter.l1_q3_option3 = l1_q3_option3;
+        ListeningTestPart1QuestionAdapter.l1_q3_option4 = l1_q3_option4;
+        ListeningTestPart1QuestionAdapter.l1_q4_audio = l1_q4_audio;
+        ListeningTestPart1QuestionAdapter.l1_q4_option1 = l1_q4_option1;
+        ListeningTestPart1QuestionAdapter.l1_q4_option2 = l1_q4_option2;
+        ListeningTestPart1QuestionAdapter.l1_q4_option3 = l1_q4_option3;
+        ListeningTestPart1QuestionAdapter.l1_q4_option4 = l1_q4_option4;
+        ListeningTestPart1QuestionAdapter.l1_q5_audio = l1_q5_audio;
+        ListeningTestPart1QuestionAdapter.l1_q5_option1 = l1_q5_option1;
+        ListeningTestPart1QuestionAdapter.l1_q5_option2 = l1_q5_option2;
+        ListeningTestPart1QuestionAdapter.l1_q5_option3 = l1_q5_option3;
+        ListeningTestPart1QuestionAdapter.l1_q5_option4 = l1_q5_option4;
+        ListeningTestPart1QuestionAdapter.l1_q6_audio = l1_q6_audio;
+        ListeningTestPart1QuestionAdapter.l1_q6_option1 = l1_q6_option1;
+        ListeningTestPart1QuestionAdapter.l1_q6_option2 = l1_q6_option2;
+        ListeningTestPart1QuestionAdapter.l1_q6_option3 = l1_q6_option3;
+        ListeningTestPart1QuestionAdapter.l1_q6_option4 = l1_q6_option4;
+        ListeningTestPart1QuestionAdapter.l1_q7_audio = l1_q7_audio;
+        ListeningTestPart1QuestionAdapter.l1_q7_option1 = l1_q7_option1;
+        ListeningTestPart1QuestionAdapter.l1_q7_option2 = l1_q7_option2;
+        ListeningTestPart1QuestionAdapter.l1_q7_option3 = l1_q7_option3;
+        ListeningTestPart1QuestionAdapter.l1_q7_option4 = l1_q7_option4;
+        ListeningTestPart1QuestionAdapter.l1_q8_audio = l1_q8_audio;
+        ListeningTestPart1QuestionAdapter.l1_q8_option1 = l1_q8_option1;
+        ListeningTestPart1QuestionAdapter.l1_q8_option2 = l1_q8_option2;
+        ListeningTestPart1QuestionAdapter.l1_q8_option3 = l1_q8_option3;
+        ListeningTestPart1QuestionAdapter.l1_q8_option4 = l1_q8_option4;
 
     }
 
@@ -248,17 +248,17 @@ public class ListeningTestPart1QuestionAdapter extends BaseAdapter{
 
         convertView=in.inflate(R.layout.test_adapter_listeningtestpart1,null);
 
-        final RadioGroup radioGroup1 = (RadioGroup)convertView.findViewById(R.id.frame1);
-        final RadioGroup radioGroup2 = (RadioGroup)convertView.findViewById(R.id.frame2);
+        final RadioGroup radioGroup1 = convertView.findViewById(R.id.frame1);
+        final RadioGroup radioGroup2 = convertView.findViewById(R.id.frame2);
 
-        final RadioButton t1=(RadioButton) convertView.findViewById(R.id.radioButtonOption1);
-        final RadioButton t2=(RadioButton) convertView.findViewById(R.id.radioButtonOption2);
-        final RadioButton t3=(RadioButton) convertView.findViewById(R.id.radioButtonOption3);
-        final RadioButton t4=(RadioButton) convertView.findViewById(R.id.radioButtonOption4);
-        final RadioButton t5=(RadioButton) convertView.findViewById(R.id.radio1);
-        final RadioButton t6=(RadioButton) convertView.findViewById(R.id.radio2);
-        final RadioButton t7=(RadioButton) convertView.findViewById(R.id.radio3);
-        final RadioButton t8=(RadioButton) convertView.findViewById(R.id.radio4);
+        final RadioButton t1= convertView.findViewById(R.id.radioButtonOption1);
+        final RadioButton t2= convertView.findViewById(R.id.radioButtonOption2);
+        final RadioButton t3= convertView.findViewById(R.id.radioButtonOption3);
+        final RadioButton t4= convertView.findViewById(R.id.radioButtonOption4);
+        final RadioButton t5= convertView.findViewById(R.id.radio1);
+        final RadioButton t6= convertView.findViewById(R.id.radio2);
+        final RadioButton t7= convertView.findViewById(R.id.radio3);
+        final RadioButton t8= convertView.findViewById(R.id.radio4);
 
         final Button b1NextQuestion = convertView.findViewById(R.id.buttonNextQuestion1);
         final Button b2NextQuestion = convertView.findViewById(R.id.buttonNextQuestion2);
@@ -277,20 +277,20 @@ public class ListeningTestPart1QuestionAdapter extends BaseAdapter{
         final ImageView imageView3  = convertView.findViewById(R.id.imageViewRadio3);
         final ImageView imageView4  = convertView.findViewById(R.id.imageViewRadio4);
 
-        final String questions_audio[]  = {l1_q1_audio,l1_q2_audio,l1_q3_audio,l1_q4_audio,l1_q5_audio,l1_q6_audio,l1_q7_audio,l1_q8_audio,null};
-        final String question_option1[] = {l1_q1_option1,l1_q2_option1,l1_q3_option3,l1_q4_option1,l1_q5_option1,l1_q6_option1,l1_q7_option1,l1_q8_option1,null};
-        final String question_option2[] = {l1_q1_option2,l1_q2_option2,l1_q3_option2,l1_q4_option2,l1_q5_option2,l1_q6_option2,l1_q7_option2,l1_q8_option2,null};
-        final String question_option3[] = {l1_q1_option3,l1_q2_option3,l1_q3_option3,l1_q4_option3,l1_q5_option3,l1_q6_option3,l1_q7_option3,l1_q8_option3,null};
-        final String question_option4[] = {l1_q1_option4,l1_q2_option4,l1_q3_option4,l1_q4_option4,l1_q5_option4,l1_q6_option4,l1_q7_option4,l1_q8_option4,null};
+        final String[] questions_audio = {l1_q1_audio, l1_q2_audio, l1_q3_audio, l1_q4_audio, l1_q5_audio, l1_q6_audio, l1_q7_audio, l1_q8_audio, null};
+        final String[] question_option1 = {l1_q1_option1, l1_q2_option1, l1_q3_option3, l1_q4_option1, l1_q5_option1, l1_q6_option1, l1_q7_option1, l1_q8_option1, null};
+        final String[] question_option2 = {l1_q1_option2, l1_q2_option2, l1_q3_option2, l1_q4_option2, l1_q5_option2, l1_q6_option2, l1_q7_option2, l1_q8_option2, null};
+        final String[] question_option3 = {l1_q1_option3, l1_q2_option3, l1_q3_option3, l1_q4_option3, l1_q5_option3, l1_q6_option3, l1_q7_option3, l1_q8_option3, null};
+        final String[] question_option4 = {l1_q1_option4, l1_q2_option4, l1_q3_option4, l1_q4_option4, l1_q5_option4, l1_q6_option4, l1_q7_option4, l1_q8_option4, null};
 
-        final ImageButton imageButtonPlay = (ImageButton)convertView.findViewById(R.id.buttonPlay);
-        final ImageButton imageButtonPause = (ImageButton)convertView.findViewById(R.id.buttonPause);
+        final ImageButton imageButtonPlay = convertView.findViewById(R.id.buttonPlay);
+        final ImageButton imageButtonPause = convertView.findViewById(R.id.buttonPause);
 
         final View finalConvertView = convertView;
         final View finalConvertView1 = convertView;
-        textViewStart = (TextView) finalConvertView1.findViewById(R.id.textViewStartTime);
-        textViewStop  = (TextView) finalConvertView1.findViewById(R.id.textViewStopTime);
-        seekbar = (SeekBar)  finalConvertView.findViewById(R.id.seekbar);
+        textViewStart = finalConvertView1.findViewById(R.id.textViewStartTime);
+        textViewStop  = finalConvertView1.findViewById(R.id.textViewStopTime);
+        seekbar = finalConvertView.findViewById(R.id.seekbar);
         imageButtonPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -490,7 +490,7 @@ public class ListeningTestPart1QuestionAdapter extends BaseAdapter{
             public void onClick(View v) {
 
                 radioGroup1.setVisibility(View.GONE);
-                audio_player = url+jsonHolderListingpart1.l1_converstaion_2_audio;
+                audio_player = url+ JsonDataHandlerListeningPart1.l1_converstaion_2_audio;
                 b10NextQuestion.setVisibility(View.GONE);
                 new PlayMusic().execute();
                 imageButtonPause.setVisibility(View.VISIBLE);
@@ -611,7 +611,7 @@ public class ListeningTestPart1QuestionAdapter extends BaseAdapter{
                 b6NextQuestion.setVisibility(View.VISIBLE);
                 radioGroup1.setVisibility(View.GONE);
 
-                audio_player = url+jsonHolderListingpart1.l1_converstaion_3_audio;
+                audio_player = url+ JsonDataHandlerListeningPart1.l1_converstaion_3_audio;
                 new PlayMusic().execute();
                 mediaPlayer.stop();
             }
@@ -687,7 +687,6 @@ public class ListeningTestPart1QuestionAdapter extends BaseAdapter{
         b8NextQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-;
                 radioGroup1.setVisibility(View.GONE);
                 b8NextQuestion.setVisibility(View.GONE);
                 b9NextQuestion.setVisibility(View.VISIBLE);

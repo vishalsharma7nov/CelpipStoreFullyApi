@@ -1,4 +1,4 @@
-package com.celpipstore.Tests;
+package com.celpipstore.Tests.ReadingTest;
 
 import android.app.ProgressDialog;
 import android.content.DialogInterface;
@@ -32,9 +32,9 @@ public class READING extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reading);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        listViewReadingTest =(ListView)findViewById(R.id.listViewReadingTest);
+        listViewReadingTest = findViewById(R.id.listViewReadingTest);
         sendRequest();
     }
 

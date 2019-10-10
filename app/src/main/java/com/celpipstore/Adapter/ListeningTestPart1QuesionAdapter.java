@@ -24,7 +24,7 @@ import android.widget.SeekBar;
 import android.widget.TextView;
 
 import com.bumptech.glide.Glide;
-import com.celpipstore.Tests.LISTENING_part2;
+import com.celpipstore.Tests.ListeningTest.LISTENING_part2;
 import com.celpipstore.R;
 
 import java.io.IOException;
@@ -143,49 +143,49 @@ public class ListeningTestPart1QuesionAdapter extends BaseAdapter{
             , String l1_q8_option4)
             {
         this.c=c;
-        this.id         = ListeningTestPart1QuesionAdapter.id;
-        this.test_code  = ListeningTestPart1QuesionAdapter.test_code;
-        this.l1_converstaion_1_audio = l1_converstaion_1_audio;
-        this.l1_q1_audio   = l1_q1_audio;
-        this.l1_q1_option1 = l1_q1_option1;
-        this.l1_q1_option2 = l1_q1_option2;
-        this.l1_q1_option3 = l1_q1_option3;
-        this.l1_q1_option4 = l1_q1_option4;
-        this.l1_q2_audio   = l1_q2_audio;
-        this.l1_q2_option1 = l1_q2_option1;
-        this.l1_q2_option2 = l1_q2_option2;
-        this.l1_q2_option3 = l1_q2_option3;
-        this.l1_q2_option4 = l1_q2_option4;
-        this.l1_q3_audio   = l1_q3_audio;
-        this.l1_q3_option1 = l1_q3_option1;
-        this.l1_q3_option2 = l1_q3_option2;
-        this.l1_q3_option3 = l1_q3_option3;
-        this.l1_q3_option4 = l1_q3_option4;
-        this.l1_q4_audio   = l1_q4_audio;
-        this.l1_q4_option1 = l1_q4_option1;
-        this.l1_q4_option2 = l1_q4_option2;
-        this.l1_q4_option3 = l1_q4_option3;
-        this.l1_q4_option4 = l1_q4_option4;
-        this.l1_q5_audio   = l1_q5_audio;
-        this.l1_q5_option1 = l1_q5_option1;
-        this.l1_q5_option2 = l1_q5_option2;
-        this.l1_q5_option3 = l1_q5_option3;
-        this.l1_q5_option4 = l1_q5_option4;
-        this.l1_q6_audio   = l1_q6_audio;
-        this.l1_q6_option1 = l1_q6_option1;
-        this.l1_q6_option2 = l1_q6_option2;
-        this.l1_q6_option3 = l1_q6_option3;
-        this.l1_q6_option4 = l1_q6_option4;
-        this.l1_q7_audio   = l1_q7_audio;
-        this.l1_q7_option1 = l1_q7_option1;
-        this.l1_q7_option2 = l1_q7_option2;
-        this.l1_q7_option3 = l1_q7_option3;
-        this.l1_q7_option4 = l1_q7_option4;
-        this.l1_q8_audio   = l1_q8_audio;
-        this.l1_q8_option1 = l1_q8_option1;
-        this.l1_q8_option2 = l1_q8_option2;
-        this.l1_q8_option3 = l1_q8_option3;
-        this.l1_q8_option4 = l1_q8_option4;
+        ListeningTestPart1QuesionAdapter.id = ListeningTestPart1QuesionAdapter.id;
+        ListeningTestPart1QuesionAdapter.test_code = ListeningTestPart1QuesionAdapter.test_code;
+        l1_converstaion_1_audio = l1_converstaion_1_audio;
+        ListeningTestPart1QuesionAdapter.l1_q1_audio = l1_q1_audio;
+        ListeningTestPart1QuesionAdapter.l1_q1_option1 = l1_q1_option1;
+        ListeningTestPart1QuesionAdapter.l1_q1_option2 = l1_q1_option2;
+        ListeningTestPart1QuesionAdapter.l1_q1_option3 = l1_q1_option3;
+        ListeningTestPart1QuesionAdapter.l1_q1_option4 = l1_q1_option4;
+        ListeningTestPart1QuesionAdapter.l1_q2_audio = l1_q2_audio;
+        ListeningTestPart1QuesionAdapter.l1_q2_option1 = l1_q2_option1;
+        ListeningTestPart1QuesionAdapter.l1_q2_option2 = l1_q2_option2;
+        ListeningTestPart1QuesionAdapter.l1_q2_option3 = l1_q2_option3;
+        ListeningTestPart1QuesionAdapter.l1_q2_option4 = l1_q2_option4;
+        ListeningTestPart1QuesionAdapter.l1_q3_audio = l1_q3_audio;
+        ListeningTestPart1QuesionAdapter.l1_q3_option1 = l1_q3_option1;
+        ListeningTestPart1QuesionAdapter.l1_q3_option2 = l1_q3_option2;
+        ListeningTestPart1QuesionAdapter.l1_q3_option3 = l1_q3_option3;
+        ListeningTestPart1QuesionAdapter.l1_q3_option4 = l1_q3_option4;
+        ListeningTestPart1QuesionAdapter.l1_q4_audio = l1_q4_audio;
+        ListeningTestPart1QuesionAdapter.l1_q4_option1 = l1_q4_option1;
+        ListeningTestPart1QuesionAdapter.l1_q4_option2 = l1_q4_option2;
+        ListeningTestPart1QuesionAdapter.l1_q4_option3 = l1_q4_option3;
+        ListeningTestPart1QuesionAdapter.l1_q4_option4 = l1_q4_option4;
+        ListeningTestPart1QuesionAdapter.l1_q5_audio = l1_q5_audio;
+        ListeningTestPart1QuesionAdapter.l1_q5_option1 = l1_q5_option1;
+        ListeningTestPart1QuesionAdapter.l1_q5_option2 = l1_q5_option2;
+        ListeningTestPart1QuesionAdapter.l1_q5_option3 = l1_q5_option3;
+        ListeningTestPart1QuesionAdapter.l1_q5_option4 = l1_q5_option4;
+        ListeningTestPart1QuesionAdapter.l1_q6_audio = l1_q6_audio;
+        ListeningTestPart1QuesionAdapter.l1_q6_option1 = l1_q6_option1;
+        ListeningTestPart1QuesionAdapter.l1_q6_option2 = l1_q6_option2;
+        ListeningTestPart1QuesionAdapter.l1_q6_option3 = l1_q6_option3;
+        ListeningTestPart1QuesionAdapter.l1_q6_option4 = l1_q6_option4;
+        ListeningTestPart1QuesionAdapter.l1_q7_audio = l1_q7_audio;
+        ListeningTestPart1QuesionAdapter.l1_q7_option1 = l1_q7_option1;
+        ListeningTestPart1QuesionAdapter.l1_q7_option2 = l1_q7_option2;
+        ListeningTestPart1QuesionAdapter.l1_q7_option3 = l1_q7_option3;
+        ListeningTestPart1QuesionAdapter.l1_q7_option4 = l1_q7_option4;
+        ListeningTestPart1QuesionAdapter.l1_q8_audio = l1_q8_audio;
+        ListeningTestPart1QuesionAdapter.l1_q8_option1 = l1_q8_option1;
+        ListeningTestPart1QuesionAdapter.l1_q8_option2 = l1_q8_option2;
+        ListeningTestPart1QuesionAdapter.l1_q8_option3 = l1_q8_option3;
+        ListeningTestPart1QuesionAdapter.l1_q8_option4 = l1_q8_option4;
 
     }
 
@@ -233,16 +233,16 @@ public class ListeningTestPart1QuesionAdapter extends BaseAdapter{
         final ImageView imageView3  = convertView.findViewById(R.id.imageViewRadio3);
         final ImageView imageView4  = convertView.findViewById(R.id.imageViewRadio4);
 
-        final String questions_audio[]  = {l1_q1_audio,l1_q2_audio,l1_q3_audio,l1_q4_audio,l1_q5_audio,l1_q6_audio,l1_q7_audio,l1_q8_audio,null};
-        final String question_option1[] = {l1_q1_option1,l1_q2_option1,l1_q3_option3,l1_q4_option1,l1_q5_option1,l1_q6_option1,l1_q7_option1,l1_q8_option1,null};
-        final String question_option2[] = {l1_q1_option2,l1_q2_option2,l1_q3_option2,l1_q4_option2,l1_q5_option2,l1_q6_option2,l1_q7_option2,l1_q8_option2,null};
-        final String question_option3[] = {l1_q1_option3,l1_q2_option3,l1_q3_option3,l1_q4_option3,l1_q5_option3,l1_q6_option3,l1_q7_option3,l1_q8_option3,null};
-        final String question_option4[] = {l1_q1_option4,l1_q2_option4,l1_q3_option4,l1_q4_option4,l1_q5_option4,l1_q6_option4,l1_q7_option4,l1_q8_option4,null};
+        final String[] questions_audio = {l1_q1_audio, l1_q2_audio, l1_q3_audio, l1_q4_audio, l1_q5_audio, l1_q6_audio, l1_q7_audio, l1_q8_audio, null};
+        final String[] question_option1 = {l1_q1_option1, l1_q2_option1, l1_q3_option3, l1_q4_option1, l1_q5_option1, l1_q6_option1, l1_q7_option1, l1_q8_option1, null};
+        final String[] question_option2 = {l1_q1_option2, l1_q2_option2, l1_q3_option2, l1_q4_option2, l1_q5_option2, l1_q6_option2, l1_q7_option2, l1_q8_option2, null};
+        final String[] question_option3 = {l1_q1_option3, l1_q2_option3, l1_q3_option3, l1_q4_option3, l1_q5_option3, l1_q6_option3, l1_q7_option3, l1_q8_option3, null};
+        final String[] question_option4 = {l1_q1_option4, l1_q2_option4, l1_q3_option4, l1_q4_option4, l1_q5_option4, l1_q6_option4, l1_q7_option4, l1_q8_option4, null};
 
         final ListView lv = convertView.findViewById(R.id.correctanswer);
         final ListView lv1 = convertView.findViewById(R.id.userAnswer);
 
-        ImageButton imageButtonPlay = (ImageButton)convertView.findViewById(R.id.buttonPlay);
+        ImageButton imageButtonPlay = convertView.findViewById(R.id.buttonPlay);
         final View finalConvertView = convertView;
         final View finalConvertView1 = convertView;
         imageButtonPlay.setOnClickListener(new View.OnClickListener() {
@@ -302,7 +302,7 @@ public class ListeningTestPart1QuesionAdapter extends BaseAdapter{
 
             }
         });
-            String correct_answer[] = {l1_q1_answer,l1_q2_answer,l1_q3_answer,l1_q4_answer,l1_q5_answer,l1_q6_answer,l1_q7_answer,l1_q8_answer};
+        String[] correct_answer = {l1_q1_answer, l1_q2_answer, l1_q3_answer, l1_q4_answer, l1_q5_answer, l1_q6_answer, l1_q7_answer, l1_q8_answer};
             String image1 = "https://online.celpip.biz/uploads/part1_listening/"+question_option1[0];
             String image2 = "https://online.celpip.biz/uploads/part1_listening/"+question_option2[0];
             String image3 = "https://online.celpip.biz/uploads/part1_listening/"+question_option3[0];

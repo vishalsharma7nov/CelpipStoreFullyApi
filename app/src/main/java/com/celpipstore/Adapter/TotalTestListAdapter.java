@@ -15,10 +15,8 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.celpipstore.GetterAndSetterClasses.TotalTest;
 import com.celpipstore.GetterAndSetterClasses.TotalTestList;
-import com.celpipstore.JsonData.JsonDataHandler;
-import com.celpipstore.ListeningTestQuestionActivity;
+import com.celpipstore.Tests.ListeningTest.ListeningTestQuestionActivity;
 import com.celpipstore.R;
 
 import java.util.List;

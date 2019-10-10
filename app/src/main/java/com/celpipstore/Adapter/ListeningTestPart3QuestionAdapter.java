@@ -31,7 +31,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.celpipstore.Tests.LISTENING_part2;
+import com.celpipstore.Tests.ListeningTest.LISTENING_part2;
 import com.celpipstore.R;
 
 import java.util.HashMap;
@@ -99,34 +99,34 @@ public class ListeningTestPart3QuestionAdapter extends BaseAdapter{
     public ListeningTestPart3QuestionAdapter(Context c, String id, String test_code, String converstaion_1_audio, String q1_audio, String q1_option1, String q1_option2, String q1_option3, String q1_option4, String q2_audio, String q2_option1, String q2_option2, String q2_option3, String q2_option4, String q3_audio, String q3_option1, String q3_option2, String q3_option3, String q3_option4, String q4_audio, String q4_option1, String q4_option2, String q4_option3, String q4_option4, String q5_audio, String q5_option1, String q5_option2, String q5_option3, String q5_option4)
     {
         this.c=c;
-        this.id         = id;
-        this.test_code  = test_code;
-        this.converstaion_1_audio = converstaion_1_audio;
-        this.q1_audio   = q1_audio;
-        this.q1_option1 = q1_option1;
-        this.q1_option2 = q1_option2;
-        this.q1_option3 = q1_option3;
-        this.q1_option4 = q1_option4;
-        this.q2_audio   = q2_audio;
-        this.q2_option1 = q2_option1;
-        this.q2_option2 = q2_option2;
-        this.q2_option3 = q2_option3;
-        this.q2_option4 = q2_option4;
-        this.q3_audio   = q3_audio;
-        this.q3_option1 = q3_option1;
-        this.q3_option2 = q3_option2;
-        this.q3_option3 = q3_option3;
-        this.q3_option4 = q3_option4;
-        this.q4_audio   = q4_audio;
-        this.q4_option1 = q4_option1;
-        this.q4_option2 = q4_option2;
-        this.q4_option3 = q4_option3;
-        this.q4_option4 = q4_option4;
-        this.q5_audio   = q5_audio;
-        this.q5_option1 = q5_option1;
-        this.q5_option2 = q5_option2;
-        this.q5_option3 = q5_option3;
-        this.q5_option4 = q5_option4;
+        ListeningTestPart3QuestionAdapter.id = id;
+        ListeningTestPart3QuestionAdapter.test_code = test_code;
+        ListeningTestPart3QuestionAdapter.converstaion_1_audio = converstaion_1_audio;
+        ListeningTestPart3QuestionAdapter.q1_audio = q1_audio;
+        ListeningTestPart3QuestionAdapter.q1_option1 = q1_option1;
+        ListeningTestPart3QuestionAdapter.q1_option2 = q1_option2;
+        ListeningTestPart3QuestionAdapter.q1_option3 = q1_option3;
+        ListeningTestPart3QuestionAdapter.q1_option4 = q1_option4;
+        ListeningTestPart3QuestionAdapter.q2_audio = q2_audio;
+        ListeningTestPart3QuestionAdapter.q2_option1 = q2_option1;
+        ListeningTestPart3QuestionAdapter.q2_option2 = q2_option2;
+        ListeningTestPart3QuestionAdapter.q2_option3 = q2_option3;
+        ListeningTestPart3QuestionAdapter.q2_option4 = q2_option4;
+        ListeningTestPart3QuestionAdapter.q3_audio = q3_audio;
+        ListeningTestPart3QuestionAdapter.q3_option1 = q3_option1;
+        ListeningTestPart3QuestionAdapter.q3_option2 = q3_option2;
+        ListeningTestPart3QuestionAdapter.q3_option3 = q3_option3;
+        ListeningTestPart3QuestionAdapter.q3_option4 = q3_option4;
+        ListeningTestPart3QuestionAdapter.q4_audio = q4_audio;
+        ListeningTestPart3QuestionAdapter.q4_option1 = q4_option1;
+        ListeningTestPart3QuestionAdapter.q4_option2 = q4_option2;
+        ListeningTestPart3QuestionAdapter.q4_option3 = q4_option3;
+        ListeningTestPart3QuestionAdapter.q4_option4 = q4_option4;
+        ListeningTestPart3QuestionAdapter.q5_audio = q5_audio;
+        ListeningTestPart3QuestionAdapter.q5_option1 = q5_option1;
+        ListeningTestPart3QuestionAdapter.q5_option2 = q5_option2;
+        ListeningTestPart3QuestionAdapter.q5_option3 = q5_option3;
+        ListeningTestPart3QuestionAdapter.q5_option4 = q5_option4;
 
     }
 
@@ -152,10 +152,10 @@ public class ListeningTestPart3QuestionAdapter extends BaseAdapter{
         convertView=in.inflate(R.layout.test_adapter_listeningtestpart2,null);
 
 
-        final RadioButton t1=(RadioButton) convertView.findViewById(R.id.radioButtonOption1);
-        final RadioButton t2=(RadioButton) convertView.findViewById(R.id.radioButtonOption2);
-        final RadioButton t3=(RadioButton) convertView.findViewById(R.id.radioButtonOption3);
-        final RadioButton t4=(RadioButton) convertView.findViewById(R.id.radioButtonOption4);
+        final RadioButton t1= convertView.findViewById(R.id.radioButtonOption1);
+        final RadioButton t2= convertView.findViewById(R.id.radioButtonOption2);
+        final RadioButton t3= convertView.findViewById(R.id.radioButtonOption3);
+        final RadioButton t4= convertView.findViewById(R.id.radioButtonOption4);
 
         final Button b2NextQuestion = convertView.findViewById(R.id.buttonNextQuestion2);
         final Button b3NextQuestion = convertView.findViewById(R.id.buttonNextQuestion3);
@@ -163,21 +163,21 @@ public class ListeningTestPart3QuestionAdapter extends BaseAdapter{
         final Button b5NextQuestion = convertView.findViewById(R.id.buttonNextQuestion5);
         final Button b6NextQuestion = convertView.findViewById(R.id.buttonFinish);
 
-        final String questions_audio[]  = {q1_audio,q2_audio,q3_audio,q4_audio,q5_audio,null};
-        final String question_option1[] = {q1_option1,q2_option1,q3_option3,q4_option1,q5_option1,null};
-        final String question_option2[] = {q1_option2,q2_option2,q3_option2,q4_option2,q5_option2,null};
-        final String question_option3[] = {q1_option3,q2_option3,q3_option3,q4_option3,q5_option3,null};
-        final String question_option4[] = {q1_option4,q2_option4,q3_option4,q4_option4,q5_option4,null};
+        final String[] questions_audio = {q1_audio, q2_audio, q3_audio, q4_audio, q5_audio, null};
+        final String[] question_option1 = {q1_option1, q2_option1, q3_option3, q4_option1, q5_option1, null};
+        final String[] question_option2 = {q1_option2, q2_option2, q3_option2, q4_option2, q5_option2, null};
+        final String[] question_option3 = {q1_option3, q2_option3, q3_option3, q4_option3, q5_option3, null};
+        final String[] question_option4 = {q1_option4, q2_option4, q3_option4, q4_option4, q5_option4, null};
 
         SharedPreferences bb = c.getSharedPreferences("my_prefs", 0);
         final String tokenCode = bb.getString("tokenCode", "tokenCode");
         final String member_id = bb.getString("member_id", "member_id");
 
-        seekbar = (SeekBar)  convertView.findViewById(R.id.seekbar);
-        textViewStart = (TextView) convertView.findViewById(R.id.textViewStartTime);
-        textViewStop  = (TextView) convertView.findViewById(R.id.textViewStopTime);
+        seekbar = convertView.findViewById(R.id.seekbar);
+        textViewStart = convertView.findViewById(R.id.textViewStartTime);
+        textViewStop  = convertView.findViewById(R.id.textViewStopTime);
 
-        ImageButton imageButtonPlay = (ImageButton)convertView.findViewById(R.id.buttonPlay);
+        ImageButton imageButtonPlay = convertView.findViewById(R.id.buttonPlay);
         imageButtonPlay.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
