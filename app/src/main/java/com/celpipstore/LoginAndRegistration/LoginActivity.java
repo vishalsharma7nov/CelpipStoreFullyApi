@@ -5,6 +5,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
@@ -220,13 +221,21 @@ public class LoginActivity extends AppCompatActivity
                             int abc = Integer.parseInt(obj.getString("response"));
                             if (abc == 1)
                             {
-                                String id = obj.getJSONObject("").getString("id");
+                                String member_id = obj.getJSONObject("").getString("id");
+                                String coins = obj.getJSONObject("").getString("coins");
                                 Intent intent = new Intent(LoginActivity.this, Dashboard.class);
                                 intent.putExtra("username",Username);
                                 intent.putExtra("password",Password);
-                                intent.putExtra("member_id",id);
+                                intent.putExtra("member_id",member_id);
                                 session.createLoginSession(Username, Password);
                                 startActivity(intent);
+                                SharedPreferences prefs = getSharedPreferences("my_prefs", MODE_PRIVATE);
+                                SharedPreferences.Editor edit = prefs.edit();
+                                edit.putString("username", username.getText().toString());
+                                edit.putString("password", password.getText().toString());
+                                edit.putString("member_id", member_id);
+                                edit.putString("coins", coins);
+                                edit.commit();
                                 loading.dismiss();
                                 Toast.makeText(LoginActivity.this, "Login Successful!!!", Toast.LENGTH_SHORT).show();
                             }

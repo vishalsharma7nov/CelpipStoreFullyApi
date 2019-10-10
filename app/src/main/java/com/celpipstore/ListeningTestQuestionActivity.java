@@ -105,12 +105,10 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listening_test_question);
-
         ConnectivityManager ConnectionManager=(ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo=ConnectionManager.getActiveNetworkInfo();
         if(networkInfo != null && networkInfo.isConnected()==true )
         {
-
         }
         else
         {
@@ -120,23 +118,19 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
 
                         // do something when the button is clicked
                         public void onClick(DialogInterface arg0, int arg1) {
-
                             Intent intent = new Intent();
                             intent.setComponent(new ComponentName("com.android.settings", "com.android.settings.Settings$DataUsageSummaryActivity"));
                             startActivity(intent);
                             recreate();
-
                         }
                     })
                     .show();
             Toast.makeText(ListeningTestQuestionActivity.this, "Network Not Available", Toast.LENGTH_LONG).show();
-
         }
         MediaController mediaController = new MediaController(this);
         videoView = (VideoView)findViewById(R.id.videoView);
         videoView.setMediaController(mediaController);
         progressBar = (ProgressBar)findViewById(R.id.progrss);
-
         loadingAudio = new ProgressDialog(ListeningTestQuestionActivity.this);
         listView = (ListView)findViewById(R.id.listView);
         imageButtonPlay = (ImageButton)findViewById(R.id.buttonPlay);
@@ -145,12 +139,10 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
         buttonPracticeTestSubmit  = (Button)findViewById(R.id.buttonPracticeTestSubmit);
         buttonQuestionsPart5  = (Button)findViewById(R.id.buttonQuestions);
         imageButtonPause = (ImageButton)findViewById(R.id.buttonPause);
-
         linearLayoutFrame1 = (LinearLayout)findViewById(R.id.frame1);
         linearLayoutFrame2 = (LinearLayout)findViewById(R.id.frame2);
         linearLayoutFrame3 = (LinearLayout)findViewById(R.id.framePracttcieTest);
         linearLayoutFrame4 = (LinearLayout)findViewById(R.id.frame3);
-
         seekbar = (SeekBar)findViewById(R.id.seekbar);
         seekbar.setClickable(false);
         seekbar.setOnTouchListener(new View.OnTouchListener() {
@@ -163,22 +155,16 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
         textViewStop = (TextView)findViewById(R.id.textViewStopTime);
         textViewInstruction = (TextView)findViewById(R.id.textViewInstruction);
         imageButtonPause.setVisibility(View.GONE);
-
         radioButton1 = (RadioButton)findViewById(R.id.practiceTestRadio1);
         radioButton2 = (RadioButton)findViewById(R.id.practiceTestRadio2);
         radioButton3 = (RadioButton)findViewById(R.id.practiceTestRadio3);
         radioButton4 = (RadioButton)findViewById(R.id.practiceTestRadio4);
-
-
         imageView = (ImageView)findViewById(R.id.imageView);
-
         SharedPreferences bb = getSharedPreferences("my_prefs", 0);
         String member_id = bb.getString("member_id", "member_id");
-
         Intent intent = getIntent();
         String test_id = bb.getString("test_id","test_id");
         String test_code = intent.getStringExtra("t2");
-
         url = "http://online.celpip.biz/api/accessnewtest?memberid="+member_id+"&testid="+test_id+"&testcode="+test_code;
         practicetest = "http://online.celpip.biz/api/accessnewtest?memberid="+member_id+"&testid=29&testcode="+test_code;
         part1 = "http://online.celpip.biz/api/accessnewtest?memberid="+member_id+"&testid=20&testcode="+test_code;
@@ -187,7 +173,7 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
         part4 = "http://online.celpip.biz/api/accessnewtest?memberid="+member_id+"&testid=17&testcode="+test_code;
         part5 = "http://online.celpip.biz/api/accessnewtest?memberid="+member_id+"&testid=16&testcode="+test_code;
         part6 = "http://online.celpip.biz/api/accessnewtest?memberid="+member_id+"&testid=15&testcode="+test_code;
-
+        Log.e("===APIQUESTIONS",url);
         sendRequest();
         button.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -235,9 +221,7 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
                         mediaPlayer.stop();
                         Toast.makeText(ListeningTestQuestionActivity.this, "Stopped", Toast.LENGTH_SHORT).show();
                     }
-
                 }
-
             }
         });
         imageButtonPause.setOnClickListener(new View.OnClickListener() {
@@ -255,8 +239,6 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
                     imageButtonPause.setImageResource(R.drawable.ic_pause_black_24dp);
                     Toast.makeText(ListeningTestQuestionActivity.this, "Play", Toast.LENGTH_SHORT).show();
                 }
-
-
             }
         });
         imageButtonPlay.setOnClickListener(new View.OnClickListener() {
@@ -292,17 +274,14 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
                     linearLayoutFrame2.setVisibility(View.GONE);
                     linearLayoutFrame4.setVisibility(View.VISIBLE);
                     progressBar.setVisibility(View.VISIBLE);
-
                     new PlayMusic().execute();
                 }
                 if (url.equals(part6))
                 {
                     new PlayMusic().execute();
                 }
-
             }
         });
-
     }
 
     private Runnable UpdateAudioTime = new Runnable() {
@@ -313,7 +292,6 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
                     TimeUnit.MILLISECONDS.toSeconds((long) startTime) -
                             TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.
                                     toMinutes((long) startTime)))
-
             );
             finalTime = mediaPlayer.getDuration();
             textViewStop.setText(String.format("%d min, %d sec",
@@ -322,7 +300,6 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
                             TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes((long)
                                     finalTime)))
             );
-
             seekbar.setProgress((int)startTime);
             if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.LOLLIPOP) {
                 seekbar.setSecondaryProgressTintList(ColorStateList.valueOf(Color.RED));
@@ -330,7 +307,6 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
             myHandler.postDelayed(this, 100);
         }
     };
-
 
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
@@ -342,7 +318,6 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
     }
 
     protected void exitByBackKey() {
-
         AlertDialog alertbox = new AlertDialog.Builder(this)
                 .setMessage("Do you want to exit?")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -352,11 +327,9 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
                     public void onClick(DialogInterface arg0, int arg1) {
                         finish();
                         mediaPlayer.stop();
-                        //close();
                     }
                 })
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {
-
                     // do something when the button is clicked
                     public void onClick(DialogInterface arg0, int arg1) {
                     }
@@ -495,9 +468,10 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
                                     RequestQueue requestQueue = Volley.newRequestQueue(ListeningTestQuestionActivity.this);
                                     requestQueue.add(stringRequest);
                                 }
-
                         } catch (JSONException e) {
                             e.printStackTrace();
+                            loading.dismiss();
+                            Toast.makeText(getApplicationContext(), "Error"+e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                         }
                     }
                 },
@@ -508,7 +482,6 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 });
-
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
     }

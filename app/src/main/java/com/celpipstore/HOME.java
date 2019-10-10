@@ -45,6 +45,7 @@ public class HOME extends AppCompatActivity
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         session = new SessionManager(getApplicationContext());
+        session.checkLogin();
         Login = findViewById(R.id.loginHome);
         Register = findViewById(R.id.registerHome);
         Login.setOnClickListener(new View.OnClickListener() {

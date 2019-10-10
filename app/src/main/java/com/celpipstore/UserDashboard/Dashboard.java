@@ -13,6 +13,7 @@ import android.os.Bundle;
 import android.os.Handler;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AlertDialog;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.support.design.widget.NavigationView;
@@ -24,6 +25,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
+import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -36,6 +38,7 @@ import com.android.volley.toolbox.Volley;
 import com.celpipstore.Adapter.ExpandableListAdapter;
 import com.celpipstore.DICTATION_TESTS;
 import com.celpipstore.FILL_IN_THE_BLANKS;
+import com.celpipstore.GetterAndSetterClasses.VocabularyTest;
 import com.celpipstore.LISTENING_part1;
 import com.celpipstore.LoginAndRegistration.SessionManager;
 import com.celpipstore.Tests.LISTENING_part2;
@@ -56,63 +59,29 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class Dashboard extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
+public class Dashboard extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
     protected ExpandableListAdapter listAdapter;
     protected ExpandableListView expListView;
     protected List<String> listDataHeader;
     protected HashMap<String, List<String>> listDataChild;
-    protected TextView textViewTotalCoins;
-    protected String username;
-    protected String password;
-    protected String member_id;
-    protected String id,total_coins;
+    protected TextView textViewTotalCoins,textViewUsername;
+    protected String username,password,id,total_coins,member_id,API;
     protected ImageView vocabularyimage,spottingerrorimage,dictationimage,comprehensionimage,rearrangeimage,fillintheblanksimage,listeningimage,readingimage,writingimage,speakingimage;
+    protected ImageView imageViewScreenSaver;
     protected SessionManager sessionManager;
+    protected RelativeLayout relativeLayout;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_dashboard);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-
-        ConnectivityManager ConnectionManager=(ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo=ConnectionManager.getActiveNetworkInfo();
-        if(networkInfo != null && networkInfo.isConnected()==true )
-        {
-//            Toast.makeText(DASHBOARD.this, "Network Available", Toast.LENGTH_LONG).show();
-        }
-        else
-        {
-            AlertDialog alertbox = new AlertDialog.Builder(this)
-                    .setMessage("Check Your Internet Connention?")
-                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-
-                        // do something when the button is clicked
-                        public void onClick(DialogInterface arg0, int arg1) {
-
-                            Intent intent = new Intent();
-                            intent.setComponent(new ComponentName("com.android.settings", "com.android.settings.Settings$DataUsageSummaryActivity"));
-                            startActivity(intent);
-                            recreate();
-
-                        }
-                    })
-                    .show();
-            Toast.makeText(Dashboard.this, "Network Not Available", Toast.LENGTH_LONG).show();
-
-        }
-
-        Intent intent = getIntent();
-        username = intent.getStringExtra("username");
-        password = intent.getStringExtra("password");
-        member_id = intent.getStringExtra("member_id");
-        textViewTotalCoins = (TextView)findViewById(R.id.textViewTotalCoins);
-        SharedPreferences prefs = getSharedPreferences("my_prefs", MODE_PRIVATE);
-        SharedPreferences.Editor edit = prefs.edit();
-        edit.putString("member_id", member_id);
-        edit.commit();
+        relativeLayout = findViewById(R.id.relativeLayout);
+        relativeLayout.setVisibility(View.GONE);
+        textViewTotalCoins = findViewById(R.id.textViewTotalCoins);
+        textViewUsername = findViewById(R.id.textViewUsername);
+        imageViewScreenSaver = findViewById(R.id.imageViewScreenSaver);
         final Handler handler = new Handler();
         final Runnable runnable = new Runnable() {
             @Override
@@ -121,553 +90,100 @@ public class Dashboard extends AppCompatActivity
                 handler.postDelayed(this,1000);//10 second delay
             }
         };handler.postDelayed(runnable,1000);
-
+        sessionManager = new SessionManager(getApplicationContext());
+        HashMap<String, String> user = sessionManager.getUserDetails();
+        username = user.get(SessionManager.KEY_USERNAME);
+        password = user.get(SessionManager.KEY_PASSWORD);
+        textViewUsername.setText("Welcome, "+username);
+        API = "http://online.celpip.biz/api/login?password="+password+"&username="+username;
 //-----------------------------------------------------------------------------------------//
-
-        vocabularyimage      = (ImageView)findViewById(R.id.vocabularyimage);
-
+        vocabularyimage      = findViewById(R.id.vocabularyimage);
         vocabularyimage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ConnectivityManager ConnectionManager=(ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
-                NetworkInfo networkInfo=ConnectionManager.getActiveNetworkInfo();
-                if(networkInfo != null && networkInfo.isConnected()==true )
-                {
-                    Intent intent = new Intent(Dashboard.this, VOCABULARY_TESTS.class);
-                    intent.putExtra("member_id",member_id);
-                    startActivity(intent);
-
-                }
-                else
-                {
-                    AlertDialog alertbox = new AlertDialog.Builder(Dashboard.this)
-                            .setMessage("Check Your Internet Connention?")
-                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-
-                                // do something when the button is clicked
-                                public void onClick(DialogInterface arg0, int arg1) {
-
-                                    Intent intent = new Intent();
-                                    intent.setComponent(new ComponentName("com.android.settings", "com.android.settings.Settings$DataUsageSummaryActivity"));
-                                    startActivity(intent);
-                                    recreate();
-                                }
-                            })
-                            .show();
-                    Toast.makeText(Dashboard.this, "Network Not Available", Toast.LENGTH_LONG).show();
-
-                }
+                Intent intent = new Intent(getApplicationContext(), VOCABULARY_TESTS.class);
+                startActivity(intent);
             }
         });
-        spottingerrorimage   = (ImageView)findViewById(R.id.spottingerrorimage);
+        spottingerrorimage   = findViewById(R.id.spottingerrorimage);
         spottingerrorimage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                ConnectivityManager ConnectionManager=(ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
-                NetworkInfo networkInfo=ConnectionManager.getActiveNetworkInfo();
-                if(networkInfo != null && networkInfo.isConnected()==true )
-                {
-                    Intent intent = new Intent(Dashboard.this, SPOTTING_THE_ERRORS.class);
-                    intent.putExtra("member_id",member_id);
-                    startActivity(intent);
-
-                }
-                else
-                {
-                    AlertDialog alertbox = new AlertDialog.Builder(Dashboard.this)
-                            .setMessage("Check Your Internet Connention?")
-                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-
-                                // do something when the button is clicked
-                                public void onClick(DialogInterface arg0, int arg1) {
-
-                                    Intent intent = new Intent();
-                                    intent.setComponent(new ComponentName("com.android.settings", "com.android.settings.Settings$DataUsageSummaryActivity"));
-                                    startActivity(intent);
-                                    recreate();
-                                }
-                            })
-                            .show();
-                    Toast.makeText(Dashboard.this, "Network Not Available", Toast.LENGTH_LONG).show();
-
-                }
+                Intent intent = new Intent(getApplicationContext(), SPOTTING_THE_ERRORS.class);
+                startActivity(intent);
             }
         });
-        dictationimage       = (ImageView)findViewById(R.id.dictationimage);
+        dictationimage       = findViewById(R.id.dictationimage);
         dictationimage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ConnectivityManager ConnectionManager=(ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
-                NetworkInfo networkInfo=ConnectionManager.getActiveNetworkInfo();
-                if(networkInfo != null && networkInfo.isConnected()==true )
-                {
-                    Intent intent = new Intent(Dashboard.this, DICTATION_TESTS.class);
-                    intent.putExtra("member_id",member_id);
-                    startActivity(intent);
-                }
-                else
-                {
-                    AlertDialog alertbox = new AlertDialog.Builder(Dashboard.this)
-                            .setMessage("Check Your Internet Connention?")
-                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-
-                                // do something when the button is clicked
-                                public void onClick(DialogInterface arg0, int arg1) {
-
-                                    Intent intent = new Intent();
-                                    intent.setComponent(new ComponentName("com.android.settings", "com.android.settings.Settings$DataUsageSummaryActivity"));
-                                    startActivity(intent);
-                                    recreate();
-                                }
-                            })
-                            .show();
-                    Toast.makeText(Dashboard.this, "Network Not Available", Toast.LENGTH_LONG).show();
-
-                }
+                Intent intent = new Intent(getApplicationContext(), DICTATION_TESTS.class);
+                startActivity(intent);
             }
         });
-        comprehensionimage   = (ImageView)findViewById(R.id.comprehensionimage);
+        comprehensionimage   = findViewById(R.id.comprehensionimage);
         comprehensionimage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
             }
         });
-        rearrangeimage       = (ImageView)findViewById(R.id.rearrangeimage);
+        rearrangeimage       = findViewById(R.id.rearrangeimage);
         rearrangeimage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ConnectivityManager ConnectionManager=(ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
-                NetworkInfo networkInfo=ConnectionManager.getActiveNetworkInfo();
-                if(networkInfo != null && networkInfo.isConnected()==true )
-                {
-                    Intent intent = new Intent(Dashboard.this, RE_ARRANGE.class);
-                    intent.putExtra("member_id",member_id);
-                    startActivity(intent);
-                }
-                else
-                {
-                    AlertDialog alertbox = new AlertDialog.Builder(Dashboard.this)
-                            .setMessage("Check Your Internet Connention?")
-                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-
-                                // do something when the button is clicked
-                                public void onClick(DialogInterface arg0, int arg1) {
-
-                                    Intent intent = new Intent();
-                                    intent.setComponent(new ComponentName("com.android.settings", "com.android.settings.Settings$DataUsageSummaryActivity"));
-                                    startActivity(intent);
-                                    recreate();
-                                }
-                            })
-                            .show();
-                    Toast.makeText(Dashboard.this, "Network Not Available", Toast.LENGTH_LONG).show();
-
-                }
-
+                Intent intent = new Intent(getApplicationContext(), RE_ARRANGE.class);
+                startActivity(intent);
             }
         });
-        fillintheblanksimage = (ImageView)findViewById(R.id.fillintheblanksimage);
+        fillintheblanksimage = findViewById(R.id.fillintheblanksimage);
         fillintheblanksimage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                ConnectivityManager ConnectionManager=(ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
-                NetworkInfo networkInfo=ConnectionManager.getActiveNetworkInfo();
-                if(networkInfo != null && networkInfo.isConnected()==true )
-                {
-                    Intent intent = new Intent(Dashboard.this, FILL_IN_THE_BLANKS.class);
-                    intent.putExtra("member_id",member_id);
-                    startActivity(intent);
-                }
-                else
-                {
-                    AlertDialog alertbox = new AlertDialog.Builder(Dashboard.this)
-                            .setMessage("Check Your Internet Connention?")
-                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-
-                                // do something when the button is clicked
-                                public void onClick(DialogInterface arg0, int arg1) {
-
-                                    Intent intent = new Intent();
-                                    intent.setComponent(new ComponentName("com.android.settings", "com.android.settings.Settings$DataUsageSummaryActivity"));
-                                    startActivity(intent);
-                                    recreate();
-//                        //close();
-
-
-                                }
-                            })
-                            .show();
-                    Toast.makeText(Dashboard.this, "Network Not Available", Toast.LENGTH_LONG).show();
-
-                }
+                Intent intent = new Intent(getApplicationContext(), FILL_IN_THE_BLANKS.class);
+                startActivity(intent);
             }
         });
-        listeningimage       = (ImageView)findViewById(R.id.listeningimage);
+        listeningimage       = findViewById(R.id.listeningimage);
         listeningimage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                ConnectivityManager ConnectionManager=(ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
-                NetworkInfo networkInfo=ConnectionManager.getActiveNetworkInfo();
-                if(networkInfo != null && networkInfo.isConnected()==true )
-                {
-                    Intent intent = new Intent(Dashboard.this, LISTENING_part2.class);
-                    intent.putExtra("member_id",member_id);
-                    startActivity(intent);
-                }
-                else
-                {
-                    AlertDialog alertbox = new AlertDialog.Builder(Dashboard.this)
-                            .setMessage("Check Your Internet Connention?")
-                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-
-                                // do something when the button is clicked
-                                public void onClick(DialogInterface arg0, int arg1) {
-
-                                    Intent intent = new Intent();
-                                    intent.setComponent(new ComponentName("com.android.settings", "com.android.settings.Settings$DataUsageSummaryActivity"));
-                                    startActivity(intent);
-                                    recreate();
-                                }
-                            })
-                            .show();
-                    Toast.makeText(Dashboard.this, "Network Not Available", Toast.LENGTH_LONG).show();
-
-                }
-
+                networkChecker();
+                Intent intent = new Intent(getApplicationContext(), LISTENING_part2.class);
+                startActivity(intent);
             }
         });
-        readingimage         = (ImageView)findViewById(R.id.readingimage);
+        readingimage         = findViewById(R.id.readingimage);
         readingimage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                ConnectivityManager ConnectionManager=(ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
-                NetworkInfo networkInfo=ConnectionManager.getActiveNetworkInfo();
-                if(networkInfo != null && networkInfo.isConnected()==true )
-                {
-                    Intent intent = new Intent(Dashboard.this, READING.class);
-                    intent.putExtra("member_id",member_id);
-                    startActivity(intent);
-                }
-                else
-                {
-                    AlertDialog alertbox = new AlertDialog.Builder(Dashboard.this)
-                            .setMessage("Check Your Internet Connention?")
-                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-
-                                // do something when the button is clicked
-                                public void onClick(DialogInterface arg0, int arg1) {
-
-                                    Intent intent = new Intent();
-                                    intent.setComponent(new ComponentName("com.android.settings", "com.android.settings.Settings$DataUsageSummaryActivity"));
-                                    startActivity(intent);
-                                    recreate();
-//                        //close();
-                                }
-                            })
-                            .show();
-                    Toast.makeText(Dashboard.this, "Network Not Available", Toast.LENGTH_LONG).show();
-
-                }
-
+                Intent intent = new Intent(getApplicationContext(), READING.class);
+                startActivity(intent);
             }
         });
-        speakingimage        = (ImageView)findViewById(R.id.speakingimage);
+        speakingimage        = findViewById(R.id.speakingimage);
         speakingimage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                ConnectivityManager ConnectionManager=(ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
-                NetworkInfo networkInfo=ConnectionManager.getActiveNetworkInfo();
-                if(networkInfo != null && networkInfo.isConnected()==true )
-                {
-                    Intent intent = new Intent(Dashboard.this, SPEAKING.class);
-                    intent.putExtra("member_id",member_id);
-                    startActivity(intent);
-                }
-                else
-                {
-                    AlertDialog alertbox = new AlertDialog.Builder(Dashboard.this)
-                            .setMessage("Check Your Internet Connention?")
-                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-
-                                // do something when the button is clicked
-                                public void onClick(DialogInterface arg0, int arg1) {
-
-                                    Intent intent = new Intent();
-                                    intent.setComponent(new ComponentName("com.android.settings", "com.android.settings.Settings$DataUsageSummaryActivity"));
-                                    startActivity(intent);
-                                    recreate();
-//                        //close();
-                                }
-                            })
-                            .show();
-                    Toast.makeText(Dashboard.this, "Network Not Available", Toast.LENGTH_LONG).show();
-
-                }
-
+                Intent intent = new Intent(getApplicationContext(), SPEAKING.class);
+                startActivity(intent);
             }
         });
-        writingimage         = (ImageView)findViewById(R.id.writingimage);
+        writingimage         = findViewById(R.id.writingimage);
         writingimage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                ConnectivityManager ConnectionManager=(ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
-                NetworkInfo networkInfo=ConnectionManager.getActiveNetworkInfo();
-                if(networkInfo != null && networkInfo.isConnected()==true )
-                {
-                    Intent intent = new Intent(Dashboard.this, WRITING.class);
-                    intent.putExtra("member_id",member_id);
-                    startActivity(intent);
-                }
-                else
-                {
-                    AlertDialog alertbox = new AlertDialog.Builder(Dashboard.this)
-                            .setMessage("Check Your Internet Connention?")
-                            .setPositiveButton("OK", new DialogInterface.OnClickListener() {
-
-                                // do something when the button is clicked
-                                public void onClick(DialogInterface arg0, int arg1) {
-
-                                    Intent intent = new Intent();
-                                    intent.setComponent(new ComponentName("com.android.settings", "com.android.settings.Settings$DataUsageSummaryActivity"));
-                                    startActivity(intent);
-                                    recreate();
-//                        //close();
-                                }
-                            })
-                            .show();
-                    Toast.makeText(Dashboard.this, "Network Not Available", Toast.LENGTH_LONG).show();
-
-                }
+                Intent intent = new Intent(getApplicationContext(), WRITING.class);
+                startActivity(intent);
             }
         });
-
-
-
-//-----------------------------------------------------------------------------------------//
-
-                    //expandable list
-
-
-//---------------------------------------------------------------------------------//
-
-        // get the listview
-        expListView = (ExpandableListView) findViewById(R.id.lvExp);
-
-        // preparing list data
-        prepareListData();
-
-        listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild);
-
-        // setting list adapter
-        expListView.setAdapter(listAdapter);
-
-        // Listview Group click listener
-        expListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
-
-            @Override
-            public boolean onGroupClick(ExpandableListView parent, View v,
-                                        int groupPosition, long id) {
-
-                if(groupPosition == 0 )
-                {
-                    Intent intent = new Intent(Dashboard.this,Dashboard.class);
-                    startActivity(intent);
-
-                }
-                else if(groupPosition == 1 )
-                {
-                    Intent intent = new Intent(Dashboard.this,EARN_FEE_COINS.class);
-                    startActivity(intent);
-
-                }
-
-                else if(groupPosition == 2 )
-                {
-
-
-                }
-                else if(groupPosition == 3 )
-                {
-
-
-                }
-
-                else if(groupPosition == 4 )
-                {
-
-
-                }
-                else if(groupPosition == 5 )
-                {
-
-                }
-                else if(groupPosition == 6 )
-                {
-
-
-                }
-                else if(groupPosition == 7 )
-                {
-                    Intent intent = new Intent(Dashboard.this,COIN_MANAGEMENT.class);
-                    startActivity(intent);
-
-                }
-
-                return false;
-            }
-        });
-
-        // Listview Group expanded listener
-        expListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
-
-            @Override
-            public void onGroupExpand(int groupPosition) {
-
-            }
-        });
-
-        // Listview Group collasped listener
-        expListView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
-
-            @Override
-            public void onGroupCollapse(int groupPosition) {
-
-
-            }
-        });
-
-        // Listview on child click listener
-        expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
-
-            @Override
-            public boolean onChildClick(ExpandableListView parent, View v,
-                                        int groupPosition, int childPosition, long id) {
-
-        if (groupPosition == 2) {
-            if (childPosition == 0) {
-                Intent intent = new Intent(Dashboard.this, VOCABULARY_TESTS.class);
-                startActivity(intent);
-            } else if (childPosition == 1) {
-                Intent intent = new Intent(Dashboard.this, SPOTTING_THE_ERRORS.class);
-                startActivity(intent);
-            } else if (childPosition == 2) {
-                Intent intent = new Intent(Dashboard.this, DICTATION_TESTS.class);
-                startActivity(intent);
-            }
-            else if (childPosition ==3)
-            {
-                Intent intent = new Intent(Dashboard.this,RE_ARRANGE.class);
-                startActivity(intent);
-            }
-            else
-            {
-                Intent intent = new Intent(Dashboard.this,FILL_IN_THE_BLANKS.class);
-                startActivity(intent);
-            }
-        }
-
-
-        if(groupPosition==3)
-        {
-            if (childPosition==0)
-            {
-                Intent intent = new Intent(Dashboard.this, LISTENING_part1.class);
-                startActivity(intent);
-            }
-        }
-        if (groupPosition==4)
-        {
-            if(childPosition==0)
-            {
-                Intent intent = new Intent(Dashboard.this,LISTENING_part2.class);
-                startActivity(intent);
-            }
-            if(childPosition==1)
-            {
-                Intent intent = new Intent(Dashboard.this,READING.class);
-                startActivity(intent);
-            }
-            if(childPosition==2)
-            {
-                Intent intent = new Intent(Dashboard.this,SPEAKING.class);
-                startActivity(intent);
-            }
-            if(childPosition==3)
-            {
-                Intent intent = new Intent(Dashboard.this,WRITING.class);
-                startActivity(intent);
-            }
-        }
-
-        if(groupPosition==5)
-        {
-            if (childPosition==0)
-            {
-                String url = "https://online.celpip.biz/member/dashboard";
-                Intent i = new Intent(Intent.ACTION_VIEW);
-                i.setData(Uri.parse(url));
-                startActivity(i);
-            }
-            else
-            {
-                String url = "https://online.celpip.biz/member/dashboard";
-                Intent i = new Intent(Intent.ACTION_VIEW);
-                i.setData(Uri.parse(url));
-                startActivity(i);
-            }
-
-        }
-        if(groupPosition==6)
-        {
-           if (childPosition==0) {
-               String url = "https://online.celpip.biz/member/dashboard";
-               Intent i = new Intent(Intent.ACTION_VIEW);
-               i.setData(Uri.parse(url));
-               startActivity(i);
-           }
-           else
-           {
-               String url = "https://online.celpip.biz/member/dashboard";
-               Intent i = new Intent(Intent.ACTION_VIEW);
-               i.setData(Uri.parse(url));
-               startActivity(i);
-           }
-
-        }
-
-
-                // TODO Auto-generated method stub
-//                Toast.makeText(
-//                        getApplicationContext(),
-//                        listDataHeader.get(groupPosition)
-//                                + " : "
-//                                + listDataChild.get(
-//                                listDataHeader.get(groupPosition)).get(
-//                                childPosition), Toast.LENGTH_SHORT)
-//                        .show();
-                return false;
-            }
-        });
-
-
-
-//---------------------------------------------------------------------------------//
-
-
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
                 this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
         drawer.addDrawerListener(toggle);
         toggle.syncState();
-
-        NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
+        NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        navigation();
     }
 
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -679,7 +195,7 @@ public class Dashboard extends AppCompatActivity
         return super.onKeyDown(keyCode, event);
     }
     public void login() {
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://online.celpip.biz/api/login?password="+password+"&username="+username,
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, API,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
@@ -687,24 +203,24 @@ public class Dashboard extends AppCompatActivity
                         {
                             JSONObject obj = new JSONObject(response);
                             int abc = Integer.parseInt(obj.getString("response"));
-
                             if (abc == 1)
                             {
                                 id          = obj.getJSONObject("").getString("id");
                                 total_coins = obj.getJSONObject("").getString("coins");
-                                textViewTotalCoins.setText("Total Coins = "+total_coins);
+                                textViewTotalCoins.setText("Balance Coins = "+total_coins);
+                                SharedPreferences prefs = getSharedPreferences("my_prefs", MODE_PRIVATE);
+                                SharedPreferences.Editor edit = prefs.edit();
+                                edit.putString("member_id", id);
+                                edit.commit();
+                                relativeLayout.setVisibility(View.VISIBLE);
+                                imageViewScreenSaver.setVisibility(View.GONE);
                             }
-
                         } catch (JSONException e) {
                             e.printStackTrace();
                         }
-
-
                     }
                 },
-
                 new Response.ErrorListener() {
-
                     @Override
                     public void onErrorResponse(VolleyError error) {
                     }
@@ -716,13 +232,10 @@ public class Dashboard extends AppCompatActivity
                 return params;
             }
         };
-
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
         requestQueue.add(stringRequest);
     }
-
     protected void exitByBackKey() {
-
         AlertDialog alertbox = new AlertDialog.Builder(this)
                 .setMessage("Do you want to logout?")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -730,27 +243,20 @@ public class Dashboard extends AppCompatActivity
                     // do something when the button is clicked
                     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
                     public void onClick(DialogInterface arg0, int arg1) {
-
                         Intent intent= new Intent(Dashboard.this, LoginActivity.class);
                         intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
                         startActivity(intent);
                         finish();
-                        //close();
                         sessionManager.logoutUser();
-
                     }
                 })
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {
-
                     // do something when the button is clicked
                     public void onClick(DialogInterface arg0, int arg1) {
                     }
                 })
                 .show();
-
     }
-
-
     @Override
     public void onBackPressed() {
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
@@ -762,15 +268,10 @@ public class Dashboard extends AppCompatActivity
             moveTaskToBack(true);
         }
     }
-
-
-
     @SuppressWarnings("StatementWithEmptyBody")
     @Override
     public boolean onNavigationItemSelected(MenuItem item) {
         // Handle navigation view item clicks here.
-
-
         DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
         drawer.closeDrawer(GravityCompat.START);
         return true;
@@ -779,7 +280,6 @@ public class Dashboard extends AppCompatActivity
     public void prepareListData() {
         listDataHeader = new ArrayList<String>();
         listDataChild = new HashMap<String, List<String>>();
-
         // Adding child data
         listDataHeader.add("DASHBOARD");
         listDataHeader.add("EARN FEE COINS");
@@ -789,9 +289,6 @@ public class Dashboard extends AppCompatActivity
         listDataHeader.add("SUPPORT");
         listDataHeader.add("SETTINGS");
         listDataHeader.add("COIN MANAGEMENT");
-
-
-
         // Adding child data
         List<String> dashboard       = new ArrayList<String>();
         List<String> earn_fee_coins = new ArrayList<String>();
@@ -815,9 +312,6 @@ public class Dashboard extends AppCompatActivity
         setting.add("UPDATE PROFILE");
         setting.add("CHANGE PASSWORD");
         List<String> coin_management = new ArrayList<String>();
-
-
-
         listDataChild.put(listDataHeader.get(0), dashboard); // Header, Child data
         listDataChild.put(listDataHeader.get(1), earn_fee_coins);
         listDataChild.put(listDataHeader.get(2), competitive_english);
@@ -826,8 +320,190 @@ public class Dashboard extends AppCompatActivity
         listDataChild.put(listDataHeader.get(5), support);
         listDataChild.put(listDataHeader.get(6), setting);
         listDataChild.put(listDataHeader.get(7), coin_management);
+    }
+    private void navigation()
+    {
+        //---------------------------------------------------------------------------------//
+        //expandable list
+        // get the listview
+        expListView = (ExpandableListView) findViewById(R.id.lvExp);
+        // preparing list data
+        prepareListData();
+        listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild);
+        // setting list adapter
+        expListView.setAdapter(listAdapter);
+        // Listview Group click listener
+        expListView.setOnGroupClickListener(new ExpandableListView.OnGroupClickListener() {
 
+            @Override
+            public boolean onGroupClick(ExpandableListView parent, View v,
+                                        int groupPosition, long id) {
+                if(groupPosition == 0 )
+                {
+                    Intent intent = new Intent(Dashboard.this,Dashboard.class);
+                    startActivity(intent);
+                }
+                else if(groupPosition == 1 )
+                {
+                    Intent intent = new Intent(Dashboard.this,EARN_FEE_COINS.class);
+                    startActivity(intent);
+                }
+                else if(groupPosition == 2 )
+                {
+                }
+                else if(groupPosition == 3 )
+                {
+                }
+                else if(groupPosition == 4 )
+                {
+                }
+                else if(groupPosition == 5 )
+                {
+                }
+                else if(groupPosition == 6 )
+                {
+                }
+                else if(groupPosition == 7 )
+                {
+                    Intent intent = new Intent(Dashboard.this,COIN_MANAGEMENT.class);
+                    startActivity(intent);
+                }
+                return false;
+            }
+        });
+        // Listview Group expanded listener
+        expListView.setOnGroupExpandListener(new ExpandableListView.OnGroupExpandListener() {
+            @Override
+            public void onGroupExpand(int groupPosition) {
+            }
+        });
+        // Listview Group collasped listener
+        expListView.setOnGroupCollapseListener(new ExpandableListView.OnGroupCollapseListener() {
+            @Override
+            public void onGroupCollapse(int groupPosition) {
+            }
+        });
+        // Listview on child click listener
+        expListView.setOnChildClickListener(new ExpandableListView.OnChildClickListener() {
 
+            @Override
+            public boolean onChildClick(ExpandableListView parent, View v,
+                                        int groupPosition, int childPosition, long id) {
+                if (groupPosition == 2) {
+                    if (childPosition == 0) {
+                        Intent intent = new Intent(Dashboard.this, VOCABULARY_TESTS.class);
+                        startActivity(intent);
+                    }
+                    else if (childPosition == 1) {
+                        Intent intent = new Intent(Dashboard.this, SPOTTING_THE_ERRORS.class);
+                        startActivity(intent);
+                    }
+                    else if (childPosition == 2) {
+                        Intent intent = new Intent(Dashboard.this, DICTATION_TESTS.class);
+                        startActivity(intent);
+                    }
+                    else if (childPosition ==3)
+                    {
+                        Intent intent = new Intent(Dashboard.this,RE_ARRANGE.class);
+                        startActivity(intent);
+                    }
+                    else
+                    {
+                        Intent intent = new Intent(Dashboard.this,FILL_IN_THE_BLANKS.class);
+                        startActivity(intent);
+                    }
+                }
+                if(groupPosition==3)
+                {
+                    if (childPosition==0)
+                    {
+                        Intent intent = new Intent(Dashboard.this, LISTENING_part1.class);
+                        startActivity(intent);
+                    }
+                }
+                if (groupPosition==4)
+                {
+                    if(childPosition==0)
+                    {
+                        Intent intent = new Intent(Dashboard.this,LISTENING_part2.class);
+                        startActivity(intent);
+                    }
+                    if(childPosition==1)
+                    {
+                        Intent intent = new Intent(Dashboard.this,READING.class);
+                        startActivity(intent);
+                    }
+                    if(childPosition==2)
+                    {
+                        Intent intent = new Intent(Dashboard.this,SPEAKING.class);
+                        startActivity(intent);
+                    }
+                    if(childPosition==3)
+                    {
+                        Intent intent = new Intent(Dashboard.this,WRITING.class);
+                        startActivity(intent);
+                    }
+                }
+                if(groupPosition==5)
+                {
+                    if (childPosition==0)
+                    {
+                        String url = "https://online.celpip.biz/member/dashboard";
+                        Intent i = new Intent(Intent.ACTION_VIEW);
+                        i.setData(Uri.parse(url));
+                        startActivity(i);
+                    }
+                    else
+                    {
+                        String url = "https://online.celpip.biz/member/dashboard";
+                        Intent i = new Intent(Intent.ACTION_VIEW);
+                        i.setData(Uri.parse(url));
+                        startActivity(i);
+                    }
+                }
+                if(groupPosition==6)
+                {
+                    if (childPosition==0) {
+                        String url = "https://online.celpip.biz/member/dashboard";
+                        Intent i = new Intent(Intent.ACTION_VIEW);
+                        i.setData(Uri.parse(url));
+                        startActivity(i);
+                    }
+                    else
+                    {
+                        String url = "https://online.celpip.biz/member/dashboard";
+                        Intent i = new Intent(Intent.ACTION_VIEW);
+                        i.setData(Uri.parse(url));
+                        startActivity(i);
+                    }
+                }
+                return false;
+            }
+        });
+    }
+    private void networkChecker(){
+        ConnectivityManager ConnectionManager=(ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo=ConnectionManager.getActiveNetworkInfo();
+        if(networkInfo != null && networkInfo.isConnected()==true )
+        {
+        }
+        else
+        {
+            AlertDialog alertbox = new AlertDialog.Builder(this)
+                    .setMessage("Check Your Internet Connention?")
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
 
+                        // do something when the button is clicked
+                        public void onClick(DialogInterface arg0, int arg1) {
+
+                            Intent intent = new Intent();
+                            intent.setComponent(new ComponentName("com.android.settings", "com.android.settings.Settings$DataUsageSummaryActivity"));
+                            startActivity(intent);
+                            recreate();
+                        }
+                    })
+                    .show();
+            Toast.makeText(Dashboard.this, "Network Not Available", Toast.LENGTH_LONG).show();
+        }
     }
 }

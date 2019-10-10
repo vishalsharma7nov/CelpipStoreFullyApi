@@ -26,24 +26,23 @@ import java.util.Map;
 
 public class RegistrationActivity extends AppCompatActivity {
 
-    EditText editTextEmailId,editTextUsername,editTextCoupons;
-    Button buttonRegister;
+    protected EditText editTextEmailId,editTextUsername,editTextCoupons;
+    protected Button buttonRegister;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_registration);
-        editTextEmailId   = (EditText)findViewById(R.id.editTextEmialId);
-        editTextUsername  = (EditText)findViewById(R.id.editTextUsername);
-        editTextCoupons   = (EditText)findViewById(R.id.editTextRefer);
-        buttonRegister = (Button)findViewById(R.id.register);
+        editTextEmailId   = findViewById(R.id.editTextEmialId);
+        editTextUsername  = findViewById(R.id.editTextUsername);
+        editTextCoupons   = findViewById(R.id.editTextRefer);
+        buttonRegister    = findViewById(R.id.register);
         buttonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 registration();
             }
         });
-
     }
 
     public void registration() {
@@ -51,7 +50,6 @@ public class RegistrationActivity extends AppCompatActivity {
         final String email = editTextEmailId.getText().toString();
         final String username = editTextUsername.getText().toString();
         final String coupons = editTextCoupons.getText().toString();
-
         StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://online.celpip.biz/api/register",
                 new Response.Listener<String>() {
                     @Override
@@ -71,10 +69,8 @@ public class RegistrationActivity extends AppCompatActivity {
                             {
                                 Toast.makeText(RegistrationActivity.this, response, Toast.LENGTH_SHORT).show();
                             }
-
                         } catch (JSONException e) {
                             e.printStackTrace();
-//                            Log.e("===JsonError",e.getLocalizedMessage());
                             loading.dismiss();
                             Toast.makeText(getApplicationContext(), "Error In Registration"+e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
                         }
@@ -84,7 +80,6 @@ public class RegistrationActivity extends AppCompatActivity {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         loading.dismiss();
-//                        Log.e("===JsonResponse",error.networkResponse.allHeaders.toString());
                         Toast.makeText(getApplicationContext(), "Error in Registration"+error.getLocalizedMessage(), Toast.LENGTH_LONG).show();
                     }
                 })
@@ -98,10 +93,7 @@ public class RegistrationActivity extends AppCompatActivity {
                 return params;
             }
         };
-
         RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
         requestQueue.add(stringRequest);
     }
-
-
 }

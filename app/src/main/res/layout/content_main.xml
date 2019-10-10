@@ -6,26 +6,24 @@
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
     tools:context=".LoginAndRegistration.LoginActivity"
-    android:background="#F2F1F1"
     tools:showIn="@layout/app_bar_main">
 
-
-
     <LinearLayout
+        android:background="@drawable/loginbackground"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:orientation="vertical">
-
         <ImageView
             android:layout_marginTop="30dp"
-            android:layout_width="201dp"
+            android:layout_width="250dp"
             android:layout_height="70dp"
             android:layout_gravity="left"
             android:layout_marginLeft="20dp"
             android:src="@drawable/loginpage" />
-
         <EditText
             android:id="@+id/username"
+            android:padding="10dp"
+            android:background="@drawable/textfieldoutline"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginLeft="20dp"
@@ -33,10 +31,11 @@
             android:layout_marginRight="20dp"
             android:drawableLeft="@drawable/ic_person_black_24dp"
             android:hint="USERNAME"
-            android:inputType="textEmailAddress" />
-
+            android:inputType="textAutoComplete|textEmailAddress" />
         <EditText
             android:id="@+id/password"
+            android:padding="10dp"
+            android:background="@drawable/textfield"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginTop="30dp"
@@ -44,23 +43,20 @@
             android:layout_marginRight="20dp"
             android:drawableLeft="@drawable/ic_lock_black_24dp"
             android:hint="PASSWORD"
-            android:inputType="textPassword" />
-
+            android:autofillHints="true"
+            android:inputType="textAutoComplete|textPassword" />
         <Button
             android:id="@+id/login"
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_marginLeft="145dp"
-            android:layout_marginTop="50dp"
-            android:background="@color/colorPrimary"
+            android:layout_gravity="center"
+            android:padding="5dp"
+            android:layout_margin="50dp"
+            android:background="@drawable/buttonoutline"
             android:drawableRight="@drawable/ic_lock_open_black_24dp"
             android:text="LOGIN"
             android:textColor="#FCFCFC" />
 
-
-
     </LinearLayout>
-
-
 
 </android.support.constraint.ConstraintLayout>
