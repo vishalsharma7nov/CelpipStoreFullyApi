@@ -18,24 +18,27 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.celpipstore.Adapter.TotalTestListAdapter;
+import com.celpipstore.GetterAndSetterClasses.TotalTestList;
+import com.celpipstore.JsonData.JsonDataHandlerTestList;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class ListeningTestListActivity extends AppCompatActivity {
-    String url;
-    ListView listView;
+import java.util.List;
 
+public class ListeningTestListActivity extends AppCompatActivity {
+    protected String url;
+    protected ListView listView;
+    protected List<TotalTestList> totalTestLists;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_listening_test_list);
-
         ConnectivityManager ConnectionManager=(ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo=ConnectionManager.getActiveNetworkInfo();
         if(networkInfo != null && networkInfo.isConnected()==true )
         {
-//            Toast.makeText(DASHBOARD.this, "Network Available", Toast.LENGTH_LONG).show();
         }
         else
         {
@@ -45,26 +48,21 @@ public class ListeningTestListActivity extends AppCompatActivity {
 
                         // do something when the button is clicked
                         public void onClick(DialogInterface arg0, int arg1) {
-
                             Intent intent = new Intent();
                             intent.setComponent(new ComponentName("com.android.settings", "com.android.settings.Settings$DataUsageSummaryActivity"));
                             startActivity(intent);
                             recreate();
-//                        //close();
                         }
                     })
                     .show();
             Toast.makeText(ListeningTestListActivity.this, "Network Not Available", Toast.LENGTH_LONG).show();
-
         }
-
         Intent intent = getIntent();
         String id = intent.getStringExtra("t1");
         url = "http://online.celpip.biz/api/getTestList?testId="+id;
-        listView = (ListView)findViewById(R.id.listViewListeningTestListPart2);
+        listView = findViewById(R.id.listViewListeningTestListPart2);
         sendRequest();
     }
-
 
     private void sendRequest() {
         final ProgressDialog loading = ProgressDialog.show(this,"Loading","Please wait...",false,false);
@@ -72,11 +70,9 @@ public class ListeningTestListActivity extends AppCompatActivity {
                 new com.android.volley.Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
-
                         try {
                             JSONObject obj = new JSONObject(response);
                             int abc = Integer.parseInt(obj.getString("response"));
-
                             if (abc !=1 )
                             {
                                 loading.dismiss();
@@ -87,7 +83,11 @@ public class ListeningTestListActivity extends AppCompatActivity {
                                 loading.dismiss();
                                 showJSON(response);
                             }
-                        } catch (JSONException e) {
+                        }
+                        catch (JSONException e)
+                        {
+                            loading.dismiss();
+                            Toast.makeText(getApplicationContext(), "Application Under Maintenance!!", Toast.LENGTH_SHORT).show();
                             e.printStackTrace();
                         }
                     }
@@ -99,14 +99,13 @@ public class ListeningTestListActivity extends AppCompatActivity {
                         Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_LONG).show();
                     }
                 });
-
         RequestQueue requestQueue = Volley.newRequestQueue(this);
         requestQueue.add(stringRequest);
     }
     private void showJSON(String json) {
         JsonDataHandlerTestList jsonHolderListing = new JsonDataHandlerTestList(json);
-        jsonHolderListing.parseJSON();
-        ListeningTestListAdapter ca = new ListeningTestListAdapter(this,jsonHolderListing.id,jsonHolderListing.test_code);
+        totalTestLists=jsonHolderListing.parseJSON();
+        TotalTestListAdapter ca = new TotalTestListAdapter(this,totalTestLists);
         listView.setAdapter(ca);
         ca.notifyDataSetChanged();
     }

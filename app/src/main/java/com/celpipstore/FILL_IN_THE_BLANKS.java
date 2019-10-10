@@ -22,20 +22,18 @@ public class FILL_IN_THE_BLANKS extends AppCompatActivity{
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_fill__in__the__blanks);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
     }
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
             exitByBackKey();
-            //moveTaskToBack(false);
             return true;
         }
         return super.onKeyDown(keyCode, event);
     }
 
     protected void exitByBackKey() {
-
         AlertDialog alertbox = new AlertDialog.Builder(this)
                 .setMessage("Do you want to exit fill in the blanks test?")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
@@ -43,7 +41,6 @@ public class FILL_IN_THE_BLANKS extends AppCompatActivity{
                     // do something when the button is clicked
                     public void onClick(DialogInterface arg0, int arg1) {
                         finish();
-                        //close();
                     }
                 })
                 .setNegativeButton("No", new DialogInterface.OnClickListener() {

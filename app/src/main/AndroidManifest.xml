@@ -45,34 +45,34 @@
             android:name=".ListeningTestListActivity"
             android:label="Listening Test" />
         <activity
-            android:name=".RegistrationActivity"
+            android:name=".LoginAndRegistration.RegistrationActivity"
             android:label="Registration" />
         <activity
-            android:name=".WRITING"
+            android:name=".Tests.WRITING"
             android:label="@string/title_activity_writing"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".READING"
+            android:name=".Tests.READING"
             android:label="@string/title_activity_reading"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".SPEAKING"
+            android:name=".Tests.SPEAKING"
             android:label="@string/title_activity_speaking"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".COIN_MANAGEMENT"
+            android:name=".UserDashboard.COIN_MANAGEMENT"
             android:label="@string/title_activity_coin__management"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".SETTING"
+            android:name=".UserDashboard.SETTING"
             android:label="@string/title_activity_setting"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".SUPPORT"
+            android:name=".UserDashboard.SUPPORT"
             android:label="@string/title_activity_support"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".LISTENING_part2"
+            android:name=".Tests.LISTENING_part2"
             android:label="@string/title_activity_listening_part2"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -104,7 +104,7 @@
             android:label="@string/title_activity_spotting__the__errors"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".VOCABULARY_TESTS"
+            android:name=".Tests.VOCABULARY_TESTS"
             android:label="@string/title_activity_vocabulary__tests"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -112,11 +112,11 @@
             android:label="@string/title_activity_competitive__english"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".EARN_FEE_COINS"
+            android:name=".UserDashboard.EARN_FEE_COINS"
             android:label="@string/title_activity_earn__fee__coins"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Dashboard"
+            android:name=".UserDashboard.Dashboard"
             android:label="@string/title_activity_dashboard"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -130,27 +130,27 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".CONTACTUS"
+            android:name=".StaticActivity.CONTACTUS"
             android:label="@string/title_activity_contactus"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".FAQ"
+            android:name=".StaticActivity.FAQ"
             android:label="FAQ"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".WHYUS"
+            android:name=".StaticActivity.WHYUS"
             android:label="@string/title_activity_whyus"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".OurFeature"
+            android:name=".StaticActivity.OurFeature"
             android:label="@string/title_activity_our_feature"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".AboutUS"
+            android:name=".StaticActivity.AboutUS"
             android:label="@string/title_activity_about_us"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".MainActivity"
+            android:name=".LoginAndRegistration.LoginActivity"
             android:label="@string/app_name"
             android:theme="@style/AppTheme.NoActionBar" />
 

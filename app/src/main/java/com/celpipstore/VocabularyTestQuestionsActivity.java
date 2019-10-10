@@ -26,12 +26,12 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.celpipstore.Adapter.VocabularyTestQuestionAdapter;
+import com.celpipstore.JsonData.JsonDataHandlerVocabularyTestQuestionList;
+import com.celpipstore.Tests.VOCABULARY_TESTS;
 
 import org.json.JSONException;
 import org.json.JSONObject;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class VocabularyTestQuestionsActivity extends AppCompatActivity {
 
@@ -54,7 +54,6 @@ public class VocabularyTestQuestionsActivity extends AppCompatActivity {
         NetworkInfo networkInfo=ConnectionManager.getActiveNetworkInfo();
         if(networkInfo != null && networkInfo.isConnected()==true )
         {
-//            Toast.makeText(DASHBOARD.this, "Network Available", Toast.LENGTH_LONG).show();
         }
         else
         {
@@ -64,7 +63,6 @@ public class VocabularyTestQuestionsActivity extends AppCompatActivity {
 
                         // do something when the button is clicked
                         public void onClick(DialogInterface arg0, int arg1) {
-
                             Intent intent = new Intent();
                             intent.setComponent(new ComponentName("com.android.settings", "com.android.settings.Settings$DataUsageSummaryActivity"));
                             startActivity(intent);
@@ -73,28 +71,21 @@ public class VocabularyTestQuestionsActivity extends AppCompatActivity {
                     })
                     .show();
             Toast.makeText(VocabularyTestQuestionsActivity.this, "Network Not Available", Toast.LENGTH_LONG).show();
-
         }
-
         radioGroupOptions = findViewById(R.id.radiogroupOptions);
-
         viewReportLayout = (LinearLayout)findViewById(R.id.viewReportLayout);
         questionLayout = (LinearLayout)findViewById(R.id.questionLayout);
-
         textViewQuestion = (TextView)findViewById(R.id.question);
         textViewGivenAnswer = (TextView)findViewById(R.id.givenanswer);
         textViewCorrectAnswer = (TextView)findViewById(R.id.correctanswer);
-
         radioButtonOption1 =(RadioButton)findViewById(R.id.radioButtonOption1);
         radioButtonOption2 =(RadioButton)findViewById(R.id.radioButtonOption2);
         radioButtonOption3 =(RadioButton)findViewById(R.id.radioButtonOption3);
         radioButtonOption4 =(RadioButton)findViewById(R.id.radioButtonOption4);
-
         radioButtonOption1.setChecked(true);
         radioButtonOption2.setChecked(false);
         radioButtonOption3.setChecked(false);
         radioButtonOption4.setChecked(false);
-
         buttonSubmit = (Button)findViewById(R.id.submit);
         buttonNext = (Button)findViewById(R.id.next);
         buttonViewReport = (Button)findViewById(R.id.viewReport);
@@ -143,7 +134,7 @@ public class VocabularyTestQuestionsActivity extends AppCompatActivity {
         buttonFinish.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(VocabularyTestQuestionsActivity.this,VOCABULARY_TESTS.class);
+                Intent intent = new Intent(VocabularyTestQuestionsActivity.this, VOCABULARY_TESTS.class);
                 startActivity(intent);
             }
         });
@@ -352,13 +343,10 @@ public class VocabularyTestQuestionsActivity extends AppCompatActivity {
     private void showJSON(String json) {
         JsonDataHandlerVocabularyTestQuestionList jsonHolderListing = new JsonDataHandlerVocabularyTestQuestionList(json);
         jsonHolderListing.parseJSON();
-
         setData(position);
         VocabularyTestQuestionAdapter ca = new VocabularyTestQuestionAdapter(this,jsonHolderListing.id,jsonHolderListing.level_id, jsonHolderListing.title,jsonHolderListing.question_image,jsonHolderListing.options1,jsonHolderListing.options2,jsonHolderListing.options3,jsonHolderListing.options4);
         listView.setAdapter(ca);
         ca.notifyDataSetChanged();
-
-
     }
 
     private void setData(int position) {
@@ -367,6 +355,5 @@ public class VocabularyTestQuestionsActivity extends AppCompatActivity {
         radioButtonOption2.setText(JsonDataHandlerVocabularyTestQuestionList.options2[position]);
         radioButtonOption3.setText(JsonDataHandlerVocabularyTestQuestionList.options3[position]);
         radioButtonOption4.setText(JsonDataHandlerVocabularyTestQuestionList.options4[position]);
-
     }
 }

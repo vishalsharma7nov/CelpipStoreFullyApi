@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".COIN_MANAGEMENT"
+    tools:context=".UserDashboard.COIN_MANAGEMENT"
     tools:showIn="@layout/app_bar_coin__management">
 
 </android.support.constraint.ConstraintLayout>

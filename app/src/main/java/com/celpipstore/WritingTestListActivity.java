@@ -12,13 +12,19 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.celpipstore.Adapter.TotalTestListAdapter;
+import com.celpipstore.GetterAndSetterClasses.TotalTestList;
+import com.celpipstore.JsonData.JsonDataHandlerTestList;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.List;
+
 public class WritingTestListActivity extends AppCompatActivity {
-    String url;
-    ListView listView;
+    protected List<TotalTestList> totalTestLists;
+    protected String url;
+    protected ListView listView;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,7 +73,7 @@ public class WritingTestListActivity extends AppCompatActivity {
     private void showJSON(String json) {
         JsonDataHandlerTestList jsonHolderListing = new JsonDataHandlerTestList(json);
         jsonHolderListing.parseJSON();
-        WritingTestListAdapter ca = new WritingTestListAdapter(this,jsonHolderListing.id,jsonHolderListing.test_code);
+        TotalTestListAdapter ca = new TotalTestListAdapter(this,totalTestLists);
         listView.setAdapter(ca);
         ca.notifyDataSetChanged();
     }

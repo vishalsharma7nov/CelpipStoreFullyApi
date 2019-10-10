@@ -5,7 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     app:layout_behavior="@string/appbar_scrolling_view_behavior"
-    tools:context=".EARN_FEE_COINS"
+    tools:context=".UserDashboard.EARN_FEE_COINS"
     tools:showIn="@layout/app_bar_earn__fee__coins">
 
 
