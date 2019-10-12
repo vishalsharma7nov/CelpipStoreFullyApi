@@ -1,4 +1,4 @@
-package com.celpipstore.Adapter;
+package com.celpipstore.Adapter.ListeningTestAdapter;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -41,7 +41,7 @@ import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
-import com.celpipstore.JsonData.JsonDataHandlerListeningPart1;
+import com.celpipstore.JsonData.ListeningTest.JsonDataHandlerListeningPart1;
 import com.celpipstore.Tests.ListeningTest.LISTENING_part2;
 import com.celpipstore.R;
 

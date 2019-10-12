@@ -49,18 +49,18 @@ import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
-import com.celpipstore.Adapter.ListeningTestPart1QuestionAdapter;
-import com.celpipstore.Adapter.ListeningTestPart2QuestionAdapter;
-import com.celpipstore.Adapter.ListeningTestPart3QuestionAdapter;
-import com.celpipstore.Adapter.ListeningTestPart4QuestionAdapter;
-import com.celpipstore.Adapter.ListeningTestPart5QuestionAdapter;
-import com.celpipstore.Adapter.ListeningTestPart6QuestionAdapter;
-import com.celpipstore.JsonData.JsonDataHandlerListeningPart1;
-import com.celpipstore.JsonData.JsonDataHandlerListeningPart2;
-import com.celpipstore.JsonData.JsonDataHandlerListeningPart4;
-import com.celpipstore.JsonData.JsonDataHandlerListeningPart5;
-import com.celpipstore.JsonData.JsonDataHandlerListeningPart6;
-import com.celpipstore.JsonData.JsonDataHandlerPracticeTestListening;
+import com.celpipstore.Adapter.ListeningTestAdapter.ListeningTestPart1QuestionAdapter;
+import com.celpipstore.Adapter.ListeningTestAdapter.ListeningTestPart2QuestionAdapter;
+import com.celpipstore.Adapter.ListeningTestAdapter.ListeningTestPart3QuestionAdapter;
+import com.celpipstore.Adapter.ListeningTestAdapter.ListeningTestPart4QuestionAdapter;
+import com.celpipstore.Adapter.ListeningTestAdapter.ListeningTestPart5QuestionAdapter;
+import com.celpipstore.Adapter.ListeningTestAdapter.ListeningTestPart6QuestionAdapter;
+import com.celpipstore.JsonData.ListeningTest.JsonDataHandlerListeningPart1;
+import com.celpipstore.JsonData.ListeningTest.JsonDataHandlerListeningPart2;
+import com.celpipstore.JsonData.ListeningTest.JsonDataHandlerListeningPart4;
+import com.celpipstore.JsonData.ListeningTest.JsonDataHandlerListeningPart5;
+import com.celpipstore.JsonData.ListeningTest.JsonDataHandlerListeningPart6;
+import com.celpipstore.JsonData.ListeningTest.JsonDataHandlerPracticeTestListening;
 import com.celpipstore.R;
 
 import org.json.JSONException;
@@ -319,7 +319,6 @@ public class ListeningTestQuestionActivity extends AppCompatActivity {
         AlertDialog alertbox = new AlertDialog.Builder(this)
                 .setMessage("Do you want to exit?")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-
                     // do something when the button is clicked
                     @RequiresApi(api = Build.VERSION_CODES.LOLLIPOP)
                     public void onClick(DialogInterface arg0, int arg1) {

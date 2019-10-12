@@ -1,4 +1,4 @@
-package com.celpipstore.Adapter;
+package com.celpipstore.Adapter.VocabularyTestAdapter;
 
 import android.content.Context;
 import android.content.Intent;
@@ -9,18 +9,17 @@ import android.widget.BaseAdapter;
 import android.widget.Button;
 import android.widget.TextView;
 
-import com.celpipstore.GetterAndSetterClasses.VocabularyTest;
+import com.celpipstore.GetterAndSetterClasses.VocabularyTest.VocabularyTest;
 import com.celpipstore.R;
 import com.celpipstore.Tests.VocabularyTest.VocabularyTestQuestionsActivity;
 
-import java.util.ArrayList;
 import java.util.List;
 
 
 public class VocabularyTestAdapter extends BaseAdapter{
 
-    Context c;
-    List<VocabularyTest> vocabularyTests = new ArrayList<>();
+    private Context c;
+    private List<VocabularyTest> vocabularyTests;
 
     public VocabularyTestAdapter(Context c, List<VocabularyTest> vocabularyTests)
     {

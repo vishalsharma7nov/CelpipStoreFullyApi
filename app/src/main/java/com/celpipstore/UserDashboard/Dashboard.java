@@ -24,6 +24,7 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.ExpandableListView;
 import android.widget.ImageView;
+import android.widget.ProgressBar;
 import android.widget.RelativeLayout;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -69,6 +70,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
     protected ImageView imageViewScreenSaver;
     protected SessionManager sessionManager;
     protected RelativeLayout relativeLayout;
+    protected ProgressBar progressBar;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -80,6 +82,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         textViewTotalCoins = findViewById(R.id.textViewTotalCoins);
         textViewUsername = findViewById(R.id.textViewUsername);
         imageViewScreenSaver = findViewById(R.id.imageViewScreenSaver);
+        progressBar = findViewById(R.id.progressBar);
         final Handler handler = new Handler();
         final Runnable runnable = new Runnable() {
             @Override
@@ -212,6 +215,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
                                 edit.commit();
                                 relativeLayout.setVisibility(View.VISIBLE);
                                 imageViewScreenSaver.setVisibility(View.GONE);
+                                progressBar.setVisibility(View.GONE);
                             }
                         } catch (JSONException e) {
                             e.printStackTrace();

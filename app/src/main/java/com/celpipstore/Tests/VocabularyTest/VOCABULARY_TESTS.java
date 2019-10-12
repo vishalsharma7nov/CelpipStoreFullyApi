@@ -20,9 +20,9 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.celpipstore.Adapter.VocabularyTestAdapter;
-import com.celpipstore.GetterAndSetterClasses.VocabularyTest;
-import com.celpipstore.JsonData.JsonDataHandlerVocabularyTestList;
+import com.celpipstore.Adapter.VocabularyTestAdapter.VocabularyTestAdapter;
+import com.celpipstore.GetterAndSetterClasses.VocabularyTest.VocabularyTest;
+import com.celpipstore.JsonData.VocabularyTest.JsonDataHandlerVocabularyTestList;
 import com.celpipstore.R;
 
 import org.json.JSONException;

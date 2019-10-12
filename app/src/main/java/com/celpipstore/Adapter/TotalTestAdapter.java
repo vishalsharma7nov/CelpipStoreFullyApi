@@ -27,8 +27,8 @@ import static android.content.Context.MODE_PRIVATE;
 
 public class TotalTestAdapter extends BaseAdapter{
 
-    Context c;
-    List<TotalTest> totalTests;
+    protected Context c;
+    protected List<TotalTest> totalTests;
 
     public TotalTestAdapter(Context c, List<TotalTest> totalTests)
     {

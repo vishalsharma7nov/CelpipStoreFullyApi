@@ -33,13 +33,13 @@
         <activity android:name=".Tests.ListeningTest.ListeningTestQuestionActivity" />
         <activity android:name=".Tests.VocabularyTest.VocabularyTestQuestionsActivity" />
         <activity
-            android:name=".SpeakingTestListActivity"
+            android:name=".Tests.SpeakingTest.SpeakingTestListActivity"
             android:label="Speaking Tests" />
         <activity
-            android:name=".WritingTestListActivity"
+            android:name=".Tests.WritingTest.WritingTestListActivity"
             android:label="Writing Tests" />
         <activity
-            android:name=".ReadingTestListActivity"
+            android:name=".Tests.ReadingTest.ReadingTestListActivity"
             android:label="Reading Tests" />
         <activity
             android:name=".Tests.ListeningTest.ListeningTestListActivity"

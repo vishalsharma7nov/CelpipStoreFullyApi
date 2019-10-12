@@ -1,4 +1,4 @@
-package com.celpipstore.Adapter;
+package com.celpipstore.Adapter.ListeningTestAdapter;
 
 import android.app.ProgressDialog;
 import android.content.Context;
@@ -39,7 +39,7 @@ import java.util.Map;
 import java.util.concurrent.TimeUnit;
 
 
-public class ListeningTestPart2QuestionAdapter extends BaseAdapter{
+public class ListeningTestPart3QuestionAdapter extends BaseAdapter{
 
     Context c;
     String url = "https://online.celpip.biz/uploads/part2_listening/";
@@ -96,37 +96,37 @@ public class ListeningTestPart2QuestionAdapter extends BaseAdapter{
     public static String q5_option4;
     public static String q5_answer;
 
-    public ListeningTestPart2QuestionAdapter(Context c, String id, String test_code, String converstaion_1_audio, String q1_audio, String q1_option1, String q1_option2, String q1_option3, String q1_option4, String q2_audio, String q2_option1, String q2_option2, String q2_option3, String q2_option4, String q3_audio, String q3_option1, String q3_option2, String q3_option3, String q3_option4, String q4_audio, String q4_option1, String q4_option2, String q4_option3, String q4_option4, String q5_audio, String q5_option1, String q5_option2, String q5_option3, String q5_option4)
+    public ListeningTestPart3QuestionAdapter(Context c, String id, String test_code, String converstaion_1_audio, String q1_audio, String q1_option1, String q1_option2, String q1_option3, String q1_option4, String q2_audio, String q2_option1, String q2_option2, String q2_option3, String q2_option4, String q3_audio, String q3_option1, String q3_option2, String q3_option3, String q3_option4, String q4_audio, String q4_option1, String q4_option2, String q4_option3, String q4_option4, String q5_audio, String q5_option1, String q5_option2, String q5_option3, String q5_option4)
     {
         this.c=c;
-        ListeningTestPart2QuestionAdapter.id = id;
-        ListeningTestPart2QuestionAdapter.test_code = test_code;
-        ListeningTestPart2QuestionAdapter.converstaion_1_audio = converstaion_1_audio;
-        ListeningTestPart2QuestionAdapter.q1_audio = q1_audio;
-        ListeningTestPart2QuestionAdapter.q1_option1 = q1_option1;
-        ListeningTestPart2QuestionAdapter.q1_option2 = q1_option2;
-        ListeningTestPart2QuestionAdapter.q1_option3 = q1_option3;
-        ListeningTestPart2QuestionAdapter.q1_option4 = q1_option4;
-        ListeningTestPart2QuestionAdapter.q2_audio = q2_audio;
-        ListeningTestPart2QuestionAdapter.q2_option1 = q2_option1;
-        ListeningTestPart2QuestionAdapter.q2_option2 = q2_option2;
-        ListeningTestPart2QuestionAdapter.q2_option3 = q2_option3;
-        ListeningTestPart2QuestionAdapter.q2_option4 = q2_option4;
-        ListeningTestPart2QuestionAdapter.q3_audio = q3_audio;
-        ListeningTestPart2QuestionAdapter.q3_option1 = q3_option1;
-        ListeningTestPart2QuestionAdapter.q3_option2 = q3_option2;
-        ListeningTestPart2QuestionAdapter.q3_option3 = q3_option3;
-        ListeningTestPart2QuestionAdapter.q3_option4 = q3_option4;
-        ListeningTestPart2QuestionAdapter.q4_audio = q4_audio;
-        ListeningTestPart2QuestionAdapter.q4_option1 = q4_option1;
-        ListeningTestPart2QuestionAdapter.q4_option2 = q4_option2;
-        ListeningTestPart2QuestionAdapter.q4_option3 = q4_option3;
-        ListeningTestPart2QuestionAdapter.q4_option4 = q4_option4;
-        ListeningTestPart2QuestionAdapter.q5_audio = q5_audio;
-        ListeningTestPart2QuestionAdapter.q5_option1 = q5_option1;
-        ListeningTestPart2QuestionAdapter.q5_option2 = q5_option2;
-        ListeningTestPart2QuestionAdapter.q5_option3 = q5_option3;
-        ListeningTestPart2QuestionAdapter.q5_option4 = q5_option4;
+        ListeningTestPart3QuestionAdapter.id = id;
+        ListeningTestPart3QuestionAdapter.test_code = test_code;
+        ListeningTestPart3QuestionAdapter.converstaion_1_audio = converstaion_1_audio;
+        ListeningTestPart3QuestionAdapter.q1_audio = q1_audio;
+        ListeningTestPart3QuestionAdapter.q1_option1 = q1_option1;
+        ListeningTestPart3QuestionAdapter.q1_option2 = q1_option2;
+        ListeningTestPart3QuestionAdapter.q1_option3 = q1_option3;
+        ListeningTestPart3QuestionAdapter.q1_option4 = q1_option4;
+        ListeningTestPart3QuestionAdapter.q2_audio = q2_audio;
+        ListeningTestPart3QuestionAdapter.q2_option1 = q2_option1;
+        ListeningTestPart3QuestionAdapter.q2_option2 = q2_option2;
+        ListeningTestPart3QuestionAdapter.q2_option3 = q2_option3;
+        ListeningTestPart3QuestionAdapter.q2_option4 = q2_option4;
+        ListeningTestPart3QuestionAdapter.q3_audio = q3_audio;
+        ListeningTestPart3QuestionAdapter.q3_option1 = q3_option1;
+        ListeningTestPart3QuestionAdapter.q3_option2 = q3_option2;
+        ListeningTestPart3QuestionAdapter.q3_option3 = q3_option3;
+        ListeningTestPart3QuestionAdapter.q3_option4 = q3_option4;
+        ListeningTestPart3QuestionAdapter.q4_audio = q4_audio;
+        ListeningTestPart3QuestionAdapter.q4_option1 = q4_option1;
+        ListeningTestPart3QuestionAdapter.q4_option2 = q4_option2;
+        ListeningTestPart3QuestionAdapter.q4_option3 = q4_option3;
+        ListeningTestPart3QuestionAdapter.q4_option4 = q4_option4;
+        ListeningTestPart3QuestionAdapter.q5_audio = q5_audio;
+        ListeningTestPart3QuestionAdapter.q5_option1 = q5_option1;
+        ListeningTestPart3QuestionAdapter.q5_option2 = q5_option2;
+        ListeningTestPart3QuestionAdapter.q5_option3 = q5_option3;
+        ListeningTestPart3QuestionAdapter.q5_option4 = q5_option4;
 
     }
 
@@ -204,6 +204,7 @@ public class ListeningTestPart2QuestionAdapter extends BaseAdapter{
 
                 b2NextQuestion.setVisibility(View.GONE);
                 b3NextQuestion.setVisibility(View.VISIBLE);
+                audio_player = url+questions_audio[0];
                 t1.setText(question_option1[0]);
                 t2.setText(question_option2[0]);
                 t3.setText(question_option3[0]);
@@ -226,11 +227,12 @@ public class ListeningTestPart2QuestionAdapter extends BaseAdapter{
                 }
                 audio_player = url + questions_audio[1];
                 new PlayMusic().execute();
+                mediaPlayer.stop();
                 t1.setText(question_option1[1]);
                 t2.setText(question_option2[1]);
                 t3.setText(question_option3[1]);
                 t4.setText(question_option4[1]);
-                mediaPlayer.stop();
+
             }
         });
         b3NextQuestion.setOnClickListener(new View.OnClickListener() {
@@ -257,11 +259,12 @@ public class ListeningTestPart2QuestionAdapter extends BaseAdapter{
                 }
                 audio_player = url + questions_audio[2];
                 new PlayMusic().execute();
+                mediaPlayer.stop();
                 t1.setText(question_option1[2]);
                 t2.setText(question_option2[2]);
                 t3.setText(question_option3[2]);
                 t4.setText(question_option4[2]);
-                mediaPlayer.stop();
+
             }
         });
         b4NextQuestion.setOnClickListener(new View.OnClickListener() {
@@ -289,11 +292,12 @@ public class ListeningTestPart2QuestionAdapter extends BaseAdapter{
 
                 audio_player = url + questions_audio[3];
                 new PlayMusic().execute();
+                mediaPlayer.stop();
                 t1.setText(question_option1[3]);
                 t2.setText(question_option2[3]);
                 t3.setText(question_option3[3]);
                 t4.setText(question_option4[3]);
-                mediaPlayer.stop();
+
             }
         });
         b5NextQuestion.setOnClickListener(new View.OnClickListener() {
@@ -351,7 +355,7 @@ public class ListeningTestPart2QuestionAdapter extends BaseAdapter{
                 {
                     userAnswerQuestion5 = t4.getText().toString();
                 }
-                String urlForSubmittingOptions = "http://online.celpip.biz/api/lsPart2Submit?token="+tokenCode+"&q1_response="+userAnswerQuestion1+"&q2_response="+userAnswerQuestion2+"&q3_response="+userAnswerQuestion3+"&q4_response="+userAnswerQuestion4+"&q5_response="+userAnswerQuestion5+"&memberid="+member_id;
+                String urlForSubmittingOptions = "http://online.celpip.biz/api/lsPart3Submit?token="+tokenCode+"&q1_response="+userAnswerQuestion1+"&q2_response="+userAnswerQuestion2+"&q3_response="+userAnswerQuestion3+"&q4_response="+userAnswerQuestion4+"&q5_response="+userAnswerQuestion5+"&memberid="+member_id;
                 StringRequest stringRequest = new StringRequest(Request.Method.POST, urlForSubmittingOptions,
                         new Response.Listener<String>() {
                             @Override
@@ -395,23 +399,17 @@ public class ListeningTestPart2QuestionAdapter extends BaseAdapter{
     private Runnable UpdateSongTime = new Runnable() {
         public void run() {
             startTime = mediaPlayer.getCurrentPosition();
-            textViewStop.setText(String.format("%d min, %d sec",
-                    TimeUnit.MILLISECONDS.toMinutes((long) finalTime),
-                    TimeUnit.MILLISECONDS.toSeconds((long) finalTime) -
-                            TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes((long)
-                                    finalTime)))
-            );
-
             textViewStart.setText(String.format("%d min, %d sec",
                     TimeUnit.MILLISECONDS.toMinutes((long) startTime),
                     TimeUnit.MILLISECONDS.toSeconds((long) startTime) -
-                            TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes((long)
-                                    startTime)))
+                            TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.
+                                    toMinutes((long) startTime)))
             );
             seekbar.setProgress((int)startTime);
             myHandler.postDelayed(this, 100);
         }
     };
+
     class  PlayMusic extends AsyncTask<Void, Void, Void> {
 
         @Override

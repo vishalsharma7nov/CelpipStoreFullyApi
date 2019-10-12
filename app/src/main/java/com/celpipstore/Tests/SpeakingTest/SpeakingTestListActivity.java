@@ -1,4 +1,4 @@
-package com.celpipstore;
+package com.celpipstore.Tests.SpeakingTest;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -15,13 +15,14 @@ import com.android.volley.toolbox.Volley;
 import com.celpipstore.Adapter.TotalTestListAdapter;
 import com.celpipstore.GetterAndSetterClasses.TotalTestList;
 import com.celpipstore.JsonData.JsonDataHandlerTestList;
+import com.celpipstore.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.List;
 
-public class ReadingTestListActivity extends AppCompatActivity {
+public class SpeakingTestListActivity extends AppCompatActivity {
     protected String url;
     protected ListView listView;
     protected List<TotalTestList> totalTestLists;
@@ -32,7 +33,7 @@ public class ReadingTestListActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String id = intent.getStringExtra("t1");
         url = "http://online.celpip.biz/api/getTestList?testId="+id;
-        listView = (ListView)findViewById(R.id.listViewReadingTestList);
+        listView = findViewById(R.id.listViewReadingTestList);
         sendRequest();
     }
     private void sendRequest() {
@@ -48,7 +49,7 @@ public class ReadingTestListActivity extends AppCompatActivity {
 
                             if (abc !=1 )
                             {
-                                Toast.makeText(ReadingTestListActivity.this, "Work in Progress....", Toast.LENGTH_SHORT).show();
+                                Toast.makeText(SpeakingTestListActivity.this, "Work in Progress....", Toast.LENGTH_SHORT).show();
                             }
                             else if (abc == 1)
                             {
@@ -72,7 +73,7 @@ public class ReadingTestListActivity extends AppCompatActivity {
     }
     private void showJSON(String json) {
         JsonDataHandlerTestList jsonHolderListing = new JsonDataHandlerTestList(json);
-        totalTestLists = jsonHolderListing.parseJSON();
+        totalTestLists=jsonHolderListing.parseJSON();
         TotalTestListAdapter ca = new TotalTestListAdapter(this,totalTestLists);
         listView.setAdapter(ca);
         ca.notifyDataSetChanged();

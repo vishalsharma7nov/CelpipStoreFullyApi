@@ -1,4 +1,4 @@
-package com.celpipstore.GetterAndSetterClasses;
+package com.celpipstore.GetterAndSetterClasses.VocabularyTest;
 
 public class VocabularyTest {
     protected String id;

@@ -1,6 +1,6 @@
-package com.celpipstore.JsonData;
+package com.celpipstore.JsonData.VocabularyTest;
 
-import com.celpipstore.GetterAndSetterClasses.VocabularyTest;
+import com.celpipstore.GetterAndSetterClasses.VocabularyTest.VocabularyTest;
 import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;

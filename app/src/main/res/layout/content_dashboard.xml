@@ -13,9 +13,14 @@
     <ImageView
         android:id="@+id/imageViewScreenSaver"
         android:src="@drawable/screensaverdashboard"
-        android:scaleType="fitXY"
+        android:scaleType="center"
         android:layout_width="match_parent"
         android:layout_height="match_parent"/>
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
     <RelativeLayout
         android:id="@+id/relativeLayout"
         android:layout_width="match_parent"

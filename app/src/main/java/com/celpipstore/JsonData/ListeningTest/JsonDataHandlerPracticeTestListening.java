@@ -1,4 +1,4 @@
-package com.celpipstore.JsonData;
+package com.celpipstore.JsonData.ListeningTest;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -17,20 +17,14 @@ public class JsonDataHandlerPracticeTestListening {
     public static String option3;
     public static String option4;
     public static String answer;
-
-
-    public static final String KEY_ID              = "id";
-    public static final String KEY_TEST_CODE       = "test_code";
-
-
+    public static String KEY_ID              = "id";
+    public static String KEY_TEST_CODE       = "test_code";
     private String json;
-
     public JsonDataHandlerPracticeTestListening(String json) {
         this.json = json;
     }
 
     public void parseJSON() {
-
         try {
                 JSONObject jsonObject = new JSONObject(json);
                 id                      = jsonObject.getJSONObject("data").getString(KEY_ID);
@@ -45,10 +39,8 @@ public class JsonDataHandlerPracticeTestListening {
                 option3                 = jsonObject.getJSONObject("data").getString("option3");
                 option4                 = jsonObject.getJSONObject("data").getString("option4");
                 answer                  = jsonObject.getJSONObject("data").getString("answer");
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
-
 }

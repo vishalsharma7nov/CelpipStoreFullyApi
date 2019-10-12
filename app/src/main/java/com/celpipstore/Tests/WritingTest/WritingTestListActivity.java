@@ -1,4 +1,4 @@
-package com.celpipstore;
+package com.celpipstore.Tests.WritingTest;
 
 import android.app.ProgressDialog;
 import android.content.Intent;
@@ -15,6 +15,7 @@ import com.android.volley.toolbox.Volley;
 import com.celpipstore.Adapter.TotalTestListAdapter;
 import com.celpipstore.GetterAndSetterClasses.TotalTestList;
 import com.celpipstore.JsonData.JsonDataHandlerTestList;
+import com.celpipstore.R;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -32,7 +33,7 @@ public class WritingTestListActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String id = intent.getStringExtra("t1");
         url = "http://online.celpip.biz/api/getTestList?testId="+id;
-        listView = (ListView)findViewById(R.id.listViewReadingTestList);
+        listView = findViewById(R.id.listViewReadingTestList);
         sendRequest();
     }
     private void sendRequest() {

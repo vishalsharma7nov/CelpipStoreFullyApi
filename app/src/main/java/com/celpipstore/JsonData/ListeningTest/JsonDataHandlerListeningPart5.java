@@ -1,13 +1,13 @@
-package com.celpipstore.JsonData;
+package com.celpipstore.JsonData.ListeningTest;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
-public class JsonDataHandlerListeningPart6 {
+public class JsonDataHandlerListeningPart5 {
 
     public static String id;
     public static String test_code;
-    public static String conversation_1_audio;
+    public static String conversation_1_video;
 
     public static String q1_question;
     public static String q2_question;
@@ -15,6 +15,8 @@ public class JsonDataHandlerListeningPart6 {
     public static String q4_question;
     public static String q5_question;
     public static String q6_question;
+    public static String q7_question;
+    public static String q8_question;
 
 
     public static String q1_option1;
@@ -56,13 +58,27 @@ public class JsonDataHandlerListeningPart6 {
     public static String q6_option4;
     public static String q6_answer;
 
+    public static String q7_option1;
+    public static String q7_option2;
+    public static String q7_option3;
+    public static String q7_option4;
+    public static String q7_answer;
+
+    public static String q8_option1;
+    public static String q8_option2;
+    public static String q8_option3;
+    public static String q8_option4;
+    public static String q8_answer;
+
+
+
     public static final String KEY_ID              = "id";
     public static final String KEY_TEST_CODE       = "test_code";
 
 
     private String json;
 
-    public JsonDataHandlerListeningPart6(String json) {
+    public JsonDataHandlerListeningPart5(String json) {
         this.json = json;
     }
 
@@ -72,13 +88,15 @@ public class JsonDataHandlerListeningPart6 {
                 JSONObject jsonObject = new JSONObject(json);
                 id                   = jsonObject.getJSONObject("data").getString(KEY_ID);
                 test_code            = jsonObject.getJSONObject("data").getString(KEY_TEST_CODE);
-                conversation_1_audio = jsonObject.getJSONObject("data").getString("conversation_1_audio");
+                conversation_1_video = jsonObject.getJSONObject("data").getString("conversation_1_video");
                 q1_question          = jsonObject.getJSONObject("data").getString("q1_question");
                 q2_question          = jsonObject.getJSONObject("data").getString("q2_question");
                 q3_question          = jsonObject.getJSONObject("data").getString("q3_question");
                 q4_question          = jsonObject.getJSONObject("data").getString("q4_question");
                 q5_question          = jsonObject.getJSONObject("data").getString("q5_question");
                 q6_question          = jsonObject.getJSONObject("data").getString("q6_question");
+                q7_question          = jsonObject.getJSONObject("data").getString("q7_question");
+                q8_question          = jsonObject.getJSONObject("data").getString("q8_question");
                 q1_option1           = jsonObject.getJSONObject("data").getString("q1_option1");
                 q1_option2           = jsonObject.getJSONObject("data").getString("q1_option2");
                 q1_option3           = jsonObject.getJSONObject("data").getString("q1_option3");
@@ -109,6 +127,16 @@ public class JsonDataHandlerListeningPart6 {
                 q6_option3           = jsonObject.getJSONObject("data").getString("q6_option3");
                 q6_option4           = jsonObject.getJSONObject("data").getString("q6_option4");
                 q6_answer            = jsonObject.getJSONObject("data").getString("q6_answer");
+                q7_option1           = jsonObject.getJSONObject("data").getString("q7_option1");
+                q7_option2           = jsonObject.getJSONObject("data").getString("q7_option2");
+                q7_option3           = jsonObject.getJSONObject("data").getString("q7_option3");
+                q7_option4           = jsonObject.getJSONObject("data").getString("q7_option4");
+                q7_answer            = jsonObject.getJSONObject("data").getString("q7_answer");
+                q8_option1           = jsonObject.getJSONObject("data").getString("q8_option1");
+                q8_option2           = jsonObject.getJSONObject("data").getString("q8_option2");
+                q8_option3           = jsonObject.getJSONObject("data").getString("q8_option3");
+                q8_option4           = jsonObject.getJSONObject("data").getString("q8_option4");
+                q8_answer            = jsonObject.getJSONObject("data").getString("q8_answer");
 
 
 
