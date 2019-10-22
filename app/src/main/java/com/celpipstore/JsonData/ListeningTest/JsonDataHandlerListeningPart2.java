@@ -41,21 +41,13 @@ public class JsonDataHandlerListeningPart2 {
     public static String q5_option3;
     public static String q5_option4;
     public static String q5_answer;
-
-
-
     public static final String KEY_ID              = "id";
     public static final String KEY_TEST_CODE       = "test_code";
-
-
     private String json;
-
     public JsonDataHandlerListeningPart2(String json) {
         this.json = json;
     }
-
     public void parseJSON() {
-
         try {
                 JSONObject jsonObject = new JSONObject(json);
                 id                   = jsonObject.getJSONObject("data").getString(KEY_ID);
@@ -91,14 +83,8 @@ public class JsonDataHandlerListeningPart2 {
                 q5_option3           = jsonObject.getJSONObject("data").getString("q5_option3");
                 q5_option4           = jsonObject.getJSONObject("data").getString("q5_option4");
                 q5_answer            = jsonObject.getJSONObject("data").getString("q5_answer");
-
-
-
-
-
         } catch (JSONException e) {
             e.printStackTrace();
         }
     }
-
 }

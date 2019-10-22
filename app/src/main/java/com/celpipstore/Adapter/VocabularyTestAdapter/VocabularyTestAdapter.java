@@ -11,7 +11,7 @@ import android.widget.TextView;
 
 import com.celpipstore.GetterAndSetterClasses.VocabularyTest.VocabularyTest;
 import com.celpipstore.R;
-import com.celpipstore.Tests.VocabularyTest.VocabularyTestQuestionsActivity;
+import com.celpipstore.CelpipTests.VocabularyTest.VocabularyTestQuestionsActivity;
 
 import java.util.List;
 

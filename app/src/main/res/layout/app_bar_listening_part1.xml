@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Tests.ListeningTest.LISTENING_part1">
+    tools:context=".CelpipTests.ListeningTest.LISTENING_part1">
 
     <android.support.design.widget.AppBarLayout
         android:layout_width="match_parent"

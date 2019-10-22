@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
@@ -8,7 +9,20 @@
     tools:context=".HOME"
     tools:showIn="@layout/app_bar_home">
 
+    <ImageView
+        android:id="@+id/imageViewHomeScreenSaver"
+        android:src="@drawable/firstpagess"
+        android:scaleType="fitCenter"
+        android:background="#e9f0f0"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"/>
+    <ProgressBar
+        android:id="@+id/progressBar_Home"
+        android:layout_centerInParent="true"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"/>
     <ScrollView
+        android:id="@+id/scrollView"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
@@ -19,44 +33,42 @@
             android:paddingTop="10dp"
             android:orientation="vertical">
 
-
             <TextView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:paddingLeft="10dp"
-                android:paddingRight="10dp"
+               android:layout_margin="10dp"
                 android:singleLine="true"
                 android:text="Practice Tests"
+                android:background="@color/cardview_shadow_start_color"
                 android:textAlignment="center"
                 android:textAllCaps="true"
                 android:textColor="@color/colorPrimary"
-                android:textSize="40dp"
+                android:textSize="40sp"
                 android:textStyle="bold" />
 
             <ImageView
                 android:layout_width="match_parent"
-                android:layout_height="200dp"
-                android:layout_alignParentTop="true"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
+                android:layout_height="220dp"
+                android:background="@drawable/textfieldoutline"
+                android:padding="5dp"
+                android:scaleType="fitXY"
+                android:layout_margin="10dp"
                 android:src="@drawable/homepage" />
-
 
             <Button
                 android:id="@+id/loginHome"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginLeft="10dp"
-                android:layout_marginTop="20dp"
-                android:layout_marginRight="10dp"
-                android:background="@color/colorPrimary"
+                android:layout_margin="20dp"
+                android:background="@drawable/buttonoutline"
                 android:fontFamily="sans-serif"
-                android:text="Press Here To login IN APP"
+                android:text="Press Here To Continue"
                 android:textColor="#FCFCFC"
                 android:textStyle="bold" />
 
             <Button
                 android:id="@+id/registerHome"
+                android:visibility="gone"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginLeft="10dp"
@@ -68,18 +80,17 @@
                 android:textColor="#FCFCFC"
                 android:textStyle="bold" />
 
-
             <TextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:fontFamily="serif"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
+                android:layout_margin="10dp"
                 android:text="To improve your Competitve English Skills."
                 android:textAlignment="center"
                 android:textColor="@color/colorPrimary"
-                android:textSize="25dp"
+                android:textSize="25sp"
+                android:background="@color/cardview_shadow_start_color"
                 android:textStyle="bold" />
 
             <TextView
@@ -87,14 +98,13 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentTop="true"
                 android:layout_alignParentEnd="true"
-                android:layout_marginBottom="30dp"
                 android:fontFamily="serif"
-                android:paddingLeft="20dp"
-                android:paddingRight="20dp"
+                android:layout_margin="10dp"
                 android:text="Practice with Complete Tests, Section wise Tests, Question wise Tests"
                 android:textAlignment="center"
                 android:textColor="@color/colorPrimary"
-                android:textSize="20dp"
+                android:textSize="20sp"
+                android:background="@color/cardview_shadow_start_color"
                 android:textStyle="italic" />
 
 
@@ -115,4 +125,4 @@
 
 
 
-</android.support.constraint.ConstraintLayout>
+</RelativeLayout>

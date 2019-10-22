@@ -50,7 +50,7 @@ public class RegistrationActivity extends AppCompatActivity {
         final String email = editTextEmailId.getText().toString();
         final String username = editTextUsername.getText().toString();
         final String coupons = editTextCoupons.getText().toString();
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://online.celpip.biz/api/register",
+        StringRequest stringRequest = new StringRequest(Request.Method.POST, "http://demo.celpip.biz/api/register",
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {

@@ -42,7 +42,7 @@ import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.target.Target;
 import com.celpipstore.JsonData.ListeningTest.JsonDataHandlerListeningPart1;
-import com.celpipstore.Tests.ListeningTest.LISTENING_part2;
+import com.celpipstore.CelpipTests.ListeningTest.LISTENING_part2;
 import com.celpipstore.R;
 
 import java.util.HashMap;
@@ -51,11 +51,8 @@ import java.util.concurrent.TimeUnit;
 
 
 public class ListeningTestPart1QuestionAdapter extends BaseAdapter{
-
     Context c;
-    String url = "https://online.celpip.biz/uploads/part1_listening/";
-    JsonDataHandlerListeningPart1 jsonHolderListingpart1;
-
+    String url = "https://demo.celpip.biz/uploads/part1_listening/";
     //media player
     double startTime = 0;
     double finalTime = 0;
@@ -66,7 +63,6 @@ public class ListeningTestPart1QuestionAdapter extends BaseAdapter{
     Handler myHandler = new Handler();
     public static int oneTimeOnly = 0;
     String audio_player;
-
     String userAnswerQuestion1;
     String userAnswerQuestion2;
     String userAnswerQuestion3;
@@ -75,9 +71,7 @@ public class ListeningTestPart1QuestionAdapter extends BaseAdapter{
     String userAnswerQuestion6;
     String userAnswerQuestion7;
     String userAnswerQuestion8;
-
     ProgressDialog loadingAudio;
-
     //json data
     public static String id;
     public static String test_code;
@@ -133,50 +127,8 @@ public class ListeningTestPart1QuestionAdapter extends BaseAdapter{
     public static String l1_q8_option4;
     public static String l1_q8_answer;
 
-    public ListeningTestPart1QuestionAdapter(Context c
-            , String id
-            , String test_code
-            , String l1_q1_audio
-            , String l1_q1_option1
-            , String l1_q1_option2
-            , String l1_q1_option3
-            , String l1_q1_option4
-            , String l1_q2_audio
-            , String l1_q2_option1
-            , String l1_q2_option2
-            , String l1_q2_option3
-            , String l1_q2_option4
-            , String l1_q3_audio
-            , String l1_q3_option1
-            , String l1_q3_option2
-            , String l1_q3_option3
-            , String l1_q3_option4
-            , String l1_q4_audio
-            , String l1_q4_option1
-            , String l1_q4_option2
-            , String l1_q4_option3
-            , String l1_q4_option4
-            , String l1_q5_audio
-            , String l1_q5_option1
-            , String l1_q5_option2
-            , String l1_q5_option3
-            , String l1_q5_option4
-            , String l1_q6_audio
-            , String l1_q6_option1
-            , String l1_q6_option2
-            , String l1_q6_option3
-            , String l1_q6_option4
-            , String l1_q7_audio
-            , String l1_q7_option1
-            , String l1_q7_option2
-            , String l1_q7_option3
-            , String l1_q7_option4
-            , String l1_q8_audio
-            , String l1_q8_option1
-            , String l1_q8_option2
-            , String l1_q8_option3
-            , String l1_q8_option4)
-            {
+    public ListeningTestPart1QuestionAdapter(Context c, String id, String test_code, String l1_q1_audio, String l1_q1_option1, String l1_q1_option2, String l1_q1_option3, String l1_q1_option4, String l1_q2_audio, String l1_q2_option1, String l1_q2_option2, String l1_q2_option3, String l1_q2_option4, String l1_q3_audio, String l1_q3_option1, String l1_q3_option2, String l1_q3_option3, String l1_q3_option4, String l1_q4_audio, String l1_q4_option1, String l1_q4_option2, String l1_q4_option3, String l1_q4_option4, String l1_q5_audio, String l1_q5_option1, String l1_q5_option2, String l1_q5_option3, String l1_q5_option4, String l1_q6_audio, String l1_q6_option1, String l1_q6_option2, String l1_q6_option3, String l1_q6_option4, String l1_q7_audio, String l1_q7_option1, String l1_q7_option2, String l1_q7_option3, String l1_q7_option4, String l1_q8_audio, String l1_q8_option1, String l1_q8_option2, String l1_q8_option3, String l1_q8_option4)
+    {
         this.c=c;
         ListeningTestPart1QuestionAdapter.id = ListeningTestPart1QuestionAdapter.id;
         ListeningTestPart1QuestionAdapter.test_code = ListeningTestPart1QuestionAdapter.test_code;
@@ -223,9 +175,7 @@ public class ListeningTestPart1QuestionAdapter extends BaseAdapter{
         ListeningTestPart1QuestionAdapter.l1_q8_option2 = l1_q8_option2;
         ListeningTestPart1QuestionAdapter.l1_q8_option3 = l1_q8_option3;
         ListeningTestPart1QuestionAdapter.l1_q8_option4 = l1_q8_option4;
-
     }
-
 
     @Override
     public int getCount() {
@@ -245,12 +195,9 @@ public class ListeningTestPart1QuestionAdapter extends BaseAdapter{
     @Override
     public View getView(final int position, View convertView, ViewGroup parent) {
         LayoutInflater in=(LayoutInflater)c.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-
         convertView=in.inflate(R.layout.test_adapter_listeningtestpart1,null);
-
         final RadioGroup radioGroup1 = convertView.findViewById(R.id.frame1);
         final RadioGroup radioGroup2 = convertView.findViewById(R.id.frame2);
-
         final RadioButton t1= convertView.findViewById(R.id.radioButtonOption1);
         final RadioButton t2= convertView.findViewById(R.id.radioButtonOption2);
         final RadioButton t3= convertView.findViewById(R.id.radioButtonOption3);
@@ -259,7 +206,6 @@ public class ListeningTestPart1QuestionAdapter extends BaseAdapter{
         final RadioButton t6= convertView.findViewById(R.id.radio2);
         final RadioButton t7= convertView.findViewById(R.id.radio3);
         final RadioButton t8= convertView.findViewById(R.id.radio4);
-
         final Button b1NextQuestion = convertView.findViewById(R.id.buttonNextQuestion1);
         final Button b2NextQuestion = convertView.findViewById(R.id.buttonNextQuestion2);
         final Button b3NextQuestion = convertView.findViewById(R.id.buttonNextQuestion3);
@@ -271,21 +217,17 @@ public class ListeningTestPart1QuestionAdapter extends BaseAdapter{
         final Button b9NextQuestion = convertView.findViewById(R.id.buttonFinish);
         final Button b10NextQuestion = convertView.findViewById(R.id.buttonAudio2);
         final Button b11NextQuestion = convertView.findViewById(R.id.buttonAudio3);
-
         final ImageView imageView1  = convertView.findViewById(R.id.imageViewRadio1);
         final ImageView imageView2  = convertView.findViewById(R.id.imageViewRadio2);
         final ImageView imageView3  = convertView.findViewById(R.id.imageViewRadio3);
         final ImageView imageView4  = convertView.findViewById(R.id.imageViewRadio4);
-
         final String[] questions_audio = {l1_q1_audio, l1_q2_audio, l1_q3_audio, l1_q4_audio, l1_q5_audio, l1_q6_audio, l1_q7_audio, l1_q8_audio, null};
         final String[] question_option1 = {l1_q1_option1, l1_q2_option1, l1_q3_option3, l1_q4_option1, l1_q5_option1, l1_q6_option1, l1_q7_option1, l1_q8_option1, null};
         final String[] question_option2 = {l1_q1_option2, l1_q2_option2, l1_q3_option2, l1_q4_option2, l1_q5_option2, l1_q6_option2, l1_q7_option2, l1_q8_option2, null};
         final String[] question_option3 = {l1_q1_option3, l1_q2_option3, l1_q3_option3, l1_q4_option3, l1_q5_option3, l1_q6_option3, l1_q7_option3, l1_q8_option3, null};
         final String[] question_option4 = {l1_q1_option4, l1_q2_option4, l1_q3_option4, l1_q4_option4, l1_q5_option4, l1_q6_option4, l1_q7_option4, l1_q8_option4, null};
-
         final ImageButton imageButtonPlay = convertView.findViewById(R.id.buttonPlay);
         final ImageButton imageButtonPause = convertView.findViewById(R.id.buttonPause);
-
         final View finalConvertView = convertView;
         final View finalConvertView1 = convertView;
         textViewStart = finalConvertView1.findViewById(R.id.textViewStartTime);
@@ -297,21 +239,15 @@ public class ListeningTestPart1QuestionAdapter extends BaseAdapter{
                 new PlayMusic().execute();
             }
         });
-
         notifyDataSetChanged();
-
-            SharedPreferences bb = c.getSharedPreferences("my_prefs", 0);
-            final String tokenCode = bb.getString("tokenCode", "tokenCode");
-            final String member_id = bb.getString("member_id", "member_id");
-
-
-
-            final String image1 = "https://online.celpip.biz/uploads/part1_listening/"+question_option1[0];
-            final String image2 = "https://online.celpip.biz/uploads/part1_listening/"+question_option2[0];
-            final String image3 = "https://online.celpip.biz/uploads/part1_listening/"+question_option3[0];
-            final String image4 = "https://online.celpip.biz/uploads/part1_listening/"+question_option4[0];
-            final ProgressDialog loading = ProgressDialog.show(c,"Loading","Please wait...",false,false);
-
+        SharedPreferences bb = c.getSharedPreferences("my_prefs", 0);
+        final String tokenCode = bb.getString("tokenCode", "tokenCode");
+        final String member_id = bb.getString("member_id", "member_id");
+        final String image1 = "https://demo.celpip.biz/uploads/part1_listening/"+question_option1[0];
+        final String image2 = "https://demo.celpip.biz/uploads/part1_listening/"+question_option2[0];
+        final String image3 = "https://demo.celpip.biz/uploads/part1_listening/"+question_option3[0];
+        final String image4 = "https://demo.celpip.biz/uploads/part1_listening/"+question_option4[0];
+        final ProgressDialog loading = ProgressDialog.show(c,"Loading","Please wait...",false,false);
         seekbar.setSelected(false);
         seekbar.setOnTouchListener(new View.OnTouchListener() {
             @Override
@@ -319,7 +255,6 @@ public class ListeningTestPart1QuestionAdapter extends BaseAdapter{
                 return true;
             }
         });
-
         audio_player = url+questions_audio[0];
         new PlayMusic().execute();
         Glide
@@ -331,7 +266,6 @@ public class ListeningTestPart1QuestionAdapter extends BaseAdapter{
                         loading.dismiss();
                         return false;
                     }
-
                     @Override
                     public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
                         loading.dismiss();
@@ -349,7 +283,6 @@ public class ListeningTestPart1QuestionAdapter extends BaseAdapter{
                         loading.dismiss();
                         return false;
                     }
-
                     @Override
                     public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
                         loading.dismiss();
@@ -366,7 +299,6 @@ public class ListeningTestPart1QuestionAdapter extends BaseAdapter{
                         loading.dismiss();
                         return false;
                     }
-
                     @Override
                     public boolean onResourceReady(Drawable resource, Object model, Target<Drawable> target, DataSource dataSource, boolean isFirstResource) {
                         loading.dismiss();
@@ -390,21 +322,16 @@ public class ListeningTestPart1QuestionAdapter extends BaseAdapter{
                     }
                 })
                 .into(imageView4);
-
-
         t1.setChecked(false);
         t2.setChecked(false);
         t3.setChecked(false);
         t4.setChecked(false);
-
-
         imageButtonPause.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 if (mediaPlayer.isPlaying()) {
                     mediaPlayer.stop();
-                    Toast.makeText(c, "Stopped", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(c, "STOPPED!", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -412,7 +339,6 @@ public class ListeningTestPart1QuestionAdapter extends BaseAdapter{
         b1NextQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 radioGroup2.setVisibility(View.GONE);
                 radioGroup1.setVisibility(View.VISIBLE);
                 b1NextQuestion.setVisibility(View.GONE);
@@ -443,18 +369,13 @@ public class ListeningTestPart1QuestionAdapter extends BaseAdapter{
                 t2.setText(question_option2[1]);
                 t3.setText(question_option3[1]);
                 t4.setText(question_option4[1]);
-
                 mediaPlayer.stop();
 
             }
         });
-
-
         b2NextQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-
                 b2NextQuestion.setVisibility(View.GONE);
                 b10NextQuestion.setVisibility(View.VISIBLE);
                 radioGroup2.setVisibility(View.GONE);
@@ -467,19 +388,19 @@ public class ListeningTestPart1QuestionAdapter extends BaseAdapter{
                 t4.setText(question_option4[2]);
                 if (t1.isChecked())
                 {
-                    userAnswerQuestion2 = t1.getText().toString();
+                    userAnswerQuestion2 = "option1";
                 }
                 if (t2.isChecked())
                 {
-                    userAnswerQuestion2 = t2.getText().toString();
+                    userAnswerQuestion2 = "option2";
                 }
                 if (t3.isChecked())
                 {
-                    userAnswerQuestion2 = t3.getText().toString();
+                    userAnswerQuestion2 = "option3";
                 }
                 if (t4.isChecked())
                 {
-                    userAnswerQuestion2 = t4.getText().toString();
+                    userAnswerQuestion2 = "option4";
                 }
                 mediaPlayer.stop();
 
@@ -488,7 +409,6 @@ public class ListeningTestPart1QuestionAdapter extends BaseAdapter{
         b10NextQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 radioGroup1.setVisibility(View.GONE);
                 audio_player = url+ JsonDataHandlerListeningPart1.l1_converstaion_2_audio;
                 b10NextQuestion.setVisibility(View.GONE);
@@ -514,19 +434,19 @@ public class ListeningTestPart1QuestionAdapter extends BaseAdapter{
                 t4.setText(question_option4[3]);
                 if (t1.isChecked())
                 {
-                    userAnswerQuestion3 = t1.getText().toString();
+                    userAnswerQuestion3 = "option1";
                 }
                 if (t2.isChecked())
                 {
-                    userAnswerQuestion3 = t2.getText().toString();
+                    userAnswerQuestion3 = "option2";
                 }
                 if (t3.isChecked())
                 {
-                    userAnswerQuestion3 = t3.getText().toString();
+                    userAnswerQuestion3 = "option3";
                 }
                 if (t4.isChecked())
                 {
-                    userAnswerQuestion3 = t4.getText().toString();
+                    userAnswerQuestion3 = "option4";
                 }
                 mediaPlayer.stop();
             }
@@ -534,7 +454,6 @@ public class ListeningTestPart1QuestionAdapter extends BaseAdapter{
         b4NextQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 b4NextQuestion.setVisibility(View.GONE);
                 b5NextQuestion.setVisibility(View.VISIBLE);
                 radioGroup1.setVisibility(View.VISIBLE);
@@ -544,25 +463,21 @@ public class ListeningTestPart1QuestionAdapter extends BaseAdapter{
                 t2.setText(question_option2[4]);
                 t3.setText(question_option3[4]);
                 t4.setText(question_option4[4]);
-                t1.setChecked(false);
-                t2.setChecked(false);
-                t3.setChecked(false);
-                t4.setChecked(false);
                 if (t1.isChecked())
                 {
-                    userAnswerQuestion4 = t1.getText().toString();
+                    userAnswerQuestion4 = "option1";
                 }
                 if (t2.isChecked())
                 {
-                    userAnswerQuestion4 = t2.getText().toString();
+                    userAnswerQuestion4 = "option2";
                 }
                 if (t3.isChecked())
                 {
-                    userAnswerQuestion4 = t3.getText().toString();
+                    userAnswerQuestion4 = "option3";
                 }
                 if (t4.isChecked())
                 {
-                    userAnswerQuestion4 = t4.getText().toString();
+                    userAnswerQuestion4 = "option4";
                 }
                 mediaPlayer.stop();
             }
@@ -570,7 +485,6 @@ public class ListeningTestPart1QuestionAdapter extends BaseAdapter{
         b5NextQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 b5NextQuestion.setVisibility(View.GONE);
                 b11NextQuestion.setVisibility(View.VISIBLE);
                 radioGroup1.setVisibility(View.VISIBLE);
@@ -580,24 +494,22 @@ public class ListeningTestPart1QuestionAdapter extends BaseAdapter{
                 t2.setText(question_option2[5]);
                 t3.setText(question_option3[5]);
                 t4.setText(question_option4[5]);
-
                 if (t1.isChecked())
                 {
-                    userAnswerQuestion5 = t1.getText().toString();
+                    userAnswerQuestion5 = "option1";
                 }
                 if (t2.isChecked())
                 {
-                    userAnswerQuestion5 = t2.getText().toString();
+                    userAnswerQuestion5 = "option2";
                 }
                 if (t3.isChecked())
                 {
-                    userAnswerQuestion5 = t3.getText().toString();
+                    userAnswerQuestion5 = "option3";
                 }
                 if (t4.isChecked())
                 {
-                    userAnswerQuestion5 = t4.getText().toString();
+                    userAnswerQuestion5 = "option4";
                 }
-
                 mediaPlayer.stop();
 
             }
@@ -620,7 +532,6 @@ public class ListeningTestPart1QuestionAdapter extends BaseAdapter{
         b6NextQuestion.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
                 b6NextQuestion.setVisibility(View.GONE);
                 b7NextQuestion.setVisibility(View.VISIBLE);
                 imageButtonPause.setVisibility(View.GONE);
@@ -633,19 +544,19 @@ public class ListeningTestPart1QuestionAdapter extends BaseAdapter{
                 t4.setText(question_option4[6]);
                 if (t1.isChecked())
                 {
-                    userAnswerQuestion6 = t1.getText().toString();
+                    userAnswerQuestion6 = "option1";
                 }
                 if (t2.isChecked())
                 {
-                    userAnswerQuestion6 = t2.getText().toString();
+                    userAnswerQuestion6 = "option2";
                 }
                 if (t3.isChecked())
                 {
-                    userAnswerQuestion6 = t3.getText().toString();
+                    userAnswerQuestion6 = "option3";
                 }
                 if (t4.isChecked())
                 {
-                    userAnswerQuestion6 = t4.getText().toString();
+                    userAnswerQuestion6 = "option4";
                 }
 
                 mediaPlayer.stop();
@@ -666,21 +577,20 @@ public class ListeningTestPart1QuestionAdapter extends BaseAdapter{
                 t4.setText(question_option4[7]);
                 if (t1.isChecked())
                 {
-                    userAnswerQuestion7 = t1.getText().toString();
+                    userAnswerQuestion7 = "option1";
                 }
                 if (t2.isChecked())
                 {
-                    userAnswerQuestion7 = t2.getText().toString();
+                    userAnswerQuestion7 = "option2";
                 }
                 if (t3.isChecked())
                 {
-                    userAnswerQuestion7 = t3.getText().toString();
+                    userAnswerQuestion7 = "option3";
                 }
                 if (t4.isChecked())
                 {
-                    userAnswerQuestion7 = t4.getText().toString();
+                    userAnswerQuestion7 = "option4";
                 }
-
                 mediaPlayer.stop();
             }
         });
@@ -694,38 +604,43 @@ public class ListeningTestPart1QuestionAdapter extends BaseAdapter{
                 textViewStop.setVisibility(View.GONE);
                 imageButtonPlay.setVisibility(View.GONE);
                 seekbar.setVisibility(View.GONE);
-                t1.setChecked(false);
-                t2.setChecked(false);
-                t3.setChecked(false);
-                t4.setChecked(false);
                 if (t1.isChecked())
                 {
-                    userAnswerQuestion8 = t1.getText().toString();
+                    userAnswerQuestion8 = "option1";
                 }
                 if (t2.isChecked())
                 {
-                    userAnswerQuestion8 = t2.getText().toString();
+                    userAnswerQuestion8 = "option2";
                 }
                 if (t3.isChecked())
                 {
-                    userAnswerQuestion8 = t3.getText().toString();
+                    userAnswerQuestion8 = "option3";
                 }
                 if (t4.isChecked())
                 {
-                    userAnswerQuestion8 = t4.getText().toString();
+                    userAnswerQuestion8 = "option4";
                 }
-                String urlForSubmittingOptions = "http://online.celpip.biz/api/lsPart1Submit?token="+tokenCode+"&q1_response="+userAnswerQuestion1+"&q2_response="+userAnswerQuestion2+"&q3_response="+userAnswerQuestion3+"&q4_response="+userAnswerQuestion4+"&q5_response="+userAnswerQuestion5+"&q6_response="+userAnswerQuestion6+"&q7_response="+userAnswerQuestion7+"&q8_response="+userAnswerQuestion8+"&memberid="+member_id;
+                mediaPlayer.stop();
+            }
+        });
+        b9NextQuestion.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+               radioGroup2.setVisibility(View.GONE);
+               radioGroup1.setVisibility(View.GONE);
+                final String urlForSubmittingOptions = "http://demo.celpip.biz/api/lsPart1Submit?token="+tokenCode+"&q1_response="+userAnswerQuestion1+"&q2_response="+userAnswerQuestion2+"&q3_response="+userAnswerQuestion3+"&q4_response="+userAnswerQuestion4+"&q5_response="+userAnswerQuestion5+"&q6_response="+userAnswerQuestion6+"&q7_response="+userAnswerQuestion7+"&q8_response="+userAnswerQuestion8+"&memberid="+member_id;
                 StringRequest stringRequest = new StringRequest(Request.Method.POST, urlForSubmittingOptions,
                         new Response.Listener<String>() {
                             @Override
                             public void onResponse(String response) {
-                                Toast.makeText(c, response, Toast.LENGTH_SHORT).show();
+                                Toast.makeText(c, "Answer Submitted", Toast.LENGTH_SHORT).show();
+                                Log.e("===part1 answer",urlForSubmittingOptions);
                             }
-
                         }, new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
                         Toast.makeText(c, error.getMessage(), Toast.LENGTH_SHORT).show();
+                        Log.e("===part1 answer",urlForSubmittingOptions);
                     }
                 }) {
                     @Override
@@ -739,35 +654,15 @@ public class ListeningTestPart1QuestionAdapter extends BaseAdapter{
                         params.put("q6_response", userAnswerQuestion6);
                         params.put("q7_response", userAnswerQuestion7);
                         params.put("q8_response", userAnswerQuestion8);
-                        Log.e("===answer1",userAnswerQuestion1);
-                        Log.e("===answer2",userAnswerQuestion2);
-                        Log.e("===answer3",userAnswerQuestion3);
-                        Log.e("===answer4",userAnswerQuestion4);
-                        Log.e("===answer5",userAnswerQuestion5);
-                        Log.e("===answer6",userAnswerQuestion6);
-                        Log.e("===answer7",userAnswerQuestion7);
-                        Log.e("===answer8",userAnswerQuestion8);
-
                         return params;
                     }
                 };
                 RequestQueue requestQueue = Volley.newRequestQueue(c.getApplicationContext());
                 requestQueue.add(stringRequest);
-
-                mediaPlayer.stop();
+                Intent intent = new Intent(c , LISTENING_part2.class);
+                c.startActivity(intent);
             }
         });
-        b9NextQuestion.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-               radioGroup2.setVisibility(View.GONE);
-               radioGroup1.setVisibility(View.GONE);
-               Intent intent = new Intent(c , LISTENING_part2.class);
-               c.startActivity(intent);
-
-            }
-        });
-
         return convertView;
     }
     private Runnable UpdateSongTime = new Runnable() {
@@ -779,7 +674,6 @@ public class ListeningTestPart1QuestionAdapter extends BaseAdapter{
                             TimeUnit.MINUTES.toSeconds(TimeUnit.MILLISECONDS.toMinutes((long)
                                     finalTime)))
             );
-
             textViewStart.setText(String.format("%d min, %d sec",
                     TimeUnit.MILLISECONDS.toMinutes((long) startTime),
                     TimeUnit.MILLISECONDS.toSeconds((long) startTime) -
@@ -791,17 +685,15 @@ public class ListeningTestPart1QuestionAdapter extends BaseAdapter{
         }
     };
     class  PlayMusic extends AsyncTask<Void, Void, Void> {
-
         @Override
         protected void onPreExecute() {
             // TODO Auto-generated method stub
             loadingAudio = new ProgressDialog(c);
-            loadingAudio.setMessage("Loading Audio");
+            loadingAudio.setMessage("LOADING AUDIO!!");
             loadingAudio.show();
             loadingAudio.setCancelable(false);
             loadingAudio.setIndeterminate(false);
             super.onPreExecute();
-
         }
 
         @Override
@@ -809,13 +701,10 @@ public class ListeningTestPart1QuestionAdapter extends BaseAdapter{
             audioFile();
             return (null);
         }
-
         protected void onPostExecute(Void unused) {
-
             //here you can call your mp.prepare();
             loadingAudio.dismiss();
         }
-
     }
     public void audioFile()
     {
@@ -839,10 +728,7 @@ public class ListeningTestPart1QuestionAdapter extends BaseAdapter{
                 seekbar.setMax((int) finalTime);
                 oneTimeOnly = 0;
             }
-
             seekbar.setProgress((int)startTime);
             myHandler.postDelayed(UpdateSongTime,100);
-
     }
-
 }

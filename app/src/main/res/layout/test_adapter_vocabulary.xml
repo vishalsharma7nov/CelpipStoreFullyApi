@@ -5,6 +5,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
     <LinearLayout
+        android:paddingBottom="15dp"
         android:orientation="vertical"
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
@@ -17,7 +18,7 @@
             android:layout_alignParentLeft="true"
             android:layout_alignParentTop="true"
             android:layout_marginLeft="20dp"
-            android:layout_marginTop="24dp"
+            android:layout_marginTop="5dp"
             android:layout_marginRight="20dp"
             android:fontFamily="sans-serif"
             android:text="Test Type"
@@ -102,14 +103,12 @@
             android:id="@+id/buttonSelectedTest"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentStart="true"
-            android:layout_alignParentTop="true"
             android:layout_marginStart="10dp"
             android:layout_marginTop="30dp"
             android:layout_marginEnd="10dp"
-            android:background="@color/colorPrimary"
+            android:background="@drawable/buttonoutline"
             android:text="Take test"
-            android:textColor="#FCFCFC" />
+            android:textColor="@color/colorWhite" />
     </LinearLayout>
 
 

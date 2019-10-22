@@ -38,17 +38,17 @@ import com.android.volley.toolbox.Volley;
 import com.celpipstore.Adapter.ExpandableListAdapter;
 import com.celpipstore.DICTATION_TESTS;
 import com.celpipstore.FILL_IN_THE_BLANKS;
-import com.celpipstore.Tests.ListeningTest.LISTENING_part1;
+import com.celpipstore.CelpipTests.ListeningTest.LISTENING_part1;
 import com.celpipstore.LoginAndRegistration.SessionManager;
-import com.celpipstore.Tests.ListeningTest.LISTENING_part2;
+import com.celpipstore.CelpipTests.ListeningTest.LISTENING_part2;
 import com.celpipstore.LoginAndRegistration.LoginActivity;
 import com.celpipstore.R;
-import com.celpipstore.Tests.ReadingTest.READING;
+import com.celpipstore.CelpipTests.ReadingTest.READING;
 import com.celpipstore.RE_ARRANGE;
-import com.celpipstore.Tests.SpeakingTest.SPEAKING;
+import com.celpipstore.CelpipTests.SpeakingTest.SPEAKING;
 import com.celpipstore.SPOTTING_THE_ERRORS;
-import com.celpipstore.Tests.VocabularyTest.VOCABULARY_TESTS;
-import com.celpipstore.Tests.WritingTest.WRITING;
+import com.celpipstore.CelpipTests.VocabularyTest.VOCABULARY_TESTS;
+import com.celpipstore.CelpipTests.WritingTest.WRITING;
 
 import org.json.JSONException;
 import org.json.JSONObject;
@@ -60,17 +60,18 @@ import java.util.Map;
 
 public class Dashboard extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
 
-    protected ExpandableListAdapter listAdapter;
-    protected ExpandableListView expListView;
-    protected List<String> listDataHeader;
-    protected HashMap<String, List<String>> listDataChild;
-    protected TextView textViewTotalCoins,textViewUsername;
-    protected String username,password,id,total_coins,member_id,API;
-    protected ImageView vocabularyimage,spottingerrorimage,dictationimage,comprehensionimage,rearrangeimage,fillintheblanksimage,listeningimage,readingimage,writingimage,speakingimage;
-    protected ImageView imageViewScreenSaver;
-    protected SessionManager sessionManager;
-    protected RelativeLayout relativeLayout;
-    protected ProgressBar progressBar;
+    private ExpandableListAdapter listAdapter;
+    private ExpandableListView expListView;
+    private List<String> listDataHeader;
+    private HashMap<String, List<String>> listDataChild;
+    private TextView textViewTotalCoins,textViewUsername;
+    private String username,password,id,total_coins,member_id,API;
+    private ImageView vocabularyimage,spottingerrorimage,dictationimage,comprehensionimage,rearrangeimage,fillintheblanksimage,listeningimage,readingimage,writingimage,speakingimage;
+    private ImageView imageViewScreenSaver;
+    private SessionManager sessionManager;
+    private RelativeLayout relativeLayout;
+    private ProgressBar progressBar;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -96,7 +97,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         username = user.get(SessionManager.KEY_USERNAME);
         password = user.get(SessionManager.KEY_PASSWORD);
         textViewUsername.setText("Welcome, "+username);
-        API = "http://online.celpip.biz/api/login?password="+password+"&username="+username;
+        API = "http://demo.celpip.biz/api/login?password="+password+"&username="+username;
 //-----------------------------------------------------------------------------------------//
         vocabularyimage      = findViewById(R.id.vocabularyimage);
         vocabularyimage.setOnClickListener(new View.OnClickListener() {
@@ -291,6 +292,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         listDataHeader.add("SUPPORT");
         listDataHeader.add("SETTINGS");
         listDataHeader.add("COIN MANAGEMENT");
+        listDataHeader.add("LOGOUT");
         // Adding child data
         List<String> dashboard       = new ArrayList<String>();
         List<String> earn_fee_coins = new ArrayList<String>();
@@ -314,6 +316,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         setting.add("UPDATE PROFILE");
         setting.add("CHANGE PASSWORD");
         List<String> coin_management = new ArrayList<String>();
+        List<String> logout = new ArrayList<String>();
         listDataChild.put(listDataHeader.get(0), dashboard); // Header, Child data
         listDataChild.put(listDataHeader.get(1), earn_fee_coins);
         listDataChild.put(listDataHeader.get(2), competitive_english);
@@ -322,10 +325,10 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         listDataChild.put(listDataHeader.get(5), support);
         listDataChild.put(listDataHeader.get(6), setting);
         listDataChild.put(listDataHeader.get(7), coin_management);
+        listDataChild.put(listDataHeader.get(8), logout);
     }
     private void navigation()
     {
-        //---------------------------------------------------------------------------------//
         //expandable list
         // get the listview
         expListView = findViewById(R.id.lvExp);
@@ -369,6 +372,15 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
                 {
                     Intent intent = new Intent(Dashboard.this,COIN_MANAGEMENT.class);
                     startActivity(intent);
+                }
+                else if(groupPosition == 8)
+                {
+                    Intent intent= new Intent(Dashboard.this, LoginActivity.class);
+                    intent.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK | Intent.FLAG_ACTIVITY_CLEAR_TASK);
+                    startActivity(intent);
+                    finish();
+                    sessionManager.logoutUser();
+                    Toast.makeText(getApplicationContext(), "Logged Out!", Toast.LENGTH_SHORT).show();
                 }
                 return false;
             }
@@ -450,14 +462,14 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
                 {
                     if (childPosition==0)
                     {
-                        String url = "https://online.celpip.biz/member/dashboard";
+                        String url = "https://demo.celpip.biz/member/dashboard";
                         Intent i = new Intent(Intent.ACTION_VIEW);
                         i.setData(Uri.parse(url));
                         startActivity(i);
                     }
                     else
                     {
-                        String url = "https://online.celpip.biz/member/dashboard";
+                        String url = "https://demo.celpip.biz/member/dashboard";
                         Intent i = new Intent(Intent.ACTION_VIEW);
                         i.setData(Uri.parse(url));
                         startActivity(i);
@@ -466,14 +478,14 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
                 if(groupPosition==6)
                 {
                     if (childPosition==0) {
-                        String url = "https://online.celpip.biz/member/dashboard";
+                        String url = "https://demo.celpip.biz/member/dashboard";
                         Intent i = new Intent(Intent.ACTION_VIEW);
                         i.setData(Uri.parse(url));
                         startActivity(i);
                     }
                     else
                     {
-                        String url = "https://online.celpip.biz/member/dashboard";
+                        String url = "https://demo.celpip.biz/member/dashboard";
                         Intent i = new Intent(Intent.ACTION_VIEW);
                         i.setData(Uri.parse(url));
                         startActivity(i);

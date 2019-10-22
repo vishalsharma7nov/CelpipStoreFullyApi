@@ -7,6 +7,8 @@ import android.content.Intent;
 import android.content.SharedPreferences;
 import android.content.SharedPreferences.Editor;
 
+import com.celpipstore.UserDashboard.Dashboard;
+
 public class SessionManager {
     // Shared Preferences
     SharedPreferences pref;
@@ -51,6 +53,17 @@ public class SessionManager {
         if(!this.isLoggedIn()){
             // user is not logged in redirect him to Login Activity
             Intent i = new Intent(_context, LoginActivity.class);
+            // Closing all the Activities
+            i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
+            // Add new Flag to start new Activity
+            i.setFlags(Intent.FLAG_ACTIVITY_NEW_TASK);
+            // Staring Login Activity
+            _context.startActivity(i);
+        }
+        else
+        {
+            // user is not logged in redirect him to Login Activity
+            Intent i = new Intent(_context, Dashboard.class);
             // Closing all the Activities
             i.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP);
             // Add new Flag to start new Activity

@@ -3,14 +3,6 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.celpipstore">
 
-    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
-    <uses-permission android:name="android.permission.INTERNET" />
-    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE"/>
-    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE"/>
-
-
-
     <supports-screens
         android:anyDensity="true"
         android:largeScreens="true"
@@ -18,6 +10,15 @@
         android:resizeable="true"
         android:smallScreens="true"
         android:xlargeScreens="true" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.ACCESS_WIFI_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_WIFI_STATE" />
+    <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.CHANGE_NETWORK_STATE" />
+    <uses-permission android:name="android.permission.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.RECORD_AUDIO" />
 
     <application
         android:allowBackup="true"
@@ -29,34 +30,37 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-
-        <activity android:name=".Tests.ListeningTest.ListeningTestQuestionActivity" />
-        <activity android:name=".Tests.VocabularyTest.VocabularyTestQuestionsActivity" />
+        <activity android:name=".CelpipTests.SpeakingTest.SpeakingTestQuestionActivity"></activity>
+        <activity android:name=".CelpipTests.WritingTest.WritingTestQuestionActivity" />
+        <activity android:name=".CelpipTests.ReadingTest.ReadingTestQuestionActivity" />
+        <activity android:name=".LoginAndRegistration.ForgetPasswordActivity" />
+        <activity android:name=".CelpipTests.ListeningTest.ListeningTestQuestionActivity" />
+        <activity android:name=".CelpipTests.VocabularyTest.VocabularyTestQuestionsActivity" />
         <activity
-            android:name=".Tests.SpeakingTest.SpeakingTestListActivity"
+            android:name=".CelpipTests.SpeakingTest.SpeakingTestListActivity"
             android:label="Speaking Tests" />
         <activity
-            android:name=".Tests.WritingTest.WritingTestListActivity"
+            android:name=".CelpipTests.WritingTest.WritingTestListActivity"
             android:label="Writing Tests" />
         <activity
-            android:name=".Tests.ReadingTest.ReadingTestListActivity"
+            android:name=".CelpipTests.ReadingTest.ReadingTestListActivity"
             android:label="Reading Tests" />
         <activity
-            android:name=".Tests.ListeningTest.ListeningTestListActivity"
+            android:name=".CelpipTests.ListeningTest.ListeningTestListActivity"
             android:label="Listening Test" />
         <activity
             android:name=".LoginAndRegistration.RegistrationActivity"
             android:label="Registration" />
         <activity
-            android:name=".Tests.WritingTest.WRITING"
+            android:name=".CelpipTests.WritingTest.WRITING"
             android:label="@string/title_activity_writing"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Tests.ReadingTest.READING"
+            android:name=".CelpipTests.ReadingTest.READING"
             android:label="@string/title_activity_reading"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Tests.SpeakingTest.SPEAKING"
+            android:name=".CelpipTests.SpeakingTest.SPEAKING"
             android:label="@string/title_activity_speaking"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -72,7 +76,7 @@
             android:label="@string/title_activity_support"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Tests.ListeningTest.LISTENING_part2"
+            android:name=".CelpipTests.ListeningTest.LISTENING_part2"
             android:label="@string/title_activity_listening_part2"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -80,7 +84,7 @@
             android:label="@string/title_activity_celpip__parts__tests"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Tests.ListeningTest.LISTENING_part1"
+            android:name=".CelpipTests.ListeningTest.LISTENING_part1"
             android:label="@string/title_activity_listening_part1"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -104,7 +108,7 @@
             android:label="@string/title_activity_spotting__the__errors"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
-            android:name=".Tests.VocabularyTest.VOCABULARY_TESTS"
+            android:name=".CelpipTests.VocabularyTest.VOCABULARY_TESTS"
             android:label="@string/title_activity_vocabulary__tests"
             android:theme="@style/AppTheme.NoActionBar" />
         <activity
@@ -157,7 +161,6 @@
         <meta-data
             android:name="preloaded_fonts"
             android:resource="@array/preloaded_fonts" />
-
     </application>
 
 </manifest>

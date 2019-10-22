@@ -130,8 +130,6 @@ public class JsonDataHandlerListeningPart1 {
                 l1_q8_option3           = jsonObject.getJSONObject("data").getString("l1_q8_option3");
                 l1_q8_option4           = jsonObject.getJSONObject("data").getString("l1_q8_option4");
                 l1_q8_answer            = jsonObject.getJSONObject("data").getString("l1_q8_answer");
-
-
         } catch (JSONException e) {
             e.printStackTrace();
         }

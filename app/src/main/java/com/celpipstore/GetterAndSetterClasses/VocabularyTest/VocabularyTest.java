@@ -1,11 +1,11 @@
 package com.celpipstore.GetterAndSetterClasses.VocabularyTest;
 
 public class VocabularyTest {
-    protected String id;
-    protected String name;
-    protected String total_questions;
-    protected String active;
-    protected String coin_cost;
+    private String id;
+    private String name;
+    private String total_questions;
+    private String active;
+    private String coin_cost;
 
     public VocabularyTest(String id, String name, String total_questions, String active, String coin_cost) {
         this.id = id;

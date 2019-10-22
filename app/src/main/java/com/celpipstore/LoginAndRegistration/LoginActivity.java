@@ -24,6 +24,7 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ExpandableListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.android.volley.Request;
@@ -50,44 +51,64 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public class LoginActivity extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
-
-    protected EditText username,password;
-    protected Button login;
-    protected ExpandableListAdapter listAdapter;
-    protected ExpandableListView expListView;
-    protected List<String> listDataHeader;
-    protected HashMap<String, List<String>> listDataChild;
-    protected SessionManager session;
-    protected String mUsername,mPassword;
+public class LoginActivity extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    private EditText username,password;
+    private Button login;
+    private ExpandableListAdapter listAdapter;
+    private ExpandableListView expListView;
+    private List<String> listDataHeader;
+    private HashMap<String, List<String>> listDataChild;
+    private SessionManager session;
+    private String mUsername,mPassword;
+    private TextView textViewRegister,textViewForgetPassword;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        ConnectivityManager ConnectionManager=(ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
-        NetworkInfo networkInfo=ConnectionManager.getActiveNetworkInfo();
-        if(networkInfo != null && networkInfo.isConnected()==true )
-        {
-        }
-        else
-        {
-            AlertDialog alertbox = new AlertDialog.Builder(this)
-                    .setMessage("Check Your Internet Connention?")
-                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+        networkChecker();
+        navigation();
+        textViewRegister = findViewById(R.id.textViewRegister);
+        textViewForgetPassword = findViewById(R.id.textViewForgetPassword);
+        textViewRegister.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(),RegistrationActivity.class);
+                startActivity(intent);
+            }
+        });
+        textViewForgetPassword.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(getApplicationContext(),ForgetPasswordActivity.class);
+                startActivity(intent);
+            }
+        });
+        username = findViewById(R.id.username);
+        password = findViewById(R.id.password);
+        login = findViewById(R.id.login);
+        login.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                login();
+                saveLoginInformation();
+            }
+        });
+        Toolbar toolbar =  findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+        session = new SessionManager(getApplicationContext());
+        HashMap<String, String> user = session.getUserDetails();
+        mUsername = user.get(SessionManager.KEY_USERNAME);
+        mPassword = user.get(SessionManager.KEY_PASSWORD);
+    }
 
-                        // do something when the button is clicked
-                        public void onClick(DialogInterface arg0, int arg1) {
-                            Intent intent = new Intent();
-                            intent.setComponent(new ComponentName("com.android.settings", "com.android.settings.Settings$DataUsageSummaryActivity"));
-                            startActivity(intent);
-                            recreate();
-                        }
-                    })
-                    .show();
-            Toast.makeText(LoginActivity.this, "Network Not Available", Toast.LENGTH_LONG).show();
-        }
-        //---------------------------------------------------------------------------------//
+    private void navigation() {
         expListView = findViewById(R.id.lvExp);
         prepareListData();
         listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild);
@@ -161,30 +182,31 @@ public class LoginActivity extends AppCompatActivity
                 return false;
             }
         });
-//------------------------------------------------------------------------------//
-        username = findViewById(R.id.username);
-        password = findViewById(R.id.password);
-        login = findViewById(R.id.login);
-        login.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                login();
-                saveLoginInformation();
-            }
-        });
-        Toolbar toolbar =  findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
-        session = new SessionManager(getApplicationContext());
-        HashMap<String, String> user = session.getUserDetails();
-        mUsername = user.get(SessionManager.KEY_USERNAME);
-        mPassword = user.get(SessionManager.KEY_PASSWORD);
+    }
+
+    private void networkChecker() {
+        ConnectivityManager ConnectionManager=(ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo=ConnectionManager.getActiveNetworkInfo();
+        if(networkInfo != null && networkInfo.isConnected()==true )
+        {
+        }
+        else
+        {
+            AlertDialog alertbox = new AlertDialog.Builder(this)
+                    .setMessage("Check Your Internet Connention?")
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+                        // do something when the button is clicked
+                        public void onClick(DialogInterface arg0, int arg1) {
+                            Intent intent = new Intent();
+                            intent.setComponent(new ComponentName("com.android.settings", "com.android.settings.Settings$DataUsageSummaryActivity"));
+                            startActivity(intent);
+                            recreate();
+                        }
+                    })
+                    .show();
+            Toast.makeText(LoginActivity.this, "Network Not Available", Toast.LENGTH_LONG).show();
+        }
     }
 
     private void saveLoginInformation() {
@@ -210,7 +232,7 @@ public class LoginActivity extends AppCompatActivity
         final ProgressDialog loading = ProgressDialog.show(this,"Loading","Please wait...",false,false);
         final String Username = username.getText().toString();
         final String Password = password.getText().toString();
-        final String url = "http://online.celpip.biz/api/login?password="+Password+"&username="+Username;
+        final String url = "http://demo.celpip.biz/api/login?password="+Password+"&username="+Username;
         StringRequest stringRequest = new StringRequest(Request.Method.POST,url ,
                 new Response.Listener<String>() {
                     @Override
@@ -247,7 +269,7 @@ public class LoginActivity extends AppCompatActivity
                         } catch (JSONException e) {
                             e.printStackTrace();
                             loading.dismiss();
-                            Toast.makeText(getApplicationContext(), "Application Under Maintenance!!"+e.getLocalizedMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(getApplicationContext(), "Application Under Maintenance!!", Toast.LENGTH_SHORT).show();
                             Log.e("===exceptions",e.getMessage());
                         }
                     }
@@ -275,7 +297,7 @@ public class LoginActivity extends AppCompatActivity
 
     @Override
     public void onBackPressed() {
-        DrawerLayout drawer = (DrawerLayout) findViewById(R.id.drawer_layout);
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
         if (drawer.isDrawerOpen(GravityCompat.START)) {
             drawer.closeDrawer(GravityCompat.START);
             moveTaskToBack(true);

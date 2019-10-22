@@ -2,6 +2,7 @@ package com.celpipstore;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -12,6 +13,9 @@ import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.ExpandableListView;
+import android.widget.ImageView;
+import android.widget.ProgressBar;
+import android.widget.ScrollView;
 
 import com.celpipstore.Adapter.ExpandableListAdapter;
 import com.celpipstore.LoginAndRegistration.LoginActivity;
@@ -28,24 +32,37 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
-public class HOME extends AppCompatActivity
-        implements NavigationView.OnNavigationItemSelectedListener {
-
-    protected Button Login,Register;
-    protected ExpandableListAdapter listAdapter;
-    protected ExpandableListView expListView;
-    protected List<String> listDataHeader;
-    protected HashMap<String, List<String>> listDataChild;
-    protected SessionManager session;
-
+public class HOME extends AppCompatActivity implements NavigationView.OnNavigationItemSelectedListener {
+    private Button Login,Register;
+    private ExpandableListAdapter listAdapter;
+    private ExpandableListView expListView;
+    private List<String> listDataHeader;
+    private HashMap<String, List<String>> listDataChild;
+    private SessionManager session;
+    private ImageView imageViewHomeScreenSaver;
+    private ScrollView scrollView;
+    private ProgressBar progressBarHome;
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_home);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        scrollView = findViewById(R.id.scrollView);
+        scrollView.setVisibility(View.GONE);
+        progressBarHome = findViewById(R.id.progressBar_Home);
+        final Handler handler = new Handler();
+        final Runnable runnable = new Runnable() {
+            @Override
+            public void run() {
+                scrollView.setVisibility(View.VISIBLE);
+                progressBarHome.setVisibility(View.GONE);
+                imageViewHomeScreenSaver.setVisibility(View.GONE);
+                handler.postDelayed(this,2000);//2 second delay
+            }
+        };handler.postDelayed(runnable,2000);
+        imageViewHomeScreenSaver = findViewById(R.id.imageViewHomeScreenSaver);
         session = new SessionManager(getApplicationContext());
-        session.checkLogin();
         Login = findViewById(R.id.loginHome);
         Register = findViewById(R.id.registerHome);
         Login.setOnClickListener(new View.OnClickListener() {
@@ -55,12 +72,15 @@ public class HOME extends AppCompatActivity
                 {
                     Intent intent = new Intent(HOME.this, Dashboard.class);
                     startActivity(intent);
+                    session.checkLogin();
                 }
                 else
                 {
                     Intent intent = new Intent(getApplicationContext(),LoginActivity.class);
                     startActivity(intent);
+                    session.checkLogin();
                 }
+
             }
         });
         Register.setOnClickListener(new View.OnClickListener() {
@@ -70,9 +90,19 @@ public class HOME extends AppCompatActivity
                 startActivity(intent);
             }
         });
-//---------------------------------------------------------------------------------//
+        navigation();
+        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+        drawer.addDrawerListener(toggle);
+        toggle.syncState();
+        NavigationView navigationView = findViewById(R.id.nav_view);
+        navigationView.setNavigationItemSelectedListener(this);
+    }
+
+    private void navigation() {
         // get the listview
-        expListView = (ExpandableListView) findViewById(R.id.lvExp);
+        expListView = findViewById(R.id.lvExp);
         // preparing list data
         prepareListData();
         listAdapter = new ExpandableListAdapter(this, listDataHeader, listDataChild);
@@ -151,14 +181,6 @@ public class HOME extends AppCompatActivity
                 return false;
             }
         });
-//------------------------------------------------------------------------------//
-        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-        drawer.addDrawerListener(toggle);
-        toggle.syncState();
-        NavigationView navigationView = findViewById(R.id.nav_view);
-        navigationView.setNavigationItemSelectedListener(this);
     }
 
     @Override

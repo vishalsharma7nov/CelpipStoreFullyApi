@@ -17,7 +17,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import com.celpipstore.GetterAndSetterClasses.TotalTest;
-import com.celpipstore.Tests.ListeningTest.ListeningTestListActivity;
+import com.celpipstore.CelpipTests.ListeningTest.ListeningTestListActivity;
 import com.celpipstore.R;
 
 import java.util.List;

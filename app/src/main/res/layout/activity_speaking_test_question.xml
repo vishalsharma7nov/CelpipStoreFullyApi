@@ -1,0 +1,77 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".CelpipTests.SpeakingTest.SpeakingTestQuestionActivity">
+    <ListView
+        android:id="@+id/speakingTestPracticeQuestion"
+        android:scrollbars="vertical"
+        android:scrollbarSize="3dp"
+        android:scrollbarThumbVertical="@color/colorPrimary"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"/>
+    <ListView
+        android:id="@+id/speakingTest3"
+        android:layout_width="match_parent"
+        android:layout_height="250dp"/>
+    <ScrollView
+        android:layout_marginTop="30dp"
+        android:layout_below="@id/speakingTest3"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+        <LinearLayout
+            android:orientation="vertical"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+            <Button
+                android:id="@+id/btnRecord"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:background="@drawable/buttonoutline"
+                android:textColor="@color/colorWhite"
+                android:padding="10dp"
+                android:layout_marginTop="20dp"
+                android:text="Start Recording" />
+            <Button
+                android:id="@+id/btnStop"
+                android:background="@drawable/buttonoutline"
+                android:textColor="@color/colorWhite"
+                android:padding="10dp"
+                android:layout_gravity="center"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="Stop Recording" />
+            <Button
+                android:id="@+id/btnPlay"
+                android:layout_width="wrap_content"
+                android:background="@drawable/buttonoutline"
+                android:textColor="@color/colorWhite"
+                android:padding="10dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Play Recording" />
+            <Button
+                android:id="@+id/btnStopPlay"
+                android:layout_width="wrap_content"
+                android:background="@drawable/buttonoutline"
+                android:textColor="@color/colorWhite"
+                android:padding="10dp"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:text="Stop Playing" />
+            <Button
+                android:id="@+id/submitAnswer"
+                android:text="Submit"
+                android:background="@drawable/buttonoutline"
+                android:layout_margin="40dp"
+                android:textColor="@color/colorWhite"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"/>
+        </LinearLayout>
+    </ScrollView>
+
+</RelativeLayout>

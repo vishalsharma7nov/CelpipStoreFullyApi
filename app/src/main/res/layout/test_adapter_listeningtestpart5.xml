@@ -1,6 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout
-    android:orientation="vertical"
     xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
@@ -20,8 +19,7 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="20dp"
-            android:text="Choose the best way to complete each statement from the drop-down menu" />
-
+            android:text="Choose the best way to complete each statement from the drop-down menu"/>
         <TextView
             android:id="@+id/question1"
             android:layout_margin="10dp"
@@ -31,70 +29,57 @@
             android:id="@+id/optionsquestion1"
             android:layout_margin="10dp"
             android:layout_width="250dp"
-            android:layout_height="wrap_content">
-
-        </Spinner>
+            android:layout_height="wrap_content"/>
         <TextView
             android:id="@+id/question2"
             android:layout_margin="10dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"/>
         <Spinner
             android:id="@+id/optionsquestion2"
             android:layout_margin="10dp"
             android:layout_width="250dp"
-            android:layout_height="wrap_content">
-
-        </Spinner>
+            android:layout_height="wrap_content"/>
         <TextView
             android:id="@+id/question3"
             android:layout_margin="10dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"/>
         <Spinner
             android:id="@+id/optionsquestion3"
             android:layout_margin="10dp"
             android:layout_width="250dp"
-            android:layout_height="wrap_content">
-
-        </Spinner>
+            android:layout_height="wrap_content"/>
         <TextView
             android:id="@+id/question4"
             android:layout_margin="10dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"/>
         <Spinner
             android:id="@+id/optionsquestion4"
             android:layout_margin="10dp"
             android:layout_width="250dp"
-            android:layout_height="wrap_content">
-
-        </Spinner>
+            android:layout_height="wrap_content"/>
         <TextView
             android:id="@+id/question5"
             android:layout_margin="10dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"/>
         <Spinner
             android:id="@+id/optionsquestion5"
             android:layout_margin="10dp"
             android:layout_width="250dp"
-            android:layout_height="wrap_content">
-
-        </Spinner>
-
+            android:layout_height="wrap_content"/>
         <TextView
             android:id="@+id/question6"
             android:layout_margin="10dp"
             android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
+            android:layout_height="wrap_content"/>
         <Spinner
             android:id="@+id/optionsquestion6"
             android:layout_margin="10dp"
             android:layout_width="250dp"
-            android:layout_height="wrap_content">
-
-        </Spinner>
+            android:layout_height="wrap_content"/>
         <TextView
             android:id="@+id/question7"
             android:layout_margin="10dp"
@@ -104,9 +89,7 @@
             android:id="@+id/optionsquestion7"
             android:layout_margin="10dp"
             android:layout_width="250dp"
-            android:layout_height="wrap_content">
-
-        </Spinner>
+            android:layout_height="wrap_content"/>
         <TextView
             android:id="@+id/question8"
             android:layout_margin="10dp"
@@ -116,19 +99,17 @@
             android:id="@+id/optionsquestion8"
             android:layout_margin="10dp"
             android:layout_width="250dp"
-            android:layout_height="wrap_content">
-
-        </Spinner>
-
+            android:layout_height="wrap_content"/>
         <Button
             android:id="@+id/buttonSubmitTest"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
             android:layout_margin="40dp"
-            android:background="@color/colorPrimary"
+            android:padding="10dp"
+            android:background="@drawable/buttonoutline"
             android:text="Submit"
-            android:textColor="@color/colorWhite" />
+            android:textColor="@color/colorWhite"/>
 
     </LinearLayout>
 
@@ -157,11 +138,5 @@
         android:visibility="gone"
         android:layout_width="match_parent"
         android:layout_height="match_parent" />
-
-
-
-
-
-
 
 </RelativeLayout>

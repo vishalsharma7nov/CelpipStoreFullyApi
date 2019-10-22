@@ -5,7 +5,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Tests.ListeningTest.ListeningTestQuestionActivity">
+    tools:context=".CelpipTests.ListeningTest.ListeningTestQuestionActivity">
 
 
     <LinearLayout
@@ -76,7 +76,8 @@
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
-            android:background="@color/colorPrimary"
+            android:background="@drawable/buttonoutline"
+            android:padding="10dp"
             android:src="@drawable/ic_play_arrow_black_24dp" />
         <ImageButton
             android:id="@+id/buttonPause"
@@ -85,7 +86,8 @@
             android:layout_height="50dp"
             android:layout_gravity="center"
             android:layout_marginTop="20dp"
-            android:background="@color/colorPrimary"
+            android:padding="10dp"
+            android:background="@drawable/buttonoutline"
             android:src="@drawable/ic_pause_black_24dp" />
 
         <Button
@@ -132,7 +134,8 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_alignBottom="@+id/frame2"
-            android:background="@color/colorPrimary"
+            android:background="@drawable/buttonoutline"
+            android:padding="10dp"
             android:text="Next"
             android:textColor="@color/colorWhite" />
     </LinearLayout>
@@ -181,7 +184,8 @@
             android:layout_margin="20dp"
             android:text="submit"
             android:textColor="@color/colorWhite"
-            android:background="@color/colorPrimary"
+            android:background="@drawable/buttonoutline"
+            android:padding="10dp"
             android:layout_gravity="center"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content" />
@@ -206,7 +210,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="50dp"
-            android:background="@color/colorPrimary"
+            android:background="@drawable/buttonoutline"
+            android:padding="10dp"
             android:text="Questions"
             android:textColor="@color/colorWhite"
             android:textStyle="bold" />
