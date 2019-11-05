@@ -1,7 +1,13 @@
 package com.celpipstore.LoginAndRegistration;
 
 import android.app.ProgressDialog;
+import android.content.ComponentName;
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
@@ -40,11 +46,35 @@ public class RegistrationActivity extends AppCompatActivity {
         buttonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                registration();
+               connectionChecker();
             }
         });
     }
+    private void connectionChecker() {
+        ConnectivityManager ConnectionManager=(ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo=ConnectionManager.getActiveNetworkInfo();
+        if(networkInfo != null && networkInfo.isConnected()==true )
+        {
+            registration();
+        }
+        else
+        {
+            AlertDialog alertbox = new AlertDialog.Builder(this)
+                    .setMessage("CHECK YOUR INTERNET CONNECTION?")
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
 
+                        // do something when the button is clicked
+                        public void onClick(DialogInterface arg0, int arg1) {
+                            Intent intent = new Intent();
+                            intent.setComponent(new ComponentName("com.android.settings", "com.android.settings.Settings$DataUsageSummaryActivity"));
+                            startActivity(intent);
+                            recreate();
+                        }
+                    })
+                    .show();
+            Toast.makeText(getApplicationContext(), "Network Not Available", Toast.LENGTH_LONG).show();
+        }
+    }
     public void registration() {
         final ProgressDialog loading = ProgressDialog.show(this,"Loading","Please wait...",false,false);
         final String email = editTextEmailId.getText().toString();

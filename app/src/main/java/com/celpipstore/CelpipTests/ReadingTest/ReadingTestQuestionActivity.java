@@ -13,7 +13,6 @@ import android.os.Bundle;
 import android.support.annotation.RequiresApi;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
-import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.ListView;
@@ -24,11 +23,15 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.celpipstore.Adapter.ReadingTestAdapter.ReadingTestPart1QuestionAdapter;
-import com.celpipstore.Adapter.ReadingTestAdapter.ReadingTestPart2QuestionAdapter;
-import com.celpipstore.Adapter.ReadingTestAdapter.ReadingTestPart3QuestionAdapter;
-import com.celpipstore.Adapter.ReadingTestAdapter.ReadingTestPart4QuestionAdapter;
-import com.celpipstore.Adapter.ReadingTestAdapter.ReadingTestPracticeTestAdapter;
+import com.celpipstore.Adapter.ReadingTestAdapter.Question.ReadingTestPart1QuestionAdapter;
+import com.celpipstore.Adapter.ReadingTestAdapter.Question.ReadingTestPart2QuestionAdapter;
+import com.celpipstore.Adapter.ReadingTestAdapter.Question.ReadingTestPart3QuestionAdapter;
+import com.celpipstore.Adapter.ReadingTestAdapter.Question.ReadingTestPart4QuestionAdapter;
+import com.celpipstore.Adapter.ReadingTestAdapter.Question.ReadingTestPracticeTestAdapter;
+import com.celpipstore.GetterAndSetterClasses.ReadingTest.Question.ReadingTestPart1;
+import com.celpipstore.GetterAndSetterClasses.ReadingTest.Question.ReadingTestPart2;
+import com.celpipstore.GetterAndSetterClasses.ReadingTest.Question.ReadingTestPart3;
+import com.celpipstore.GetterAndSetterClasses.ReadingTest.Question.ReadingTestPart4;
 import com.celpipstore.JsonData.ReadingTest.JsonDataHandlerPracticeTestReading;
 import com.celpipstore.JsonData.ReadingTest.JsonDataHandlerReadingPart1;
 import com.celpipstore.JsonData.ReadingTest.JsonDataHandlerReadingPart2;
@@ -39,7 +42,13 @@ import com.celpipstore.R;
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.List;
+
 public class ReadingTestQuestionActivity extends AppCompatActivity {
+    private List<ReadingTestPart1> readingTestPart1;
+    private List<ReadingTestPart2> readingTestPart2;
+    private List<ReadingTestPart3> readingTestPart3;
+    private List<ReadingTestPart4> readingTestPart4;
     private String tokenCode,API,part1,part2,part3,part4,practicetest;
     private ListView listViewReadingPractice,listViewReadingPart1,listViewReadingPart2,listViewReadingPart3,listViewReadingPart4;
     @Override
@@ -64,7 +73,6 @@ public class ReadingTestQuestionActivity extends AppCompatActivity {
         part3 = "http://demo.celpip.biz/api/accessnewtest?memberid="+member_id+"&testid=37&testcode="+test_code;
         part4 = "http://demo.celpip.biz/api/accessnewtest?memberid="+member_id+"&testid=36&testcode="+test_code;
         connectionChecker();
-//        Log.e("===APIREADING",API);
     }
 
     private void connectionChecker() {
@@ -238,29 +246,29 @@ public class ReadingTestQuestionActivity extends AppCompatActivity {
     }
     private void showJSONPart1(String json) {
         JsonDataHandlerReadingPart1 jsonDataHandlerReadingPart1 = new JsonDataHandlerReadingPart1(json);
-        jsonDataHandlerReadingPart1.parseJSON();
-        ReadingTestPart1QuestionAdapter ca = new ReadingTestPart1QuestionAdapter(this,JsonDataHandlerReadingPart1.id,JsonDataHandlerReadingPart1.test_code,JsonDataHandlerReadingPart1.passages,JsonDataHandlerReadingPart1.q1_question,JsonDataHandlerReadingPart1.q1_option1,JsonDataHandlerReadingPart1.q1_option2,JsonDataHandlerReadingPart1.q11_option3,JsonDataHandlerReadingPart1.q1_option4,JsonDataHandlerReadingPart1.q1_answerer,JsonDataHandlerReadingPart1.q2_question,JsonDataHandlerReadingPart1.q2_option1,JsonDataHandlerReadingPart1.q2_option2,JsonDataHandlerReadingPart1.q2_option3,JsonDataHandlerReadingPart1.q2_option4,JsonDataHandlerReadingPart1.q2_answerer,JsonDataHandlerReadingPart1.q3_question,JsonDataHandlerReadingPart1.q3_option1,JsonDataHandlerReadingPart1.q3_option2,JsonDataHandlerReadingPart1.q3_option3,JsonDataHandlerReadingPart1.q3_option4,JsonDataHandlerReadingPart1.q3_answerer,JsonDataHandlerReadingPart1.q4_question,JsonDataHandlerReadingPart1.q4_option1,JsonDataHandlerReadingPart1.q4_option2,JsonDataHandlerReadingPart1.q4_option3,JsonDataHandlerReadingPart1.q4_option4,JsonDataHandlerReadingPart1.q4_answerer,JsonDataHandlerReadingPart1.q5_question,JsonDataHandlerReadingPart1.q5_option1,JsonDataHandlerReadingPart1.q5_option2,JsonDataHandlerReadingPart1.q5_option3,JsonDataHandlerReadingPart1.q5_option4,JsonDataHandlerReadingPart1.q5_answerer,JsonDataHandlerReadingPart1.q6_question,JsonDataHandlerReadingPart1.q6_option1,JsonDataHandlerReadingPart1.q6_option2,JsonDataHandlerReadingPart1.q6_option3,JsonDataHandlerReadingPart1.q6_option4,JsonDataHandlerReadingPart1.q6_answerer,JsonDataHandlerReadingPart1.hi_message,JsonDataHandlerReadingPart1.q7_question,JsonDataHandlerReadingPart1.q7_option1,JsonDataHandlerReadingPart1.q7_option2,JsonDataHandlerReadingPart1.q7_option3,JsonDataHandlerReadingPart1.q7_option4,JsonDataHandlerReadingPart1.q7_answerer,JsonDataHandlerReadingPart1.q8_question,JsonDataHandlerReadingPart1.q8_option1,JsonDataHandlerReadingPart1.q8_option2,JsonDataHandlerReadingPart1.q8_option3,JsonDataHandlerReadingPart1.q8_option4,JsonDataHandlerReadingPart1.q8_answerer,JsonDataHandlerReadingPart1.q9_question,JsonDataHandlerReadingPart1.q9_option1,JsonDataHandlerReadingPart1.q9_option2,JsonDataHandlerReadingPart1.q9_option3,JsonDataHandlerReadingPart1.q9_option4,JsonDataHandlerReadingPart1.q9_answerer,JsonDataHandlerReadingPart1.q10_question,JsonDataHandlerReadingPart1.q10_option1,JsonDataHandlerReadingPart1.q10_option2,JsonDataHandlerReadingPart1.q10_option3,JsonDataHandlerReadingPart1.q10_option4,JsonDataHandlerReadingPart1.q10_answerer,JsonDataHandlerReadingPart1.q11_question,JsonDataHandlerReadingPart1.q11_option1,JsonDataHandlerReadingPart1.q11_option2,JsonDataHandlerReadingPart1.q11_option3,JsonDataHandlerReadingPart1.q11_option4,JsonDataHandlerReadingPart1.q11_answerer,JsonDataHandlerReadingPart1.thank_message);
+        readingTestPart1=jsonDataHandlerReadingPart1.parseJSON();
+        ReadingTestPart1QuestionAdapter ca = new ReadingTestPart1QuestionAdapter(this,readingTestPart1);
         listViewReadingPart1.setAdapter(ca);
         ca.notifyDataSetChanged();
     }
     private void showJSONPart2(String json) {
         JsonDataHandlerReadingPart2 jsonDataHandlerReadingPart2 = new JsonDataHandlerReadingPart2(json);
-        jsonDataHandlerReadingPart2.parseJSON();
-        ReadingTestPart2QuestionAdapter ca = new ReadingTestPart2QuestionAdapter(this,JsonDataHandlerReadingPart2.id,JsonDataHandlerReadingPart2.test_code,JsonDataHandlerReadingPart2.image_1,JsonDataHandlerReadingPart2.image_2,JsonDataHandlerReadingPart2.image_3,JsonDataHandlerReadingPart2.image_4,JsonDataHandlerReadingPart2.q1_question,JsonDataHandlerReadingPart2.q1_option1,JsonDataHandlerReadingPart2.q1_option2,JsonDataHandlerReadingPart2.q1_option3,JsonDataHandlerReadingPart2.q1_option4,JsonDataHandlerReadingPart2.q1_answerer,JsonDataHandlerReadingPart2.q2_question,JsonDataHandlerReadingPart2.q2_option1,JsonDataHandlerReadingPart2.q2_option2,JsonDataHandlerReadingPart2.q2_option3,JsonDataHandlerReadingPart2.q2_option4,JsonDataHandlerReadingPart2.q2_answerer,JsonDataHandlerReadingPart2.q3_question,JsonDataHandlerReadingPart2.q3_option1,JsonDataHandlerReadingPart2.q3_option2,JsonDataHandlerReadingPart2.q3_option3,JsonDataHandlerReadingPart2.q3_option4,JsonDataHandlerReadingPart2.q3_answerer,JsonDataHandlerReadingPart2.q4_question,JsonDataHandlerReadingPart2.q4_option1,JsonDataHandlerReadingPart2.q4_option2,JsonDataHandlerReadingPart2.q4_option3,JsonDataHandlerReadingPart2.q4_option4,JsonDataHandlerReadingPart2.q4_answerer,JsonDataHandlerReadingPart2.q5_question,JsonDataHandlerReadingPart2.q5_option1,JsonDataHandlerReadingPart2.q5_option2,JsonDataHandlerReadingPart2.q5_option3,JsonDataHandlerReadingPart2.q5_option4,JsonDataHandlerReadingPart2.q5_answerer,JsonDataHandlerReadingPart2.q6_question,JsonDataHandlerReadingPart2.q6_option1,JsonDataHandlerReadingPart2.q6_option2,JsonDataHandlerReadingPart2.q6_option3,JsonDataHandlerReadingPart2.q6_option4,JsonDataHandlerReadingPart2.q6_answerer,JsonDataHandlerReadingPart2.q7_question,JsonDataHandlerReadingPart2.q7_option1,JsonDataHandlerReadingPart2.q7_option2,JsonDataHandlerReadingPart2.q7_option3,JsonDataHandlerReadingPart2.q7_option4,JsonDataHandlerReadingPart2.q7_answerer,JsonDataHandlerReadingPart2.q8_question,JsonDataHandlerReadingPart2.q8_option1,JsonDataHandlerReadingPart2.q8_option2,JsonDataHandlerReadingPart2.q8_option3,JsonDataHandlerReadingPart2.q8_option4,JsonDataHandlerReadingPart2.q8_answerer);
+        readingTestPart2=jsonDataHandlerReadingPart2.parseJSON();
+        ReadingTestPart2QuestionAdapter ca = new ReadingTestPart2QuestionAdapter(this,readingTestPart2);
         listViewReadingPart2.setAdapter(ca);
         ca.notifyDataSetChanged();
     }
     private void showJSONPart3(String json) {
         JsonDataHandlerReadingPart3 jsonDataHandlerReadingPart3 = new JsonDataHandlerReadingPart3(json);
-        jsonDataHandlerReadingPart3.parseJSON();
-        ReadingTestPart3QuestionAdapter ca = new ReadingTestPart3QuestionAdapter(this,JsonDataHandlerReadingPart3.id,JsonDataHandlerReadingPart3.test_code,JsonDataHandlerReadingPart3.passages_1,JsonDataHandlerReadingPart3.passages_2,JsonDataHandlerReadingPart3.passages_3,JsonDataHandlerReadingPart3.passages_4,JsonDataHandlerReadingPart3.q1_question,JsonDataHandlerReadingPart3.q1_answerer,JsonDataHandlerReadingPart3.q2_question,JsonDataHandlerReadingPart3.q2_answerer,JsonDataHandlerReadingPart3.q3_question,JsonDataHandlerReadingPart3.q3_answerer,JsonDataHandlerReadingPart3.q4_question,JsonDataHandlerReadingPart3.q4_question,JsonDataHandlerReadingPart3.q5_question,JsonDataHandlerReadingPart3.q5_answerer,JsonDataHandlerReadingPart3.q6_question,JsonDataHandlerReadingPart3.q6_answerer,JsonDataHandlerReadingPart3.q7_question,JsonDataHandlerReadingPart3.q7_answerer,JsonDataHandlerReadingPart3.q8_question,JsonDataHandlerReadingPart3.q8_answerer,JsonDataHandlerReadingPart3.q9_question,JsonDataHandlerReadingPart3.q9_answerer);
+        readingTestPart3=jsonDataHandlerReadingPart3.parseJSON();
+        ReadingTestPart3QuestionAdapter ca = new ReadingTestPart3QuestionAdapter(this,readingTestPart3);
         listViewReadingPart3.setAdapter(ca);
         ca.notifyDataSetChanged();
     }
     private void showJSONPart4(String json) {
         JsonDataHandlerReadingPart4 jsonDataHandlerReadingPart4 = new JsonDataHandlerReadingPart4(json);
-        jsonDataHandlerReadingPart4.parseJSON();
-        ReadingTestPart4QuestionAdapter ca = new ReadingTestPart4QuestionAdapter(this,JsonDataHandlerReadingPart4.id,JsonDataHandlerReadingPart4.test_code,JsonDataHandlerReadingPart4.passages,JsonDataHandlerReadingPart4.q1_question,JsonDataHandlerReadingPart4.q1_option1,JsonDataHandlerReadingPart4.q1_option2,JsonDataHandlerReadingPart4.q1_option3,JsonDataHandlerReadingPart4.q1_option4,JsonDataHandlerReadingPart4.q1_answerer,JsonDataHandlerReadingPart4.q2_question,JsonDataHandlerReadingPart4.q2_option1,JsonDataHandlerReadingPart4.q2_option2,JsonDataHandlerReadingPart4.q2_option3,JsonDataHandlerReadingPart4.q2_option4,JsonDataHandlerReadingPart4.q2_answerer,JsonDataHandlerReadingPart4.q3_question,JsonDataHandlerReadingPart4.q3_option1,JsonDataHandlerReadingPart4.q3_option2,JsonDataHandlerReadingPart4.q3_option3,JsonDataHandlerReadingPart4.q3_option4,JsonDataHandlerReadingPart4.q3_answerer,JsonDataHandlerReadingPart4.q4_question,JsonDataHandlerReadingPart4.q4_option1,JsonDataHandlerReadingPart4.q4_option2,JsonDataHandlerReadingPart4.q4_option3,JsonDataHandlerReadingPart4.q4_option4,JsonDataHandlerReadingPart4.q4_answerer,JsonDataHandlerReadingPart4.q5_question,JsonDataHandlerReadingPart4.q5_option1,JsonDataHandlerReadingPart4.q5_option2,JsonDataHandlerReadingPart4.q5_option3,JsonDataHandlerReadingPart4.q5_option4,JsonDataHandlerReadingPart4.q5_answerer,JsonDataHandlerReadingPart4.q6_question,JsonDataHandlerReadingPart4.q6_option1,JsonDataHandlerReadingPart4.q6_option2,JsonDataHandlerReadingPart4.q6_option3,JsonDataHandlerReadingPart4.q6_option4,JsonDataHandlerReadingPart4.q6_answerer,JsonDataHandlerReadingPart4.q7_question,JsonDataHandlerReadingPart4.q7_option1,JsonDataHandlerReadingPart4.q7_option2,JsonDataHandlerReadingPart4.q7_option3,JsonDataHandlerReadingPart4.q7_option4,JsonDataHandlerReadingPart4.q7_answerer,JsonDataHandlerReadingPart4.q8_question,JsonDataHandlerReadingPart4.q8_option1,JsonDataHandlerReadingPart4.q8_option2,JsonDataHandlerReadingPart4.q8_option3,JsonDataHandlerReadingPart4.q8_option4,JsonDataHandlerReadingPart4.q8_answerer,JsonDataHandlerReadingPart4.q9_question,JsonDataHandlerReadingPart4.q9_option1,JsonDataHandlerReadingPart4.q9_option2,JsonDataHandlerReadingPart4.q9_option3,JsonDataHandlerReadingPart4.q9_option4,JsonDataHandlerReadingPart4.q9_answerer,JsonDataHandlerReadingPart4.q10_question,JsonDataHandlerReadingPart4.q10_option1,JsonDataHandlerReadingPart4.q10_option2,JsonDataHandlerReadingPart4.q10_option3,JsonDataHandlerReadingPart4.q10_option4,JsonDataHandlerReadingPart4.q10_answerer);
+        readingTestPart4=jsonDataHandlerReadingPart4.parseJSON();
+        ReadingTestPart4QuestionAdapter ca = new ReadingTestPart4QuestionAdapter(this,readingTestPart4);
         listViewReadingPart4.setAdapter(ca);
         ca.notifyDataSetChanged();
     }

@@ -1,7 +1,12 @@
 package com.celpipstore.CelpipTests.SpeakingTest;
 
 import android.app.ProgressDialog;
+import android.content.ComponentName;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
@@ -15,10 +20,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.celpipstore.Adapter.SpeakingTestAdapter.SpeakingTotalTestAdapter;
-import com.celpipstore.Adapter.SpeakingTestAdapter.SpeakingTotalTestListAdapter;
-import com.celpipstore.Adapter.TotalTestAdapter;
-import com.celpipstore.GetterAndSetterClasses.TotalTest;
+import com.celpipstore.Adapter.SpeakingTestAdapter.TotalTest.SpeakingTotalTestAdapter;
+import com.celpipstore.GetterAndSetterClasses.TotalTest.TotalTest;
 import com.celpipstore.JsonData.JsonDataHandler;
 import com.celpipstore.R;
 
@@ -37,7 +40,7 @@ public class SPEAKING extends AppCompatActivity{
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         listView  = findViewById(R.id.listViewSpeakingTest);
-        sendRequest();
+        connectionChecker();
     }
 
     public boolean onKeyDown(int keyCode, KeyEvent event) {
@@ -108,5 +111,30 @@ public class SPEAKING extends AppCompatActivity{
         SpeakingTotalTestAdapter ca = new SpeakingTotalTestAdapter(this,totalTests);
         listView.setAdapter(ca);
         ca.notifyDataSetChanged();
+    }
+    private void connectionChecker() {
+        ConnectivityManager ConnectionManager=(ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo=ConnectionManager.getActiveNetworkInfo();
+        if(networkInfo != null && networkInfo.isConnected()==true )
+        {
+            sendRequest();
+        }
+        else
+        {
+            AlertDialog alertbox = new AlertDialog.Builder(this)
+                    .setMessage("CHECK YOUR INTERNET CONNECTION?")
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+                        // do something when the button is clicked
+                        public void onClick(DialogInterface arg0, int arg1) {
+                            Intent intent = new Intent();
+                            intent.setComponent(new ComponentName("com.android.settings", "com.android.settings.Settings$DataUsageSummaryActivity"));
+                            startActivity(intent);
+                            recreate();
+                        }
+                    })
+                    .show();
+            Toast.makeText(getApplicationContext(), "Network Not Available", Toast.LENGTH_LONG).show();
+        }
     }
 }

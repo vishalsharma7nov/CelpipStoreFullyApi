@@ -1,6 +1,5 @@
 package com.celpipstore.UserDashboard;
 
-import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -35,7 +34,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.celpipstore.Adapter.ExpandableListAdapter;
+import com.celpipstore.ExpandableListAdapter.ExpandableListAdapter;
 import com.celpipstore.DICTATION_TESTS;
 import com.celpipstore.FILL_IN_THE_BLANKS;
 import com.celpipstore.CelpipTests.ListeningTest.LISTENING_part1;
@@ -103,6 +102,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         vocabularyimage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                connectionChecker();
                 Intent intent = new Intent(getApplicationContext(), VOCABULARY_TESTS.class);
                 startActivity(intent);
             }
@@ -111,6 +111,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         spottingerrorimage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                connectionChecker();
                 Intent intent = new Intent(getApplicationContext(), SPOTTING_THE_ERRORS.class);
                 startActivity(intent);
             }
@@ -119,6 +120,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         dictationimage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                connectionChecker();
                 Intent intent = new Intent(getApplicationContext(), DICTATION_TESTS.class);
                 startActivity(intent);
             }
@@ -133,6 +135,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         rearrangeimage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                connectionChecker();
                 Intent intent = new Intent(getApplicationContext(), RE_ARRANGE.class);
                 startActivity(intent);
             }
@@ -141,6 +144,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         fillintheblanksimage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                connectionChecker();
                 Intent intent = new Intent(getApplicationContext(), FILL_IN_THE_BLANKS.class);
                 startActivity(intent);
             }
@@ -149,7 +153,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         listeningimage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                networkChecker();
+                connectionChecker();
                 Intent intent = new Intent(getApplicationContext(), LISTENING_part2.class);
                 startActivity(intent);
             }
@@ -158,6 +162,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         readingimage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                connectionChecker();
                 Intent intent = new Intent(getApplicationContext(), READING.class);
                 startActivity(intent);
             }
@@ -166,6 +171,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         speakingimage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                connectionChecker();
                 Intent intent = new Intent(getApplicationContext(), SPEAKING.class);
                 startActivity(intent);
             }
@@ -174,6 +180,7 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
         writingimage.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
+                connectionChecker();
                 Intent intent = new Intent(getApplicationContext(), WRITING.class);
                 startActivity(intent);
             }
@@ -495,29 +502,26 @@ public class Dashboard extends AppCompatActivity implements NavigationView.OnNav
             }
         });
     }
-    private void networkChecker(){
+    private void connectionChecker(){
         ConnectivityManager ConnectionManager=(ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo=ConnectionManager.getActiveNetworkInfo();
         if(networkInfo != null && networkInfo.isConnected()==true )
         {
+
         }
         else
         {
             AlertDialog alertbox = new AlertDialog.Builder(this)
-                    .setMessage("Check Your Internet Connention?")
+                    .setMessage("CHECK YOUR INTERNET CONNECTION?")
                     .setPositiveButton("OK", new DialogInterface.OnClickListener() {
 
                         // do something when the button is clicked
                         public void onClick(DialogInterface arg0, int arg1) {
-
-                            Intent intent = new Intent();
-                            intent.setComponent(new ComponentName("com.android.settings", "com.android.settings.Settings$DataUsageSummaryActivity"));
-                            startActivity(intent);
                             recreate();
                         }
                     })
                     .show();
-            Toast.makeText(Dashboard.this, "Network Not Available", Toast.LENGTH_LONG).show();
+            Toast.makeText(Dashboard.this, "CHECK YOUR INTERNET CONNECTION", Toast.LENGTH_LONG).show();
         }
     }
 }

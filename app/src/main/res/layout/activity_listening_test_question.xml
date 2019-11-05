@@ -96,7 +96,8 @@
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_margin="50dp"
-            android:background="@color/colorPrimary"
+            android:padding="10dp"
+            android:background="@drawable/buttonoutline"
             android:text="Questions"
             android:textColor="@color/colorWhite"
             android:textStyle="bold" />
@@ -105,6 +106,10 @@
     <ListView
         android:visibility="gone"
         android:id="@+id/listView"
+        android:scrollbarSize="3dp"
+        android:scrollbars="vertical"
+        android:fadeScrollbars="false"
+        android:scrollbarThumbVertical="@color/colorPrimary"
         android:layout_marginBottom="10dp"
         android:layout_width="match_parent"
         android:layout_height="match_parent">

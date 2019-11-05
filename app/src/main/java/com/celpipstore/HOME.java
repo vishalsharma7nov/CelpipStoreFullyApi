@@ -1,8 +1,13 @@
 package com.celpipstore;
 
+import android.content.Context;
+import android.content.DialogInterface;
 import android.content.Intent;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.os.Handler;
+import android.support.v7.app.AlertDialog;
 import android.view.View;
 import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
@@ -16,8 +21,9 @@ import android.widget.ExpandableListView;
 import android.widget.ImageView;
 import android.widget.ProgressBar;
 import android.widget.ScrollView;
+import android.widget.Toast;
 
-import com.celpipstore.Adapter.ExpandableListAdapter;
+import com.celpipstore.ExpandableListAdapter.ExpandableListAdapter;
 import com.celpipstore.LoginAndRegistration.LoginActivity;
 import com.celpipstore.LoginAndRegistration.RegistrationActivity;
 import com.celpipstore.LoginAndRegistration.SessionManager;
@@ -98,6 +104,7 @@ public class HOME extends AppCompatActivity implements NavigationView.OnNavigati
         toggle.syncState();
         NavigationView navigationView = findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
+        connectionChecker();
     }
 
     private void navigation() {
@@ -265,5 +272,27 @@ public class HOME extends AppCompatActivity implements NavigationView.OnNavigati
         listDataChild.put(listDataHeader.get(4), FAQ);
         listDataChild.put(listDataHeader.get(5), ABOUT_US);
         listDataChild.put(listDataHeader.get(6), CONTACT_US);
+    }
+    private void connectionChecker() {
+        ConnectivityManager ConnectionManager=(ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo=ConnectionManager.getActiveNetworkInfo();
+        if(networkInfo != null && networkInfo.isConnected()==true )
+        {
+            session.checkLogin();
+        }
+        else
+        {
+            AlertDialog alertbox = new AlertDialog.Builder(this)
+                    .setMessage("CHECK YOUR INTERNET CONNECTION?")
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+
+                        // do something when the button is clicked
+                        public void onClick(DialogInterface arg0, int arg1) {
+                            recreate();
+                        }
+                    })
+                    .show();
+            Toast.makeText(this, "Network Not Available", Toast.LENGTH_LONG).show();
+        }
     }
 }

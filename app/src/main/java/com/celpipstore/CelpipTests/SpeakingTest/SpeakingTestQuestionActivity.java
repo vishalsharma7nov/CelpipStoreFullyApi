@@ -31,12 +31,16 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.celpipstore.Adapter.SpeakingTestAdapter.SpeakingTestPart3Adapter;
-import com.celpipstore.Adapter.SpeakingTestAdapter.SpeakingTestPart5Adapter;
-import com.celpipstore.Adapter.SpeakingTestAdapter.SpeakingTestPracticeTestAdapter;
-import com.celpipstore.GetterAndSetterClasses.SpeakingTest.PracticeTestSpeaking;
-import com.celpipstore.GetterAndSetterClasses.SpeakingTest.SpeakingTestPart3;
-import com.celpipstore.GetterAndSetterClasses.SpeakingTest.SpeakingTestPart5;
+import com.celpipstore.Adapter.SpeakingTestAdapter.Question.SpeakingTestPart1Adapter;
+import com.celpipstore.Adapter.SpeakingTestAdapter.Question.SpeakingTestPart2Adapter;
+import com.celpipstore.Adapter.SpeakingTestAdapter.Question.SpeakingTestPart3Adapter;
+import com.celpipstore.Adapter.SpeakingTestAdapter.Question.SpeakingTestPart4Adapter;
+import com.celpipstore.Adapter.SpeakingTestAdapter.Question.SpeakingTestPart5Adapter;
+import com.celpipstore.Adapter.SpeakingTestAdapter.Question.SpeakingTestPart8Adapter;
+import com.celpipstore.Adapter.SpeakingTestAdapter.Question.SpeakingTestPracticeTestAdapter;
+import com.celpipstore.GetterAndSetterClasses.SpeakingTest.Question.PracticeTestSpeaking;
+import com.celpipstore.GetterAndSetterClasses.SpeakingTest.Question.SpeakingTestPart3;
+import com.celpipstore.GetterAndSetterClasses.SpeakingTest.Question.SpeakingTestPart5;
 import com.celpipstore.JsonData.SpeakingTest.JsonDataHandlerPracticeTestSpeaking;
 import com.celpipstore.JsonData.SpeakingTest.JsonDataHandlerSpeakingTest3;
 import com.celpipstore.JsonData.SpeakingTest.JsonDataHandlerSpeakingTest5;
@@ -141,49 +145,89 @@ public class SpeakingTestQuestionActivity extends AppCompatActivity {
                                                         {
                                                             loading.dismiss();
                                                             showJSONPart1(response);
-                                                            Log.e("===READINGPART1",a);
+                                                            submitAnswer.setOnClickListener(new View.OnClickListener() {
+                                                                @Override
+                                                                public void onClick(View view) {
+                                                                    submitAnswerPractice();
+                                                                }
+                                                            });
                                                         }
                                                         else if(API.equals(part2))
                                                         {
                                                             loading.dismiss();
-                                                            showJSONPart1(response);
-                                                            Log.e("===READINGPART1",a);
+                                                            showJSONPart2(response);
+                                                            submitAnswer.setOnClickListener(new View.OnClickListener() {
+                                                                @Override
+                                                                public void onClick(View view) {
+                                                                    submitAnswerPractice();
+                                                                }
+                                                            });
                                                         }
                                                         else if (API.equals(part3))
                                                         {
                                                             loading.dismiss();
                                                             showJSONPart3(response);
-                                                            Log.e("===READINGPART1",a);
+                                                            submitAnswer.setOnClickListener(new View.OnClickListener() {
+                                                                @Override
+                                                                public void onClick(View view) {
+                                                                    submitAnswerPractice();
+                                                                }
+                                                            });
                                                         }
                                                         else if (API.equals(part4))
                                                         {
                                                             loading.dismiss();
-                                                            showJSONPart3(response);
-                                                            Log.e("===READINGPART1",a);
+                                                            showJSONPart4(response);
+                                                            submitAnswer.setOnClickListener(new View.OnClickListener() {
+                                                                @Override
+                                                                public void onClick(View view) {
+                                                                    submitAnswerPractice();
+                                                                }
+                                                            });
                                                         }
                                                         else if (API.equals(part5))
                                                         {
                                                             loading.dismiss();
                                                             showJSONPart5(response);
-                                                            Log.e("===READINGPART1",a);
+                                                            submitAnswer.setOnClickListener(new View.OnClickListener() {
+                                                                @Override
+                                                                public void onClick(View view) {
+                                                                    submitAnswerPractice();
+                                                                }
+                                                            });
                                                         }
                                                         else if (API.equals(part6))
                                                         {
                                                             loading.dismiss();
                                                             showJSONPart1(response);
-                                                            Log.e("===READINGPART1",a);
+                                                            submitAnswer.setOnClickListener(new View.OnClickListener() {
+                                                                @Override
+                                                                public void onClick(View view) {
+                                                                    submitAnswerPractice();
+                                                                }
+                                                            });
                                                         }
                                                         else if (API.equals(part7))
                                                         {
                                                             loading.dismiss();
                                                             showJSONPart1(response);
-                                                            Log.e("===READINGPART1",a);
+                                                            submitAnswer.setOnClickListener(new View.OnClickListener() {
+                                                                @Override
+                                                                public void onClick(View view) {
+                                                                    submitAnswerPractice();
+                                                                }
+                                                            });
                                                         }
                                                         else if (API.equals(part8))
                                                         {
                                                             loading.dismiss();
-                                                            showJSONPart3(response);
-                                                            Log.e("===READINGPART1",a);
+                                                            showJSONPart8(response);
+                                                            submitAnswer.setOnClickListener(new View.OnClickListener() {
+                                                                @Override
+                                                                public void onClick(View view) {
+                                                                    submitAnswerPractice();
+                                                                }
+                                                            });
                                                         }
                                                         else if (API.equals(practicetest))
                                                         {
@@ -191,10 +235,9 @@ public class SpeakingTestQuestionActivity extends AppCompatActivity {
                                                             submitAnswer.setOnClickListener(new View.OnClickListener() {
                                                                 @Override
                                                                 public void onClick(View view) {
-//                                                                    submitAnswerPractice();
+                                                                    submitAnswerPractice();
                                                                 }
                                                             });
-                                                            Log.e("===READINGPART1",a);
                                                             showJSONPracticeTest(response);
                                                         }
                                                     }
@@ -244,9 +287,16 @@ public class SpeakingTestQuestionActivity extends AppCompatActivity {
     private void showJSONPart1(String json) {
         JsonDataHandlerPracticeTestSpeaking jsonDataHandlerPracticeTestSpeaking= new JsonDataHandlerPracticeTestSpeaking(json);
         practiceTestSpeaking=jsonDataHandlerPracticeTestSpeaking.parseJSON();
-        SpeakingTestPracticeTestAdapter speakingTestPracticeTestAdapter = new SpeakingTestPracticeTestAdapter(this,practiceTestSpeaking);
-        speakingTestPracticeQuestion.setAdapter(speakingTestPracticeTestAdapter);
-        speakingTestPracticeTestAdapter.notifyDataSetChanged();
+        SpeakingTestPart1Adapter speakingTestPart1Adapter = new SpeakingTestPart1Adapter(this,practiceTestSpeaking);
+        speakingTestPracticeQuestion.setAdapter(speakingTestPart1Adapter);
+        speakingTestPart1Adapter.notifyDataSetChanged();
+    }
+    private void showJSONPart2(String json) {
+        JsonDataHandlerPracticeTestSpeaking jsonDataHandlerPracticeTestSpeaking= new JsonDataHandlerPracticeTestSpeaking(json);
+        practiceTestSpeaking=jsonDataHandlerPracticeTestSpeaking.parseJSON();
+        SpeakingTestPart2Adapter speakingTestPart2Adapter = new SpeakingTestPart2Adapter(this,practiceTestSpeaking);
+        speakingTestPracticeQuestion.setAdapter(speakingTestPart2Adapter);
+        speakingTestPart2Adapter.notifyDataSetChanged();
     }
     private void showJSONPart3(String json) {
         JsonDataHandlerSpeakingTest3 jsonDataHandlerSpeakingTest3 = new JsonDataHandlerSpeakingTest3(json);
@@ -255,6 +305,13 @@ public class SpeakingTestQuestionActivity extends AppCompatActivity {
         speakingTest3.setAdapter(speakingTestPart3Adapter);
         speakingTestPart3Adapter.notifyDataSetChanged();
     }
+    private void showJSONPart4(String json) {
+        JsonDataHandlerSpeakingTest3 jsonDataHandlerSpeakingTest3 = new JsonDataHandlerSpeakingTest3(json);
+        speakingTestPart3=jsonDataHandlerSpeakingTest3.parseJSON();
+        SpeakingTestPart4Adapter speakingTestPart4Adapter = new SpeakingTestPart4Adapter(this,speakingTestPart3);
+        speakingTest3.setAdapter(speakingTestPart4Adapter);
+        speakingTestPart4Adapter.notifyDataSetChanged();
+    }
     private void showJSONPart5(String json) {
         JsonDataHandlerSpeakingTest5 jsonDataHandlerSpeakingTest5 = new JsonDataHandlerSpeakingTest5(json);
         speakingTestPart5=jsonDataHandlerSpeakingTest5.parseJSON();
@@ -262,36 +319,295 @@ public class SpeakingTestQuestionActivity extends AppCompatActivity {
         speakingTest3.setAdapter(speakingTestPart5Adapter);
         speakingTestPart5Adapter.notifyDataSetChanged();
     }
-    private void submitAnswerPractice (){
-        final String speaking = videoToBase64(new File(mFileName));
-        final String urlForSubmittingOptions = "http://demo.celpip.biz/api/spPracticeTaskSubmitSubmit?token="+tokenCode+"&q1_response="+speaking+"&memberid="+member_id;
-        StringRequest stringRequest = new StringRequest(Request.Method.POST, urlForSubmittingOptions,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        Toast.makeText(getApplicationContext(), response, Toast.LENGTH_SHORT).show();
-                        Log.e("===Answer",urlForSubmittingOptions);
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-                Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
-                Log.e("===ErrorAnswer",urlForSubmittingOptions+"\n"+error.getLocalizedMessage());
-
-            }
-        }) {
-            @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String, String> params = new HashMap<>();
-                params.put("q1_response", speaking);
-                return params;
-            }
-        };
-        RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
-        requestQueue.add(stringRequest);
-//        Intent intent = new Intent(getApplicationContext(), SPEAKING.class);
-//        startActivity(intent);
+    private void showJSONPart8(String json) {
+        JsonDataHandlerSpeakingTest3 jsonDataHandlerSpeakingTest3 = new JsonDataHandlerSpeakingTest3(json);
+        speakingTestPart3=jsonDataHandlerSpeakingTest3.parseJSON();
+        SpeakingTestPart8Adapter speakingTestPart8Adapter = new SpeakingTestPart8Adapter(this,speakingTestPart3);
+        speakingTest3.setAdapter(speakingTestPart8Adapter);
+        speakingTestPart8Adapter.notifyDataSetChanged();
     }
+    private void submitAnswerPractice (){
+        if (API.equals(part1))
+        {
+            final String speaking = videoToBase64(new File(mFileName));
+            final String urlForSubmittingOptions = "http://demo.celpip.biz/api/spPart1Submit?token="+tokenCode+"&memberid="+member_id;
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, urlForSubmittingOptions,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            Toast.makeText(getApplicationContext(), "Audio Submitted!!"+response, Toast.LENGTH_SHORT).show();
+                            Log.e("===Answer",urlForSubmittingOptions);
+                            Intent intent = new Intent(getApplicationContext(), SPEAKING.class);
+                            startActivity(intent);
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                    Log.e("===ErrorAnswer",urlForSubmittingOptions+"\n"+error.getLocalizedMessage());
+
+                }
+            }) {
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("q1_response", speaking);
+                    return params;
+                }
+            };
+            RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+            requestQueue.add(stringRequest);
+        }
+        else if(API.equals(part2))
+        {
+            final String speaking = videoToBase64(new File(mFileName));
+            final String urlForSubmittingOptions = "http://demo.celpip.biz/api/spPart2Submit?token="+tokenCode+"&memberid="+member_id;
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, urlForSubmittingOptions,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            Toast.makeText(getApplicationContext(), "Audio Submitted!!"+response, Toast.LENGTH_SHORT).show();
+                            Log.e("===Answer",urlForSubmittingOptions);
+                            Intent intent = new Intent(getApplicationContext(), SPEAKING.class);
+                            startActivity(intent);
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                    Log.e("===ErrorAnswer",urlForSubmittingOptions+"\n"+error.getLocalizedMessage());
+
+                }
+            }) {
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("q1_response", speaking);
+                    return params;
+                }
+            };
+            RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+            requestQueue.add(stringRequest);
+        }
+        else if (API.equals(part3))
+        {
+            final String speaking = videoToBase64(new File(mFileName));
+            final String urlForSubmittingOptions = "http://demo.celpip.biz/api/spPart3Submit?token="+tokenCode+"&memberid="+member_id;
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, urlForSubmittingOptions,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            Toast.makeText(getApplicationContext(), "Audio Submitted!!"+response, Toast.LENGTH_SHORT).show();
+                            Log.e("===Answer",urlForSubmittingOptions);
+                            Intent intent = new Intent(getApplicationContext(), SPEAKING.class);
+                            startActivity(intent);
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                    Log.e("===ErrorAnswer",urlForSubmittingOptions+"\n"+error.getLocalizedMessage());
+
+                }
+            }) {
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("q1_response", speaking);
+                    return params;
+                }
+            };
+            RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+            requestQueue.add(stringRequest);
+        }
+        else if (API.equals(part4))
+        {
+            final String speaking = videoToBase64(new File(mFileName));
+            final String urlForSubmittingOptions = "http://demo.celpip.biz/api/spPart4Submit?token="+tokenCode+"&memberid="+member_id;
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, urlForSubmittingOptions,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            Toast.makeText(getApplicationContext(), "Audio Submitted!!"+response, Toast.LENGTH_SHORT).show();
+                            Log.e("===Answer",urlForSubmittingOptions);
+                            Intent intent = new Intent(getApplicationContext(), SPEAKING.class);
+                            startActivity(intent);
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                    Log.e("===ErrorAnswer",urlForSubmittingOptions+"\n"+error.getLocalizedMessage());
+
+                }
+            }) {
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("q1_response", speaking);
+                    return params;
+                }
+            };
+            RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+            requestQueue.add(stringRequest);
+        }
+        else if (API.equals(part5))
+        {
+            final String speaking = videoToBase64(new File(mFileName));
+            final String urlForSubmittingOptions = "http://demo.celpip.biz/api/spPart5Submit?token="+tokenCode+"&memberid="+member_id;
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, urlForSubmittingOptions,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            Toast.makeText(getApplicationContext(), "Audio Submitted!!"+response, Toast.LENGTH_SHORT).show();
+                            Log.e("===Answer",urlForSubmittingOptions);
+                            Intent intent = new Intent(getApplicationContext(), SPEAKING.class);
+                            startActivity(intent);
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                    Log.e("===ErrorAnswer",urlForSubmittingOptions+"\n"+error.getLocalizedMessage());
+
+                }
+            }) {
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("q1_response", speaking);
+                    return params;
+                }
+            };
+            RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+            requestQueue.add(stringRequest);
+        }
+        else if (API.equals(part6))
+        {
+            final String speaking = videoToBase64(new File(mFileName));
+            final String urlForSubmittingOptions = "http://demo.celpip.biz/api/spPart6Submit?token="+tokenCode+"&memberid="+member_id;
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, urlForSubmittingOptions,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            Toast.makeText(getApplicationContext(), "Audio Submitted!!"+response, Toast.LENGTH_SHORT).show();
+                            Log.e("===Answer",urlForSubmittingOptions);
+                            Intent intent = new Intent(getApplicationContext(), SPEAKING.class);
+                            startActivity(intent);
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                    Log.e("===ErrorAnswer",urlForSubmittingOptions+"\n"+error.getLocalizedMessage());
+
+                }
+            }) {
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("q1_response", speaking);
+                    return params;
+                }
+            };
+            RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+            requestQueue.add(stringRequest);
+        }
+        else if (API.equals(part7))
+        {
+            final String speaking = videoToBase64(new File(mFileName));
+            final String urlForSubmittingOptions = "http://demo.celpip.biz/api/spPart7Submit?token="+tokenCode+"&memberid="+member_id;
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, urlForSubmittingOptions,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            Toast.makeText(getApplicationContext(), "Audio Submitted!!"+response, Toast.LENGTH_SHORT).show();
+                            Log.e("===Answer",urlForSubmittingOptions);
+                            Intent intent = new Intent(getApplicationContext(), SPEAKING.class);
+                            startActivity(intent);
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                    Log.e("===ErrorAnswer",urlForSubmittingOptions+"\n"+error.getLocalizedMessage());
+
+                }
+            }) {
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("q1_response", speaking);
+                    return params;
+                }
+            };
+            RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+            requestQueue.add(stringRequest);
+        }
+        else if (API.equals(part8))
+        {
+            final String speaking = videoToBase64(new File(mFileName));
+            final String urlForSubmittingOptions = "http://demo.celpip.biz/api/spPart8Submit?token="+tokenCode+"&memberid="+member_id;
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, urlForSubmittingOptions,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            Toast.makeText(getApplicationContext(), "Audio Submitted!!"+response, Toast.LENGTH_SHORT).show();
+                            Log.e("===Answer",urlForSubmittingOptions);
+                            Intent intent = new Intent(getApplicationContext(), SPEAKING.class);
+                            startActivity(intent);
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                    Log.e("===ErrorAnswer",urlForSubmittingOptions+"\n"+error.getLocalizedMessage());
+
+                }
+            }) {
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("q1_response", speaking);
+                    return params;
+                }
+            };
+            RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+            requestQueue.add(stringRequest);
+        }
+        else if (API.equals(practicetest))
+        {
+            final String speaking = videoToBase64(new File(mFileName));
+            final String urlForSubmittingOptions = "http://demo.celpip.biz/api/sp/spPracticeTaskSubmit?token="+tokenCode+"&memberid="+member_id;
+            StringRequest stringRequest = new StringRequest(Request.Method.POST, urlForSubmittingOptions,
+                    new Response.Listener<String>() {
+                        @Override
+                        public void onResponse(String response) {
+                            Toast.makeText(getApplicationContext(), "Audio Submitted!!"+response, Toast.LENGTH_SHORT).show();
+                            Log.e("===Answer",urlForSubmittingOptions);
+                            Intent intent = new Intent(getApplicationContext(), SPEAKING.class);
+                            startActivity(intent);
+                        }
+                    }, new Response.ErrorListener() {
+                @Override
+                public void onErrorResponse(VolleyError error) {
+                    Toast.makeText(getApplicationContext(), error.getMessage(), Toast.LENGTH_SHORT).show();
+                    Log.e("===ErrorAnswer",urlForSubmittingOptions+"\n"+error.getLocalizedMessage());
+
+                }
+            }) {
+                @Override
+                protected Map<String, String> getParams() throws AuthFailureError {
+                    Map<String, String> params = new HashMap<>();
+                    params.put("q1_response", speaking);
+                    return params;
+                }
+            };
+            RequestQueue requestQueue = Volley.newRequestQueue(getApplicationContext());
+            requestQueue.add(stringRequest);
+        }
+    }
+
 
     @Override
     public void onRequestPermissionsResult(int requestCode, String[] permissions, int[] grantResults) {
@@ -330,9 +646,13 @@ public class SpeakingTestQuestionActivity extends AppCompatActivity {
         int bytesRead;
         ByteArrayOutputStream output = new ByteArrayOutputStream();
         try {
-            while ((bytesRead = inputStream.read(buffer)) != -1) {
-                output.write(buffer, 0, bytesRead);
+            if (inputStream!=null)
+            {
+                while ((bytesRead = inputStream.read(buffer)) != -1) {
+                    output.write(buffer, 0, bytesRead);
+                }
             }
+
         } catch (IOException e) {
             e.printStackTrace();
         }
@@ -362,7 +682,7 @@ public class SpeakingTestQuestionActivity extends AppCompatActivity {
                     mRecorder.setAudioEncoder(MediaRecorder.AudioEncoder.AMR_NB);
                     mRecorder.setOutputFile(mFileName);
                     String a = videoToBase64(new File(mFileName));
-                    Log.e("===Audio",a);
+//                    Log.e("===Audio",a);
                     try {
                         mRecorder.prepare();
                     } catch (IOException e) {

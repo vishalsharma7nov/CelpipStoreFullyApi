@@ -6,11 +6,13 @@
     android:layout_height="match_parent">
 
     <LinearLayout
+        android:id="@+id/timer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
         android:layout_alignParentTop="true"
         android:layout_margin="10dp"
+        android:padding="5dp"
         android:orientation="horizontal">
 
         <TextView
@@ -39,6 +41,7 @@
     </LinearLayout>
 
     <LinearLayout
+        android:id="@+id/radioButton"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -90,85 +93,76 @@
                 android:layout_marginEnd="50dp" />
         </RadioGroup>
     </LinearLayout>
-
-    <Button
-        android:id="@+id/buttonNextQuestion2"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_alignStart="@+id/buttonFinish"
-        android:layout_marginStart="140dp"
-        android:layout_marginTop="350dp"
-        android:layout_marginBottom="80dp"
-        android:background="@drawable/buttonoutline"
-        android:padding="10dp"
-        android:text="Next Question"
-        android:textColor="@color/colorWhite" />
-
-    <Button
-        android:visibility="gone"
-        android:id="@+id/buttonNextQuestion3"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="center"
-        android:layout_marginStart="140dp"
+    <LinearLayout
         android:layout_marginTop="450dp"
-        android:layout_marginBottom="80dp"
-        android:background="@color/colorPrimary"
-        android:text="Next Question"
-        android:textColor="@color/colorWhite" />
-
-    <Button
-        android:visibility="gone"
-        android:id="@+id/buttonNextQuestion4"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="140dp"
-        android:layout_marginTop="450dp"
-        android:layout_marginBottom="80dp"
-        android:background="@color/colorPrimary"
-        android:text="Next Question"
-        android:textColor="@color/colorWhite" />
-    <Button
-        android:visibility="gone"
-        android:id="@+id/buttonNextQuestion5"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="140dp"
-        android:layout_marginTop="450dp"
-        android:layout_marginBottom="80dp"
-        android:background="@color/colorPrimary"
-        android:text="Next Question"
-        android:textColor="@color/colorWhite" />
-
-    <Button
-        android:visibility="gone"
-        android:id="@+id/buttonFinish"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginStart="140dp"
-        android:layout_marginTop="450dp"
-        android:layout_marginBottom="80dp"
-        android:background="@color/colorPrimary"
-        android:text="Test Finish"
-        android:textColor="@color/colorWhite" />
-
-
-    <ListView
-        android:visibility="gone"
-        android:id="@+id/correctanswer"
+        android:orientation="vertical"
         android:layout_width="match_parent"
-        android:layout_height="254dp">
-    </ListView>
+        android:layout_height="wrap_content">
+        <Button
+            android:id="@+id/buttonNextQuestion2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="20dp"
+            android:background="@drawable/buttonoutline"
+            android:padding="10dp"
+            android:text="Next Question"
+            android:textColor="@color/colorWhite" />
 
-    <ListView
-        android:visibility="gone"
+        <Button
+            android:visibility="gone"
+            android:id="@+id/buttonNextQuestion3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="20dp"
+            android:background="@color/colorPrimary"
+            android:text="Next Question"
+            android:textColor="@color/colorWhite" />
+
+        <Button
+            android:visibility="gone"
+            android:id="@+id/buttonNextQuestion4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="20dp"
+            android:background="@color/colorPrimary"
+            android:text="Next Question"
+            android:textColor="@color/colorWhite" />
+        <Button
+            android:visibility="gone"
+            android:id="@+id/buttonNextQuestion5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="20dp"
+            android:background="@color/colorPrimary"
+            android:text="Next Question"
+            android:textColor="@color/colorWhite" />
+
+        <Button
+            android:visibility="gone"
+            android:id="@+id/buttonFinish"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_margin="20dp"
+            android:background="@color/colorPrimary"
+            android:text="Test Finish"
+            android:textColor="@color/colorWhite" />
+    </LinearLayout>
+
+    <ScrollView
         android:id="@+id/userAnswer"
+        android:visibility="gone"
+        android:scrollbars="vertical"
+        android:scrollbarSize="3dp"
+        android:scrollbarThumbVertical="@color/colorPrimary"
         android:layout_width="match_parent"
-        android:layout_height="200dp"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="13dp"
-        android:layout_marginBottom="398dp"></ListView>
+        android:layout_height="match_parent">
+        <include layout="@layout/answer_listeningtests"/>
+    </ScrollView>
 
 
 

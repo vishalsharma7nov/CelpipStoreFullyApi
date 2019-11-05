@@ -1,6 +1,6 @@
 package com.celpipstore.JsonData.WritingTest;
 
-import com.celpipstore.GetterAndSetterClasses.WritingTest.WritingTask2;
+import com.celpipstore.GetterAndSetterClasses.WritingTest.Question.WritingTask2;
 
 import org.json.JSONException;
 import org.json.JSONObject;

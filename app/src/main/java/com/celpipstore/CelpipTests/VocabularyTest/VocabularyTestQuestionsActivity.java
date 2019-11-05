@@ -6,6 +6,7 @@ import android.content.ComponentName;
 import android.content.Context;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.IntentFilter;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.os.Build;
@@ -13,6 +14,7 @@ import android.support.annotation.RequiresApi;
 import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.KeyEvent;
 import android.view.View;
 import android.widget.Button;
@@ -51,7 +53,6 @@ public class VocabularyTestQuestionsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vocabulary_test_questions);
-        connectionChecker();
         radioGroupOptions = findViewById(R.id.radiogroupOptions);
         viewReportLayout = findViewById(R.id.viewReportLayout);
         questionLayout = findViewById(R.id.questionLayout);
@@ -75,7 +76,7 @@ public class VocabularyTestQuestionsActivity extends AppCompatActivity {
         Intent intent = getIntent();
         String id = intent.getStringExtra("t1");
         url = "http://online.celpip.biz/api/vocabularyQuestion?lavelId="+id;
-//        Log.d("url", url);
+        Log.e("===url", url);
         listView = findViewById(R.id.listViewVocabularyTestQuestionsList);
         buttonViewReport.setVisibility(View.GONE);
         buttonBack.setVisibility(View.GONE);
@@ -261,6 +262,7 @@ public class VocabularyTestQuestionsActivity extends AppCompatActivity {
                 buttonSubmit.setVisibility(View.GONE);
             }
         });
+        connectionChecker();
     }
 
     private void connectionChecker() {
@@ -285,7 +287,7 @@ public class VocabularyTestQuestionsActivity extends AppCompatActivity {
                         }
                     })
                     .show();
-            Toast.makeText(VocabularyTestQuestionsActivity.this, "Network Not Available", Toast.LENGTH_LONG).show();
+            Toast.makeText(VocabularyTestQuestionsActivity.this, "Internet Not Working!", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -315,7 +317,6 @@ public class VocabularyTestQuestionsActivity extends AppCompatActivity {
                 })
                 .show();
     }
-
     private void sendRequest() {
         final ProgressDialog loading = ProgressDialog.show(this,"LOADING","PLEASE WAIT!!",false,false);
         StringRequest stringRequest = new StringRequest(url,
@@ -340,14 +341,33 @@ public class VocabularyTestQuestionsActivity extends AppCompatActivity {
                         } catch (JSONException e) {
                             e.printStackTrace();
                             loading.dismiss();
-                            Toast.makeText(getApplicationContext(), "APPLICATION UNDER MAINTENANCE!!", Toast.LENGTH_SHORT).show();
+                            if (e.getMessage() == null)
+                            {
+                                Toast.makeText(getApplicationContext(), "PLEASE TRY AGAIN!", Toast.LENGTH_SHORT).show();
+                            }
+                            else
+                            {
+                                Toast.makeText(getApplicationContext(), "APPLICATION UNDER MAINTENANCE!!", Toast.LENGTH_SHORT).show();
+                            }
                         }
                     }
                 },
                 new Response.ErrorListener() {
                     @Override
                     public void onErrorResponse(VolleyError error) {
-                        Toast.makeText(getApplicationContext(), "APPLICATION UNDER MAINTENANCE!!",Toast.LENGTH_LONG).show();
+                        loading.dismiss();
+                        if (error.networkResponse == null)
+                        {
+                            Toast.makeText(getApplicationContext(), "PLEASE TRY AGAIN!", Toast.LENGTH_SHORT).show();
+                        }
+                        else if (error.getLocalizedMessage() == null)
+                        {
+                            Toast.makeText(getApplicationContext(), "PLEASE TRY AGAIN!", Toast.LENGTH_SHORT).show();
+                        }
+                        else
+                        {
+                            Toast.makeText(getApplicationContext(), "APPLICATION UNDER MAINTENANCE!!",Toast.LENGTH_LONG).show();
+                        }
                     }
                 });
         RequestQueue requestQueue = Volley.newRequestQueue(this);
@@ -361,7 +381,6 @@ public class VocabularyTestQuestionsActivity extends AppCompatActivity {
         listView.setAdapter(ca);
         ca.notifyDataSetChanged();
     }
-
     private void setData(int position) {
         textViewQuestion.setText(JsonDataHandlerVocabularyTestQuestionList.title[position]);
         radioButtonOption1.setText(JsonDataHandlerVocabularyTestQuestionList.options1[position]);

@@ -24,20 +24,22 @@
             android:id="@+id/listeningTestListStartTest"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
+            android:layout_marginStart="60dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/buttonoutline"
             android:text="Start"
-            android:textColor="#FCFCFC" />
+            android:textColor="@color/colorWhite" />
+
         <Button
             android:id="@+id/reviewTest"
             android:layout_width="80dp"
             android:layout_height="wrap_content"
-            android:layout_marginStart="30dp"
+            android:layout_marginStart="20dp"
             android:layout_marginTop="10dp"
             android:background="@drawable/buttonoutline"
             android:text="Review"
-            android:textColor="#FCFCFC" />
+            android:textColor="#FCFCFC"
+            android:visibility="visible" />
     </LinearLayout>
 
 

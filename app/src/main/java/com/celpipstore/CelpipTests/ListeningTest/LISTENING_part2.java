@@ -22,8 +22,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.celpipstore.Adapter.TotalTestAdapter;
-import com.celpipstore.GetterAndSetterClasses.TotalTest;
+import com.celpipstore.Adapter.ListeningTestAdapter.TotalTest.ListeningTotalTestAdapter;
+import com.celpipstore.GetterAndSetterClasses.TotalTest.TotalTest;
 import com.celpipstore.JsonData.JsonDataHandler;
 import com.celpipstore.R;
 import com.celpipstore.UserDashboard.Dashboard;
@@ -145,8 +145,9 @@ public class LISTENING_part2 extends AppCompatActivity{
     private void showJSON(String json) {
         JsonDataHandler jsonHolderListing = new JsonDataHandler(json);
         totalTests=jsonHolderListing.parseJSON();
-        TotalTestAdapter ca = new TotalTestAdapter(this,totalTests);
+        ListeningTotalTestAdapter ca = new ListeningTotalTestAdapter(this,totalTests);
         listView.setAdapter(ca);
         ca.notifyDataSetChanged();
     }
+
 }

@@ -4,4 +4,6 @@
     <color name="colorPrimaryDark">#FF926B</color>
     <color name="colorAccent">#FF5505</color>
     <color name="colorWhite">#FCFCFC</color>
+    <color name="spinner_items">#01AA43</color>
+    <color name="correct_answer_background">#02EB65</color>
 </resources>

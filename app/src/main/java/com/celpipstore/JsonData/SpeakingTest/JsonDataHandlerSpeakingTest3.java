@@ -1,7 +1,6 @@
 package com.celpipstore.JsonData.SpeakingTest;
 
-import com.celpipstore.GetterAndSetterClasses.SpeakingTest.PracticeTestSpeaking;
-import com.celpipstore.GetterAndSetterClasses.SpeakingTest.SpeakingTestPart3;
+import com.celpipstore.GetterAndSetterClasses.SpeakingTest.Question.SpeakingTestPart3;
 
 import org.json.JSONException;
 import org.json.JSONObject;

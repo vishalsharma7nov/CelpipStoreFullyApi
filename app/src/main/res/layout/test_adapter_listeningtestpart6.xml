@@ -5,6 +5,7 @@
     android:layout_height="match_parent">
 
     <LinearLayout
+        android:id="@+id/frame1"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_alignParentStart="true"
@@ -103,39 +104,15 @@
             android:background="@drawable/buttonoutline"
             android:text="Submit"
             android:textColor="@color/colorWhite" />
-
     </LinearLayout>
-
-    <TextView
-        android:id="@+id/answer1"
+    <ScrollView
+        android:id="@+id/userAnswer"
         android:visibility="gone"
+        android:scrollbars="vertical"
+        android:scrollbarSize="3dp"
+        android:scrollbarThumbVertical="@color/colorPrimary"
         android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-    <TextView
-        android:id="@+id/answer2"
-        android:visibility="gone"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-    <TextView
-        android:id="@+id/answer3"
-        android:visibility="gone"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-    <TextView
-        android:id="@+id/answer4"
-        android:visibility="gone"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-    <TextView
-        android:id="@+id/answer5"
-        android:visibility="gone"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
-
-
-
-
-
-
-
+        android:layout_height="match_parent">
+        <include layout="@layout/answer_listeningtests"/>
+    </ScrollView>
 </RelativeLayout>

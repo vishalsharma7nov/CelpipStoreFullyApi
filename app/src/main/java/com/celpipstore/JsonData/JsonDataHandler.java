@@ -1,6 +1,6 @@
 package com.celpipstore.JsonData;
 
-import com.celpipstore.GetterAndSetterClasses.TotalTest;
+import com.celpipstore.GetterAndSetterClasses.TotalTest.TotalTest;
 
 import org.json.JSONArray;
 import org.json.JSONException;

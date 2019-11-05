@@ -12,7 +12,7 @@
         android:layout_margin="10dp"
         android:gravity="left"
         android:padding="5dip"
-        android:textColor="#64DD17"
+        android:textColor="@color/spinner_items"
         android:textSize="15sp"/>
 
 </RelativeLayout>

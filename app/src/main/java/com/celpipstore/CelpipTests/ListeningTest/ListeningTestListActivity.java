@@ -18,8 +18,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.celpipstore.Adapter.ListeningTestAdapter.ListeningTotalTestListAdapter;
-import com.celpipstore.GetterAndSetterClasses.TotalTestList;
+import com.celpipstore.Adapter.ListeningTestAdapter.TotalTestList.ListeningTotalTestListAdapter;
+import com.celpipstore.GetterAndSetterClasses.TotalTestList.TotalTestList;
 import com.celpipstore.JsonData.JsonDataHandlerTestList;
 import com.celpipstore.R;
 

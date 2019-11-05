@@ -33,7 +33,7 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.celpipstore.Adapter.ExpandableListAdapter;
+import com.celpipstore.ExpandableListAdapter.ExpandableListAdapter;
 import com.celpipstore.HOME;
 import com.celpipstore.R;
 import com.celpipstore.StaticActivity.AboutUS;
@@ -65,7 +65,6 @@ public class LoginActivity extends AppCompatActivity implements NavigationView.O
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
-        networkChecker();
         navigation();
         textViewRegister = findViewById(R.id.textViewRegister);
         textViewForgetPassword = findViewById(R.id.textViewForgetPassword);
@@ -89,7 +88,7 @@ public class LoginActivity extends AppCompatActivity implements NavigationView.O
         login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                login();
+                connectionChecker();
                 saveLoginInformation();
             }
         });
@@ -184,16 +183,17 @@ public class LoginActivity extends AppCompatActivity implements NavigationView.O
         });
     }
 
-    private void networkChecker() {
+    private void connectionChecker() {
         ConnectivityManager ConnectionManager=(ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
         NetworkInfo networkInfo=ConnectionManager.getActiveNetworkInfo();
         if(networkInfo != null && networkInfo.isConnected()==true )
         {
+            login();
         }
         else
         {
             AlertDialog alertbox = new AlertDialog.Builder(this)
-                    .setMessage("Check Your Internet Connention?")
+                    .setMessage("CHECK YOUR INTERNET CONNECTION?")
                     .setPositiveButton("OK", new DialogInterface.OnClickListener() {
 
                         // do something when the button is clicked
@@ -205,7 +205,7 @@ public class LoginActivity extends AppCompatActivity implements NavigationView.O
                         }
                     })
                     .show();
-            Toast.makeText(LoginActivity.this, "Network Not Available", Toast.LENGTH_LONG).show();
+            Toast.makeText(getApplicationContext(), "Network Not Available", Toast.LENGTH_LONG).show();
         }
     }
 

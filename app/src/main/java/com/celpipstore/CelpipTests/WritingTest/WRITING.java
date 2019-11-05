@@ -1,7 +1,10 @@
 package com.celpipstore.CelpipTests.WritingTest;
 
 import android.app.ProgressDialog;
+import android.content.Context;
 import android.content.DialogInterface;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
 import android.os.Bundle;
 import android.support.v7.app.AlertDialog;
 import android.view.KeyEvent;
@@ -15,9 +18,8 @@ import com.android.volley.Response;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
-import com.celpipstore.Adapter.TotalTestAdapter;
-import com.celpipstore.Adapter.WritingTestAdapter.WritingTotalTestAdapter;
-import com.celpipstore.GetterAndSetterClasses.TotalTest;
+import com.celpipstore.Adapter.WritingTestAdapter.TotalTest.WritingTotalTestAdapter;
+import com.celpipstore.GetterAndSetterClasses.TotalTest.TotalTest;
 import com.celpipstore.JsonData.JsonDataHandler;
 import com.celpipstore.R;
 
@@ -37,7 +39,30 @@ public class WRITING extends AppCompatActivity{
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         listView = findViewById(R.id.listViewWritingTest);
-        sendRequest();
+        connectionChecker();
+    }
+    private void connectionChecker() {
+        ConnectivityManager ConnectionManager=(ConnectivityManager)getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo networkInfo=ConnectionManager.getActiveNetworkInfo();
+        if(networkInfo != null && networkInfo.isConnected()==true )
+        {
+            sendRequest();
+        }
+        else
+        {
+            AlertDialog alertbox = new AlertDialog.Builder(this)
+                    .setIcon(R.drawable.warning)
+                    .setIcon(R.drawable.warning)
+                    .setMessage("CHECK YOUR INTERNET CONNECTION?")
+                    .setPositiveButton("OK", new DialogInterface.OnClickListener() {
+                        // do something when the button is clicked
+                        public void onClick(DialogInterface arg0, int arg1) {
+                            recreate();
+                        }
+                    })
+                    .show();
+            Toast.makeText(getApplicationContext(), "Network Not Available", Toast.LENGTH_LONG).show();
+        }
     }
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK) {
@@ -63,7 +88,7 @@ public class WRITING extends AppCompatActivity{
     }
     private void sendRequest() {
         final ProgressDialog loading = ProgressDialog.show(this,"LOADING","PLEASE WAIT!!",false,false);
-        StringRequest stringRequest = new StringRequest("http://online.celpip.biz/api/writingTest",
+        StringRequest stringRequest = new StringRequest("http://demo.celpip.biz/api/writingTest",
                 new com.android.volley.Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {

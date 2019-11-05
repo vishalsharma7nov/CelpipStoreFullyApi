@@ -40,9 +40,8 @@ public class VOCABULARY_TESTS extends AppCompatActivity {
         setContentView(R.layout.activity_vocabulary__tests);
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        connectionChecker();
         listView = findViewById(R.id.listViewWritingTest);
-        sendRequest();
+        connectionChecker();
     }
 
     private void connectionChecker() {
@@ -50,11 +49,12 @@ public class VOCABULARY_TESTS extends AppCompatActivity {
         NetworkInfo networkInfo=ConnectionManager.getActiveNetworkInfo();
         if(networkInfo != null && networkInfo.isConnected()==true )
         {
+            sendRequest();
         }
         else
         {
             AlertDialog alertbox = new AlertDialog.Builder(this)
-                    .setMessage("Check Your Internet Connention?")
+                    .setMessage("CHECK YOUR INTERNET CONNECTION?")
                     .setPositiveButton("OK", new DialogInterface.OnClickListener() {
 
                         // do something when the button is clicked
@@ -66,7 +66,7 @@ public class VOCABULARY_TESTS extends AppCompatActivity {
                         }
                     })
                     .show();
-            Toast.makeText(VOCABULARY_TESTS.this, "Network Not Available", Toast.LENGTH_LONG).show();
+            Toast.makeText(VOCABULARY_TESTS.this, "INTERNET IS NOT WORKING!", Toast.LENGTH_LONG).show();
         }
     }
 
@@ -80,7 +80,7 @@ public class VOCABULARY_TESTS extends AppCompatActivity {
 
     protected void exitByBackKey() {
         AlertDialog alertbox = new AlertDialog.Builder(this)
-                .setMessage("Do you want to exit vocabulary test?")
+                .setMessage("DO YOUR WANT TO EXIT VOCABULARY TEST?")
                 .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                     // do something when the button is clicked
                     public void onClick(DialogInterface arg0, int arg1) {

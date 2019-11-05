@@ -30,7 +30,8 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".CelpipTests.SpeakingTest.SpeakingTestQuestionActivity"></activity>
+        <activity android:name=".CelpipTests.ListeningTest.ListeningTestAnswerActivity"></activity>
+        <activity android:name=".CelpipTests.SpeakingTest.SpeakingTestQuestionActivity" />
         <activity android:name=".CelpipTests.WritingTest.WritingTestQuestionActivity" />
         <activity android:name=".CelpipTests.ReadingTest.ReadingTestQuestionActivity" />
         <activity android:name=".LoginAndRegistration.ForgetPasswordActivity" />

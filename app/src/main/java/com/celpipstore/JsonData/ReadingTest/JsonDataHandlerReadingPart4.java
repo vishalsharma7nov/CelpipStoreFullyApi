@@ -1,9 +1,15 @@
 package com.celpipstore.JsonData.ReadingTest;
 
+import com.celpipstore.GetterAndSetterClasses.ReadingTest.Question.ReadingTestPart4;
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class JsonDataHandlerReadingPart4 {
+    private List<ReadingTestPart4> readingTestPart4 = new ArrayList<>();
     public static String id;
     public static String test_code;
     public static String passages;
@@ -77,7 +83,7 @@ public class JsonDataHandlerReadingPart4 {
         this.json = json;
     }
 
-    public void parseJSON() {
+    public List<ReadingTestPart4> parseJSON() {
         try {
                 JSONObject jsonObject = new JSONObject(json);
                 id              = jsonObject.getJSONObject("data").getString(KEY_ID);
@@ -145,8 +151,10 @@ public class JsonDataHandlerReadingPart4 {
                 q10_answerer    = jsonObject.getJSONObject("data").getString("q10_answere");
                 created_date    = jsonObject.getJSONObject("data").getString("created_date");
                 updated_date    = jsonObject.getJSONObject("data").getString("updated_date");
+                readingTestPart4.add(new ReadingTestPart4(jsonObject.getJSONObject("data").getString(KEY_ID),jsonObject.getJSONObject("data").getString(KEY_TEST_CODE),jsonObject.getJSONObject("data").getString("passages"),jsonObject.getJSONObject("data").getString("q1_question"),jsonObject.getJSONObject("data").getString("q1_option1"),jsonObject.getJSONObject("data").getString("q1_option2"),jsonObject.getJSONObject("data").getString("q1_option3"),jsonObject.getJSONObject("data").getString("q1_option4"),jsonObject.getJSONObject("data").getString("q1_answere"),jsonObject.getJSONObject("data").getString("q2_question"),jsonObject.getJSONObject("data").getString("q2_option1"),jsonObject.getJSONObject("data").getString("q2_option2"),jsonObject.getJSONObject("data").getString("q2_option3"),jsonObject.getJSONObject("data").getString("q2_option4"),jsonObject.getJSONObject("data").getString("q2_answere"),jsonObject.getJSONObject("data").getString("q3_question"),jsonObject.getJSONObject("data").getString("q3_option1"),jsonObject.getJSONObject("data").getString("q3_option2"),jsonObject.getJSONObject("data").getString("q3_option3"),jsonObject.getJSONObject("data").getString("q3_option4"),jsonObject.getJSONObject("data").getString("q3_answere"),jsonObject.getJSONObject("data").getString("q4_question"),jsonObject.getJSONObject("data").getString("q4_option1"),jsonObject.getJSONObject("data").getString("q4_option2"),jsonObject.getJSONObject("data").getString("q4_option3"),jsonObject.getJSONObject("data").getString("q4_option4"),jsonObject.getJSONObject("data").getString("q4_answere"),jsonObject.getJSONObject("data").getString("q5_question"),jsonObject.getJSONObject("data").getString("q5_option1"),jsonObject.getJSONObject("data").getString("q5_option2"),jsonObject.getJSONObject("data").getString("q5_option3"),jsonObject.getJSONObject("data").getString("q5_option4"),jsonObject.getJSONObject("data").getString("q5_answere"),jsonObject.getJSONObject("data").getString("q6_question"),jsonObject.getJSONObject("data").getString("q6_option1"),jsonObject.getJSONObject("data").getString("q6_option2"),jsonObject.getJSONObject("data").getString("q6_option3"),jsonObject.getJSONObject("data").getString("q6_option4"),jsonObject.getJSONObject("data").getString("q6_answere"),jsonObject.getJSONObject("data").getString("q7_question"),jsonObject.getJSONObject("data").getString("q7_option1"),jsonObject.getJSONObject("data").getString("q7_option2"),jsonObject.getJSONObject("data").getString("q7_option3"),jsonObject.getJSONObject("data").getString("q7_option4"),jsonObject.getJSONObject("data").getString("q7_answere"),jsonObject.getJSONObject("data").getString("q8_question"),jsonObject.getJSONObject("data").getString("q8_option1"),jsonObject.getJSONObject("data").getString("q8_option2"),jsonObject.getJSONObject("data").getString("q8_option3"),jsonObject.getJSONObject("data").getString("q8_option4"),jsonObject.getJSONObject("data").getString("q8_answere"),jsonObject.getJSONObject("data").getString("q9_question"),jsonObject.getJSONObject("data").getString("q9_option1"),jsonObject.getJSONObject("data").getString("q9_option2"),jsonObject.getJSONObject("data").getString("q9_option3"),jsonObject.getJSONObject("data").getString("q9_option4"),jsonObject.getJSONObject("data").getString("q9_answere"),jsonObject.getJSONObject("data").getString("q10_question"),jsonObject.getJSONObject("data").getString("q10_option1"),jsonObject.getJSONObject("data").getString("q10_option2"),jsonObject.getJSONObject("data").getString("q10_option3"),jsonObject.getJSONObject("data").getString("q10_option4"),jsonObject.getJSONObject("data").getString("q10_answere"),jsonObject.getJSONObject("data").getString("created_date"),jsonObject.getJSONObject("data").getString("updated_date")));
         } catch (JSONException e) {
             e.printStackTrace();
         }
+        return readingTestPart4;
     }
 }
